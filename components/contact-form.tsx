@@ -1,14 +1,17 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { toast } from 'sonner'
-import { Send } from 'lucide-react'
+import { Send, CheckCircle2, Sparkles, ArrowRight } from 'lucide-react'
+import confetti from 'canvas-confetti'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { Progress } from '@/components/ui/progress'
 import {
   Select,
   SelectContent,
@@ -24,7 +27,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { fadeInUp, staggerContainer } from '@/lib/animations'
+import { fadeInUp, staggerContainer, scaleIn } from '@/lib/animations'
 
 const contactSchema = z.object({
   namn: z.string().min(2, 'Namn maste vara minst 2 tecken'),
@@ -38,6 +41,7 @@ const contactSchema = z.object({
 type ContactFormValues = z.infer<typeof contactSchema>
 
 export function ContactForm() {
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
@@ -48,200 +52,268 @@ export function ContactForm() {
       forbattra: '',
       meddelande: '',
     },
+    mode: 'onChange',
   })
 
+  const watchedFields = form.watch()
+  const filledFields = Object.values(watchedFields).filter(value => value && value.length > 0).length
+  const progress = (filledFields / 6) * 100
+
   function onSubmit(data: ContactFormValues) {
-    // In production, this would send to a backend API
-    console.log('Form submitted:', data)
-    toast.success('Tack for ert meddelande!', {
-      description: 'Vi aterkomner inom 24 timmar.',
-    })
-    form.reset()
+    // Mocking API call
+    setTimeout(() => {
+      console.log('Form submitted:', data)
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#10b981', '#34d399', '#059669']
+      })
+      setIsSubmitted(true)
+      toast.success('Analysforfragan skickad!')
+    }, 800)
   }
 
   return (
-    <section id="kontakt" className="border-t border-border bg-muted/20 py-20 lg:py-28">
-      <div className="mx-auto max-w-2xl px-4 lg:px-6">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-          variants={staggerContainer}
-          className="text-center"
-        >
-          <motion.span
-            variants={fadeInUp}
-            className="text-xs font-semibold uppercase tracking-wider text-primary"
-          >
-            Kontakta oss
-          </motion.span>
-          <motion.h2
-            variants={fadeInUp}
-            className="mt-3 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-          >
-            Fa en kostnadsfri webbplatsanalys
-          </motion.h2>
-          <motion.p
-            variants={fadeInUp}
-            className="mt-4 text-pretty text-muted-foreground"
-          >
-            Fyll i formularet sa aterkomner vi med konkreta forslag pa hur er
-            sajt kan prestera battre.
-          </motion.p>
-        </motion.div>
+    <section id="kontakt" className="relative border-t border-border bg-muted/20 py-24 lg:py-32 overflow-hidden">
+      {/* Background accent */}
+      <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 size-[600px] rounded-full bg-primary/5 blur-[120px] -z-10" />
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-          variants={fadeInUp}
-          className="mt-10"
-        >
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="flex flex-col gap-5 rounded-2xl border border-border bg-card p-6 sm:p-8"
+      <div className="mx-auto max-w-2xl px-4 lg:px-8">
+        <AnimatePresence mode="wait">
+          {!isSubmitted ? (
+            <motion.div
+              key="form"
+              initial="hidden"
+              whileInView="visible"
+              exit={{ opacity: 0, scale: 0.95 }}
+              viewport={{ once: true, margin: '-80px' }}
+              variants={staggerContainer}
             >
-              <div className="grid gap-5 sm:grid-cols-2">
-                <FormField
-                  control={form.control}
-                  name="namn"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-foreground">Namn</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Anna Andersson"
-                          className="bg-background border-border"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="foretag"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-foreground">Foretag</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Ert foretag AB"
-                          className="bg-background border-border"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+              <div className="text-center mb-12">
+                <motion.span
+                  variants={fadeInUp}
+                  className="text-sm font-bold uppercase tracking-widest text-primary"
+                >
+                  Kontakta oss
+                </motion.span>
+                <motion.h2
+                  variants={fadeInUp}
+                  className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"
+                >
+                  Redo for nasta steg?
+                </motion.h2>
+                <motion.p
+                  variants={fadeInUp}
+                  className="mt-6 text-pretty text-muted-foreground text-lg"
+                >
+                  Fyll i formularet sa aterkomner vi med konkreta forslag pa hur er
+                  sajt kan prestera battre.
+                </motion.p>
               </div>
 
-              <div className="grid gap-5 sm:grid-cols-2">
-                <FormField
-                  control={form.control}
-                  name="epost"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-foreground">E-post</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="email"
-                          placeholder="anna@foretag.se"
-                          className="bg-background border-border"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="hemsida"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-foreground">
-                        Hemsida{' '}
-                        <span className="text-muted-foreground font-normal">(valfri)</span>
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="https://ertforetag.se"
-                          className="bg-background border-border"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+              <motion.div variants={fadeInUp} className="relative mt-12 overflow-hidden rounded-3xl border border-border bg-card shadow-2xl">
+                <div className="absolute top-0 left-0 w-full h-1 bg-muted">
+                  <motion.div
+                    className="h-full bg-primary"
+                    animate={{ width: `${progress}%` }}
+                    transition={{ duration: 0.5 }}
+                  />
+                </div>
 
-              <FormField
-                control={form.control}
-                name="forbattra"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-foreground">
-                      Vad vill ni forbattra?
-                    </FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger className="w-full bg-background border-border">
-                          <SelectValue placeholder="Valj ett alternativ" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="ny-sajt">Vi behover en helt ny sajt</SelectItem>
-                        <SelectItem value="omdesign">Omdesign av befintlig sajt</SelectItem>
-                        <SelectItem value="prestanda">Forbattra prestanda och laddtid</SelectItem>
-                        <SelectItem value="konvertering">Oka konvertering och leads</SelectItem>
-                        <SelectItem value="e-handel">E-handelslosning</SelectItem>
-                        <SelectItem value="ovrigt">Ovrigt</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="meddelande"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-foreground">Meddelande</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Beratta lite om ert projekt och era mal..."
-                        className="min-h-28 resize-none bg-background border-border"
-                        {...field}
+                <Form {...form}>
+                  <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="flex flex-col gap-6 p-8 sm:p-10"
+                  >
+                    <div className="grid gap-6 sm:grid-cols-2">
+                      <FormField
+                        control={form.control}
+                        name="namn"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="flex justify-between">
+                              Namn
+                              {field.value.length >= 2 && <CheckCircle2 className="size-4 text-primary animate-in zoom-in" />}
+                            </FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="Anna Andersson"
+                                className="h-12 bg-background/50 border-border focus:border-primary/50"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
                       />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                      <FormField
+                        control={form.control}
+                        name="foretag"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="flex justify-between">
+                              Foretag
+                              {field.value.length >= 2 && <CheckCircle2 className="size-4 text-primary animate-in zoom-in" />}
+                            </FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="Ert foretag AB"
+                                className="h-12 bg-background/50 border-border focus:border-primary/50"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
 
-              <Button
-                type="submit"
-                size="lg"
-                className="mt-2 w-full cursor-pointer rounded-xl bg-primary text-primary-foreground hover:bg-primary/90"
-                disabled={form.formState.isSubmitting}
-              >
-                <Send className="mr-2 size-4" />
-                Skicka forfragan
-              </Button>
+                    <div className="grid gap-6 sm:grid-cols-2">
+                      <FormField
+                        control={form.control}
+                        name="epost"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="flex justify-between">
+                              E-post
+                              {field.value.includes('@') && field.value.includes('.') && <CheckCircle2 className="size-4 text-primary animate-in zoom-in" />}
+                            </FormLabel>
+                            <FormControl>
+                              <Input
+                                type="email"
+                                placeholder="anna@foretag.se"
+                                className="h-12 bg-background/50 border-border focus:border-primary/50"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="hemsida"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>
+                              Hemsida{' '}
+                              <span className="text-muted-foreground font-normal">(valfri)</span>
+                            </FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="https://ertforetag.se"
+                                className="h-12 bg-background/50 border-border focus:border-primary/50"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
 
-              <p className="text-center text-xs text-muted-foreground">
-                Tar 30 sekunder &middot; Ingen forpliktelse &middot; Svar inom 24h
+                    <FormField
+                      control={form.control}
+                      name="forbattra"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Vad vill ni forbattra?</FormLabel>
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
+                              <SelectTrigger className="h-12 w-full bg-background/50 border-border">
+                                <SelectValue placeholder="Valj ett alternativ" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="ny-sajt">Vi behover en helt ny sajt</SelectItem>
+                              <SelectItem value="omdesign">Omdesign av befintlig sajt</SelectItem>
+                              <SelectItem value="prestanda">Forbattra prestanda och laddtid</SelectItem>
+                              <SelectItem value="konvertering">Oka konvertering och leads</SelectItem>
+                              <SelectItem value="e-handel">E-handelslosning</SelectItem>
+                              <SelectItem value="ovrigt">Ovrigt</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="meddelande"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Meddelande</FormLabel>
+                          <FormControl>
+                            <Textarea
+                              placeholder="Beratta lite om ert projekt och era mal..."
+                              className="min-h-32 resize-none bg-background/50 border-border"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="mt-4 h-14 w-full cursor-pointer rounded-2xl bg-primary text-base font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:scale-[1.02] hover:bg-primary/90 hover:shadow-2xl active:scale-[0.98]"
+                      disabled={form.formState.isSubmitting}
+                    >
+                      {form.formState.isSubmitting ? (
+                        "Skickar..."
+                      ) : (
+                        <>
+                          Skicka analysforfragan
+                          <Send className="ml-2 size-5" />
+                        </>
+                      )}
+                    </Button>
+
+                    <div className="flex items-center justify-center gap-6 mt-2 opacity-60">
+                      <p className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground uppercase tracking-widest">
+                        <CheckCircle2 className="size-3 text-primary" />
+                        Svar inom 24h
+                      </p>
+                      <p className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground uppercase tracking-widest">
+                        <Sparkles className="size-3 text-primary" />
+                        100% Gratis
+                      </p>
+                    </div>
+                  </form>
+                </Form>
+              </motion.div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="success"
+              initial="hidden"
+              animate="visible"
+              variants={scaleIn}
+              className="flex flex-col items-center justify-center text-center p-12 bg-card rounded-[3rem] border border-primary/20 shadow-2xl"
+            >
+              <div className="size-20 rounded-full bg-primary/10 flex items-center justify-center mb-8">
+                <CheckCircle2 className="size-10 text-primary" />
+              </div>
+              <h2 className="text-4xl font-black text-foreground mb-4">Tack for visat intresse!</h2>
+              <p className="text-lg text-muted-foreground max-w-sm mb-10">
+                Vi har tagit emot din forfragan och kommer att paborja
+                analysen av er webbplats omedelbart.
               </p>
-            </form>
-          </Form>
-        </motion.div>
+              <Button
+                onClick={() => setIsSubmitted(false)}
+                variant="outline"
+                className="rounded-xl px-8 h-12"
+              >
+                Tillbaka till start
+                <ArrowRight className="ml-2 size-4" />
+              </Button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   )

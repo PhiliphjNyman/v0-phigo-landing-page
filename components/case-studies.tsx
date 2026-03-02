@@ -2,9 +2,17 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { ArrowUpRight, TrendingUp, Zap, Users } from 'lucide-react'
+import { ArrowUpRight, TrendingUp, Zap, Users, ChevronRight, ChevronLeft } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
-import { fadeInUp, staggerContainer } from '@/lib/animations'
+import { fadeInUp, staggerContainer, scaleIn } from '@/lib/animations'
+import { Counter } from '@/components/ui/counter'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel'
 
 const cases = [
   {
@@ -12,121 +20,180 @@ const cases = [
     industry: 'B2B Konsulttjanster',
     description:
       'Omdesign av en foraldrad hemsida till en modern, konverteringsoptimerad sajt med fokus pa leadgenerering och trovardig positionering.',
-    metric: '+68% fler leads',
+    metricPrefix: '+',
+    metricValue: 68,
+    metricSuffix: '% fler leads',
     metricIcon: TrendingUp,
     image: '/images/case-nordic.jpg',
+    accent: 'amber',
   },
   {
     company: 'Storberg E-handel',
     industry: 'E-handel',
     description:
       'Ny e-handelslosning med blixtsnabb laddtid, mobilvanlighet och somlost kopflode som ledde till okad konvertering.',
-    metric: '40% snabbare laddtid',
+    metricPrefix: '',
+    metricValue: 40,
+    metricSuffix: '% snabbare laddtid',
     metricIcon: Zap,
     image: '/images/case-storberg.jpg',
+    accent: 'emerald',
   },
   {
     company: 'Avenio Fastigheter',
     industry: 'Lokalt tjansteforetag',
     description:
       'En helt ny digital narvarol med modernt formsprak, tydligt varderbjudande och integrerad bokningsfunktion.',
-    metric: '+120% besokare',
+    metricPrefix: '+',
+    metricValue: 120,
+    metricSuffix: '% besokare',
     metricIcon: Users,
     image: '/images/case-avenio.jpg',
+    accent: 'cyan',
   },
 ]
 
+const accentMap = {
+  amber: 'group-hover:border-amber-500/30 text-amber-500 bg-amber-500/10',
+  emerald: 'group-hover:border-emerald-500/30 text-emerald-500 bg-emerald-500/10',
+  cyan: 'group-hover:border-cyan-500/30 text-cyan-500 bg-cyan-500/10',
+}
+
 export function CaseStudies() {
   return (
-    <section id="case" className="py-20 lg:py-28">
-      <div className="mx-auto max-w-6xl px-4 lg:px-6">
+    <section id="case" className="py-24 lg:py-32 overflow-hidden">
+      <div className="mx-auto max-w-7xl px-4 lg:px-8">
         {/* Section header */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-          variants={staggerContainer}
-          className="text-center"
-        >
-          <motion.span
-            variants={fadeInUp}
-            className="text-xs font-semibold uppercase tracking-wider text-primary"
+        <div className="flex flex-col items-center justify-between gap-6 sm:flex-row sm:items-end">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={staggerContainer}
+            className="text-center sm:text-left"
           >
-            Exempel pa leveranser
-          </motion.span>
-          <motion.h2
-            variants={fadeInUp}
-            className="mt-3 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-          >
-            Utvalda projekt fran PHIGO
-          </motion.h2>
+            <motion.span
+              variants={fadeInUp}
+              className="text-sm font-bold uppercase tracking-widest text-primary"
+            >
+              Exempel pa leveranser
+            </motion.span>
+            <motion.h2
+              variants={fadeInUp}
+              className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"
+            >
+              Utvalda projekt fran PHIGO
+            </motion.h2>
+          </motion.div>
+
           <motion.p
-            variants={fadeInUp}
-            className="mx-auto mt-4 max-w-xl text-pretty text-muted-foreground"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="max-w-md text-pretty text-center text-muted-foreground sm:text-right"
           >
-            Vi hjalper foretag att sta ut digitalt med design och teknik som gor
+            Vi hjalper B2B-foretag att sta ut digitalt med design och teknik som gor
             skillnad pa riktigt.
           </motion.p>
-        </motion.div>
+        </div>
 
-        {/* Case cards */}
+        {/* Carousel Container */}
         <motion.div
+          variants={scaleIn}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-          variants={staggerContainer}
-          className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+          viewport={{ once: true }}
+          className="relative mt-16"
         >
-          {cases.map((c) => {
-            const MetricIcon = c.metricIcon
-            return (
-              <motion.article
-                key={c.company}
-                variants={fadeInUp}
-                className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-colors hover:border-primary/30"
-              >
-                {/* Image */}
-                <div className="relative aspect-[16/10] overflow-hidden bg-muted">
-                  <Image
-                    src={c.image}
-                    alt={`Webbplats mockup for ${c.company}`}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                </div>
+          <Carousel
+            opts={{
+              align: 'start',
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-6">
+              {cases.map((c) => {
+                const MetricIcon = c.metricIcon
+                const accentStyles = accentMap[c.accent as keyof typeof accentMap]
 
-                {/* Content */}
-                <div className="flex flex-1 flex-col gap-3 p-5">
-                  <div className="flex items-center justify-between">
-                    <Badge
-                      variant="outline"
-                      className="text-xs text-muted-foreground"
+                return (
+                  <CarouselItem key={c.company} className="pl-6 md:basis-1/2 lg:basis-1/3">
+                    <motion.article
+                      className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card/50 transition-all duration-500 hover:border-primary/20 hover:bg-card hover:shadow-2xl hover:shadow-primary/5"
                     >
-                      {c.industry}
-                    </Badge>
-                    <div className="flex items-center gap-1 text-xs font-medium text-primary">
-                      <MetricIcon className="size-3.5" />
-                      {c.metric}
-                    </div>
-                  </div>
-                  <h3 className="text-lg font-semibold text-foreground">
-                    {c.company}
-                  </h3>
-                  <p className="flex-1 text-sm leading-relaxed text-muted-foreground">
-                    {c.description}
-                  </p>
-                  <a
-                    href="#kontakt"
-                    className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80"
-                  >
-                    Se case
-                    <ArrowUpRight className="size-3.5" />
-                  </a>
-                </div>
-              </motion.article>
-            )
-          })}
+                      {/* Image with Overlay */}
+                      <div className="relative aspect-[16/11] overflow-hidden bg-muted">
+                        <Image
+                          src={c.image}
+                          alt={`Webbplats mockup for ${c.company}`}
+                          fill
+                          className="object-cover transition-transform duration-700 group-hover:scale-110"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                      </div>
+
+                      {/* Content */}
+                      <div className="flex flex-1 flex-col gap-4 p-7">
+                        <div className="flex items-center justify-between">
+                          <Badge
+                            variant="secondary"
+                            className="rounded-lg bg-muted/50 text-xs font-semibold text-muted-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary"
+                          >
+                            {c.industry}
+                          </Badge>
+                          <div className={`flex items-center gap-1.5 text-sm font-bold transition-all duration-500 ${accentStyles.split(' ')[1]}`}>
+                            <MetricIcon className="size-4" />
+                            <Counter
+                              value={c.metricValue}
+                              prefix={c.metricPrefix}
+                              suffix={c.metricSuffix.split(' ')[0]}
+                            />
+                            <span className="text-[10px] font-medium uppercase text-muted-foreground/60">
+                              {c.metricSuffix.split(' ').slice(1).join(' ')}
+                            </span>
+                          </div>
+                        </div>
+
+                        <h3 className="text-xl font-bold text-foreground decoration-primary/30 decoration-2 transition-all group-hover:underline">
+                          {c.company}
+                        </h3>
+
+                        <p className="flex-1 text-sm leading-relaxed text-muted-foreground/80 group-hover:text-muted-foreground transition-colors">
+                          {c.description}
+                        </p>
+
+                        <div className="mt-4 pt-4 border-t border-border/50">
+                          <a
+                            href="#kontakt"
+                            className="inline-flex items-center gap-2 text-sm font-bold text-primary transition-all hover:gap-3"
+                          >
+                            Se case detaljer
+                            <ArrowUpRight className="size-4" />
+                          </a>
+                        </div>
+                      </div>
+
+                      {/* Corner Accent */}
+                      <div className={`absolute top-4 right-4 h-1.5 w-1.5 rounded-full transition-all duration-500 group-hover:scale-[8] group-hover:opacity-20 ${accentStyles.split(' ')[1].replace('text-', 'bg-')}`} />
+                    </motion.article>
+                  </CarouselItem>
+                )
+              })}
+            </CarouselContent>
+
+            {/* Carousel Controls */}
+            <div className="mt-12 flex justify-center gap-4 lg:hidden">
+              <CarouselPrevious className="static translate-y-0 h-12 w-12 rounded-2xl bg-muted border-border hover:bg-primary hover:text-white" />
+              <CarouselNext className="static translate-y-0 h-12 w-12 rounded-2xl bg-muted border-border hover:bg-primary hover:text-white" />
+            </div>
+
+            <div className="hidden lg:block">
+              <CarouselPrevious className="-left-16 h-12 w-12 rounded-2xl bg-muted/50 border-border hover:bg-primary hover:text-white transition-all backdrop-blur-sm" />
+              <CarouselNext className="-right-16 h-12 w-12 rounded-2xl bg-muted/50 border-border hover:bg-primary hover:text-white transition-all backdrop-blur-sm" />
+            </div>
+          </Carousel>
         </motion.div>
       </div>
     </section>

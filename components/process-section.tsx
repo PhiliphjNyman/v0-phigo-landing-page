@@ -1,7 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Search, Paintbrush, RocketIcon } from 'lucide-react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { Search, Paintbrush, RocketIcon, ChevronRight } from 'lucide-react'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
 const steps = [
@@ -11,6 +11,7 @@ const steps = [
     title: 'Analys & strategi',
     description:
       'Vi borjar med att forsta ert foretag, era mal och er malgrupp. Darefter tar vi fram en strategi som styr hela projektet.',
+    accent: 'from-emerald-500/20 to-emerald-500/5',
   },
   {
     number: '02',
@@ -18,6 +19,7 @@ const steps = [
     title: 'Design & utveckling',
     description:
       'Vi designar och bygger er sajt med fokus pa konvertering, prestanda och anvandarvanlighet. Ni ar med i hela processen.',
+    accent: 'from-primary/20 to-primary/5',
   },
   {
     number: '03',
@@ -25,13 +27,17 @@ const steps = [
     title: 'Lansering & optimering',
     description:
       'Vi lanserar er nya sajt och foljer upp med data och insikter. Kontinuerlig optimering saker att resultaten haller over tid.',
+    accent: 'from-cyan-500/20 to-cyan-500/5',
   },
 ]
 
 export function ProcessSection() {
   return (
-    <section id="process" className="py-20 lg:py-28">
-      <div className="mx-auto max-w-6xl px-4 lg:px-6">
+    <section id="process" className="py-24 lg:py-32 relative overflow-hidden">
+      {/* Decorative gradient blur */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-[600px] w-full max-w-5xl bg-primary/5 blur-[120px] rounded-full" />
+
+      <div className="mx-auto max-w-7xl px-4 lg:px-8">
         {/* Section header */}
         <motion.div
           initial="hidden"
@@ -42,57 +48,94 @@ export function ProcessSection() {
         >
           <motion.span
             variants={fadeInUp}
-            className="text-xs font-semibold uppercase tracking-wider text-primary"
+            className="text-sm font-bold uppercase tracking-widest text-primary"
           >
             Var process
           </motion.span>
           <motion.h2
             variants={fadeInUp}
-            className="mt-3 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
+            className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"
           >
             Fran ide till lansering i tre steg
           </motion.h2>
+          <motion.p
+            variants={fadeInUp}
+            className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-muted-foreground"
+          >
+            Vi har forfinat var process for att leverera hogkvalitativa webbplatser
+            snabbt och effektivt, utan att tulla pa detaljerna.
+          </motion.p>
         </motion.div>
 
-        {/* Steps */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-          variants={staggerContainer}
-          className="mt-14 grid gap-6 md:grid-cols-3"
-        >
-          {steps.map((step, i) => {
-            const Icon = step.icon
-            return (
-              <motion.div
-                key={step.number}
-                variants={fadeInUp}
-                className="relative flex flex-col gap-4 rounded-2xl border border-border bg-card p-6"
-              >
-                {/* Connector line on desktop */}
-                {i < steps.length - 1 && (
-                  <div className="absolute -right-3 top-1/2 hidden h-px w-6 bg-border md:block" />
-                )}
+        {/* Steps Pipeline */}
+        <div className="relative mt-24">
+          {/* Connector Path for Desktop */}
+          <div className="absolute top-[4.5rem] left-[15%] right-[15%] hidden h-0.5 bg-gradient-to-r from-emerald-500/20 via-primary/50 to-cyan-500/20 md:block">
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              transition={{ duration: 1.5, ease: 'easeInOut' }}
+              viewport={{ once: true }}
+              className="absolute inset-0 h-full bg-primary origin-left shadow-[0_0_10px_rgba(var(--primary),0.5)]"
+            />
+          </div>
 
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl font-bold text-primary/30">
-                    {step.number}
-                  </span>
-                  <div className="flex size-10 items-center justify-center rounded-lg bg-primary/10">
-                    <Icon className="size-5 text-primary" />
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={staggerContainer}
+            className="grid gap-12 md:grid-cols-3 md:gap-8"
+          >
+            {steps.map((step, i) => {
+              const Icon = step.icon
+              return (
+                <motion.div
+                  key={step.number}
+                  variants={fadeInUp}
+                  className="group relative flex flex-col items-center text-center md:items-start md:text-left"
+                >
+                  {/* Step Visual */}
+                  <div className="relative z-10 mb-8 flex size-36 items-center justify-center rounded-full bg-muted/30 p-4 transition-transform duration-500 group-hover:scale-105">
+                    <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${step.accent} opacity-0 transition-opacity duration-500 group-hover:opacity-100`} />
+                    <div className="relative flex flex-col items-center gap-2">
+                      <span className="text-4xl font-black tracking-tighter text-primary/40 transition-colors duration-500 group-hover:text-primary">
+                        {step.number}
+                      </span>
+                      <div className="flex size-14 items-center justify-center rounded-2xl bg-card shadow-xl border border-border group-hover:border-primary/30 transition-all">
+                        <Icon className="size-7 text-primary" />
+                      </div>
+                    </div>
+
+                    {/* Spinning border effect on hover */}
+                    <div className="absolute inset-0 rounded-full border-2 border-dashed border-primary/20 opacity-0 transition-opacity duration-500 group-hover:animate-[spin_20s_linear_infinite] group-hover:opacity-100" />
                   </div>
-                </div>
-                <h3 className="text-lg font-semibold text-foreground">
-                  {step.title}
-                </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  {step.description}
-                </p>
-              </motion.div>
-            )
-          })}
-        </motion.div>
+
+                  {/* Content */}
+                  <div className="space-y-4">
+                    <h3 className="text-2xl font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">
+                      {step.title}
+                    </h3>
+                    <p className="text-base leading-relaxed text-muted-foreground/80 group-hover:text-muted-foreground transition-colors">
+                      {step.description}
+                    </p>
+
+                    {/* Step Features - micro interaction */}
+                    <div className="inline-flex items-center gap-2 text-sm font-bold text-primary opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+                      <span>Läs mer om fasen</span>
+                      <ChevronRight className="size-4" />
+                    </div>
+                  </div>
+
+                  {/* Decorative Connector on Mobile */}
+                  {i < steps.length - 1 && (
+                    <div className="mt-8 h-12 w-px bg-gradient-to-b from-primary/50 to-transparent md:hidden" />
+                  )}
+                </motion.div>
+              )
+            })}
+          </motion.div>
+        </div>
       </div>
     </section>
   )

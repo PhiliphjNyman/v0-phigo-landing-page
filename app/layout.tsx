@@ -3,6 +3,7 @@ import { Inter, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Toaster } from '@/components/ui/sonner'
+import { PageBackground } from '@/components/page-background'
 import './globals.css'
 
 const _inter = Inter({ subsets: ['latin'] })
@@ -52,7 +53,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="sv" className="dark">
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased relative">
+        <PageBackground />
         {children}
         <Toaster />
         <Analytics />
