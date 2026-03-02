@@ -1,15 +1,17 @@
-import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
+import { Inter, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { Toaster } from '@/components/ui/sonner'
 import './globals.css'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const _inter = Inter({ subsets: ['latin'] })
+const _geistMono = Geist_Mono({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
+  title: 'PHIGO | Webbplatser som konverterar',
+  description:
+    'PHIGO bygger moderna, snabba och konverteringsfokuserade webbplatser for B2B-foretag. Fa en kostnadsfri webbplatsanalys idag.',
+  generator: 'Next.js',
   icons: {
     icon: [
       {
@@ -27,6 +29,19 @@ export const metadata: Metadata = {
     ],
     apple: '/apple-icon.png',
   },
+  openGraph: {
+    title: 'PHIGO | Webbplatser som konverterar',
+    description:
+      'Vi hjalper B2B-foretag att lansera eller frascha upp sin sajt med modern design, hog prestanda och matbara resultat.',
+    type: 'website',
+    locale: 'sv_SE',
+  },
+}
+
+export const viewport: Viewport = {
+  themeColor: '#1a1a2e',
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({
@@ -35,9 +50,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="sv" className="dark">
       <body className="font-sans antialiased">
         {children}
+        <Toaster />
         <Analytics />
       </body>
     </html>
