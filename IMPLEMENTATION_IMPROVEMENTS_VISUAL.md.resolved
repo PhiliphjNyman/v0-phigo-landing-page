@@ -1,0 +1,87 @@
+# IMPLEMENTATION_IMPROVEMENTS_VISUAL.md
+
+Denna plan beskriver de visuella och interaktiva förbättringar som ska implementeras för att lyfta PHIGO-landningssidan från en statisk version till en dynamisk, premium B2B-upplevelse.
+
+## 🎯 Övergripande Mål
+Att bryta monotonin i den nuvarande designen genom att introducera rörelse, visuell hierarki och interaktiva element som förstärker förtroendet och engagemanget.
+
+---
+
+## 🏗️ Faser och Åtgärder
+
+### Fas 1: Global Dynamik & Rörelsesystem
+*Mål: Skapa en känsla av liv när användaren scrollar.*
+
+- [ ] **Parallax-effekter:** Implementera subtil parallax på bakgrundselement (grid och blobs) för att skapa djup.
+- [ ] **Scroll-triggered Counters:** Implementera en återanvändbar `Counter`-komponent med `framer-motion` för alla numeriska metrics (t.ex. +68%, 24h).
+- [ ] **Scroll-spy Navigation:** Uppdatera Headern för att indikera var på sidan användaren befinner sig med en aktiv indicator i nav-länkarna.
+- [ ] **Morphing Shapes:** Lägg till animerade SVG-bakgrundsformer som långsamt skiftar form och färg mellan sektioner.
+
+### Fas 2: Hero – Den Centrala Fokuspunkten
+*Mål: Att direkt fånga besökarens intresse med en modern "Hero Visual".*
+
+- [ ] **Central Visual:** Implementera en laptop/mobil-mockup (eller en abstrakt 3D-liknande SVG) som visar en "PHIGO-leverans".
+- [ ] **Interaktivitet:** Låt den centrala visualen reagera på musrörelser (subtil tilt-effekt).
+- [ ] **Färgaccent:** Introducera en mjuk övergång/gradient i bakgrunden som bryter den enformiga emerald-tonen.
+
+### Fas 3: Case Studies – Från Grid till Experience
+*Mål: Göra projekten mer levande och distinkta.*
+
+- [ ] **Carousel/Slider:** Ersätt det statiska griddet med en Carousel (använd `shadcn/ui` Carousel-bas modifierad med `framer-motion`).
+- [ ] **Hover Overlays:** Vid hover på desktop ska en overlay visas med kort info och en mer framträdande "Se case"-knapp.
+- [ ] **Färgkodning:** Ge varje case en unik accentfärg (t.ex. Guld för Nordic, Teal för Storberg) på borders eller badges.
+- [ ] **Animerade Metrics:** Integrera de animerade siffer-räknarna direkt i case-korten.
+
+### Fas 4: Services – Visuell Hierarki
+*Mål: Att guida ögat till de viktigaste tjänsterna.*
+
+- [ ] **Feature Focus:** Gör mittkortet ("Snabb och modern teknik") något större och ge det en mer lysande profil (glow-effekt/border-gradient).
+- [ ] **Resultatgrafik:** Lägg till små, stiliserade diagram eller ikoner i varje kort som visualiserar "före/efter" eller "ökad prestanda".
+- [ ] **Progress Bars:** Inför subtila indikatorer i korten som visar t.ex. "Fokus: 100% Prestanda".
+
+### Fas 5: Process – Visuell Pipeline
+*Mål: Tydliggöra progressionen i samarbetet.*
+
+- [ ] **Länkad Pipeline:** Lägg till animerade linjer/stigar mellan stegen (01 → 02 → 03) som "fylls" när man scrollar förbi.
+- [ ] **Växande Siffror:** Gör siffrorna (01, 02, 03) mer framträdande och låt dem animeras (skala/färg) när de hamnar i viewport.
+- [ ] **Accentlinjer:** Använd Teal-accenter för att separera process-stegen visuellt.
+
+### Fas 6: FAQ & Trust – Polish & Motion
+*Mål: Förbättra de mer informativa delarna.*
+
+- [ ] **Advanced Accordion:** Lägg till en distinkt border-animation och mjuka layouts-transitions när frågor expanderas.
+- [ ] **Infinite Trust Loop:** Gör logotyperna i Trust Bar till en horisontell "infinite scroll" animation (marquee).
+- [ ] **Testimonial Toasts:** Lägg till små animerade "social proof"-bubblor som dyker upp subtilt för att citera nöjda kunder.
+
+### Fas 7: Kontaktformulär – Micro-interaktioner
+*Mål: Maximera konvertering genom en "delightful" upplevelse.*
+
+- [ ] **Real-time Validation:** Lägg till animerade checkmarks (gröna) när ett fält är korrekt ifyllt.
+- [ ] **Multi-step Progress:** Om formuläret känns långt, dela upp det i två steg med en progress bar högst upp.
+- [ ] **Success Celebration:** Implementera en konfetti-effekt (`canvas-confetti`) eller en stor succes-check-animation vid lyckad inskickning.
+
+---
+
+## 🎨 Uppdaterad Färgpalett & Accents
+
+| Sektion | Accentfärg | Syfte |
+|---|---|---|
+| **Global** | Dark Emerald | Bas-tema |
+| **Case Studies** | Warm Gold / Amber | Premium-känsla, fokus på resultat |
+| **Process** | Cool Teal / Cyan | Teknisk precision och logik |
+| **Hero/CTA** | Vivid Emerald | Action och energi |
+
+---
+
+## 🚀 Prioriteringslista (Top 5)
+
+1.  **Hero Visual:** Implementera den centrala mockupen/visualen först.
+2.  **Case Studies Slider:** Skapa interaktivitet i den mest kritiska sektionen.
+3.  **Metrics Counters:** Lägg till de animerade siffrorna för omedelbar "vibe"-förbättring.
+4.  **Process Pipeline:** Länka ihop process-stegen visuellt.
+5.  **Accent-system:** Implementera dividers och färgade accents mellan sektioner.
+
+---
+
+> [!IMPORTANT]
+> Alla animationer ska hållas professionella. Vi siktar på en "Apple/Stripe"-estetik snarare än en lekfull animation. Använd `spring` transitions istället för `linear` för en mer naturlig känsla.
