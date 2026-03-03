@@ -14,13 +14,13 @@ const faqs = [
   {
     question: 'Hur lång tid tar ett projekt?',
     answer:
-      'Ett typiskt projekt tar mellan 3--6 veckor beroende på omfattning. Vi börjar alltid med en kort analyssfas for att sakerstalla att vi bygger ratt saker, sedan gar vi vidare till design och utveckling.',
+      'Ett typiskt projekt tar mellan 3--6 veckor beroende på omfattning. Vi börjar alltid med en kort analysfas för att säkerställa att vi bygger rätt saker, sedan går vi vidare till design och utveckling.',
     icon: Clock,
   },
   {
     question: 'Vad kostar en webbplats?',
     answer:
-      'Priset beror på projektets storlek och komplexitet. Vi är transparenta med priserna och ger alltid en tydlig offert innan vi börjar. Kontakta oss för en kostnadsfri analys sa ger vi er ett förslag.',
+      'Priset beror på projektets storlek och komplexitet. Vi är transparenta med priserna och ger alltid en tydlig offert innan vi börjar. Kontakta oss för en kostnadsfri analys så ger vi er ett förslag.',
     icon: CreditCard,
   },
   {
@@ -61,13 +61,13 @@ export function FaqSection() {
             variants={fadeInUp}
             className="text-sm font-bold uppercase tracking-widest text-primary"
           >
-            Vanliga fragor
+            Vanliga frågor
           </motion.span>
           <motion.h2
             variants={fadeInUp}
             className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"
           >
-            Har ni fragor? Vi har svar.
+            Har ni frågor? Vi har svar.
           </motion.h2>
           <motion.p
             variants={fadeInUp}
@@ -117,7 +117,7 @@ export function FaqSection() {
         >
           <div className="inline-flex items-center gap-3 rounded-full border border-border bg-background px-6 py-3 text-sm font-medium text-muted-foreground">
             <HelpCircle className="size-4 text-primary" />
-            Fortfarande osakor?
+            Fortfarande osäker?
             <a href="#kontakt" className="font-bold text-primary hover:underline">Chatta med oss</a>
           </div>
         </motion.div>

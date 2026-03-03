@@ -27,9 +27,9 @@ const services = [
   },
   {
     icon: Settings,
-    title: 'Enkelt att underhalla',
+    title: 'Enkelt att underhålla',
     description:
-      'En sajt ska vara lätt att uppdatera, även utan teknisk bakgrund. Vi levererar lösningar som ar intuitiva och framtidssäkra.',
+      'En sajt ska vara lätt att uppdatera, även utan teknisk bakgrund. Vi levererar lösningar som är intuitiva och framtidssäkra.',
     features: ['Headless CMS', 'Supportavtal', 'Utbildning'],
     metric: 90,
     metricLabel: 'Användarvänlighet',
@@ -55,7 +55,7 @@ export function Services() {
             variants={fadeInUp}
             className="text-sm font-bold uppercase tracking-widest text-primary"
           >
-            Varderbjudande
+            Värdeerbjudande
           </motion.span>
           <motion.h2
             variants={fadeInUp}

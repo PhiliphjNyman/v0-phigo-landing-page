@@ -45,7 +45,7 @@ export function FinalCta() {
                 className="cursor-pointer rounded-xl bg-primary px-8 text-primary-foreground shadow-lg shadow-primary/20 hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30 transition-all"
               >
                 <a href="#kontakt">
-                  Fa en kostnadsfri webbplatsanalys
+                  Få en kostnadsfri webbplatsanalys
                   <ArrowRight className="ml-1 size-4" />
                 </a>
               </Button>

@@ -70,7 +70,7 @@ export function ContactForm() {
         colors: ['#10b981', '#34d399', '#059669']
       })
       setIsSubmitted(true)
-      toast.success('Analysforfragan skickad!')
+      toast.success('Analysförfrågan skickad!')
     }, 800)
   }
 
@@ -101,13 +101,13 @@ export function ContactForm() {
                   variants={fadeInUp}
                   className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"
                 >
-                  Redo for nasta steg?
+                  Redo för nästa steg?
                 </motion.h2>
                 <motion.p
                   variants={fadeInUp}
                   className="mt-6 text-pretty text-muted-foreground text-lg"
                 >
-                  Fyll i formuläret så återkommer vi med konkreta förslag pa hur er
+                  Fyll i formuläret så återkommer vi med konkreta förslag på hur er
                   sajt kan prestera bättre
                 </motion.p>
               </div>
@@ -153,7 +153,7 @@ export function ContactForm() {
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel className="flex justify-between">
-                              Foretag
+                              Företag
                               {field.value.length >= 2 && <CheckCircle2 className="size-4 text-primary animate-in zoom-in" />}
                             </FormLabel>
                             <FormControl>
@@ -218,11 +218,11 @@ export function ContactForm() {
                       name="forbattra"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Vad vill ni forbattra?</FormLabel>
+                          <FormLabel>Vad vill ni förbättra?</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger className="h-12 w-full bg-background/50 border-border">
-                                <SelectValue placeholder="Valj ett alternativ" />
+                                <SelectValue placeholder="Välj ett alternativ" />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
@@ -298,9 +298,9 @@ export function ContactForm() {
               <div className="size-20 rounded-full bg-primary/10 flex items-center justify-center mb-8">
                 <CheckCircle2 className="size-10 text-primary" />
               </div>
-              <h2 className="text-4xl font-black text-foreground mb-4">Tack for visat intresse!</h2>
+              <h2 className="text-4xl font-black text-foreground mb-4">Tack för visat intresse!</h2>
               <p className="text-lg text-muted-foreground max-w-sm mb-10">
-                Vi har tagit emot din forfragan och kommer att paborja
+                Vi har tagit emot din förfrågan och kommer att påbörja
                 analysen av er webbplats omedelbart.
               </p>
               <Button

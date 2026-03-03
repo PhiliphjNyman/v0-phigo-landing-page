@@ -2,7 +2,7 @@ import { PhigoLogo } from '@/components/phigo-logo'
 
 const footerLinks = [
   { label: 'Case', href: '#case' },
-  { label: 'Tjanster', href: '#tjanster' },
+  { label: 'Tjänster', href: '#tjanster' },
   { label: 'Process', href: '#process' },
   { label: 'FAQ', href: '#faq' },
   { label: 'Kontakt', href: '#kontakt' },

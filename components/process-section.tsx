@@ -18,7 +18,7 @@ const steps = [
     icon: Paintbrush,
     title: 'Design & utveckling',
     description:
-      'Vi designar och bygger er sajt med fokus pa konvertering, prestanda och användarvänlighet. Ni är med i hela processen.',
+      'Vi designar och bygger er sajt med fokus på konvertering, prestanda och användarvänlighet. Ni är med i hela processen.',
     accent: 'from-primary/20 to-primary/5',
   },
   {
@@ -50,13 +50,13 @@ export function ProcessSection() {
             variants={fadeInUp}
             className="text-sm font-bold uppercase tracking-widest text-primary"
           >
-            Var process
+            Vår process
           </motion.span>
           <motion.h2
             variants={fadeInUp}
             className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"
           >
-            Fran ide till lansering i tre steg
+            Från idé till lansering i tre steg
           </motion.h2>
           <motion.p
             variants={fadeInUp}
