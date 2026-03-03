@@ -19,7 +19,7 @@ const cases = [
     company: 'Nordic Consulting',
     industry: 'B2B Konsulttjanster',
     description:
-      'Omdesign av en foraldrad hemsida till en modern, konverteringsoptimerad sajt med fokus pa leadgenerering och trovardig positionering.',
+      'Omdesign av en föråldrad hemsida till en modern, konverteringsoptimerad sajt med fokus på leadgenerering och trovärdig positionering.',
     metricPrefix: '+',
     metricValue: 68,
     metricSuffix: '% fler leads',
@@ -31,7 +31,7 @@ const cases = [
     company: 'Storberg E-handel',
     industry: 'E-handel',
     description:
-      'Ny e-handelslosning med blixtsnabb laddtid, mobilvanlighet och somlost kopflode som ledde till okad konvertering.',
+      'Ny e-handelslösning med blixtsnabb laddtid, mobilvänlighet och sömlöst köpflode som ledde till ökad konvertering.',
     metricPrefix: '',
     metricValue: 40,
     metricSuffix: '% snabbare laddtid',
@@ -41,12 +41,12 @@ const cases = [
   },
   {
     company: 'Avenio Fastigheter',
-    industry: 'Lokalt tjansteforetag',
+    industry: 'Lokalt tjänsteföretag',
     description:
-      'En helt ny digital narvarol med modernt formsprak, tydligt varderbjudande och integrerad bokningsfunktion.',
+      'En helt ny digital närvaro med modernt formsprak, tydligt värderbjudande och integrerad bokningsfunktion.',
     metricPrefix: '+',
     metricValue: 120,
-    metricSuffix: '% besokare',
+    metricSuffix: '% besökare',
     metricIcon: Users,
     image: '/images/case-avenio.jpg',
     accent: 'cyan',
@@ -92,7 +92,7 @@ export function CaseStudies() {
             viewport={{ once: true }}
             className="max-w-md text-pretty text-center text-muted-foreground sm:text-right"
           >
-            Vi hjalper B2B-foretag att sta ut digitalt med design och teknik som gor
+            Vi hjälper B2B-foretag att stå ut digitalt med design och teknik som gör
             skillnad pa riktigt.
           </motion.p>
         </div>

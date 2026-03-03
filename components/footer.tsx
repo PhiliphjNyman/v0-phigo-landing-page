@@ -18,7 +18,7 @@ export function Footer() {
             <PhigoLogo size="lg" />
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               Vi bygger moderna, snabba och konverteringsfokuserade webbplatser
-              for B2B-foretag som vill vaxa digitalt.
+              för B2B-företag som vill växa digitalt.
             </p>
           </div>
 
@@ -54,7 +54,7 @@ export function Footer() {
 
         <div className="mt-10 border-t border-border pt-6">
           <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} PHIGO. Alla rattigheter forbehallna.
+            &copy; {new Date().getFullYear()} PHIGO. Alla rättigheter förbehållna.
           </p>
         </div>
       </div>

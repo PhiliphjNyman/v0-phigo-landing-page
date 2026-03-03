@@ -25,7 +25,7 @@ export function TrustBar() {
         className="mx-auto max-w-7xl px-4 lg:px-8"
       >
         <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground/60 mb-10">
-          Foretag litar pa PHIGO for modern webbutveckling
+          Företag litar på PHIGO för modern webbutveckling
         </p>
 
         {/* Infinite Marquee Loop */}

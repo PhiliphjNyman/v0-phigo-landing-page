@@ -30,12 +30,12 @@ import {
 import { fadeInUp, staggerContainer, scaleIn } from '@/lib/animations'
 
 const contactSchema = z.object({
-  namn: z.string().min(2, 'Namn maste vara minst 2 tecken'),
-  foretag: z.string().min(2, 'Foretagsnamn maste vara minst 2 tecken'),
+  namn: z.string().min(2, 'Namn måste vara minst 2 tecken'),
+  foretag: z.string().min(2, 'Företagsnamn måste vara minst 2 tecken'),
   epost: z.string().email('Ange en giltig e-postadress'),
   hemsida: z.string().url('Ange en giltig URL').optional().or(z.literal('')),
-  forbattra: z.string().min(1, 'Valj ett alternativ'),
-  meddelande: z.string().min(10, 'Meddelandet maste vara minst 10 tecken'),
+  forbattra: z.string().min(1, 'Välj ett alternativ'),
+  meddelande: z.string().min(10, 'Meddelandet måste vara minst 10 tecken'),
 })
 
 type ContactFormValues = z.infer<typeof contactSchema>
@@ -107,8 +107,8 @@ export function ContactForm() {
                   variants={fadeInUp}
                   className="mt-6 text-pretty text-muted-foreground text-lg"
                 >
-                  Fyll i formularet sa aterkomner vi med konkreta forslag pa hur er
-                  sajt kan prestera battre.
+                  Fyll i formuläret så återkommer vi med konkreta förslag pa hur er
+                  sajt kan prestera bättre
                 </motion.p>
               </div>
 
@@ -158,7 +158,7 @@ export function ContactForm() {
                             </FormLabel>
                             <FormControl>
                               <Input
-                                placeholder="Ert foretag AB"
+                                placeholder="Ert företag AB"
                                 className="h-12 bg-background/50 border-border focus:border-primary/50"
                                 {...field}
                               />
@@ -226,12 +226,12 @@ export function ContactForm() {
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="ny-sajt">Vi behover en helt ny sajt</SelectItem>
+                              <SelectItem value="ny-sajt">Vi behöver en helt ny sajt</SelectItem>
                               <SelectItem value="omdesign">Omdesign av befintlig sajt</SelectItem>
-                              <SelectItem value="prestanda">Forbattra prestanda och laddtid</SelectItem>
-                              <SelectItem value="konvertering">Oka konvertering och leads</SelectItem>
-                              <SelectItem value="e-handel">E-handelslosning</SelectItem>
-                              <SelectItem value="ovrigt">Ovrigt</SelectItem>
+                              <SelectItem value="prestanda">Förbättra prestanda och laddtid</SelectItem>
+                              <SelectItem value="konvertering">Öka konvertering och leads</SelectItem>
+                              <SelectItem value="e-handel">E-handelslösning</SelectItem>
+                              <SelectItem value="ovrigt">Övrigt</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -247,7 +247,7 @@ export function ContactForm() {
                           <FormLabel>Meddelande</FormLabel>
                           <FormControl>
                             <Textarea
-                              placeholder="Beratta lite om ert projekt och era mal..."
+                              placeholder="Berätta lite om ert projekt och era mål..."
                               className="min-h-32 resize-none bg-background/50 border-border"
                               {...field}
                             />
@@ -267,7 +267,7 @@ export function ContactForm() {
                         "Skickar..."
                       ) : (
                         <>
-                          Skicka analysforfragan
+                          Skicka analysförfrågan
                           <Send className="ml-2 size-5" />
                         </>
                       )}

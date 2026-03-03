@@ -12,33 +12,33 @@ import { HelpCircle, Clock, CreditCard, ShieldCheck, RefreshCw, Layers } from 'l
 
 const faqs = [
   {
-    question: 'Hur lang tid tar ett projekt?',
+    question: 'Hur lång tid tar ett projekt?',
     answer:
-      'Ett typiskt projekt tar mellan 3--6 veckor beroende pa omfattning. Vi borjar alltid med en kort analyssfas for att sakerstalla att vi bygger ratt saker, sedan gar vi vidare till design och utveckling.',
+      'Ett typiskt projekt tar mellan 3--6 veckor beroende på omfattning. Vi börjar alltid med en kort analyssfas for att sakerstalla att vi bygger ratt saker, sedan gar vi vidare till design och utveckling.',
     icon: Clock,
   },
   {
     question: 'Vad kostar en webbplats?',
     answer:
-      'Priset beror pa projektets storlek och komplexitet. Vi ar transparenta med priserna och ger alltid en tydlig offert innan vi borjar. Kontakta oss for en kostnadsfri analys sa ger vi er ett forslag.',
+      'Priset beror på projektets storlek och komplexitet. Vi är transparenta med priserna och ger alltid en tydlig offert innan vi börjar. Kontakta oss för en kostnadsfri analys sa ger vi er ett förslag.',
     icon: CreditCard,
   },
   {
     question: 'Erbjuder ni support efter lansering?',
     answer:
-      'Absolut. Vi erbjuder lopande support och underhall efter lansering. Vi hjalper med uppdateringar, optimering och eventuella tekniska fragor som dyker upp.',
+      'Absolut. Vi erbjuder löpande support och underhåll efter lansering. Vi hjälper med uppdateringar, optimering och eventuella tekniska frågor som dyker upp.',
     icon: ShieldCheck,
   },
   {
     question: 'Hur ser processen ut?',
     answer:
-      'Var process ar uppdelad i tre faser: Analys & strategi, Design & utveckling, och Lansering & optimering. Ni ar involverade genom hela processen med regelbundna avstamningar och feedback-rundor.',
+      'Vår process är uppdelad i tre faser: Analys & strategi, Design & utveckling, och Lansering & optimering. Ni är involverade genom hela processen med regelbundna avstämningar och feedback-rundor.',
     icon: RefreshCw,
   },
   {
-    question: 'Kan ni hjalpa med en befintlig sajt?',
+    question: 'Kan ni hjälpa med en befintlig sajt?',
     answer:
-      'Ja, vi kan bade forbattra befintliga sajter och bygga helt nya. Vi borjar alltid med en analys av nuvarande sajt for att identifiera forbittringsomraden och mojligheter.',
+      'Ja, vi kan både förbättra befintliga sajter och bygga helt nya. Vi börjar alltid med en analys av nuvarande sajt för att identifiera förbättringsområden och möjligheter.',
     icon: Layers,
   },
 ]
@@ -73,7 +73,7 @@ export function FaqSection() {
             variants={fadeInUp}
             className="mt-6 mx-auto max-w-xl text-muted-foreground text-lg"
           >
-            Hittar du inte det du sokor? Kontakta oss direkt sa hjalper vi dig.
+            Hittar du inte det du söker? Kontakta oss direkt så hjälper vi dig.
           </motion.p>
         </motion.div>
 

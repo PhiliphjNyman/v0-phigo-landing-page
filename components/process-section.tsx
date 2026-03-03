@@ -10,7 +10,7 @@ const steps = [
     icon: Search,
     title: 'Analys & strategi',
     description:
-      'Vi borjar med att forsta ert foretag, era mal och er malgrupp. Darefter tar vi fram en strategi som styr hela projektet.',
+      'Vi börjar med att förstå ert företag, era mål och er målgrupp. Därefter tar vi fram en strategi som styr hela projektet.',
     accent: 'from-emerald-500/20 to-emerald-500/5',
   },
   {
@@ -18,7 +18,7 @@ const steps = [
     icon: Paintbrush,
     title: 'Design & utveckling',
     description:
-      'Vi designar och bygger er sajt med fokus pa konvertering, prestanda och anvandarvanlighet. Ni ar med i hela processen.',
+      'Vi designar och bygger er sajt med fokus pa konvertering, prestanda och användarvänlighet. Ni är med i hela processen.',
     accent: 'from-primary/20 to-primary/5',
   },
   {
@@ -26,7 +26,7 @@ const steps = [
     icon: RocketIcon,
     title: 'Lansering & optimering',
     description:
-      'Vi lanserar er nya sajt och foljer upp med data och insikter. Kontinuerlig optimering saker att resultaten haller over tid.',
+      'Vi lanserar er nya sajt och följer upp med data och insikter. Kontinuerlig optimering säkerställer att resultaten håller över tid.',
     accent: 'from-cyan-500/20 to-cyan-500/5',
   },
 ]
@@ -62,8 +62,8 @@ export function ProcessSection() {
             variants={fadeInUp}
             className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-muted-foreground"
           >
-            Vi har forfinat var process for att leverera hogkvalitativa webbplatser
-            snabbt och effektivt, utan att tulla pa detaljerna.
+            Vi har förfinat vår process för att leverera högkvalitativa webbplatser
+            snabbt och effektivt, utan att tulla på detaljerna.
           </motion.p>
         </motion.div>
 

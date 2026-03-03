@@ -10,7 +10,7 @@ const services = [
     icon: Palette,
     title: 'Konverteringsfokuserad design',
     description:
-      'Design som inte bara ser bra ut -- utan som aktivt driver besokare till att bli kunder. Varje element ar strategiskt placerat for maximal effekt.',
+      'Design som inte bara ser bra ut -- utan som aktivt driver besökare till att bli kunder. Varje element är strategiskt placerat för maximal effekt.',
     features: ['UX-analys', 'A/B-testning', 'Mobiloptimering'],
     metric: 95,
     metricLabel: 'Design Score',
@@ -19,7 +19,7 @@ const services = [
     icon: Rocket,
     title: 'Snabb och modern teknik',
     description:
-      'Vi bygger med den senaste tekniken for blixtsnabb laddtid, sokmotoroptimering och skalbarhet. Resultatet ar en sajt som presterar.',
+      'Vi bygger med den senaste tekniken för blixtsnabb laddtid, sökmotoroptimering och skalbarhet. Resultatet är en sajt som presterar.',
     features: ['Next.js 15', 'Edge Computing', 'Lighthouse 100'],
     featured: true,
     metric: 100,
@@ -29,10 +29,10 @@ const services = [
     icon: Settings,
     title: 'Enkelt att underhalla',
     description:
-      'En sajt ska vara latt att uppdatera, aven utan teknisk bakgrund. Vi levererar losningar som ar intuitiva och framtidssakra.',
+      'En sajt ska vara lätt att uppdatera, även utan teknisk bakgrund. Vi levererar lösningar som ar intuitiva och framtidssäkra.',
     features: ['Headless CMS', 'Supportavtal', 'Utbildning'],
     metric: 90,
-    metricLabel: 'Anvandarvanlighet',
+    metricLabel: 'Användarvänlighet',
   },
 ]
 
@@ -61,7 +61,7 @@ export function Services() {
             variants={fadeInUp}
             className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"
           >
-            Allt ni behover for en sajt som levererar
+            Allt ni behöver för en sajt som levererar
           </motion.h2>
         </motion.div>
 
@@ -82,8 +82,8 @@ export function Services() {
                 key={service.title}
                 variants={fadeInUp}
                 className={`group relative flex flex-col gap-6 rounded-[2.5rem] border border-border p-8 transition-all duration-500 hover:shadow-2xl ${isFeatured
-                    ? 'bg-card md:-mt-4 md:mb-4 border-primary/20 shadow-xl shadow-primary/5'
-                    : 'bg-card/40 hover:bg-card'
+                  ? 'bg-card md:-mt-4 md:mb-4 border-primary/20 shadow-xl shadow-primary/5'
+                  : 'bg-card/40 hover:bg-card'
                   }`}
               >
                 {isFeatured && (

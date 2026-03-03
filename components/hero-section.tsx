@@ -40,7 +40,7 @@ export function HeroSection() {
           >
             <motion.div variants={fadeIn}>
               <span className="inline-block rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-semibold tracking-wider text-primary uppercase">
-                Webbplatser som driver tillvaxt
+                Webbplatser som driver tillväxt
               </span>
             </motion.div>
 
@@ -70,8 +70,8 @@ export function HeroSection() {
               variants={fadeInUp}
               className="mt-8 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl"
             >
-              Vi hjalper B2B-foretag att lansera eller frascha upp sin sajt med
-              modern design, hog prestanda och matbara resultat.
+              Vi hjälper B2B-företag att lansera eller fräscha upp sin sajt med
+              modern design, hög prestanda och mätbara resultat.
             </motion.p>
 
             {/* CTA group */}
@@ -85,7 +85,7 @@ export function HeroSection() {
                 className="h-14 cursor-pointer rounded-2xl bg-primary px-10 text-base font-semibold text-primary-foreground shadow-xl shadow-primary/20 transition-all hover:scale-[1.02] hover:bg-primary/90 hover:shadow-2xl hover:shadow-primary/30 active:scale-[0.98]"
               >
                 <a href="#kontakt">
-                  Fa en kostnadsfri analys
+                  Få en kostnadsfri analys
                   <ArrowRight className="ml-2 size-5" />
                 </a>
               </Button>
@@ -96,7 +96,7 @@ export function HeroSection() {
                 className="h-14 cursor-pointer text-base font-medium text-muted-foreground hover:bg-white/5 hover:text-foreground"
               >
                 <a href="#case">
-                  Se vara case
+                  Se våra case
                   <ChevronDown className="ml-2 size-5" />
                 </a>
               </Button>

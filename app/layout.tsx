@@ -12,7 +12,7 @@ const _geistMono = Geist_Mono({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'PHIGO | Webbplatser som konverterar',
   description:
-    'PHIGO bygger moderna, snabba och konverteringsfokuserade webbplatser for B2B-foretag. Fa en kostnadsfri webbplatsanalys idag.',
+    'PHIGO bygger moderna, snabba och konverteringsfokuserade webbplatser for B2B-företag. Fa en kostnadsfri webbplatsanalys idag.',
   generator: 'Next.js',
   icons: {
     icon: [
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'PHIGO | Webbplatser som konverterar',
     description:
-      'Vi hjalper B2B-foretag att lansera eller frascha upp sin sajt med modern design, hog prestanda och matbara resultat.',
+      'Vi hjälper B2B-företag att lansera eller fräscha upp sin sajt med modern design, hög prestanda och mätbara resultat.',
     type: 'website',
     locale: 'sv_SE',
   },

@@ -32,8 +32,8 @@ export function FinalCta() {
               variants={fadeInUp}
               className="mx-auto mt-4 max-w-xl text-pretty leading-relaxed text-muted-foreground"
             >
-              Fa en kostnadsfri analys fran PHIGO med konkreta
-              forbittringsforslag for er nuvarande webbplats.
+              Få en kostnadsfri analys från PHIGO med konkreta
+              förbättringsförslag för er nuvarande webbplats.
             </motion.p>
             <motion.div
               variants={fadeInUp}
@@ -50,7 +50,7 @@ export function FinalCta() {
                 </a>
               </Button>
               <p className="text-xs text-muted-foreground">
-                Inget saljkrangel &middot; Svar inom 24h
+                Inget säljkrangel &middot; Svar inom 24h
               </p>
             </motion.div>
           </div>

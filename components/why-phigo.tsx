@@ -10,22 +10,22 @@ const reasons = [
   {
     title: 'Design som konverterar',
     description:
-      'Vi bygger inte bara snygga sajter -- vi bygger sajter som driver affarsresultat och matbar tillvaxt.',
+      'Vi bygger inte bara snygga sajter -- vi bygger sajter som driver affärsresultat och mätbar tillväxt.',
   },
   {
-    title: 'Prisvart och transparent',
+    title: 'Prisvärt och transparent',
     description:
-      'Inga dolda kostnader, inga overraskningar. Ni vet alltid vad ni betalar for och vad ni far.',
+      'Inga dolda kostnader, inga överraskningar. Ni vet alltid vad ni betalar för och vad ni får.',
   },
   {
     title: 'Modern tech stack',
     description:
-      'Vi anvander den senaste tekniken for att sakerstalla att er sajt ar snabb, saker och framtidssakrad.',
+      'Vi använder den senaste tekniken för att säkerställa att er sajt är snabb, säker och framtidssäkrad.',
   },
   {
     title: 'Personlig kontakt',
     description:
-      'Ni pratar alltid direkt med den som bygger er sajt. Ingen byrakrati, bara resultat.',
+      'Ni pratar alltid direkt med den som bygger er sajt. Ingen byråkrati, bara resultat.',
   },
 ]
 
@@ -45,20 +45,20 @@ export function WhyPhigo() {
               variants={fadeInUp}
               className="text-xs font-semibold uppercase tracking-wider text-primary"
             >
-              Varfor PHIGO
+              Varför PHIGO
             </motion.span>
             <motion.h2
               variants={fadeInUp}
               className="mt-3 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
             >
-              Er partner for digital tillvaxt
+              Er partner för digital tillväxt
             </motion.h2>
             <motion.p
               variants={fadeInUp}
               className="mt-4 text-pretty leading-relaxed text-muted-foreground"
             >
-              Vi kombinerar kreativ design med datadriven strategi for att bygga
-              webbplatser som gor verklig skillnad for ert foretag.
+              Vi kombinerar kreativ design med datadriven strategi för att bygga
+              webbplatser som gör verklig skillnad för ert företag.
             </motion.p>
 
             <motion.div variants={fadeInUp} className="mt-8">

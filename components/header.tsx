@@ -15,7 +15,7 @@ import { cn } from '@/lib/utils'
 
 const navLinks = [
   { label: 'Case', href: '#case' },
-  { label: 'Tjanster', href: '#tjanster' },
+  { label: 'Tjänster', href: '#tjanster' },
   { label: 'Process', href: '#process' },
   { label: 'FAQ', href: '#faq' },
 ]
@@ -71,7 +71,7 @@ export function Header() {
                 variant="ghost"
                 size="icon-sm"
                 className="md:hidden"
-                aria-label="Oppna meny"
+                aria-label="Öppna meny"
               >
                 <Menu className="size-5" />
               </Button>
