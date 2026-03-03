@@ -13,11 +13,13 @@ import {
 import { PhigoLogo } from '@/components/phigo-logo'
 import { cn } from '@/lib/utils'
 
+import Link from 'next/link'
+
 const navLinks = [
-  { label: 'Case', href: '#case' },
-  { label: 'Tjänster', href: '#tjanster' },
-  { label: 'Process', href: '#process' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'Case', href: '/cases' },
+  { label: 'Tjänster', href: '/#tjanster' },
+  { label: 'Process', href: '/#process' },
+  { label: 'FAQ', href: '/#faq' },
 ]
 
 export function Header() {
@@ -40,18 +42,20 @@ export function Header() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 lg:px-6">
-        <PhigoLogo size="md" />
+        <Link href="/">
+          <PhigoLogo size="md" />
+        </Link>
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-8 md:flex" aria-label="Huvudnavigering">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -61,7 +65,7 @@ export function Header() {
             size="sm"
             className="hidden cursor-pointer rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 md:inline-flex"
           >
-            <a href="#kontakt">Kostnadsfri analys</a>
+            <Link href="/#kontakt">Kostnadsfri analys</Link>
           </Button>
 
           {/* Mobile menu */}
@@ -79,26 +83,28 @@ export function Header() {
             <SheetContent side="right" className="w-72 bg-background border-border">
               <SheetHeader>
                 <SheetTitle>
-                  <PhigoLogo size="md" />
+                  <Link href="/" onClick={() => setOpen(false)}>
+                    <PhigoLogo size="md" />
+                  </Link>
                 </SheetTitle>
               </SheetHeader>
               <nav className="flex flex-col gap-4 px-4 pt-4" aria-label="Mobilnavigering">
                 {navLinks.map((link) => (
-                  <a
+                  <Link
                     key={link.href}
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="text-base text-muted-foreground transition-colors hover:text-foreground"
+                    className="text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 ))}
                 <Button
                   asChild
                   className="mt-4 w-full cursor-pointer rounded-lg bg-primary text-primary-foreground hover:bg-primary/90"
                   onClick={() => setOpen(false)}
                 >
-                  <a href="#kontakt">Kostnadsfri analys</a>
+                  <Link href="/#kontakt">Kostnadsfri analys</Link>
                 </Button>
               </nav>
             </SheetContent>

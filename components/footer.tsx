@@ -1,11 +1,12 @@
 import { PhigoLogo } from '@/components/phigo-logo'
+import Link from 'next/link'
 
 const footerLinks = [
-  { label: 'Case', href: '#case' },
-  { label: 'Tjänster', href: '#tjanster' },
-  { label: 'Process', href: '#process' },
-  { label: 'FAQ', href: '#faq' },
-  { label: 'Kontakt', href: '#kontakt' },
+  { label: 'Case', href: '/cases' },
+  { label: 'Tjänster', href: '/#tjanster' },
+  { label: 'Process', href: '/#process' },
+  { label: 'FAQ', href: '/#faq' },
+  { label: 'Kontakt', href: '/#kontakt' },
 ]
 
 export function Footer() {
@@ -15,7 +16,9 @@ export function Footer() {
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           {/* Brand */}
           <div className="max-w-xs">
-            <PhigoLogo size="lg" />
+            <Link href="/" aria-label="PHIGO - Hem">
+              <PhigoLogo size="lg" />
+            </Link>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               Vi bygger moderna, snabba och konverteringsfokuserade webbplatser
               för B2B-företag som vill växa digitalt.
@@ -28,13 +31,13 @@ export function Footer() {
               Navigation
             </span>
             {footerLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
 

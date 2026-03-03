@@ -13,9 +13,7 @@ const sizeClasses = {
 
 export function PhigoLogo({ className, size = 'md' }: PhigoLogoProps) {
   return (
-    <a
-      href="#"
-      aria-label="PHIGO - Hem"
+    <div
       className={cn(
         'font-sans font-bold tracking-tight select-none',
         sizeClasses[size],
@@ -24,6 +22,6 @@ export function PhigoLogo({ className, size = 'md' }: PhigoLogoProps) {
     >
       <span className="text-primary">phi</span>
       <span className="text-foreground">go</span>
-    </a>
+    </div>
   )
 }
