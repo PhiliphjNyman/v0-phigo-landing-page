@@ -12,7 +12,7 @@ const _geistMono = Geist_Mono({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'PHIGO | Webbplatser som konverterar',
   description:
-    'PHIGO bygger moderna, snabba och konverteringsfokuserade webbplatser for B2B-företag. Fa en kostnadsfri webbplatsanalys idag.',
+    'PHIGO bygger moderna, snabba och konverteringsfokuserade webbplatser för B2B-företag. Få en kostnadsfri webbplatsanalys idag.',
   generator: 'Next.js',
   icons: {
     icon: [

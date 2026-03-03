@@ -17,7 +17,7 @@ import {
 const cases = [
   {
     company: 'Nordic Consulting',
-    industry: 'B2B Konsulttjanster',
+    industry: 'B2B Konsulttjänster',
     description:
       'Omdesign av en föråldrad hemsida till en modern, konverteringsoptimerad sajt med fokus på leadgenerering och trovärdig positionering.',
     metricPrefix: '+',
@@ -43,7 +43,7 @@ const cases = [
     company: 'Avenio Fastigheter',
     industry: 'Lokalt tjänsteföretag',
     description:
-      'En helt ny digital närvaro med modernt formsprak, tydligt värderbjudande och integrerad bokningsfunktion.',
+      'En helt ny digital närvaro med modernt formspråk, tydligt värderbjudande och integrerad bokningsfunktion.',
     metricPrefix: '+',
     metricValue: 120,
     metricSuffix: '% besökare',
@@ -76,13 +76,13 @@ export function CaseStudies() {
               variants={fadeInUp}
               className="text-sm font-bold uppercase tracking-widest text-primary"
             >
-              Exempel pa leveranser
+              Exempel på leveranser
             </motion.span>
             <motion.h2
               variants={fadeInUp}
               className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"
             >
-              Utvalda projekt fran PHIGO
+              Utvalda projekt från PHIGO
             </motion.h2>
           </motion.div>
 
@@ -92,8 +92,8 @@ export function CaseStudies() {
             viewport={{ once: true }}
             className="max-w-md text-pretty text-center text-muted-foreground sm:text-right"
           >
-            Vi hjälper B2B-foretag att stå ut digitalt med design och teknik som gör
-            skillnad pa riktigt.
+            Vi hjälper B2B-företag att stå ut digitalt med design och teknik som gör
+            skillnad på riktigt.
           </motion.p>
         </div>
 

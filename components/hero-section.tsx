@@ -109,7 +109,7 @@ export function HeroSection() {
             >
               <span>✓ Tar 30 sekunder</span>
               <span className="size-1 rounded-full bg-border" />
-              <span>✓ Ingen forpliktelse</span>
+              <span>✓ Ingen förpliktelse</span>
             </motion.div>
           </motion.div>
 
