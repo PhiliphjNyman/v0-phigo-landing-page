@@ -18,6 +18,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return {
         title: `${c.title} – Case | PHIGO`,
         description: c.summary,
+        openGraph: {
+            title: `${c.title} – Case | PHIGO`,
+            description: c.summary,
+            type: 'article',
+            locale: 'sv_SE',
+        },
     }
 }
 

@@ -1,9 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Check } from 'lucide-react'
+import { Check, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { ArrowRight } from 'lucide-react'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
 const reasons = [

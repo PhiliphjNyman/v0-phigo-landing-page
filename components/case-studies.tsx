@@ -94,7 +94,7 @@ export function CaseStudies() {
                   <CarouselItem key={c.slug} className="pl-6 md:basis-1/2 lg:basis-1/3">
                     <Link href={`/cases/${c.slug}`}>
                       <motion.article
-                        className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card/50 transition-all duration-500 hover:border-primary/20 hover:bg-card hover:shadow-2xl hover:shadow-primary/5 cursor-pointer"
+                        className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card/50 transition-[border-color,background-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-primary/20 hover:bg-card hover:shadow-2xl hover:shadow-primary/5 cursor-pointer"
                       >
                         {/* Image with Overlay */}
                         <div className="relative aspect-[16/11] overflow-hidden bg-muted">

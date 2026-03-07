@@ -93,7 +93,7 @@ export function FaqSection() {
                   value={`item-${index}`}
                   className="group border border-border bg-card/50 rounded-2xl px-6 transition-all duration-300 data-[state=open]:border-primary/30 data-[state=open]:bg-card data-[state=open]:shadow-xl data-[state=open]:shadow-primary/5"
                 >
-                  <AccordionTrigger className="flex gap-4 py-6 text-left text-lg font-bold text-foreground hover:no-underline hover:text-primary transition-all [&[data-state=open]>svg]:rotate-180">
+                  <AccordionTrigger className="flex gap-4 py-6 text-left text-lg font-bold text-foreground hover:no-underline hover:text-primary transition-[color] duration-200 [&[data-state=open]>svg]:rotate-180 [&>svg]:transition-transform [&>svg]:duration-300 [&>svg]:ease-in-out">
                     <div className="flex size-10 items-center justify-center rounded-xl bg-primary/5 text-primary group-data-[state=open]:bg-primary group-data-[state=open]:text-primary-foreground transition-colors shrink-0">
                       <Icon className="size-5" />
                     </div>
@@ -116,7 +116,7 @@ export function FaqSection() {
           className="mt-16 text-center"
         >
           <div className="inline-flex items-center gap-3 rounded-full border border-border bg-background px-6 py-3 text-sm font-medium text-muted-foreground">
-            <HelpCircle className="size-4 text-primary" />
+            <HelpCircle className="size-4 text-primary" aria-hidden="true" />
             Fortfarande osäker?
             <a href="#kontakt" className="font-bold text-primary hover:underline">Chatta med oss</a>
           </div>

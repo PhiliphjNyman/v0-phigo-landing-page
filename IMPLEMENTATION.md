@@ -2,6 +2,35 @@ IMPLEMENTATION.md
 
 # IMPLEMENTATION.md — PHIGO: Samlad implementationsplan
 
+## Checklista
+
+### Fas 1: Case-system
+
+- [x] **1.1** `lib/cases.ts` — typ, 3 placeholder-case, hjälpfunktioner
+- [x] **1.2** `components/case-studies.tsx` — importerar från `lib/cases.ts`, klickbara kort
+- [x] **1.3** `app/cases/page.tsx` — indexsida med filter, grid, CTA
+- [x] **1.4** `app/cases/[slug]/page.tsx` — detaljsida med breadcrumb, metrics, relaterade case
+- [x] **1.5** `id="kontakt"` på kontaktformulärets sektion
+
+### Fas 2: Visuell polish
+
+- [x] **2.1** `AnimatedCounter`-komponent — scroll-triggered räknare
+- [x] **2.2** Scroll-spy i navigationen
+- [x] **2.3** Case-kort hover-effekter (overlay + lyft)
+- [x] **2.4** Process-pipeline — visuella linjer + animering
+- [x] **2.5** FAQ accordion-polish
+- [x] **2.6** Hero-visual förbättring (parallax/mouse-tracking)
+
+### Fas 3: Slutpolish
+
+- [x] **3.1** Responsivitets-pass (mobil/tablet/desktop)
+- [x] **3.2** Tillgänglighets-pass (aria, focus, kontrast)
+- [x] **3.3** Prestanda-pass (`pnpm build`, lazy loading)
+- [x] **3.4** SEO & metadata (og-taggar, favicon, lang)
+
+---
+
+
 ## Nuläge
 
 Landningssidan är byggd och fungerande med Next.js 16, Tailwind 4, shadcn/ui och Framer Motion. Följande sektioner finns och är i gott skick:

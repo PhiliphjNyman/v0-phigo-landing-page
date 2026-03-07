@@ -10,6 +10,12 @@ import * as Framer from '@/components/framer-exports'
 export const metadata: Metadata = {
     title: 'Case – Utvalda projekt | PHIGO',
     description: 'Se exempel på hur PHIGO hjälper företag att växa genom modern design och teknisk expertis.',
+    openGraph: {
+        title: 'Case – Utvalda projekt | PHIGO',
+        description: 'Se exempel på hur PHIGO hjälper företag att växa genom modern design och teknisk expertis.',
+        type: 'website',
+        locale: 'sv_SE',
+    },
 }
 
 export default function CasesPage() {

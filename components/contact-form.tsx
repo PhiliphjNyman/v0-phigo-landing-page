@@ -11,7 +11,6 @@ import confetti from 'canvas-confetti'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Progress } from '@/components/ui/progress'
 import {
   Select,
   SelectContent,
@@ -268,18 +267,18 @@ export function ContactForm() {
                       ) : (
                         <>
                           Skicka analysförfrågan
-                          <Send className="ml-2 size-5" />
+                          <Send className="ml-2 size-5" aria-hidden="true" />
                         </>
                       )}
                     </Button>
 
                     <div className="flex items-center justify-center gap-6 mt-2 opacity-60">
                       <p className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground uppercase tracking-widest">
-                        <CheckCircle2 className="size-3 text-primary" />
+                        <CheckCircle2 className="size-3 text-primary" aria-hidden="true" />
                         Svar inom 24h
                       </p>
                       <p className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground uppercase tracking-widest">
-                        <Sparkles className="size-3 text-primary" />
+                        <Sparkles className="size-3 text-primary" aria-hidden="true" />
                         100% Gratis
                       </p>
                     </div>

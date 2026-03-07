@@ -131,6 +131,7 @@ export function HeroSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2, duration: 1, repeat: Infinity, repeatType: 'reverse' }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted-foreground/30"
+        aria-hidden="true"
       >
         <ChevronDown className="size-6" />
       </motion.div>
