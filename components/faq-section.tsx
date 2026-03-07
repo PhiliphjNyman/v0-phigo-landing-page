@@ -71,7 +71,7 @@ export function FaqSection() {
           </motion.h2>
           <motion.p
             variants={fadeInUp}
-            className="mt-6 mx-auto max-w-xl text-muted-foreground text-lg"
+            className="mt-6 mx-auto max-w-xl text-pretty text-muted-foreground text-lg"
           >
             Hittar du inte det du söker? Kontakta oss direkt så hjälper vi dig.
           </motion.p>

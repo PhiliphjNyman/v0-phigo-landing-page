@@ -114,8 +114,8 @@ export function ContactForm() {
               <motion.div variants={fadeInUp} className="relative mt-12 overflow-hidden rounded-3xl border border-border bg-card shadow-2xl">
                 <div className="absolute top-0 left-0 w-full h-1 bg-muted">
                   <motion.div
-                    className="h-full bg-primary"
-                    animate={{ width: `${progress}%` }}
+                    className="h-full w-full bg-primary origin-left"
+                    animate={{ scaleX: progress / 100 }}
                     transition={{ duration: 0.5 }}
                   />
                 </div>

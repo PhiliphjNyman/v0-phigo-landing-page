@@ -1,31 +1,38 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { useEffect, useRef } from 'react'
+import { motion, useAnimation, useInView } from 'framer-motion'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { fadeInUp, fadeIn, staggerContainer } from '@/lib/animations'
 import { HeroVisual } from '@/components/hero-visual'
 
 export function HeroSection() {
-  const { scrollY } = useScroll()
-  const y1 = useTransform(scrollY, [0, 500], [0, 100])
-  const y2 = useTransform(scrollY, [0, 500], [0, -100])
+  const arrowRef = useRef(null)
+  const isArrowInView = useInView(arrowRef)
+  const arrowControls = useAnimation()
+
+  useEffect(() => {
+    if (isArrowInView) {
+      arrowControls.start({
+        opacity: [0, 1],
+        y: [-20, 0],
+        transition: { delay: 2, duration: 1, repeat: Infinity, repeatType: 'reverse' },
+      })
+    } else {
+      arrowControls.stop()
+    }
+  }, [isArrowInView, arrowControls])
 
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden pt-20 pb-16 lg:pt-32">
+    <section className="relative flex min-h-dvh items-center overflow-hidden pt-20 pb-16 lg:pt-32">
       {/* Background Effects */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]" />
 
-        {/* Animated Blobs */}
-        <motion.div
-          style={{ y: y1 }}
-          className="absolute -top-[10%] -left-[10%] h-[500px] w-[500px] rounded-full bg-primary/10 blur-[120px] mix-blend-screen"
-        />
-        <motion.div
-          style={{ y: y2 }}
-          className="absolute top-[20%] -right-[10%] h-[400px] w-[400px] rounded-full bg-emerald-500/5 blur-[100px] mix-blend-screen"
-        />
+        {/* Static Blobs */}
+        <div className="absolute -top-[10%] -left-[10%] h-[500px] w-[500px] rounded-full bg-primary/10 blur-[120px] mix-blend-screen" />
+        <div className="absolute top-[20%] -right-[10%] h-[400px] w-[400px] rounded-full bg-emerald-500/5 blur-[100px] mix-blend-screen" />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
       </div>
 
@@ -127,9 +134,8 @@ export function HeroSection() {
 
       {/* Bottom arrow indicator */}
       <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2, duration: 1, repeat: Infinity, repeatType: 'reverse' }}
+        ref={arrowRef}
+        animate={arrowControls}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted-foreground/30"
         aria-hidden="true"
       >

@@ -96,15 +96,15 @@ export function ProcessSection() {
                   className="group relative flex flex-col items-center text-center md:items-start md:text-left"
                 >
                   {/* Step Visual */}
-                  <div className="relative z-10 mb-8 flex size-36 items-center justify-center rounded-full bg-muted/30 p-4 transition-[transform] duration-500 group-hover:scale-105">
-                    <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${step.accent} opacity-0 transition-opacity duration-500 group-hover:opacity-100`} />
+                  <div className="relative z-10 mb-8 flex size-36 items-center justify-center rounded-full bg-muted/30 p-4 transition-[transform] duration-200 group-hover:scale-105">
+                    <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${step.accent} opacity-0 transition-opacity duration-200 group-hover:opacity-100`} />
                     <div className="relative flex flex-col items-center gap-2">
                       <motion.span
                         initial={{ opacity: 0.2, scale: 0.8 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true, margin: '-60px' }}
                         transition={{ type: 'spring', stiffness: 200, damping: 20, delay: i * 0.15 }}
-                        className="text-4xl font-black tracking-tighter text-primary/40 transition-colors duration-500 group-hover:text-primary"
+                        className="text-4xl font-black tracking-tighter text-primary/40 transition-colors duration-200 group-hover:text-primary"
                       >
                         {step.number}
                       </motion.span>
@@ -114,7 +114,7 @@ export function ProcessSection() {
                     </div>
 
                     {/* Spinning border effect on hover */}
-                    <div className="absolute inset-0 rounded-full border-2 border-dashed border-primary/20 opacity-0 transition-opacity duration-500 group-hover:animate-[spin_20s_linear_infinite] group-hover:opacity-100" />
+                    <div className="absolute inset-0 rounded-full border-2 border-dashed border-primary/20 opacity-0 transition-opacity duration-200 group-hover:animate-[spin_20s_linear_infinite] group-hover:opacity-100" />
                   </div>
 
                   {/* Content */}

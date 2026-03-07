@@ -81,7 +81,7 @@ export function Services() {
               <motion.div
                 key={service.title}
                 variants={fadeInUp}
-                className={`group relative flex flex-col gap-6 rounded-[2.5rem] border border-border p-8 transition-all duration-500 hover:shadow-2xl ${isFeatured
+                className={`group relative flex flex-col gap-6 rounded-[2.5rem] border border-border p-8 transition-[box-shadow,background-color] duration-200 hover:shadow-2xl ${isFeatured
                   ? 'bg-card md:-mt-4 md:mb-4 border-primary/20 shadow-xl shadow-primary/5'
                   : 'bg-card/40 hover:bg-card'
                   }`}
@@ -92,7 +92,7 @@ export function Services() {
                   </div>
                 )}
 
-                <div className={`flex size-14 items-center justify-center rounded-2xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 ${isFeatured ? 'bg-primary shadow-lg shadow-primary/20 text-white' : 'bg-primary/10 text-primary'}`}>
+                <div className={`flex size-14 items-center justify-center rounded-2xl transition-transform duration-200 group-hover:scale-110 group-hover:rotate-3 ${isFeatured ? 'bg-primary shadow-lg shadow-primary/20 text-white' : 'bg-primary/10 text-primary'}`}>
                   <Icon className="size-7" />
                 </div>
 
@@ -129,7 +129,7 @@ export function Services() {
 
                 {/* Interactive Glow for featured item */}
                 {isFeatured && (
-                  <div className="absolute inset-0 -z-10 bg-primary/20 blur-[60px] opacity-0 group-hover:opacity-30 transition-opacity duration-700 rounded-[2.5rem]" />
+                  <div className="absolute inset-0 -z-10 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-[2.5rem]" />
                 )}
               </motion.div>
             )

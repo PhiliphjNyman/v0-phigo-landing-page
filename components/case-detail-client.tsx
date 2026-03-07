@@ -20,7 +20,7 @@ import { Case } from '@/lib/cases'
 
 export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: Case[] }) {
     return (
-        <div className="min-h-screen pt-24 pb-12">
+        <div className="min-h-dvh pt-24 pb-12">
             <article className="mx-auto max-w-7xl px-4 lg:px-8">
                 {/* Navigation & Breadcrumbs */}
                 <motion.div
@@ -67,7 +67,7 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                             <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-6xl mb-6">
                                 {c.title}
                             </h1>
-                            <p className="text-xl text-balance text-muted-foreground leading-relaxed mb-8">
+                            <p className="text-xl text-pretty text-muted-foreground leading-relaxed mb-8">
                                 {c.summary}
                             </p>
                         </motion.div>
@@ -185,7 +185,7 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                                                     src={rc.image}
                                                     alt={rc.title}
                                                     fill
-                                                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                                    className="object-cover transition-transform duration-150 group-hover:scale-110"
                                                 />
                                             </div>
                                             <div className="p-6 flex flex-col justify-center gap-2">

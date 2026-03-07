@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useEffect, useRef } from 'react'
+import { motion, useAnimation, useInView } from 'framer-motion'
 import { fadeIn } from '@/lib/animations'
 
 const placeholderLogos = [
@@ -15,6 +16,18 @@ const placeholderLogos = [
 ]
 
 export function TrustBar() {
+  const marqueeRef = useRef(null)
+  const isInView = useInView(marqueeRef)
+  const controls = useAnimation()
+
+  useEffect(() => {
+    if (isInView) {
+      controls.start({ x: '-50%', transition: { duration: 30, repeat: Infinity, ease: 'linear' } })
+    } else {
+      controls.stop()
+    }
+  }, [isInView, controls])
+
   return (
     <section className="border-y border-border bg-muted/20 py-12 relative overflow-hidden">
       <motion.div
@@ -34,13 +47,9 @@ export function TrustBar() {
           <div className="absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-background to-transparent md:w-32" />
 
           <motion.div
+            ref={marqueeRef}
             initial={{ x: 0 }}
-            animate={{ x: '-50%' }}
-            transition={{
-              duration: 30,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
+            animate={controls}
             className="flex min-w-full shrink-0 items-center justify-around gap-12 lg:gap-24 px-12"
           >
             {[...placeholderLogos, ...placeholderLogos].map((name, i) => (
