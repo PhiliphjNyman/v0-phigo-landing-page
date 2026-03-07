@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   description:
     'PHIGO bygger moderna, snabba och konverteringsfokuserade webbplatser för B2B-företag. Få en kostnadsfri webbplatsanalys idag.',
   generator: 'Next.js',
+  alternates: {
+    canonical: 'https://phigo.se',
+  },
   icons: {
     icon: [
       {
@@ -34,9 +37,16 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'PHIGO | Webbplatser som konverterar',
     description:
-      'Vi hjälper B2B-företag att lansera eller fräscha upp sin sajt med modern design, hög prestanda och mätbara resultat.',
+      'PHIGO bygger moderna, snabba och konverteringsfokuserade webbplatser för B2B-företag. Få en kostnadsfri webbplatsanalys idag.',
+    url: 'https://phigo.se',
     type: 'website',
     locale: 'sv_SE',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'PHIGO | Webbplatser som konverterar',
+    description:
+      'PHIGO bygger moderna, snabba och konverteringsfokuserade webbplatser för B2B-företag. Få en kostnadsfri webbplatsanalys idag.',
   },
 }
 

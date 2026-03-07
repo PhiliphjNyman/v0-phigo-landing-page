@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Search, Paintbrush, RocketIcon, ChevronRight } from 'lucide-react'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
@@ -96,19 +96,25 @@ export function ProcessSection() {
                   className="group relative flex flex-col items-center text-center md:items-start md:text-left"
                 >
                   {/* Step Visual */}
-                  <div className="relative z-10 mb-8 flex size-36 items-center justify-center rounded-full bg-muted/30 p-4 transition-transform duration-500 group-hover:scale-105">
-                    <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${step.accent} opacity-0 transition-opacity duration-500 group-hover:opacity-100`} />
+                  <div className="relative z-10 mb-8 flex size-36 items-center justify-center rounded-full bg-muted/30 p-4 transition-[transform] duration-200 group-hover:scale-105">
+                    <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${step.accent} opacity-0 transition-opacity duration-200 group-hover:opacity-100`} />
                     <div className="relative flex flex-col items-center gap-2">
-                      <span className="text-4xl font-black tracking-tighter text-primary/40 transition-colors duration-500 group-hover:text-primary">
+                      <motion.span
+                        initial={{ opacity: 0.2, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true, margin: '-60px' }}
+                        transition={{ type: 'spring', stiffness: 200, damping: 20, delay: i * 0.15 }}
+                        className="text-4xl font-black tracking-tighter text-primary/40 transition-colors duration-200 group-hover:text-primary"
+                      >
                         {step.number}
-                      </span>
-                      <div className="flex size-14 items-center justify-center rounded-2xl bg-card shadow-xl border border-border group-hover:border-primary/30 transition-all">
-                        <Icon className="size-7 text-primary" />
+                      </motion.span>
+                      <div className="flex size-14 items-center justify-center rounded-2xl bg-card shadow-xl border border-border group-hover:border-primary/30 transition-[border-color]">
+                        <Icon className="size-7 text-primary" aria-hidden="true" />
                       </div>
                     </div>
 
                     {/* Spinning border effect on hover */}
-                    <div className="absolute inset-0 rounded-full border-2 border-dashed border-primary/20 opacity-0 transition-opacity duration-500 group-hover:animate-[spin_20s_linear_infinite] group-hover:opacity-100" />
+                    <div className="absolute inset-0 rounded-full border-2 border-dashed border-primary/20 opacity-0 transition-opacity duration-200 group-hover:animate-[spin_20s_linear_infinite] group-hover:opacity-100" />
                   </div>
 
                   {/* Content */}
@@ -121,9 +127,9 @@ export function ProcessSection() {
                     </p>
 
                     {/* Step Features - micro interaction */}
-                    <div className="inline-flex items-center gap-2 text-sm font-bold text-primary opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+                    <div className="inline-flex items-center gap-2 text-sm font-bold text-primary opacity-0 -translate-x-2 transition-[opacity,transform] duration-300 group-hover:opacity-100 group-hover:translate-x-0">
                       <span>Läs mer om fasen</span>
-                      <ChevronRight className="size-4" />
+                      <ChevronRight className="size-4" aria-hidden="true" />
                     </div>
                   </div>
 

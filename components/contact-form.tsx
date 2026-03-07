@@ -11,7 +11,6 @@ import confetti from 'canvas-confetti'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Progress } from '@/components/ui/progress'
 import {
   Select,
   SelectContent,
@@ -113,10 +112,10 @@ export function ContactForm() {
               </div>
 
               <motion.div variants={fadeInUp} className="relative mt-12 overflow-hidden rounded-3xl border border-border bg-card shadow-2xl">
-                <div className="absolute top-0 left-0 w-full h-1 bg-muted">
+                <div className="absolute top-0 left-0 w-full h-1 bg-muted" aria-hidden="true">
                   <motion.div
-                    className="h-full bg-primary"
-                    animate={{ width: `${progress}%` }}
+                    className="h-full w-full bg-primary origin-left"
+                    animate={{ scaleX: progress / 100 }}
                     transition={{ duration: 0.5 }}
                   />
                 </div>
@@ -134,7 +133,7 @@ export function ContactForm() {
                           <FormItem>
                             <FormLabel className="flex justify-between">
                               Namn
-                              {field.value.length >= 2 && <CheckCircle2 className="size-4 text-primary animate-in zoom-in" />}
+                              {field.value.length >= 2 && <CheckCircle2 className="size-4 text-primary animate-in zoom-in" aria-hidden="true" />}
                             </FormLabel>
                             <FormControl>
                               <Input
@@ -154,7 +153,7 @@ export function ContactForm() {
                           <FormItem>
                             <FormLabel className="flex justify-between">
                               Företag
-                              {field.value.length >= 2 && <CheckCircle2 className="size-4 text-primary animate-in zoom-in" />}
+                              {field.value.length >= 2 && <CheckCircle2 className="size-4 text-primary animate-in zoom-in" aria-hidden="true" />}
                             </FormLabel>
                             <FormControl>
                               <Input
@@ -177,7 +176,7 @@ export function ContactForm() {
                           <FormItem>
                             <FormLabel className="flex justify-between">
                               E-post
-                              {field.value.includes('@') && field.value.includes('.') && <CheckCircle2 className="size-4 text-primary animate-in zoom-in" />}
+                              {field.value.includes('@') && field.value.includes('.') && <CheckCircle2 className="size-4 text-primary animate-in zoom-in" aria-hidden="true" />}
                             </FormLabel>
                             <FormControl>
                               <Input
@@ -268,18 +267,18 @@ export function ContactForm() {
                       ) : (
                         <>
                           Skicka analysförfrågan
-                          <Send className="ml-2 size-5" />
+                          <Send className="ml-2 size-5" aria-hidden="true" />
                         </>
                       )}
                     </Button>
 
                     <div className="flex items-center justify-center gap-6 mt-2 opacity-60">
                       <p className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground uppercase tracking-widest">
-                        <CheckCircle2 className="size-3 text-primary" />
+                        <CheckCircle2 className="size-3 text-primary" aria-hidden="true" />
                         Svar inom 24h
                       </p>
                       <p className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground uppercase tracking-widest">
-                        <Sparkles className="size-3 text-primary" />
+                        <Sparkles className="size-3 text-primary" aria-hidden="true" />
                         100% Gratis
                       </p>
                     </div>

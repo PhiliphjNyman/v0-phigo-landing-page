@@ -42,7 +42,7 @@ export function CasesClient({ allCases }: { allCases: Case[] }) {
                 className="flex flex-wrap items-center justify-center gap-2 mb-12"
             >
                 <div className="flex items-center gap-2 mr-4 text-muted-foreground text-sm font-medium">
-                    <Filter className="size-4" />
+                    <Filter className="size-4" aria-hidden="true" />
                     <span>Filtrera:</span>
                 </div>
                 {industries.map((industry) => (
@@ -50,7 +50,8 @@ export function CasesClient({ allCases }: { allCases: Case[] }) {
                         key={industry}
                         variant={activeFilter === industry ? 'default' : 'outline'}
                         onClick={() => setActiveFilter(industry)}
-                        className="rounded-full px-6 transition-all"
+                        className="rounded-full px-6 transition-[background-color,color,border-color]"
+                        aria-pressed={activeFilter === industry}
                     >
                         {industry}
                     </Button>
@@ -79,17 +80,17 @@ export function CasesClient({ allCases }: { allCases: Case[] }) {
                             >
                                 <Link href={`/cases/${c.slug}`}>
                                     <article
-                                        className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card/50 transition-all duration-500 hover:border-primary/20 hover:bg-card hover:shadow-2xl hover:shadow-primary/5 cursor-pointer"
+                                        className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card/50 transition-[border-color,background-color,box-shadow] duration-200 hover:border-primary/20 hover:bg-card hover:shadow-2xl hover:shadow-primary/5 cursor-pointer"
                                     >
                                         <div className="relative aspect-[16/11] overflow-hidden bg-muted">
                                             <Image
                                                 src={c.image}
                                                 alt={c.title}
                                                 fill
-                                                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                                className="object-cover transition-transform duration-150 group-hover:scale-110"
                                                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                             />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
                                         </div>
 
                                         <div className="flex flex-1 flex-col gap-4 p-7">
@@ -100,8 +101,8 @@ export function CasesClient({ allCases }: { allCases: Case[] }) {
                                                 >
                                                     {c.industry}
                                                 </Badge>
-                                                <div className={`flex items-center gap-1.5 text-sm font-bold transition-all duration-500 ${accentStyles.split(' ')[1]}`}>
-                                                    <MetricIcon className="size-4" />
+                                                <div className={`flex items-center gap-1.5 text-sm font-bold transition-colors duration-500 ${accentStyles.split(' ')[1]}`}>
+                                                    <MetricIcon className="size-4" aria-hidden="true" />
                                                     <Counter
                                                         value={parseInt(metric.value.replace(/[^0-9]/g, ''))}
                                                         prefix={metric.value.includes('+') ? '+' : ''}
@@ -110,7 +111,7 @@ export function CasesClient({ allCases }: { allCases: Case[] }) {
                                                 </div>
                                             </div>
 
-                                            <h3 className="text-xl font-bold text-foreground transition-all group-hover:underline">
+                                            <h3 className="text-xl font-bold text-foreground group-hover:underline">
                                                 {c.title}
                                             </h3>
 
@@ -119,9 +120,9 @@ export function CasesClient({ allCases }: { allCases: Case[] }) {
                                             </p>
 
                                             <div className="mt-4 pt-4 border-t border-border/50">
-                                                <div className="inline-flex items-center gap-2 text-sm font-bold text-primary transition-all hover:gap-3">
+                                                <div className="inline-flex items-center gap-2 text-sm font-bold text-primary">
                                                     Läs mer om projektet
-                                                    <ArrowUpRight className="size-4" />
+                                                    <ArrowUpRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
                                                 </div>
                                             </div>
                                         </div>

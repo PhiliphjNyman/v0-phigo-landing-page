@@ -41,7 +41,7 @@ export function Counter({
     }, [springValue, prefix, suffix])
 
     return (
-        <span ref={ref} className={className}>
+        <span ref={ref} className={`tabular-nums${className ? ` ${className}` : ''}`}>
             {prefix}0{suffix}
         </span>
     )

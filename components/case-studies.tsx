@@ -94,7 +94,7 @@ export function CaseStudies() {
                   <CarouselItem key={c.slug} className="pl-6 md:basis-1/2 lg:basis-1/3">
                     <Link href={`/cases/${c.slug}`}>
                       <motion.article
-                        className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card/50 transition-all duration-500 hover:border-primary/20 hover:bg-card hover:shadow-2xl hover:shadow-primary/5 cursor-pointer"
+                        className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card/50 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-1 hover:border-primary/20 hover:bg-card hover:shadow-2xl hover:shadow-primary/5 cursor-pointer"
                       >
                         {/* Image with Overlay */}
                         <div className="relative aspect-[16/11] overflow-hidden bg-muted">
@@ -102,10 +102,10 @@ export function CaseStudies() {
                             src={c.image}
                             alt={`Webbplats mockup för ${c.title}`}
                             fill
-                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                            className="object-cover transition-transform duration-150 group-hover:scale-110"
                             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
                         </div>
 
                         {/* Content */}
@@ -117,8 +117,8 @@ export function CaseStudies() {
                             >
                               {c.industry}
                             </Badge>
-                            <div className={`flex items-center gap-1.5 text-sm font-bold transition-all duration-500 ${accentStyles.split(' ')[1]}`}>
-                              <MetricIcon className="size-4" />
+                            <div className={`flex items-center gap-1.5 text-sm font-bold transition-colors duration-500 ${accentStyles.split(' ')[1]}`}>
+                              <MetricIcon className="size-4" aria-hidden="true" />
                               <Counter
                                 value={parseInt(metric.value.replace(/[^0-9]/g, ''))}
                                 prefix={metric.value.includes('+') ? '+' : ''}
@@ -140,10 +140,10 @@ export function CaseStudies() {
 
                           <div className="mt-4 pt-4 border-t border-border/50">
                             <div
-                              className="inline-flex items-center gap-2 text-sm font-bold text-primary transition-all hover:gap-3"
+                              className="inline-flex items-center gap-2 text-sm font-bold text-primary"
                             >
                               Se case detaljer
-                              <ArrowUpRight className="size-4" />
+                              <ArrowUpRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
                             </div>
                           </div>
                         </div>
@@ -164,8 +164,8 @@ export function CaseStudies() {
             </div>
 
             <div className="hidden lg:block">
-              <CarouselPrevious className="-left-16 h-12 w-12 rounded-2xl bg-muted/50 border-border hover:bg-primary hover:text-white transition-all backdrop-blur-sm" />
-              <CarouselNext className="-right-16 h-12 w-12 rounded-2xl bg-muted/50 border-border hover:bg-primary hover:text-white transition-all backdrop-blur-sm" />
+              <CarouselPrevious className="-left-16 h-12 w-12 rounded-2xl bg-muted/50 border-border hover:bg-primary hover:text-white transition-[background-color,color] backdrop-blur-sm" />
+              <CarouselNext className="-right-16 h-12 w-12 rounded-2xl bg-muted/50 border-border hover:bg-primary hover:text-white transition-[background-color,color] backdrop-blur-sm" />
             </div>
           </Carousel>
         </motion.div>

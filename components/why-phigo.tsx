@@ -1,9 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Check } from 'lucide-react'
+import { Check, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { ArrowRight } from 'lucide-react'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
 const reasons = [
@@ -69,7 +68,7 @@ export function WhyPhigo() {
               >
                 <a href="#kontakt">
                   Boka ett samtal
-                  <ArrowRight className="ml-1 size-4" />
+                  <ArrowRight className="ml-1 size-4" aria-hidden="true" />
                 </a>
               </Button>
             </motion.div>
@@ -91,7 +90,7 @@ export function WhyPhigo() {
               >
                 <div className="flex items-center gap-2">
                   <div className="flex size-6 items-center justify-center rounded-md bg-primary/10">
-                    <Check className="size-3.5 text-primary" />
+                    <Check className="size-3.5 text-primary" aria-hidden="true" />
                   </div>
                   <h3 className="text-sm font-semibold text-foreground">
                     {reason.title}

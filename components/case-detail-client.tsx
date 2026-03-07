@@ -20,7 +20,7 @@ import { Case } from '@/lib/cases'
 
 export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: Case[] }) {
     return (
-        <div className="min-h-screen pt-24 pb-12">
+        <div className="min-h-dvh pt-24 pb-12">
             <article className="mx-auto max-w-7xl px-4 lg:px-8">
                 {/* Navigation & Breadcrumbs */}
                 <motion.div
@@ -32,7 +32,7 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                         href="/cases"
                         className="group inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
                     >
-                        <ArrowLeft className="mr-2 size-4 transition-transform group-hover:-translate-x-1" />
+                        <ArrowLeft className="mr-2 size-4 transition-transform group-hover:-translate-x-1" aria-hidden="true" />
                         Tillbaka till alla case
                     </Link>
 
@@ -67,7 +67,7 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                             <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-6xl mb-6">
                                 {c.title}
                             </h1>
-                            <p className="text-xl text-balance text-muted-foreground leading-relaxed mb-8">
+                            <p className="text-xl text-pretty text-muted-foreground leading-relaxed mb-8">
                                 {c.summary}
                             </p>
                         </motion.div>
@@ -140,7 +140,7 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                             <ul className="space-y-4">
                                 {c.services.map((service, i) => (
                                     <li key={i} className="flex items-center gap-3 text-muted-foreground">
-                                        <CheckCircle2 className="size-5 text-primary shrink-0" />
+                                        <CheckCircle2 className="size-5 text-primary shrink-0" aria-hidden="true" />
                                         <span>{service}</span>
                                     </li>
                                 ))}
@@ -167,10 +167,10 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                     <section className="border-t border-border pt-24 mb-24">
                         <div className="flex items-center justify-between mb-12">
                             <h2 className="text-3xl font-bold text-foreground">Relaterade kundcase</h2>
-                            <Button variant="ghost" className="gap-2 group transition-all" asChild>
+                            <Button variant="ghost" className="gap-2 group transition-[background-color,color]" asChild>
                                 <Link href="/cases">
                                     Visa alla
-                                    <ChevronRight className="size-4 transition-transform group-hover:translate-x-1" />
+                                    <ChevronRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                                 </Link>
                             </Button>
                         </div>
@@ -178,14 +178,14 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                         <div className="grid gap-8 md:grid-cols-2">
                             {relatedCases.map((rc) => (
                                 <Link key={rc.slug} href={`/cases/${rc.slug}`}>
-                                    <article className="group relative overflow-hidden rounded-[2rem] border border-border bg-card/50 transition-all hover:border-primary/20 hover:bg-card">
+                                    <article className="group relative overflow-hidden rounded-[2rem] border border-border bg-card/50 transition-[border-color,background-color] duration-200 hover:border-primary/20 hover:bg-card">
                                         <div className="flex flex-col md:flex-row h-full">
                                             <div className="relative aspect-video md:aspect-square md:w-48 overflow-hidden shrink-0">
                                                 <Image
                                                     src={rc.image}
                                                     alt={rc.title}
                                                     fill
-                                                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                                    className="object-cover transition-transform duration-150 group-hover:scale-110"
                                                 />
                                             </div>
                                             <div className="p-6 flex flex-col justify-center gap-2">
