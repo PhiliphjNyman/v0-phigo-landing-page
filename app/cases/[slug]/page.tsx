@@ -13,16 +13,25 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params
     const c = getCaseBySlug(slug)
-    if (!c) return { title: 'Case hittades inte | PHIGO' }
+    if (!c) return { title: 'Case hittades inte | PHIGO', robots: { index: false } }
 
     return {
         title: `${c.title} – Case | PHIGO`,
         description: c.summary,
+        alternates: {
+            canonical: `https://phigo.se/cases/${slug}`,
+        },
         openGraph: {
             title: `${c.title} – Case | PHIGO`,
             description: c.summary,
+            url: `https://phigo.se/cases/${slug}`,
             type: 'article',
             locale: 'sv_SE',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: `${c.title} – Case | PHIGO`,
+            description: c.summary,
         },
     }
 }
