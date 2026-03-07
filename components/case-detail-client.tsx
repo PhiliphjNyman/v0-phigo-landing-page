@@ -167,7 +167,7 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                     <section className="border-t border-border pt-24 mb-24">
                         <div className="flex items-center justify-between mb-12">
                             <h2 className="text-3xl font-bold text-foreground">Relaterade kundcase</h2>
-                            <Button variant="ghost" className="gap-2 group transition-all" asChild>
+                            <Button variant="ghost" className="gap-2 group transition-[background-color,color]" asChild>
                                 <Link href="/cases">
                                     Visa alla
                                     <ChevronRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
@@ -178,7 +178,7 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                         <div className="grid gap-8 md:grid-cols-2">
                             {relatedCases.map((rc) => (
                                 <Link key={rc.slug} href={`/cases/${rc.slug}`}>
-                                    <article className="group relative overflow-hidden rounded-[2rem] border border-border bg-card/50 transition-all hover:border-primary/20 hover:bg-card">
+                                    <article className="group relative overflow-hidden rounded-[2rem] border border-border bg-card/50 transition-[border-color,background-color] duration-200 hover:border-primary/20 hover:bg-card">
                                         <div className="flex flex-col md:flex-row h-full">
                                             <div className="relative aspect-video md:aspect-square md:w-48 overflow-hidden shrink-0">
                                                 <Image

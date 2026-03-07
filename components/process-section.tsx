@@ -127,7 +127,7 @@ export function ProcessSection() {
                     </p>
 
                     {/* Step Features - micro interaction */}
-                    <div className="inline-flex items-center gap-2 text-sm font-bold text-primary opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+                    <div className="inline-flex items-center gap-2 text-sm font-bold text-primary opacity-0 -translate-x-2 transition-[opacity,transform] duration-300 group-hover:opacity-100 group-hover:translate-x-0">
                       <span>Läs mer om fasen</span>
                       <ChevronRight className="size-4" aria-hidden="true" />
                     </div>

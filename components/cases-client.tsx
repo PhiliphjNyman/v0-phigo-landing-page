@@ -50,7 +50,7 @@ export function CasesClient({ allCases }: { allCases: Case[] }) {
                         key={industry}
                         variant={activeFilter === industry ? 'default' : 'outline'}
                         onClick={() => setActiveFilter(industry)}
-                        className="rounded-full px-6 transition-all"
+                        className="rounded-full px-6 transition-[background-color,color,border-color]"
                         aria-pressed={activeFilter === industry}
                     >
                         {industry}
@@ -101,7 +101,7 @@ export function CasesClient({ allCases }: { allCases: Case[] }) {
                                                 >
                                                     {c.industry}
                                                 </Badge>
-                                                <div className={`flex items-center gap-1.5 text-sm font-bold transition-all duration-500 ${accentStyles.split(' ')[1]}`}>
+                                                <div className={`flex items-center gap-1.5 text-sm font-bold transition-colors duration-500 ${accentStyles.split(' ')[1]}`}>
                                                     <MetricIcon className="size-4" aria-hidden="true" />
                                                     <Counter
                                                         value={parseInt(metric.value.replace(/[^0-9]/g, ''))}
@@ -111,7 +111,7 @@ export function CasesClient({ allCases }: { allCases: Case[] }) {
                                                 </div>
                                             </div>
 
-                                            <h3 className="text-xl font-bold text-foreground transition-all group-hover:underline">
+                                            <h3 className="text-xl font-bold text-foreground group-hover:underline">
                                                 {c.title}
                                             </h3>
 
@@ -120,9 +120,9 @@ export function CasesClient({ allCases }: { allCases: Case[] }) {
                                             </p>
 
                                             <div className="mt-4 pt-4 border-t border-border/50">
-                                                <div className="inline-flex items-center gap-2 text-sm font-bold text-primary transition-all hover:gap-3">
+                                                <div className="inline-flex items-center gap-2 text-sm font-bold text-primary">
                                                     Läs mer om projektet
-                                                    <ArrowUpRight className="size-4" aria-hidden="true" />
+                                                    <ArrowUpRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
                                                 </div>
                                             </div>
                                         </div>

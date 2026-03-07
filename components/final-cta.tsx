@@ -42,7 +42,7 @@ export function FinalCta() {
               <Button
                 asChild
                 size="lg"
-                className="cursor-pointer rounded-xl bg-primary px-8 text-primary-foreground shadow-lg shadow-primary/20 hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30 transition-all"
+                className="cursor-pointer rounded-xl bg-primary px-8 text-primary-foreground shadow-lg shadow-primary/20 hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30 transition-[background-color,box-shadow] duration-200"
               >
                 <a href="#kontakt">
                   Få en kostnadsfri webbplatsanalys

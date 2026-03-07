@@ -89,7 +89,7 @@ export function HeroSection() {
               <Button
                 asChild
                 size="lg"
-                className="h-14 cursor-pointer rounded-2xl bg-primary px-10 text-base font-semibold text-primary-foreground shadow-xl shadow-primary/20 transition-all hover:scale-[1.02] hover:bg-primary/90 hover:shadow-2xl hover:shadow-primary/30 active:scale-[0.98]"
+                className="h-14 cursor-pointer rounded-2xl bg-primary px-10 text-base font-semibold text-primary-foreground shadow-xl shadow-primary/20 transition-[transform,background-color,box-shadow] duration-200 hover:scale-[1.02] hover:bg-primary/90 hover:shadow-2xl hover:shadow-primary/30 active:scale-[0.98]"
               >
                 <a href="#kontakt">
                   Få en kostnadsfri analys
