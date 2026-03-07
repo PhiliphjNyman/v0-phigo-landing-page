@@ -46,7 +46,7 @@ export function FinalCta() {
               >
                 <a href="#kontakt">
                   Få en kostnadsfri webbplatsanalys
-                  <ArrowRight className="ml-1 size-4" />
+                  <ArrowRight className="ml-1 size-4" aria-hidden="true" />
                 </a>
               </Button>
               <p className="text-xs text-muted-foreground">

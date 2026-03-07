@@ -58,7 +58,7 @@ export function HeroSection() {
               PHIGO bygger webbplatser som{' '}
               <span className="relative">
                 <span className="relative z-10 text-primary">konverterar.</span>
-                <svg className="absolute -bottom-2 lg:-bottom-4 left-0 -z-10 w-full" viewBox="0 0 358 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className="absolute -bottom-2 lg:-bottom-4 left-0 -z-10 w-full" viewBox="0 0 358 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <motion.path
                     initial={{ pathLength: 0 }}
                     animate={{ pathLength: 1 }}
@@ -93,7 +93,7 @@ export function HeroSection() {
               >
                 <a href="#kontakt">
                   Få en kostnadsfri analys
-                  <ArrowRight className="ml-2 size-5" />
+                  <ArrowRight className="ml-2 size-5" aria-hidden="true" />
                 </a>
               </Button>
               <Button
@@ -104,7 +104,7 @@ export function HeroSection() {
               >
                 <a href="#case">
                   Se våra case
-                  <ChevronDown className="ml-2 size-5" />
+                  <ChevronDown className="ml-2 size-5" aria-hidden="true" />
                 </a>
               </Button>
             </motion.div>

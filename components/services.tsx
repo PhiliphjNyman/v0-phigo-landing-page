@@ -112,7 +112,7 @@ export function Services() {
                 >
                   {service.features.map(feature => (
                     <li key={feature} className="flex items-center gap-2 text-sm font-medium text-foreground/70 group-hover:text-foreground">
-                      <CheckCircle2 className="size-4 text-primary" />
+                      <CheckCircle2 className="size-4 text-primary" aria-hidden="true" />
                       {feature}
                     </li>
                   ))}

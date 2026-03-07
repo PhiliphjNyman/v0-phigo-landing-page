@@ -109,7 +109,7 @@ export function ProcessSection() {
                         {step.number}
                       </motion.span>
                       <div className="flex size-14 items-center justify-center rounded-2xl bg-card shadow-xl border border-border group-hover:border-primary/30 transition-[border-color]">
-                        <Icon className="size-7 text-primary" />
+                        <Icon className="size-7 text-primary" aria-hidden="true" />
                       </div>
                     </div>
 
@@ -129,7 +129,7 @@ export function ProcessSection() {
                     {/* Step Features - micro interaction */}
                     <div className="inline-flex items-center gap-2 text-sm font-bold text-primary opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
                       <span>Läs mer om fasen</span>
-                      <ChevronRight className="size-4" />
+                      <ChevronRight className="size-4" aria-hidden="true" />
                     </div>
                   </div>
 

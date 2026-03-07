@@ -112,7 +112,7 @@ export function ContactForm() {
               </div>
 
               <motion.div variants={fadeInUp} className="relative mt-12 overflow-hidden rounded-3xl border border-border bg-card shadow-2xl">
-                <div className="absolute top-0 left-0 w-full h-1 bg-muted">
+                <div className="absolute top-0 left-0 w-full h-1 bg-muted" aria-hidden="true">
                   <motion.div
                     className="h-full w-full bg-primary origin-left"
                     animate={{ scaleX: progress / 100 }}
@@ -133,7 +133,7 @@ export function ContactForm() {
                           <FormItem>
                             <FormLabel className="flex justify-between">
                               Namn
-                              {field.value.length >= 2 && <CheckCircle2 className="size-4 text-primary animate-in zoom-in" />}
+                              {field.value.length >= 2 && <CheckCircle2 className="size-4 text-primary animate-in zoom-in" aria-hidden="true" />}
                             </FormLabel>
                             <FormControl>
                               <Input
@@ -153,7 +153,7 @@ export function ContactForm() {
                           <FormItem>
                             <FormLabel className="flex justify-between">
                               Företag
-                              {field.value.length >= 2 && <CheckCircle2 className="size-4 text-primary animate-in zoom-in" />}
+                              {field.value.length >= 2 && <CheckCircle2 className="size-4 text-primary animate-in zoom-in" aria-hidden="true" />}
                             </FormLabel>
                             <FormControl>
                               <Input
@@ -176,7 +176,7 @@ export function ContactForm() {
                           <FormItem>
                             <FormLabel className="flex justify-between">
                               E-post
-                              {field.value.includes('@') && field.value.includes('.') && <CheckCircle2 className="size-4 text-primary animate-in zoom-in" />}
+                              {field.value.includes('@') && field.value.includes('.') && <CheckCircle2 className="size-4 text-primary animate-in zoom-in" aria-hidden="true" />}
                             </FormLabel>
                             <FormControl>
                               <Input

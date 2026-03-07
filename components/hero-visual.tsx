@@ -35,6 +35,7 @@ export function HeroVisual() {
             className="relative flex h-full items-center justify-center py-12"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
+            aria-hidden="true"
         >
             <motion.div
                 style={{

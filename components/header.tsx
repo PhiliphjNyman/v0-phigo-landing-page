@@ -121,7 +121,7 @@ export function Header() {
                 className="md:hidden size-11"
                 aria-label="Öppna meny"
               >
-                <Menu className="size-5" />
+                <Menu className="size-5" aria-hidden="true" />
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-72 bg-background border-border">

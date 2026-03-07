@@ -95,7 +95,7 @@ export function FaqSection() {
                 >
                   <AccordionTrigger className="flex gap-4 py-6 text-left text-lg font-bold text-foreground hover:no-underline hover:text-primary transition-[color] duration-200 [&[data-state=open]>svg]:rotate-180 [&>svg]:transition-transform [&>svg]:duration-300 [&>svg]:ease-in-out">
                     <div className="flex size-10 items-center justify-center rounded-xl bg-primary/5 text-primary group-data-[state=open]:bg-primary group-data-[state=open]:text-primary-foreground transition-colors shrink-0">
-                      <Icon className="size-5" />
+                      <Icon className="size-5" aria-hidden="true" />
                     </div>
                     <span className="flex-1">{faq.question}</span>
                   </AccordionTrigger>

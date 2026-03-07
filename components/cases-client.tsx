@@ -42,7 +42,7 @@ export function CasesClient({ allCases }: { allCases: Case[] }) {
                 className="flex flex-wrap items-center justify-center gap-2 mb-12"
             >
                 <div className="flex items-center gap-2 mr-4 text-muted-foreground text-sm font-medium">
-                    <Filter className="size-4" />
+                    <Filter className="size-4" aria-hidden="true" />
                     <span>Filtrera:</span>
                 </div>
                 {industries.map((industry) => (
@@ -51,6 +51,7 @@ export function CasesClient({ allCases }: { allCases: Case[] }) {
                         variant={activeFilter === industry ? 'default' : 'outline'}
                         onClick={() => setActiveFilter(industry)}
                         className="rounded-full px-6 transition-all"
+                        aria-pressed={activeFilter === industry}
                     >
                         {industry}
                     </Button>
@@ -101,7 +102,7 @@ export function CasesClient({ allCases }: { allCases: Case[] }) {
                                                     {c.industry}
                                                 </Badge>
                                                 <div className={`flex items-center gap-1.5 text-sm font-bold transition-all duration-500 ${accentStyles.split(' ')[1]}`}>
-                                                    <MetricIcon className="size-4" />
+                                                    <MetricIcon className="size-4" aria-hidden="true" />
                                                     <Counter
                                                         value={parseInt(metric.value.replace(/[^0-9]/g, ''))}
                                                         prefix={metric.value.includes('+') ? '+' : ''}
@@ -121,7 +122,7 @@ export function CasesClient({ allCases }: { allCases: Case[] }) {
                                             <div className="mt-4 pt-4 border-t border-border/50">
                                                 <div className="inline-flex items-center gap-2 text-sm font-bold text-primary transition-all hover:gap-3">
                                                     Läs mer om projektet
-                                                    <ArrowUpRight className="size-4" />
+                                                    <ArrowUpRight className="size-4" aria-hidden="true" />
                                                 </div>
                                             </div>
                                         </div>

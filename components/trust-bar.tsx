@@ -42,7 +42,7 @@ export function TrustBar() {
         </p>
 
         {/* Infinite Marquee Loop */}
-        <div className="relative flex overflow-hidden">
+        <div className="relative flex overflow-hidden" aria-hidden="true">
           <div className="absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-background to-transparent md:w-32" />
           <div className="absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-background to-transparent md:w-32" />
 

@@ -32,7 +32,7 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                         href="/cases"
                         className="group inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
                     >
-                        <ArrowLeft className="mr-2 size-4 transition-transform group-hover:-translate-x-1" />
+                        <ArrowLeft className="mr-2 size-4 transition-transform group-hover:-translate-x-1" aria-hidden="true" />
                         Tillbaka till alla case
                     </Link>
 
@@ -140,7 +140,7 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                             <ul className="space-y-4">
                                 {c.services.map((service, i) => (
                                     <li key={i} className="flex items-center gap-3 text-muted-foreground">
-                                        <CheckCircle2 className="size-5 text-primary shrink-0" />
+                                        <CheckCircle2 className="size-5 text-primary shrink-0" aria-hidden="true" />
                                         <span>{service}</span>
                                     </li>
                                 ))}
@@ -170,7 +170,7 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                             <Button variant="ghost" className="gap-2 group transition-all" asChild>
                                 <Link href="/cases">
                                     Visa alla
-                                    <ChevronRight className="size-4 transition-transform group-hover:translate-x-1" />
+                                    <ChevronRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                                 </Link>
                             </Button>
                         </div>

@@ -118,7 +118,7 @@ export function CaseStudies() {
                               {c.industry}
                             </Badge>
                             <div className={`flex items-center gap-1.5 text-sm font-bold transition-all duration-500 ${accentStyles.split(' ')[1]}`}>
-                              <MetricIcon className="size-4" />
+                              <MetricIcon className="size-4" aria-hidden="true" />
                               <Counter
                                 value={parseInt(metric.value.replace(/[^0-9]/g, ''))}
                                 prefix={metric.value.includes('+') ? '+' : ''}
@@ -143,7 +143,7 @@ export function CaseStudies() {
                               className="inline-flex items-center gap-2 text-sm font-bold text-primary transition-all hover:gap-3"
                             >
                               Se case detaljer
-                              <ArrowUpRight className="size-4" />
+                              <ArrowUpRight className="size-4" aria-hidden="true" />
                             </div>
                           </div>
                         </div>
