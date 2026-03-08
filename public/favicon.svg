@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Dark background matching site theme -->
+  <rect width="512" height="512" rx="96" fill="#111827"/>
+  <!-- Letter P in emerald green, fill-rule evenodd cuts out the bowl counter -->
+  <path
+    fill-rule="evenodd"
+    fill="#22c55e"
+    d="
+      M 116 80
+      L 116 432
+      L 210 432
+      L 210 276
+      L 300 276
+      Q 404 276 404 178
+      Q 404 80 300 80
+      Z
+      M 210 134
+      L 288 134
+      Q 352 134 352 178
+      Q 352 222 288 222
+      L 210 222
+      Z
+    "
+  />
+</svg>
