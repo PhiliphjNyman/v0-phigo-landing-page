@@ -55,10 +55,16 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-border pt-6">
+        <div className="mt-10 border-t border-border pt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-muted-foreground">
             &copy; {new Date().getFullYear()} PHIGO. Alla rättigheter förbehållna.
           </p>
+          <Link
+            href="/integritetspolicy"
+            className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Integritetspolicy
+          </Link>
         </div>
       </div>
     </footer>

@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { toast } from 'sonner'
 import { Send, CheckCircle2, Sparkles, ArrowRight } from 'lucide-react'
+import { Checkbox } from '@/components/ui/checkbox'
 import confetti from 'canvas-confetti'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -25,7 +26,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from '@/components/ui/form'
+import Link from 'next/link'
 import { fadeInUp, staggerContainer, scaleIn } from '@/lib/animations'
 
 const contactSchema = z.object({
@@ -35,6 +38,9 @@ const contactSchema = z.object({
   hemsida: z.string().url('Ange en giltig URL').optional().or(z.literal('')),
   forbattra: z.string().min(1, 'Välj ett alternativ'),
   meddelande: z.string().min(10, 'Meddelandet måste vara minst 10 tecken'),
+  gdpr: z.boolean().refine((v) => v === true, {
+    message: 'Du måste godkänna integritetspolicyn för att skicka formuläret',
+  }),
 })
 
 type ContactFormValues = z.infer<typeof contactSchema>
@@ -50,13 +56,17 @@ export function ContactForm() {
       hemsida: '',
       forbattra: '',
       meddelande: '',
+      gdpr: false,
     },
     mode: 'onChange',
   })
 
   const watchedFields = form.watch()
-  const filledFields = Object.values(watchedFields).filter(value => value && value.length > 0).length
-  const progress = (filledFields / 6) * 100
+  const filledFields = Object.entries(watchedFields).filter(([key, value]) => {
+    if (key === 'gdpr') return value === true
+    return value && (value as string).length > 0
+  }).length
+  const progress = (filledFields / 7) * 100
 
   async function onSubmit(data: ContactFormValues) {
     try {
@@ -264,6 +274,37 @@ export function ContactForm() {
                             />
                           </FormControl>
                           <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="gdpr"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-row items-start gap-3 rounded-xl border border-border bg-background/30 p-4">
+                          <FormControl>
+                            <Checkbox
+                              checked={field.value}
+                              onCheckedChange={field.onChange}
+                              id="gdpr-checkbox"
+                              className="mt-0.5"
+                            />
+                          </FormControl>
+                          <div className="space-y-1 leading-none">
+                            <FormLabel htmlFor="gdpr-checkbox" className="text-sm font-normal text-muted-foreground cursor-pointer">
+                              Jag godkänner att PHIGO behandlar mina uppgifter
+                              enligt vår{' '}
+                              <Link
+                                href="/integritetspolicy"
+                                className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors"
+                                target="_blank"
+                              >
+                                integritetspolicy
+                              </Link>
+                            </FormLabel>
+                            <FormMessage />
+                          </div>
                         </FormItem>
                       )}
                     />
