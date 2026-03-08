@@ -58,19 +58,31 @@ export function ContactForm() {
   const filledFields = Object.values(watchedFields).filter(value => value && value.length > 0).length
   const progress = (filledFields / 6) * 100
 
-  function onSubmit(data: ContactFormValues) {
-    // Mocking API call
-    setTimeout(() => {
-      console.log('Form submitted:', data)
+  async function onSubmit(data: ContactFormValues) {
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+
+      if (!res.ok) {
+        const json = await res.json()
+        toast.error(json.error ?? 'Något gick fel. Försök igen.')
+        return
+      }
+
       confetti({
         particleCount: 150,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ['#10b981', '#34d399', '#059669']
+        colors: ['#10b981', '#34d399', '#059669'],
       })
       setIsSubmitted(true)
       toast.success('Analysförfrågan skickad!')
-    }, 800)
+    } catch {
+      toast.error('Kunde inte nå servern. Försök igen.')
+    }
   }
 
   return (
