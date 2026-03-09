@@ -2,8 +2,6 @@ import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { z } from 'zod'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 const contactSchema = z.object({
   namn: z.string().min(2),
   foretag: z.string().min(2),
@@ -23,6 +21,7 @@ const forbattraLabels: Record<string, string> = {
 }
 
 export async function POST(request: Request) {
+  const resend = new Resend(process.env.RESEND_API_KEY)
   const body = await request.json()
 
   const result = contactSchema.safeParse(body)
