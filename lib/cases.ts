@@ -1,77 +1,46 @@
-export interface CaseMetric {
+export interface CaseStat {
     label: string
     value: string
-    // Icon removed to be serializeable between RSC and Client components
 }
 
 export interface Case {
     slug: string
     title: string
-    industry: string
-    summary: string
+    category: string
+    shortDescription: string
     description: string
-    services: string[]
-    metrics: CaseMetric[]
-    year?: string
-    image: string
+    tags: string[]
+    liveUrl: string
+    heroImage: string
+    stats?: CaseStat[]
     featured: boolean
     accent: 'amber' | 'emerald' | 'cyan'
 }
 
 export const cases: Case[] = [
     {
-        slug: 'nordic-consulting',
-        title: 'Nordic Consulting',
-        industry: 'B2B konsulttjänster',
-        summary: 'Omdesign av en föråldrad hemsida till en modern, konverteringsoptimerad sajt.',
-        description: 'Nordic Consulting behövde en digital närvaro som matchade deras expertis inom B2B. Vi fokuserade på att skapa ett tydligt värderbjudande, förenkla navigeringen och implementera strategiska call-to-actions för att maximera leadgenerering.',
-        services: ['UX/UI Design', 'Next.js Development', 'Conversion Optimization', 'Technical SEO'],
-        metrics: [
-            { label: 'Fler leads', value: '+68%' },
-            { label: 'Högre konvertering', value: '+42%' },
-            { label: 'Lägre bounce rate', value: '-28%' },
-            { label: 'Sidladdning', value: '1.2s' },
-        ],
-        year: '2023',
-        image: '/images/case-nordic.jpg',
-        featured: true,
-        accent: 'amber',
-    },
-    {
-        slug: 'storberg-ehandel',
-        title: 'Storberg E-handel',
-        industry: 'E-handel',
-        summary: 'Ny e-handelslösning med blixtsnabb laddtid och sömlöst köpflöde.',
-        description: 'För Storberg var prestanda kritiskt. Vi byggde en modern e-handel med fokus på Core Web Vitals och en mobil-först upplevelse. Genom att optimera laddtider och förenkla kassan såg vi en direkt inverkan på konverteringsgraden.',
-        services: ['E-commerce Strategy', 'Headless CMS', 'Performance Engineering', 'Mobile UX'],
-        metrics: [
-            { label: 'Snabbare laddtid', value: '-40%' },
-            { label: 'Fler genomförda köp', value: '+31%' },
-            { label: 'Mobiltrafik', value: '+55%' },
-            { label: 'Lighthouse Score', value: '97' },
-        ],
-        year: '2024',
-        image: '/images/case-storberg.jpg',
-        featured: true,
-        accent: 'emerald',
-    },
-    {
-        slug: 'avenio-fastigheter',
-        title: 'Avenio Fastigheter',
-        industry: 'Lokalt tjänsteföretag',
-        summary: 'Digital närvaro med modernt formspråk och integrerad bokningsfunktion.',
-        description: 'Avenio Fastigheter ville sticka ut på en traditionell marknad. Vi skapade en visuell upplevelse som andas förtroende och modernitet, komplett med ett intuitivt system för att boka visningar och hantera prospekt.',
-        services: ['Brand Identity', 'Web Design', 'Custom Booking System', 'Local SEO'],
-        metrics: [
-            { label: 'Fler besökare', value: '+120%' },
-            { label: 'Fler bokningsförfrågningar', value: '+89%' },
-            { label: 'Sökordsranking', value: 'Top 3' },
-            { label: 'Sidor per session', value: '+2.4x' },
-        ],
-        year: '2023',
-        image: '/images/case-avenio.jpg',
+        slug: 'leendekliniken',
+        title: 'Leendekliniken',
+        category: 'Tandvård',
+        shortDescription: 'Modern hemsida för tandklinik med fokus på förtroende, tjänsteöversikt och enkel bokning.',
+        description: 'En komplett sajt för en tandklinik i Linköping. Elegant design i marinblått och korallrött som bygger förtroende. Tydlig tjänstestruktur med priser, social proof via patientrecensioner, team-sektion och kontaktformulär. Designad för att minska tandläkarskräck och driva bokningar.',
+        tags: ['UX Design', 'Konverteringsoptimering', 'Responsiv Design', 'Varumärkesdesign'],
+        liveUrl: 'https://tandlakare-demo-phigo.vercel.app/',
+        heroImage: '/images/case-leendekliniken.png',
         featured: true,
         accent: 'cyan',
+    },
+    {
+        slug: 'andersson-el',
+        title: 'Andersson El',
+        category: 'Elektriker / Hantverkare',
+        shortDescription: 'Konverteringsoptimerad sajt för lokal elektriker med bokningsflöde och tydlig tjänstestruktur.',
+        description: 'En single-page sajt för en enskild elektriker i Linköping. Fokus på tydlig tjänsteuppdelning med taggar (villa, lägenhet, företag), social proof via kundrecensioner, serviceområde och kontaktformulär som driver bokningar. Orange och mörkblå design som utstrålar trygghet och energi.',
+        tags: ['UX Design', 'Konverteringsoptimering', 'Responsiv Design', 'SEO'],
+        liveUrl: 'https://hantverkare-demo-elektriker.vercel.app/',
+        heroImage: '/images/case-andersson-el.png',
+        featured: true,
+        accent: 'amber',
     },
 ]
 
@@ -88,6 +57,6 @@ export function getRelatedCases(slug: string, limit = 2) {
     if (!currentCase) return []
 
     return cases
-        .filter((c) => c.slug !== slug && (c.industry === currentCase.industry || c.featured))
+        .filter((c) => c.slug !== slug && (c.category === currentCase.category || c.featured))
         .slice(0, limit)
 }

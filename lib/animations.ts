@@ -45,10 +45,10 @@ export const scaleIn: Variants = {
 }
 
 export const revealVariant: Variants = {
-  hidden: { clipPath: 'inset(100% 0% 0% 0%)', opacity: 0 },
+  hidden: { opacity: 0, y: 24 },
   visible: {
-    clipPath: 'inset(0% 0% 0% 0%)',
     opacity: 1,
+    y: 0,
     transition: { ...springTransition, duration: 1 },
   },
 }

@@ -5,6 +5,17 @@ export const metadata: Metadata = {
   title: 'Integritetspolicy – PHIGO',
   description:
     'Läs om hur PHIGO hanterar dina personuppgifter i enlighet med GDPR.',
+  alternates: {
+    canonical: 'https://phigo.se/integritetspolicy',
+  },
+  openGraph: {
+    title: 'Integritetspolicy – PHIGO',
+    description:
+      'Läs om hur PHIGO hanterar dina personuppgifter i enlighet med GDPR.',
+    url: 'https://phigo.se/integritetspolicy',
+    type: 'website',
+    locale: 'sv_SE',
+  },
 }
 
 export default function IntegritetspolicyPage() {

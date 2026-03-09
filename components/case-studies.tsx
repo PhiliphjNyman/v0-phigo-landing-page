@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { ArrowUpRight, TrendingUp, Zap, Users } from 'lucide-react'
+import { ArrowUpRight, TrendingUp, Zap, Heart } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { fadeInUp, staggerContainer, scaleIn } from '@/lib/animations'
 import { Counter } from '@/components/ui/counter'
@@ -26,9 +26,8 @@ const accentMap = {
 }
 
 const iconMap: Record<string, any> = {
-  'nordic-consulting': TrendingUp,
-  'storberg-ehandel': Zap,
-  'avenio-fastigheter': Users,
+  'leendekliniken': Heart,
+  'andersson-el': Zap,
 }
 
 export function CaseStudies() {
@@ -46,7 +45,7 @@ export function CaseStudies() {
           >
             <motion.span
               variants={fadeInUp}
-              className="text-sm font-bold uppercase tracking-widest text-primary"
+              className="text-sm font-bold uppercase text-primary"
             >
               Exempel på leveranser
             </motion.span>
@@ -86,7 +85,7 @@ export function CaseStudies() {
           >
             <CarouselContent className="-ml-6">
               {cases.map((c) => {
-                const metric = c.metrics[0]
+                const stat = c.stats?.[0]
                 const MetricIcon = iconMap[c.slug] || TrendingUp
                 const accentStyles = accentMap[c.accent]
 
@@ -99,13 +98,12 @@ export function CaseStudies() {
                         {/* Image with Overlay */}
                         <div className="relative aspect-[16/11] overflow-hidden bg-muted">
                           <Image
-                            src={c.image}
+                            src={c.heroImage}
                             alt={`Webbplats mockup för ${c.title}`}
                             fill
                             className="object-cover transition-transform duration-150 group-hover:scale-110"
                             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
                         </div>
 
                         {/* Content */}
@@ -115,27 +113,29 @@ export function CaseStudies() {
                               variant="secondary"
                               className="rounded-lg bg-muted/50 text-xs font-semibold text-muted-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary"
                             >
-                              {c.industry}
+                              {c.category}
                             </Badge>
-                            <div className={`flex items-center gap-1.5 text-sm font-bold transition-colors duration-500 ${accentStyles.split(' ')[1]}`}>
-                              <MetricIcon className="size-4" aria-hidden="true" />
-                              <Counter
-                                value={parseInt(metric.value.replace(/[^0-9]/g, ''))}
-                                prefix={metric.value.includes('+') ? '+' : ''}
-                                suffix={metric.value.includes('%') ? '%' : ''}
-                              />
-                              <span className="text-[10px] font-medium uppercase text-muted-foreground/60 ml-1">
-                                {metric.label}
-                              </span>
-                            </div>
+                            {stat && (
+                              <div className={`flex items-center gap-1.5 text-sm font-bold transition-colors duration-500 ${accentStyles.split(' ')[1]}`}>
+                                <MetricIcon className="size-4" aria-hidden="true" />
+                                <Counter
+                                  value={parseInt(stat.value.replace(/[^0-9]/g, ''))}
+                                  prefix={stat.value.includes('+') ? '+' : ''}
+                                  suffix={stat.value.includes('%') ? '%' : ''}
+                                />
+                                <span className="text-[10px] font-medium uppercase text-muted-foreground/60 ml-1">
+                                  {stat.label}
+                                </span>
+                              </div>
+                            )}
                           </div>
 
-                          <h3 className="text-xl font-bold text-foreground decoration-primary/30 decoration-2 transition-all group-hover:underline">
+                          <h3 className="text-xl font-bold text-foreground decoration-primary/30 decoration-2 transition-colors group-hover:underline">
                             {c.title}
                           </h3>
 
                           <p className="flex-1 text-sm leading-relaxed text-muted-foreground/80 group-hover:text-muted-foreground transition-colors line-clamp-2">
-                            {c.summary}
+                            {c.shortDescription}
                           </p>
 
                           <div className="mt-4 pt-4 border-t border-border/50">
@@ -149,7 +149,7 @@ export function CaseStudies() {
                         </div>
 
                         {/* Corner Accent */}
-                        <div className={`absolute top-4 right-4 h-1.5 w-1.5 rounded-full transition-all duration-500 group-hover:scale-[8] group-hover:opacity-20 ${accentStyles.split(' ')[1].replace('text-', 'bg-')}`} />
+                        <div className={`absolute top-4 right-4 h-1.5 w-1.5 rounded-full transition-[transform,opacity] duration-500 group-hover:scale-[8] group-hover:opacity-20 ${accentStyles.split(' ')[1].replace('text-', 'bg-')}`} aria-hidden="true" />
                       </motion.article>
                     </Link>
                   </CarouselItem>
@@ -159,13 +159,13 @@ export function CaseStudies() {
 
             {/* Carousel Controls */}
             <div className="mt-12 flex justify-center gap-4 lg:hidden">
-              <CarouselPrevious className="static translate-y-0 h-12 w-12 rounded-2xl bg-muted border-border hover:bg-primary hover:text-white" />
-              <CarouselNext className="static translate-y-0 h-12 w-12 rounded-2xl bg-muted border-border hover:bg-primary hover:text-white" />
+              <CarouselPrevious className="static translate-y-0 size-12 rounded-2xl bg-muted border-border hover:bg-primary hover:text-white" />
+              <CarouselNext className="static translate-y-0 size-12 rounded-2xl bg-muted border-border hover:bg-primary hover:text-white" />
             </div>
 
             <div className="hidden lg:block">
-              <CarouselPrevious className="-left-16 h-12 w-12 rounded-2xl bg-muted/50 border-border hover:bg-primary hover:text-white transition-[background-color,color] backdrop-blur-sm" />
-              <CarouselNext className="-right-16 h-12 w-12 rounded-2xl bg-muted/50 border-border hover:bg-primary hover:text-white transition-[background-color,color] backdrop-blur-sm" />
+              <CarouselPrevious className="-left-16 size-12 rounded-2xl bg-muted/50 border-border hover:bg-primary hover:text-white transition-[background-color,color] backdrop-blur-sm" />
+              <CarouselNext className="-right-16 size-12 rounded-2xl bg-muted/50 border-border hover:bg-primary hover:text-white transition-[background-color,color] backdrop-blur-sm" />
             </div>
           </Carousel>
         </motion.div>

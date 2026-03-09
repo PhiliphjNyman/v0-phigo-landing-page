@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { ArrowLeft, CheckCircle2, ChevronRight } from 'lucide-react'
+import { ArrowLeft, ArrowUpRight, CheckCircle2, ChevronRight } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Counter } from '@/components/ui/counter'
@@ -62,37 +62,41 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                     >
                         <motion.div variants={fadeInUp}>
                             <Badge variant="secondary" className="mb-6 rounded-full px-4 py-1 text-primary bg-primary/10">
-                                {c.industry}
+                                {c.category}
                             </Badge>
-                            <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-6xl mb-6">
+                            <h1 className="text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-6xl mb-6">
                                 {c.title}
                             </h1>
                             <p className="text-xl text-pretty text-muted-foreground leading-relaxed mb-8">
-                                {c.summary}
+                                {c.shortDescription}
                             </p>
                         </motion.div>
 
                         <motion.div variants={fadeInUp} className="flex flex-wrap gap-4 items-center">
-                            {c.metrics.map((metric, i) => (
+                            {c.stats?.map((stat, i) => (
                                 <div key={i} className="bg-card border border-border rounded-2xl p-6 flex flex-col gap-1 shadow-sm">
                                     <span className="text-3xl font-black text-primary">
                                         <Counter
-                                            value={parseInt(metric.value.replace(/[^0-9]/g, ''))}
-                                            prefix={metric.value.includes('+') ? '+' : ''}
-                                            suffix={metric.value.includes('%') ? '%' : ''}
+                                            value={parseInt(stat.value.replace(/[^0-9]/g, ''))}
+                                            prefix={stat.value.includes('+') ? '+' : ''}
+                                            suffix={stat.value.includes('%') ? '%' : ''}
                                         />
                                     </span>
-                                    <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
-                                        {metric.label}
+                                    <span className="text-xs font-bold uppercase text-muted-foreground">
+                                        {stat.label}
                                     </span>
                                 </div>
                             ))}
-                            {c.year && (
-                                <div className="px-6 py-4 flex flex-col gap-1">
-                                    <span className="text-sm font-bold text-foreground">År</span>
-                                    <span className="text-sm text-muted-foreground">{c.year}</span>
-                                </div>
-                            )}
+                            <a
+                                href={c.liveUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 h-12 px-6 rounded-2xl bg-primary text-primary-foreground font-bold text-sm hover:opacity-90 active:scale-[0.98] transition-[opacity,transform] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                            >
+                                Besök hemsida
+                                <span className="sr-only">(öppnas i ny flik)</span>
+                                <ArrowUpRight className="size-4" aria-hidden="true" />
+                            </a>
                         </motion.div>
                     </motion.div>
 
@@ -100,13 +104,13 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                         variants={scaleIn}
                         initial="hidden"
                         animate="visible"
-                        className="relative aspect-video lg:aspect-square overflow-hidden rounded-[2.5rem] border border-border shadow-2xl"
+                        className="relative aspect-video overflow-hidden rounded-2xl bg-zinc-900 shadow-2xl"
                     >
                         <Image
-                            src={c.image}
+                            src={c.heroImage}
                             alt={c.title}
                             fill
-                            className="object-cover"
+                            className="object-cover object-top"
                             priority
                             sizes="(max-width: 1024px) 100vw, 50vw"
                         />
@@ -121,8 +125,8 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                         viewport={{ once: true }}
                         className="lg:col-span-2 prose prose-invert prose-lg max-w-none"
                     >
-                        <h2 className="text-3xl font-bold text-foreground mb-6">Om projektet</h2>
-                        <p className="text-muted-foreground leading-loose whitespace-pre-wrap">
+                        <h2 className="text-balance text-3xl font-bold text-foreground mb-6">Om projektet</h2>
+                        <p className="text-pretty text-muted-foreground leading-loose whitespace-pre-wrap">
                             {c.description}
                         </p>
                     </motion.div>
@@ -136,12 +140,12 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                             viewport={{ once: true }}
                             className="bg-muted/30 border border-border rounded-3xl p-8"
                         >
-                            <h3 className="text-xl font-bold text-foreground mb-6">Vad vi gjorde</h3>
+                            <h3 className="text-balance text-xl font-bold text-foreground mb-6">Vad vi gjorde</h3>
                             <ul className="space-y-4">
-                                {c.services.map((service, i) => (
+                                {c.tags.map((tag, i) => (
                                     <li key={i} className="flex items-center gap-3 text-muted-foreground">
                                         <CheckCircle2 className="size-5 text-primary shrink-0" aria-hidden="true" />
-                                        <span>{service}</span>
+                                        <span>{tag}</span>
                                     </li>
                                 ))}
                             </ul>
@@ -166,7 +170,7 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                 {relatedCases.length > 0 && (
                     <section className="border-t border-border pt-24 mb-24">
                         <div className="flex items-center justify-between mb-12">
-                            <h2 className="text-3xl font-bold text-foreground">Relaterade kundcase</h2>
+                            <h2 className="text-balance text-3xl font-bold text-foreground">Relaterade kundcase</h2>
                             <Button variant="ghost" className="gap-2 group transition-[background-color,color]" asChild>
                                 <Link href="/cases">
                                     Visa alla
@@ -182,18 +186,18 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                                         <div className="flex flex-col md:flex-row h-full">
                                             <div className="relative aspect-video md:aspect-square md:w-48 overflow-hidden shrink-0">
                                                 <Image
-                                                    src={rc.image}
+                                                    src={rc.heroImage}
                                                     alt={rc.title}
                                                     fill
                                                     className="object-cover transition-transform duration-150 group-hover:scale-110"
                                                 />
                                             </div>
                                             <div className="p-6 flex flex-col justify-center gap-2">
-                                                <Badge variant="outline" className="w-fit text-[10px] uppercase tracking-widest text-muted-foreground group-hover:text-primary transition-colors">
-                                                    {rc.industry}
+                                                <Badge variant="outline" className="w-fit text-[10px] uppercase text-muted-foreground group-hover:text-primary transition-colors">
+                                                    {rc.category}
                                                 </Badge>
                                                 <h3 className="text-lg font-bold text-foreground group-hover:underline">{rc.title}</h3>
-                                                <p className="text-sm text-muted-foreground line-clamp-2">{rc.summary}</p>
+                                                <p className="text-sm text-muted-foreground line-clamp-2">{rc.shortDescription}</p>
                                             </div>
                                         </div>
                                     </article>
@@ -210,9 +214,8 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                     viewport={{ once: true }}
                     className="rounded-[3rem] bg-foreground text-background p-12 lg:p-20 text-center relative overflow-hidden"
                 >
-                    <div className="absolute top-0 left-0 size-full bg-gradient-to-br from-primary/20 to-transparent pointer-events-none" />
-                    <h2 className="text-4xl lg:text-5xl font-black mb-8 relative z-10">Vill du ha liknande resultat?</h2>
-                    <p className="text-xl text-background/70 max-w-2xl mx-auto mb-12 relative z-10">
+                    <h2 className="text-balance text-4xl lg:text-5xl font-black mb-8 relative z-10">Vill du ha liknande resultat?</h2>
+                    <p className="text-pretty text-xl text-background/70 max-w-2xl mx-auto mb-12 relative z-10">
                         Vi hjälper er att definiera er digitala framtid och bygga lösningar som levererar mätbara framgångar.
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">

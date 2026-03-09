@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Toaster } from '@/components/ui/sonner'
 import { PageBackground } from '@/components/page-background'
+import { MotionProvider } from '@/components/framer-exports'
 import './globals.css'
 
 const _inter = Inter({ subsets: ['latin'] })
@@ -56,9 +57,11 @@ export default function RootLayout({
   return (
     <html lang="sv" className="dark">
       <body className="font-sans antialiased relative">
-        <PageBackground />
-        {children}
-        <Toaster />
+        <MotionProvider>
+          <PageBackground />
+          {children}
+          <Toaster />
+        </MotionProvider>
         <Analytics />
         <SpeedInsights />
       </body>

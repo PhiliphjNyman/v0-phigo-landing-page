@@ -17,13 +17,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
     return {
         title: `${c.title} – Case | PHIGO`,
-        description: c.summary,
+        description: c.shortDescription,
         alternates: {
             canonical: `https://phigo.se/cases/${slug}`,
         },
         openGraph: {
             title: `${c.title} – Case | PHIGO`,
-            description: c.summary,
+            description: c.shortDescription,
             url: `https://phigo.se/cases/${slug}`,
             type: 'article',
             locale: 'sv_SE',
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         twitter: {
             card: 'summary_large_image',
             title: `${c.title} – Case | PHIGO`,
-            description: c.summary,
+            description: c.shortDescription,
         },
     }
 }

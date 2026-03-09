@@ -86,6 +86,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
+                aria-current={isActive ? (link.sectionId === null ? 'page' : 'true') : undefined}
                 className={cn(
                   'relative text-sm font-medium transition-colors duration-200',
                   isActive ? 'text-foreground' : 'text-muted-foreground hover:text-foreground',

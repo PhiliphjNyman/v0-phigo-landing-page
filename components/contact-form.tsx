@@ -26,7 +26,6 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  FormDescription,
 } from '@/components/ui/form'
 import Link from 'next/link'
 import { fadeInUp, staggerContainer, scaleIn } from '@/lib/animations'
@@ -114,7 +113,7 @@ export function ContactForm() {
               <div className="text-center mb-12">
                 <motion.span
                   variants={fadeInUp}
-                  className="text-sm font-bold uppercase tracking-widest text-primary"
+                  className="text-sm font-bold uppercase text-primary"
                 >
                   Kontakta oss
                 </motion.span>
@@ -299,6 +298,7 @@ export function ContactForm() {
                                 href="/integritetspolicy"
                                 className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors"
                                 target="_blank"
+                                aria-label="integritetspolicy (öppnas i ny flik)"
                               >
                                 integritetspolicy
                               </Link>
@@ -312,7 +312,7 @@ export function ContactForm() {
                     <Button
                       type="submit"
                       size="lg"
-                      className="mt-4 h-14 w-full cursor-pointer rounded-2xl bg-primary text-base font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:scale-[1.02] hover:bg-primary/90 hover:shadow-2xl active:scale-[0.98]"
+                      className="mt-4 h-14 w-full cursor-pointer rounded-2xl bg-primary text-base font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-[transform,background-color,box-shadow] duration-200 hover:scale-[1.02] hover:bg-primary/90 hover:shadow-2xl active:scale-[0.98]"
                       disabled={form.formState.isSubmitting}
                     >
                       {form.formState.isSubmitting ? (
@@ -326,11 +326,11 @@ export function ContactForm() {
                     </Button>
 
                     <div className="flex items-center justify-center gap-6 mt-2 opacity-60">
-                      <p className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground uppercase tracking-widest">
+                      <p className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground uppercase">
                         <CheckCircle2 className="size-3 text-primary" aria-hidden="true" />
                         Svar inom 24h
                       </p>
-                      <p className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground uppercase tracking-widest">
+                      <p className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground uppercase">
                         <Sparkles className="size-3 text-primary" aria-hidden="true" />
                         100% Gratis
                       </p>
@@ -345,13 +345,15 @@ export function ContactForm() {
               initial="hidden"
               animate="visible"
               variants={scaleIn}
+              role="alert"
+              aria-live="polite"
               className="flex flex-col items-center justify-center text-center p-12 bg-card rounded-[3rem] border border-primary/20 shadow-2xl"
             >
               <div className="size-20 rounded-full bg-primary/10 flex items-center justify-center mb-8">
                 <CheckCircle2 className="size-10 text-primary" />
               </div>
-              <h2 className="text-4xl font-black text-foreground mb-4">Tack för visat intresse!</h2>
-              <p className="text-lg text-muted-foreground max-w-sm mb-10">
+              <h2 className="text-balance text-4xl font-black text-foreground mb-4">Tack för visat intresse!</h2>
+              <p className="text-pretty text-lg text-muted-foreground max-w-sm mb-10">
                 Vi har tagit emot din förfrågan och kommer att påbörja
                 analysen av er webbplats omedelbart.
               </p>

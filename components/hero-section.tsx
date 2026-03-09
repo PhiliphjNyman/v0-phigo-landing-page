@@ -114,9 +114,9 @@ export function HeroSection() {
               variants={fadeIn}
               className="mt-6 flex items-center gap-4 text-xs text-muted-foreground font-medium"
             >
-              <span>✓ Tar 30 sekunder</span>
-              <span className="size-1 rounded-full bg-border" />
-              <span>✓ Ingen förpliktelse</span>
+              <span><span aria-hidden="true">✓</span> Tar 30 sekunder</span>
+              <span className="size-1 rounded-full bg-border" aria-hidden="true" />
+              <span><span aria-hidden="true">✓</span> Ingen förpliktelse</span>
             </motion.div>
           </motion.div>
 

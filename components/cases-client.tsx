@@ -4,14 +4,13 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowUpRight, TrendingUp, Filter, Zap, Users } from 'lucide-react'
+import { ArrowUpRight, TrendingUp, Filter, Zap, Heart } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Counter } from '@/components/ui/counter'
-import { fadeInUp } from '@/lib/animations'
 import { Case } from '@/lib/cases'
 
-const industries = ['Alla', 'B2B konsulttjänster', 'E-handel', 'Lokalt tjänsteföretag']
+const categories = ['Alla', 'Tandvård', 'Elektriker / Hantverkare']
 
 const accentMap = {
     amber: 'group-hover:border-amber-500/30 text-amber-500 bg-amber-500/10',
@@ -20,9 +19,8 @@ const accentMap = {
 }
 
 const iconMap: Record<string, any> = {
-    'nordic-consulting': TrendingUp,
-    'storberg-ehandel': Zap,
-    'avenio-fastigheter': Users,
+    'leendekliniken': Heart,
+    'andersson-el': Zap,
 }
 
 export function CasesClient({ allCases }: { allCases: Case[] }) {
@@ -30,7 +28,7 @@ export function CasesClient({ allCases }: { allCases: Case[] }) {
 
     const filteredCases = activeFilter === 'Alla'
         ? allCases
-        : allCases.filter(c => c.industry === activeFilter)
+        : allCases.filter(c => c.category === activeFilter)
 
     return (
         <>
@@ -45,27 +43,28 @@ export function CasesClient({ allCases }: { allCases: Case[] }) {
                     <Filter className="size-4" aria-hidden="true" />
                     <span>Filtrera:</span>
                 </div>
-                {industries.map((industry) => (
+                {categories.map((category) => (
                     <Button
-                        key={industry}
-                        variant={activeFilter === industry ? 'default' : 'outline'}
-                        onClick={() => setActiveFilter(industry)}
+                        key={category}
+                        variant={activeFilter === category ? 'default' : 'outline'}
+                        onClick={() => setActiveFilter(category)}
                         className="rounded-full px-6 transition-[background-color,color,border-color]"
-                        aria-pressed={activeFilter === industry}
+                        aria-pressed={activeFilter === category}
                     >
-                        {industry}
+                        {category}
                     </Button>
                 ))}
             </motion.div>
 
             {/* Case Grid */}
             <motion.div
-                layout
                 className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+                aria-live="polite"
+                aria-atomic="false"
             >
                 <AnimatePresence mode="popLayout">
                     {filteredCases.map((c) => {
-                        const metric = c.metrics[0]
+                        const stat = c.stats?.[0]
                         const MetricIcon = iconMap[c.slug] || TrendingUp
                         const accentStyles = accentMap[c.accent]
 
@@ -84,13 +83,12 @@ export function CasesClient({ allCases }: { allCases: Case[] }) {
                                     >
                                         <div className="relative aspect-[16/11] overflow-hidden bg-muted">
                                             <Image
-                                                src={c.image}
+                                                src={c.heroImage}
                                                 alt={c.title}
                                                 fill
                                                 className="object-cover transition-transform duration-150 group-hover:scale-110"
                                                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                             />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
                                         </div>
 
                                         <div className="flex flex-1 flex-col gap-4 p-7">
@@ -99,24 +97,26 @@ export function CasesClient({ allCases }: { allCases: Case[] }) {
                                                     variant="secondary"
                                                     className="rounded-lg bg-muted/50 text-xs font-semibold text-muted-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary"
                                                 >
-                                                    {c.industry}
+                                                    {c.category}
                                                 </Badge>
-                                                <div className={`flex items-center gap-1.5 text-sm font-bold transition-colors duration-500 ${accentStyles.split(' ')[1]}`}>
-                                                    <MetricIcon className="size-4" aria-hidden="true" />
-                                                    <Counter
-                                                        value={parseInt(metric.value.replace(/[^0-9]/g, ''))}
-                                                        prefix={metric.value.includes('+') ? '+' : ''}
-                                                        suffix={metric.value.includes('%') ? '%' : ''}
-                                                    />
-                                                </div>
+                                                {stat && (
+                                                    <div className={`flex items-center gap-1.5 text-sm font-bold transition-colors duration-500 ${accentStyles.split(' ')[1]}`}>
+                                                        <MetricIcon className="size-4" aria-hidden="true" />
+                                                        <Counter
+                                                            value={parseInt(stat.value.replace(/[^0-9]/g, ''))}
+                                                            prefix={stat.value.includes('+') ? '+' : ''}
+                                                            suffix={stat.value.includes('%') ? '%' : ''}
+                                                        />
+                                                    </div>
+                                                )}
                                             </div>
 
-                                            <h3 className="text-xl font-bold text-foreground group-hover:underline">
+                                            <h3 className="text-balance text-xl font-bold text-foreground group-hover:underline">
                                                 {c.title}
                                             </h3>
 
-                                            <p className="flex-1 text-sm leading-relaxed text-muted-foreground/80 group-hover:text-muted-foreground transition-colors">
-                                                {c.summary}
+                                            <p className="text-pretty flex-1 text-sm leading-relaxed text-muted-foreground/80 group-hover:text-muted-foreground transition-colors">
+                                                {c.shortDescription}
                                             </p>
 
                                             <div className="mt-4 pt-4 border-t border-border/50">
