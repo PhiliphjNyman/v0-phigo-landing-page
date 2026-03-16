@@ -31,6 +31,18 @@ export const cases: Case[] = [
         accent: 'cyan',
     },
     {
+        slug: 'cafe-alma',
+        title: 'Café Alma',
+        category: 'Restaurang / Café',
+        shortDescription: 'Levande webbplats för ett brunchcafé med interaktiv meny, platsinfo och bokningsformulär.',
+        description: 'En färgstark och personlig sajt för ett brunchcafé i Linköping. Lekfull design med organiska former, rörliga element och en interaktiv menysida med kategoriflikar. Tydlig platsinformation, öppettider och kontaktformulär. Designad för att spegla caféets varma atmosfär och driva bordbokningar.',
+        tags: ['UX Design', 'Interaktiv Meny', 'Responsiv Design', 'Varumärkesdesign'],
+        liveUrl: 'https://cafe-alma-seven.vercel.app/',
+        heroImage: '/images/case-cafe-alma.png',
+        featured: true,
+        accent: 'amber',
+    },
+    {
         slug: 'andersson-el',
         title: 'Andersson El',
         category: 'Elektriker / Hantverkare',
