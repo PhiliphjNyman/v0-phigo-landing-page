@@ -7,24 +7,24 @@ import { fadeInUp, staggerContainer } from '@/lib/animations'
 
 const reasons = [
   {
-    title: 'Design som konverterar',
+    title: 'Byggd för att ge dig kunder',
     description:
-      'Vi bygger inte bara snygga sajter -- vi bygger sajter som driver affärsresultat och mätbar tillväxt.',
+      'Inte bara snygg design. Varje del av sajten är till för att göra det lätt för besökare att ta kontakt med dig.',
   },
   {
-    title: 'Prisvärt och transparent',
+    title: 'Fast pris, inga överraskningar',
     description:
-      'Inga dolda kostnader, inga överraskningar. Ni vet alltid vad ni betalar för och vad ni får.',
+      '8 000 kr för sajten, 399 kr/mån för drift och support. Det är allt. Inga dolda kostnader.',
   },
   {
-    title: 'Modern tech stack',
+    title: 'Snabb och säker',
     description:
-      'Vi använder den senaste tekniken för att säkerställa att er sajt är snabb, säker och framtidssäkrad.',
+      'Sajten laddar på under en sekund och funkar perfekt på mobilen. Vi ser till att den alltid är uppe.',
   },
   {
-    title: 'Personlig kontakt',
+    title: 'Du pratar med den som bygger',
     description:
-      'Ni pratar alltid direkt med den som bygger er sajt. Ingen byråkrati, bara resultat.',
+      'Ingen mellanhand. Du har direkt kontakt med den som faktiskt gör jobbet, från start till mål.',
   },
 ]
 
@@ -50,14 +50,14 @@ export function WhyPhigo() {
               variants={fadeInUp}
               className="mt-3 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
             >
-              Er partner för digital tillväxt
+              Därför väljer företagare oss
             </motion.h2>
             <motion.p
               variants={fadeInUp}
               className="mt-4 text-pretty leading-relaxed text-muted-foreground"
             >
-              Vi kombinerar kreativ design med datadriven strategi för att bygga
-              webbplatser som gör verklig skillnad för ert företag.
+              Vi bygger hemsidor för lokala företag som vill ha fler kunder —
+              inte en snygg sajt som ingen agerar på.
             </motion.p>
 
             <motion.div variants={fadeInUp} className="mt-8">
@@ -67,7 +67,7 @@ export function WhyPhigo() {
                 className="cursor-pointer rounded-xl bg-primary px-8 text-primary-foreground hover:bg-primary/90"
               >
                 <a href="#kontakt">
-                  Boka ett samtal
+                  Kontakta oss
                   <ArrowRight className="ml-1 size-4" aria-hidden="true" />
                 </a>
               </Button>
@@ -96,7 +96,7 @@ export function WhyPhigo() {
                     {reason.title}
                   </h3>
                 </div>
-                <p className="text-sm leading-relaxed text-muted-foreground">
+                <p className="text-sm leading-relaxed text-pretty text-muted-foreground">
                   {reason.description}
                 </p>
               </motion.div>

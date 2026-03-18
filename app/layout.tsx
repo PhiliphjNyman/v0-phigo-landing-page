@@ -11,9 +11,9 @@ const _inter = Inter({ subsets: ['latin'] })
 const _geistMono = Geist_Mono({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'PHIGO | Webbplatser som konverterar',
+  title: 'PHIGO | Hemsidor som ger dig fler kunder',
   description:
-    'PHIGO bygger moderna, snabba och konverteringsfokuserade webbplatser för B2B-företag. Få en kostnadsfri webbplatsanalys idag.',
+    'Vi bygger hemsidor åt lokala företag som faktiskt gör att folk tar kontakt. Fast pris, live inom 14 dagar. Granska din hemsida kostnadsfritt.',
   generator: 'Next.js',
   alternates: {
     canonical: 'https://phigo.se',
@@ -28,18 +28,18 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon.png',
   },
   openGraph: {
-    title: 'PHIGO | Webbplatser som konverterar',
+    title: 'PHIGO | Hemsidor som ger dig fler kunder',
     description:
-      'PHIGO bygger moderna, snabba och konverteringsfokuserade webbplatser för B2B-företag. Få en kostnadsfri webbplatsanalys idag.',
+      'Vi bygger hemsidor åt lokala företag som faktiskt gör att folk tar kontakt. Fast pris, live inom 14 dagar. Granska din hemsida kostnadsfritt.',
     url: 'https://phigo.se',
     type: 'website',
     locale: 'sv_SE',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'PHIGO | Webbplatser som konverterar',
+    title: 'PHIGO | Hemsidor som ger dig fler kunder',
     description:
-      'PHIGO bygger moderna, snabba och konverteringsfokuserade webbplatser för B2B-företag. Få en kostnadsfri webbplatsanalys idag.',
+      'Vi bygger hemsidor åt lokala företag som faktiskt gör att folk tar kontakt. Fast pris, live inom 14 dagar. Granska din hemsida kostnadsfritt.',
   },
 }
 

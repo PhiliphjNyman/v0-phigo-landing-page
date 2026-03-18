@@ -17,13 +17,13 @@ import { cn } from '@/lib/utils'
 import Link from 'next/link'
 
 const navLinks = [
-  { label: 'Case', href: '/cases', sectionId: null },
-  { label: 'Tjänster', href: '/#tjanster', sectionId: 'tjanster' },
-  { label: 'Process', href: '/#process', sectionId: 'process' },
-  { label: 'FAQ', href: '/#faq', sectionId: 'faq' },
+  { label: 'Exempel', href: '/cases', sectionId: null },
+  { label: 'Erbjudande', href: '/#erbjudande', sectionId: 'erbjudande' },
+  { label: 'Så funkar det', href: '/#process', sectionId: 'process' },
+  { label: 'Vanliga frågor', href: '/#faq', sectionId: 'faq' },
 ]
 
-const SCROLL_SPY_SECTIONS = ['tjanster', 'process', 'faq', 'kontakt']
+const SCROLL_SPY_SECTIONS = ['erbjudande', 'process', 'faq', 'kontakt']
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -110,7 +110,7 @@ export function Header() {
             size="sm"
             className="hidden cursor-pointer rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 md:inline-flex"
           >
-            <Link href="/#kontakt">Kostnadsfri analys</Link>
+            <Link href="/#kontakt">Se vad din hemsida missar</Link>
           </Button>
 
           {/* Mobile menu */}
@@ -149,7 +149,7 @@ export function Header() {
                   className="mt-4 w-full cursor-pointer rounded-lg bg-primary text-primary-foreground hover:bg-primary/90"
                   onClick={() => setOpen(false)}
                 >
-                  <Link href="/#kontakt">Kostnadsfri analys</Link>
+                  <Link href="/#kontakt">Se vad din hemsida missar</Link>
                 </Button>
               </nav>
             </SheetContent>

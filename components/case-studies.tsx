@@ -47,13 +47,13 @@ export function CaseStudies() {
               variants={fadeInUp}
               className="text-sm font-bold uppercase text-primary"
             >
-              Exempel på leveranser
+              Exempel
             </motion.span>
             <motion.h2
               variants={fadeInUp}
               className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"
             >
-              Utvalda projekt från PHIGO
+              Så kan din hemsida se ut
             </motion.h2>
           </motion.div>
 
@@ -63,8 +63,8 @@ export function CaseStudies() {
             viewport={{ once: true }}
             className="max-w-md text-pretty text-center text-muted-foreground sm:text-right"
           >
-            Vi hjälper B2B-företag att stå ut digitalt med design och teknik som gör
-            skillnad på riktigt.
+            Här är exempel på hemsidor vi byggt åt företag som ditt. Varje sajt
+            är byggd för att besökare ska ta kontakt — inte bara titta.
           </motion.p>
         </div>
 

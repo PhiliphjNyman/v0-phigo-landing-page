@@ -1,8 +1,7 @@
 import { Header } from '@/components/header'
 import { HeroSection } from '@/components/hero-section'
-import { TrustBar } from '@/components/trust-bar'
 import { CaseStudies } from '@/components/case-studies'
-import { Services } from '@/components/services'
+import { OfferSection } from '@/components/offer-section'
 import { ProcessSection } from '@/components/process-section'
 import { WhyPhigo } from '@/components/why-phigo'
 import { FaqSection } from '@/components/faq-section'
@@ -16,9 +15,8 @@ export default function Home() {
       <Header />
       <main>
         <HeroSection />
-        <TrustBar />
         <CaseStudies />
-        <Services />
+        <OfferSection />
         <ProcessSection />
         <WhyPhigo />
         <FaqSection />

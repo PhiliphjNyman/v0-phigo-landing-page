@@ -2,10 +2,10 @@ import { PhigoLogo } from '@/components/phigo-logo'
 import Link from 'next/link'
 
 const footerLinks = [
-  { label: 'Case', href: '/cases' },
-  { label: 'Tjänster', href: '/#tjanster' },
-  { label: 'Process', href: '/#process' },
-  { label: 'FAQ', href: '/#faq' },
+  { label: 'Exempel', href: '/cases' },
+  { label: 'Erbjudande', href: '/#erbjudande' },
+  { label: 'Så funkar det', href: '/#process' },
+  { label: 'Vanliga frågor', href: '/#faq' },
   { label: 'Kontakt', href: '/#kontakt' },
 ]
 
@@ -19,9 +19,9 @@ export function Footer() {
             <Link href="/" aria-label="PHIGO - Hem">
               <PhigoLogo size="lg" />
             </Link>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Vi bygger moderna, snabba och konverteringsfokuserade webbplatser
-              för B2B-företag som vill växa digitalt.
+            <p className="mt-3 text-sm leading-relaxed text-pretty text-muted-foreground">
+              Vi bygger hemsidor som ger lokala företag fler kunder. Fast pris,
+              klart inom 14 dagar.
             </p>
           </div>
 

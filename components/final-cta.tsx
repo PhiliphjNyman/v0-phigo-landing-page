@@ -18,7 +18,7 @@ export function FinalCta() {
         >
           {/* Decorative glow */}
           <div className="pointer-events-none absolute inset-0">
-            <div className="absolute -top-20 left-1/2 h-60 w-60 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+            <div className="absolute -top-20 left-1/2 size-60 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
           </div>
 
           <div className="relative">
@@ -26,14 +26,14 @@ export function FinalCta() {
               variants={fadeInUp}
               className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
             >
-              Redo att se vad er hemsida kan prestera?
+              Vill du veta var din hemsida tappar kunder?
             </motion.h2>
             <motion.p
               variants={fadeInUp}
               className="mx-auto mt-4 max-w-xl text-pretty leading-relaxed text-muted-foreground"
             >
-              Få en kostnadsfri analys från PHIGO med konkreta
-              förbättringsförslag för er nuvarande webbplats.
+              Vi granskar din sajt och visar konkret vad som kan förbättras —
+              kostnadsfritt och utan förpliktelse.
             </motion.p>
             <motion.div
               variants={fadeInUp}
@@ -45,12 +45,12 @@ export function FinalCta() {
                 className="cursor-pointer rounded-xl bg-primary px-8 text-primary-foreground shadow-lg shadow-primary/20 hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30 transition-[background-color,box-shadow] duration-200"
               >
                 <a href="#kontakt">
-                  Få en kostnadsfri webbplatsanalys
+                  Skicka din sajt — vi visar vad du missar
                   <ArrowRight className="ml-1 size-4" aria-hidden="true" />
                 </a>
               </Button>
               <p className="text-xs text-muted-foreground">
-                Inget säljkrangel &middot; Svar inom 24h
+                Kostnadsfritt &middot; Svar inom 24h
               </p>
             </motion.div>
           </div>

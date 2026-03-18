@@ -28,12 +28,9 @@ export function HeroSection() {
     <section className="relative flex min-h-dvh items-center overflow-hidden pt-20 pb-16 lg:pt-32">
       {/* Background Effects */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]" />
-
         {/* Static Blobs */}
-        <div className="absolute -top-[10%] -left-[10%] h-[500px] w-[500px] rounded-full bg-primary/10 blur-[120px] mix-blend-screen" />
-        <div className="absolute top-[20%] -right-[10%] h-[400px] w-[400px] rounded-full bg-emerald-500/5 blur-[100px] mix-blend-screen" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
+        <div className="absolute -top-[10%] -left-[10%] size-[500px] rounded-full bg-primary/10 blur-[120px] mix-blend-screen" />
+        <div className="absolute top-[20%] -right-[10%] size-[400px] rounded-full bg-emerald-500/5 blur-[100px] mix-blend-screen" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 lg:px-8">
@@ -45,19 +42,13 @@ export function HeroSection() {
             variants={staggerContainer}
             className="flex flex-col items-center text-center lg:items-start lg:text-left"
           >
-            <motion.div variants={fadeIn}>
-              <span className="inline-block rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-semibold tracking-wider text-primary uppercase">
-                Webbplatser som driver tillväxt
-              </span>
-            </motion.div>
-
             <motion.h1
               variants={fadeInUp}
               className="mt-8 text-balance text-4xl font-extrabold leading-[1.1] tracking-tight text-foreground sm:text-6xl xl:text-7xl"
             >
-              PHIGO bygger webbplatser som{' '}
+              Din hemsida borde ge dig{' '}
               <span className="relative">
-                <span className="relative z-10 text-primary">konverterar.</span>
+                <span className="relative z-10 text-primary">kunder</span>
                 <svg className="absolute -bottom-2 lg:-bottom-4 left-0 -z-10 w-full" viewBox="0 0 358 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <motion.path
                     initial={{ pathLength: 0 }}
@@ -71,14 +62,15 @@ export function HeroSection() {
                   />
                 </svg>
               </span>
+              {' '}— inte bara finnas.
             </motion.h1>
 
             <motion.p
               variants={fadeInUp}
               className="mt-8 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl"
             >
-              Vi hjälper B2B-företag att lansera eller fräscha upp sin sajt med
-              modern design, hög prestanda och mätbara resultat.
+              Vi bygger hemsidor åt lokala företag som faktiskt gör att folk tar
+              kontakt. Fast pris, live inom 14 dagar.
             </motion.p>
 
             {/* CTA group */}
@@ -92,7 +84,7 @@ export function HeroSection() {
                 className="h-14 cursor-pointer rounded-2xl bg-primary px-10 text-base font-semibold text-primary-foreground shadow-xl shadow-primary/20 transition-[transform,background-color,box-shadow] duration-200 hover:scale-[1.02] hover:bg-primary/90 hover:shadow-2xl hover:shadow-primary/30 active:scale-[0.98]"
               >
                 <a href="#kontakt">
-                  Få en kostnadsfri analys
+                  Se vad din hemsida missar — kostnadsfritt
                   <ArrowRight className="ml-2 size-5" aria-hidden="true" />
                 </a>
               </Button>
@@ -103,7 +95,7 @@ export function HeroSection() {
                 className="h-14 cursor-pointer text-base font-medium text-muted-foreground hover:bg-white/5 hover:text-foreground"
               >
                 <a href="#case">
-                  Se våra case
+                  Se exempel
                   <ChevronDown className="ml-2 size-5" aria-hidden="true" />
                 </a>
               </Button>

@@ -8,38 +8,50 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
-import { HelpCircle, Clock, CreditCard, ShieldCheck, RefreshCw, Layers } from 'lucide-react'
+import { HelpCircle, CreditCard, Clock, ShieldCheck, Smartphone, MapPin, Pencil, PackageMinus } from 'lucide-react'
 
 const faqs = [
   {
-    question: 'Hur lång tid tar ett projekt?',
+    question: 'Vad kostar en hemsida?',
     answer:
-      'Ett typiskt projekt tar mellan 3--6 veckor beroende på omfattning. Vi börjar alltid med en kort analysfas för att säkerställa att vi bygger rätt saker, sedan går vi vidare till design och utveckling.',
-    icon: Clock,
-  },
-  {
-    question: 'Vad kostar en webbplats?',
-    answer:
-      'Priset beror på projektets storlek och komplexitet. Vi är transparenta med priserna och ger alltid en tydlig offert innan vi börjar. Kontakta oss för en kostnadsfri analys så ger vi er ett förslag.',
+      'En hemsida kostar 8 000 kr (engång) och 399 kr/mån för drift, säkerhet och support. Inga dolda kostnader — priset är fast oavsett hur lång tid det tar.',
     icon: CreditCard,
   },
   {
-    question: 'Erbjuder ni support efter lansering?',
+    question: 'Hur lång tid tar det?',
     answer:
-      'Absolut. Vi erbjuder löpande support och underhåll efter lansering. Vi hjälper med uppdateringar, optimering och eventuella tekniska frågor som dyker upp.',
+      'Din sajt är live inom 14 dagar från att vi fått all information vi behöver. Ofta går det snabbare.',
+    icon: Clock,
+  },
+  {
+    question: 'Vad händer efter att sajten är live?',
+    answer:
+      'Vi ser till att sajten alltid är uppe och funkar. Månadsavgiften på 399 kr/mån täcker hosting, säkerhet och mindre ändringar — som att uppdatera öppettider, priser eller kontaktuppgifter.',
     icon: ShieldCheck,
   },
   {
-    question: 'Hur ser processen ut?',
+    question: 'Fungerar sajten på mobilen?',
     answer:
-      'Vår process är uppdelad i tre faser: Analys & strategi, Design & utveckling, och Lansering & optimering. Ni är involverade genom hela processen med regelbundna avstämningar och feedback-rundor.',
-    icon: RefreshCw,
+      'Ja. Alla sajter vi bygger fungerar perfekt på mobilen — det är ofta där dina kunder hittar dig.',
+    icon: Smartphone,
   },
   {
-    question: 'Kan ni hjälpa med en befintlig sajt?',
+    question: 'Hittar folk mig på Google?',
     answer:
-      'Ja, vi kan både förbättra befintliga sajter och bygga helt nya. Vi börjar alltid med en analys av nuvarande sajt för att identifiera förbättringsområden och möjligheter.',
-    icon: Layers,
+      'Ja. Vi bygger sajten så att den syns i Google när folk i ditt område söker efter det du erbjuder. Det tar lite tid att bygga upp, men grunden läggs direkt.',
+    icon: MapPin,
+  },
+  {
+    question: 'Kan jag uppdatera sajten själv?',
+    answer:
+      'Mindre ändringar — som texter och kontaktuppgifter — ingår i månadsavgiften och fixar vi åt dig. Vill du kunna redigera sajten själv är det ett tillägg utöver baspaketet — fråga oss om det.',
+    icon: Pencil,
+  },
+  {
+    question: 'Kan jag köpa bara hemsidan utan månadsavtal?',
+    answer:
+      'Ja. Du kan köpa sajten för 8 000 kr och ta hand om hosting och drift själv. De flesta väljer ändå månadsavgiften — 399 kr/mån för att slippa tänka på det.',
+    icon: PackageMinus,
   },
 ]
 
@@ -67,13 +79,13 @@ export function FaqSection() {
             variants={fadeInUp}
             className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"
           >
-            Har ni frågor? Vi har svar.
+            Vanliga frågor
           </motion.h2>
           <motion.p
             variants={fadeInUp}
             className="mt-6 mx-auto max-w-xl text-pretty text-muted-foreground text-lg"
           >
-            Hittar du inte det du söker? Kontakta oss direkt så hjälper vi dig.
+            Hittar du inte svaret du söker? Hör av dig direkt.
           </motion.p>
         </motion.div>
 
@@ -99,7 +111,7 @@ export function FaqSection() {
                     </div>
                     <span className="flex-1">{faq.question}</span>
                   </AccordionTrigger>
-                  <AccordionContent className="pb-6 pl-14 text-base leading-relaxed text-muted-foreground/95">
+                  <AccordionContent className="pb-6 pl-14 text-base leading-relaxed text-pretty text-muted-foreground/95">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>

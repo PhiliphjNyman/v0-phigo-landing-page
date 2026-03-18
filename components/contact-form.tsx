@@ -121,14 +121,14 @@ export function ContactForm() {
                   variants={fadeInUp}
                   className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"
                 >
-                  Redo för nästa steg?
+                  Låt oss titta på din hemsida
                 </motion.h2>
                 <motion.p
                   variants={fadeInUp}
                   className="mt-6 text-pretty text-muted-foreground text-lg"
                 >
-                  Fyll i formuläret så återkommer vi med konkreta förslag på hur er
-                  sajt kan prestera bättre
+                  Fyll i så återkommer vi inom 24 timmar med en granskning och
+                  konkreta förslag.
                 </motion.p>
               </div>
 
