@@ -1,9 +1,13 @@
 'use client'
 
+import { useRef } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { Monitor, Smartphone, Layout, MousePointer2 } from 'lucide-react'
 
 export function HeroVisual() {
+    const containerRef = useRef<HTMLDivElement>(null)
+    const cachedRect = useRef<DOMRect | null>(null)
+
     const x = useMotionValue(0)
     const y = useMotionValue(0)
 
@@ -13,37 +17,43 @@ export function HeroVisual() {
     const rotateX = useTransform(mouseY, [-0.5, 0.5], [10, -10])
     const rotateY = useTransform(mouseX, [-0.5, 0.5], [-10, 10])
 
+    function handleMouseEnter() {
+        if (containerRef.current) {
+            cachedRect.current = containerRef.current.getBoundingClientRect()
+        }
+    }
+
     function handleMouseMove(event: React.MouseEvent<HTMLDivElement>) {
-        const rect = event.currentTarget.getBoundingClientRect()
-        const width = rect.width
-        const height = rect.height
-        const mouseXPos = event.clientX - rect.left
-        const mouseYPos = event.clientY - rect.top
-        const xPct = mouseXPos / width - 0.5
-        const yPct = mouseYPos / height - 0.5
-        x.set(xPct)
-        y.set(yPct)
+        const rect = cachedRect.current
+        if (!rect) return
+        x.set((event.clientX - rect.left) / rect.width - 0.5)
+        y.set((event.clientY - rect.top) / rect.height - 0.5)
     }
 
     function handleMouseLeave() {
+        cachedRect.current = null
         x.set(0)
         y.set(0)
     }
 
     return (
         <div
+            ref={containerRef}
             className="relative flex h-full items-center justify-center py-12"
+            onMouseEnter={handleMouseEnter}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             aria-hidden="true"
         >
+            {/* Static shadow layer — kept off the rotating element to avoid continuous repaint */}
+            <div className="absolute aspect-video w-[600px] rounded-2xl shadow-2xl" />
             <motion.div
                 style={{
                     rotateX,
                     rotateY,
                     transformStyle: 'preserve-3d',
                 }}
-                className="relative aspect-video w-[600px] rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-transparent p-4 shadow-2xl"
+                className="relative aspect-video w-[600px] rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-transparent p-4"
             >
                 {/* Title Bar */}
                 <div className="flex items-center gap-2 border-b border-white/5 pb-3">

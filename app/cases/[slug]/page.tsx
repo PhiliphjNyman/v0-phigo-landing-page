@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             url: `https://phigo.se/cases/${slug}`,
             type: 'article',
             locale: 'sv_SE',
+            images: [{ url: c.heroImage, width: 1200, height: 630, alt: c.title }],
         },
         twitter: {
             card: 'summary_large_image',

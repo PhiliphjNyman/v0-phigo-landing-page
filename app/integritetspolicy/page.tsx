@@ -16,6 +16,11 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'sv_SE',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Integritetspolicy – PHIGO',
+    description: 'Läs om hur PHIGO hanterar dina personuppgifter i enlighet med GDPR.',
+  },
 }
 
 export default function IntegritetspolicyPage() {

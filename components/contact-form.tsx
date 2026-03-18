@@ -314,6 +314,7 @@ export function ContactForm() {
                       size="lg"
                       className="mt-4 h-14 w-full cursor-pointer rounded-2xl bg-primary text-base font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-[transform,background-color,box-shadow] duration-200 hover:scale-[1.02] hover:bg-primary/90 hover:shadow-2xl active:scale-[0.98]"
                       disabled={form.formState.isSubmitting}
+                      aria-busy={form.formState.isSubmitting}
                     >
                       {form.formState.isSubmitting ? (
                         "Skickar..."
@@ -350,7 +351,7 @@ export function ContactForm() {
               className="flex flex-col items-center justify-center text-center p-12 bg-card rounded-[3rem] border border-primary/20 shadow-2xl"
             >
               <div className="size-20 rounded-full bg-primary/10 flex items-center justify-center mb-8">
-                <CheckCircle2 className="size-10 text-primary" />
+                <CheckCircle2 className="size-10 text-primary" aria-hidden="true" />
               </div>
               <h2 className="text-balance text-4xl font-black text-foreground mb-4">Tack för visat intresse!</h2>
               <p className="text-pretty text-lg text-muted-foreground max-w-sm mb-10">
