@@ -6,6 +6,46 @@ PHIGO bygger moderna, konverteringsoptimerade hemsidor åt lokala småföretag. 
 
 ---
 
+## Sessionsrutiner
+
+### Vid start av varje session
+1. Kör `/clear` för fräsch kontext och tokenbesparingar
+2. Läs denna fil (`CLAUDE.md`)
+3. Läs `lessons.md` — undvik att upprepa misstag
+4. Fråga Hugo eller Philip om oklarheter innan du börjar koda
+
+### Vid avslut av varje session
+1. Uppdatera `lessons.md` om korrigeringar gjordes
+2. Kort sammanfattning av vad som gjordes och vad som återstår
+3. Pusha INTE om jag inte sagt det
+
+---
+
+## Erbjudande & Affärskontext
+
+### Nuvarande offer (detta ska sajten sälja)
+
+| Del | Detalj |
+|---|---|
+| **Hemsida** | 8 000 kr (engång) — single-page, mobilanpassad, konverteringsstruktur |
+| **Drift** | 399 kr/mån — hosting, säkerhet, backup, mindre ändringar |
+| **Admin-system** | Tillägg (pris ges i samtal) — enkel redigering av texter/bilder |
+| **Leveranstid** | 14 dagar |
+
+### Offer-strukturen (varje erbjudande följer detta ramverk)
+
+1. **Outcome** — Vad kunden får: "Gå från en sajt som ingen agerar på till en som genererar bokningar varje vecka"
+2. **Mechanism** — Hur det händer (max 3 steg): Analysera → Bygga → Drifta
+3. **Differentiator** — Varför det fungerar: "De flesta hemsidor behandlar alla besökare likadant — vi bygger ett konverteringsflöde"
+4. **Boundaries** — Vad det är och inte är: "Fixar konvertering, bygger inte om hela din marknadsföring"
+5. **Price** — Tydligt: 8 000 kr + 399 kr/mån
+
+### Målgrupp
+
+Lokala, etablerade småföretag med bevisad verksamhet men låg digital mognad. Tandläkare, elektriker, frisörer, caféer, hantverkare. De tänker INTE på sig själva som "B2B-företag" — de tänker "jag driver en tandklinik."
+
+---
+
 ## Tech Stack
 
 | Kategori | Verktyg |
@@ -19,6 +59,8 @@ PHIGO bygger moderna, konverteringsoptimerade hemsidor åt lokala småföretag. 
 | Tema | next-themes (forcerad dark mode) |
 | Toast | Sonner |
 | Pakethanterare | pnpm |
+
+> **OBS:** Denna stack gäller PHIGOs EGEN sajt. Kundhemsidor byggs ALLTID i vanilla HTML/CSS/JS — aldrig React, Next.js eller Tailwind.
 
 ---
 
@@ -40,7 +82,7 @@ components/
   hero-section.tsx        # Hero med CTA
   trust-bar.tsx           # Social proof / trust logos
   case-studies.tsx        # Case-kort (data från lib/cases.ts)
-  services.tsx            # Tjänste-grid
+  offer-section.tsx       # Erbjudande (ersätter gamla services.tsx)
   process-section.tsx     # 3-stegs process
   why-phigo.tsx           # Varför PHIGO
   faq-section.tsx         # FAQ accordion
@@ -53,6 +95,20 @@ lib/
   animations.ts           # Återanvändbara Framer Motion variants
   cases.ts                # Case-data (single source of truth)
 ```
+
+---
+
+## Sajtstruktur (sektionsordning)
+
+1. **Hero** — Problem + löfte + CTA
+2. **Cases** — Exempel med story-format (behåll, social proof)
+3. **Erbjudande** — Outcome → mechanism → differentiator → boundaries → pris (ersätter gamla "Värdeerbjudande")
+4. **Process** — Tre steg: lär känna → bygger → går live
+5. **Varför PHIGO** — Förtroendepunkter i klarspråk
+6. **FAQ** — Vanliga frågor med tydliga svar och priser
+7. **CTA + Kontaktformulär** — Formulär via React Hook Form
+
+> **TA BORT:** Logotyp-karusellen med fiktiva företagsnamn (NordicTech, Storberg etc.). Skapar misstroende. Antingen riktiga kunder eller inget.
 
 ---
 
@@ -127,9 +183,12 @@ Inga undantag.
 - Logo vänster, nav-länkar center, CTA höger.
 - Mobil: hamburger → Sheet-komponent med scroll-lock.
 - Scroll-spy: aktiv indikator på nav-länk baserat på viewport-position.
+- **Nav-text:** Exempel | Erbjudande | Så funkar det | Vanliga frågor (INTE "Case | Tjänster | Process | FAQ")
 
 ### Hero
-- Stor headline, subheadline, primär + sekundär CTA.
+- **Rubrik:** "Din hemsida borde ge dig kunder — inte bara finnas."
+- **Undertext:** "Vi bygger hemsidor åt lokala företag som faktiskt gör att folk tar kontakt. Fast pris, live inom 14 dagar."
+- Primär + sekundär CTA.
 - Abstrakt tech-visual (CSS/SVG-baserad).
 - Staggerad entrance-animation.
 
@@ -138,30 +197,85 @@ Inga undantag.
 - Klickbara kort som länkar till `/cases/[slug]`.
 - Hover: overlay med kort info och framträdande CTA.
 - Animerade metric-räknare vid scroll.
+- **Case-beskrivningar i story-format:** "[Typ av företag] som hade [problem]. Vi byggde [lösning] som resulterade i [resultat]."
+- **Märk tydligt som "Konceptcase" eller "Demo"** tills riktiga kundprojekt finns.
 
-### Services
-- 3-kolumns grid med Lucide-ikoner.
-- Kort med layered shadows och hover-lyft.
+### Erbjudande (ersätter gamla Services)
+- Sektionsrubrik: "En hemsida som ger dig fler kunder"
+- Visar offer-strukturen: outcome → mechanism (3 steg) → differentiator → boundaries → pris
+- Priskortet med 8 000 kr + 399 kr/mån tydligt synligt
+- CTA: "Se vad din hemsida missar — kostnadsfritt"
 
 ### Process
+- **Rubrik:** "Din nya hemsida på 14 dagar"
 - 3 steg med visuell tidslinje/pipeline.
+- Steg 1: "Vi lär känna ditt företag"
+- Steg 2: "Vi bygger din sajt"
+- Steg 3: "Din sajt går live"
 - Animerade steg-nummer vid viewport entry.
+
+### Varför PHIGO
+- **Rubrik:** "Därför väljer företagare oss"
+- 4 punkter i klarspråk (inga tekniska begrepp):
+  1. "Byggd för att ge dig kunder" — inte bara snygg design
+  2. "Fast pris, inga överraskningar" — 8 000 kr + 399 kr/mån
+  3. "Snabb och säker" — laddar på under en sekund, funkar på mobilen
+  4. "Du pratar med den som bygger" — ingen mellanhand
 
 ### FAQ
 - shadcn Accordion med mjuka layout-transitions.
-- 4–5 frågor på svenska.
+- Frågor och svar på svenska, i klarspråk:
+  1. Vad kostar en hemsida? (visa priser tydligt)
+  2. Hur lång tid tar det? (14 dagar)
+  3. Vad händer efter lansering? (drift ingår)
+  4. Fungerar sajten på mobilen? (ja)
+  5. Hittar folk mig på Google? (ja, utan att säga "SEO")
+  6. Kan jag uppdatera sajten själv? (tillägg, inte inkluderat)
+  7. Kan jag köpa bara hemsidan utan månadsavtal? (ja, men nudga mot drift)
 
 ### Kontaktformulär
 - React Hook Form + Zod.
+- **Rubrik:** "Låt oss titta på din hemsida"
+- **Undertext:** "Fyll i så återkommer vi inom 24 timmar med en granskning och konkreta förslag."
 - Fält: Namn, Företag, E-post, Hemsida (valfri), Dropdown, Meddelande.
 - Validering på svenska.
 - Success-state via Sonner toast.
 - `id="kontakt"` på sektionen.
 
+### Avslutande CTA
+- **Rubrik:** "Vill du veta var din hemsida tappar kunder?"
+- **Undertext:** "Vi granskar din sajt och visar konkret vad som kan förbättras — kostnadsfritt och utan förpliktelse."
+- **Knapp:** "Skicka din sajt — vi visar vad du missar"
+
 ### Footer
 - Mörk bakgrund.
 - Logotyp, beskrivning, navigation, kontaktinfo, copyright.
+- **Beskrivning:** "Vi bygger hemsidor som ger lokala företag fler kunder. Fast pris, klart inom 14 dagar."
 - Dynamiskt copyrightår.
+
+---
+
+## Klarspråk — Ordlista
+
+All kundvänd text på sajten ska följa denna ordlista. Om ett begrepp finns i vänsterkolumnen, använd högerkolumnen.
+
+| Säg aldrig på sajten | Säg istället |
+|---|---|
+| SEO / sökmotoroptimering | Syns i Google när folk söker |
+| Mobilanpassad / responsiv | Funkar perfekt på mobilen |
+| CTA / call-to-action | Tydliga knappar som gör det lätt att ta kontakt |
+| Konverteringsoptimerad | Byggd för att besökare ska ta kontakt |
+| Tech stack / Next.js / Edge Computing | Snabb och säker teknik (eller nämn inte alls) |
+| UX / användbarhet | Enkel att använda / lätt att hitta rätt |
+| Lighthouse 100 | Laddar på under en sekund |
+| Headless CMS | Du kan ändra texter och bilder själv |
+| A/B-testning | Vi testar vad som fungerar bäst |
+| B2B-företag | Lokala företag / företagare |
+| Social proof | Omdömen och bevis från nöjda kunder |
+| Hosting | Vi ser till att sajten alltid är uppe och fungerar |
+| MRR / ARPU / churn | Aldrig — internt språk, inte kundspråk |
+
+> **Tumregel:** Om din mamma inte förstår meningen, skriv om den.
 
 ---
 
@@ -210,7 +324,7 @@ Inga undantag.
 
 - `lang="sv"` på `<html>`.
 - Dynamisk metadata per sida.
-- Startsida: `"PHIGO | Webbplatser som konverterar"`.
+- Startsida: `"PHIGO | Hemsidor som ger dig fler kunder"`.
 - Case-sidor: `"{Title} – Case | PHIGO"`.
 - `og:title`, `og:description`, `og:image` för sociala delningar.
 
@@ -223,7 +337,6 @@ Inga undantag.
 - **Synlig text**: Svenska (rubriker, brödtext, CTA, formulärlabels).
 - Ton: professionell men varm. "Vi" istället för "PHIGO" i löpande text.
 - Inga utropstecken i rubriker.
-- CTA-text direkt och tydlig: "Boka tid", "Kontakta oss", "Se våra case".
 
 ---
 
@@ -231,13 +344,26 @@ Inga undantag.
 
 | Plats | Text | Typ |
 |---|---|---|
-| Header | "Få en kostnadsfri webbplatsanalys" | Knapp (emerald) |
-| Hero (primär) | "Få en kostnadsfri webbplatsanalys" | Stor knapp (emerald) |
-| Hero (sekundär) | "Se våra case" | Ghost/outline |
+| Header | "Se vad din hemsida missar" | Knapp (emerald) |
+| Hero (primär) | "Se vad din hemsida missar — kostnadsfritt" | Stor knapp (emerald) |
+| Hero (sekundär) | "Se exempel" | Ghost/outline |
 | Case-kort | "Se case" | Textlänk |
-| Final CTA | "Få en kostnadsfri webbplatsanalys" | Stor knapp (emerald) |
+| Erbjudande | "Se vad din hemsida missar — kostnadsfritt" | Stor knapp (emerald) |
+| Avslutande CTA | "Skicka din sajt — vi visar vad du missar" | Stor knapp (emerald) |
 
 Alla primära CTA:er scrollar till `#kontakt`.
+
+---
+
+## Skills (Claude Code)
+
+Kör audit-skills i denna ordning efter varje större förändring:
+1. `/baseline-ui` — rensar AI-slop, spacing, typografi
+2. `/fixing-accessibility` — tangentbord, aria, fokus
+3. `/fixing-motion-performance` — animationsprestanda
+4. `/fixing-metadata` — SEO, OG-tags, favicon
+
+`/frontend-design` aktiveras automatiskt vid nya builds — kör aldrig manuellt.
 
 ---
 
@@ -246,7 +372,21 @@ Alla primära CTA:er scrollar till `#kontakt`.
 - **Pusha INTE till GitHub** utan att först köra allt lokalt och få godkännande.
 - Kör `pnpm dev` för lokal utveckling.
 - Testa med `pnpm build` innan push.
-- `/clear` i Claude Code för varje ny session (spara tokens).
+- `/clear` i Claude Code för varje ny session.
+
+---
+
+## Verifikation innan "klar"
+
+Markera aldrig en uppgift som klar utan att:
+- Sajten laddas korrekt i `pnpm dev`
+- Mobilvy testad (Chrome DevTools → responsiv)
+- Alla formulär fungerar och validerar
+- Inga console errors
+- `pnpm build` kompilerar utan errors
+- Alla bilder har alt-text
+- Meta-tags (title, description, OG) är korrekta
+- Klarspråk-ordlistan följd — inga tekniska begrepp i synlig text
 
 ---
 
@@ -262,3 +402,6 @@ Alla primära CTA:er scrollar till `#kontakt`.
 8. **Varje ändring ska testas lokalt** innan commit.
 9. **När du tvekar, välj det lugnare alternativet.** Premium = återhållsamhet + precision.
 10. **Sajten ska fungera som portfolio-case.** Om den inte är bra nog att visa för en potentiell kund, är den inte klar.
+11. **Aldrig fiktiva företagsnamn som riktiga kunder.** Märk demos som "Konceptcase".
+12. **Aldrig tekniska begrepp i kundvänd text.** Följ ordlistan.
+13. **Aldrig pris på tilläggstjänster i FAQ.** Baspris visas, tillägg beskrivs utan siffra.
