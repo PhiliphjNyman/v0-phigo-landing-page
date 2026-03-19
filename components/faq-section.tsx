@@ -42,15 +42,15 @@ const faqs = [
     icon: MapPin,
   },
   {
-    question: 'Kan jag uppdatera sajten själv?',
+    question: 'Behöver du ändra texter och bilder själv?',
     answer:
-      'Mindre ändringar — som texter och kontaktuppgifter — ingår i månadsavgiften och fixar vi åt dig. Vill du kunna redigera sajten själv är det ett tillägg utöver baspaketet — fråga oss om det.',
+      'Ja. Vi kan lägga till ett enkelt admin-system där du ändrar texter, bilder och priser själv — utan att kunna något om teknik. Det är ett tillägg utöver baspaketet. Vill du hellre slippa helt gör vi det åt dig — mindre ändringar ingår i månadsavtalet.',
     icon: Pencil,
   },
   {
     question: 'Kan jag köpa bara hemsidan utan månadsavtal?',
     answer:
-      'Ja. Du kan köpa sajten för 8 000 kr och ta hand om hosting och drift själv. De flesta väljer ändå månadsavgiften — 399 kr/mån för att slippa tänka på det.',
+      'Ja, det går bra. Vi bygger sajten och överlämnar den till dig. Då ansvarar du själv för hosting, säkerhet och uppdateringar. De flesta av våra kunder väljer månadsavtalet för att slippa tänka på teknik — men det är inget krav.',
     icon: PackageMinus,
   },
 ]
