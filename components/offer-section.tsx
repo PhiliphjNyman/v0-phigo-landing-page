@@ -173,7 +173,7 @@ export function OfferSection() {
             <Button
               asChild
               size="lg"
-              className="h-14 w-full cursor-pointer rounded-2xl bg-primary text-base font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-[transform,background-color,box-shadow] duration-200 hover:scale-[1.02] hover:bg-primary/90 hover:shadow-2xl active:scale-[0.98]"
+              className="h-auto min-h-12 w-full cursor-pointer whitespace-normal rounded-2xl bg-primary py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-[transform,background-color,box-shadow] duration-200 hover:scale-[1.02] hover:bg-primary/90 hover:shadow-2xl active:scale-[0.98] sm:min-h-14 sm:py-0 sm:text-base"
             >
               <a href="#kontakt">
                 Se vad din hemsida missar — kostnadsfritt
