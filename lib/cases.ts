@@ -37,7 +37,7 @@ export const cases: Case[] = [
         shortDescription: 'Ett brunchcafé som ville synas lokalt och göra det enkelt för gäster att hitta och boka bord.',
         description: 'Ett brunchcafé i Linköping som inte syntes i sökningar och saknade ett sätt för gäster att boka bord online. Vi byggde en personlig sajt med meny, öppettider och bokningsformulär — som gör det lätt att hitta caféet och ta kontakt.',
         tags: ['Konceptcase', 'Café', 'Linköping'],
-        liveUrl: 'https://cafe-alma-seven.vercel.app/',
+        liveUrl: 'https://restaurang.phigo.se',
         heroImage: '/images/case-cafe-alma.png',
         featured: true,
         accent: 'amber',
