@@ -112,7 +112,7 @@ export function FaqSection() {
                     </div>
                     <span className="flex-1">{faq.question}</span>
                   </AccordionTrigger>
-                  <AccordionContent className="pb-6 pl-14 text-base leading-relaxed text-pretty text-muted-foreground/95">
+                  <AccordionContent className="pb-6 pl-0 sm:pl-14 text-base leading-relaxed text-pretty text-muted-foreground/95">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>

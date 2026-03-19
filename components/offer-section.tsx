@@ -144,9 +144,9 @@ export function OfferSection() {
             {/* Glow */}
             <div className="pointer-events-none absolute inset-0 -z-10 rounded-3xl bg-primary/5" />
 
-            <div>
+            <div className="text-center sm:text-left">
               <p className="text-sm font-semibold uppercase text-primary">Fast pris</p>
-              <div className="mt-3 flex items-end gap-2">
+              <div className="mt-3 flex items-end justify-center gap-2 sm:justify-start">
                 <span className="text-4xl sm:text-5xl font-black text-foreground">8 000 kr</span>
                 <span className="mb-1 text-sm text-muted-foreground">engång</span>
               </div>
@@ -156,15 +156,15 @@ export function OfferSection() {
             </div>
 
             <ul className="flex flex-col gap-2 border-t border-border pt-6">
-              <li className="flex items-center gap-2 text-sm text-muted-foreground">
+              <li className="flex items-center justify-center gap-2 text-sm text-muted-foreground sm:justify-start">
                 <Check className="size-4 shrink-0 text-primary" aria-hidden="true" />
                 Inga dolda kostnader
               </li>
-              <li className="flex items-center gap-2 text-sm text-muted-foreground">
+              <li className="flex items-center justify-center gap-2 text-sm text-muted-foreground sm:justify-start">
                 <Check className="size-4 shrink-0 text-primary" aria-hidden="true" />
                 Live inom 14 dagar
               </li>
-              <li className="flex items-center gap-2 text-sm text-muted-foreground">
+              <li className="flex items-center justify-center gap-2 text-sm text-muted-foreground sm:justify-start">
                 <Check className="size-4 shrink-0 text-primary" aria-hidden="true" />
                 Du pratar direkt med den som bygger
               </li>
