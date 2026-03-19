@@ -139,7 +139,7 @@ export function OfferSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ type: 'spring', stiffness: 120, damping: 18 }}
-            className="relative flex flex-col gap-6 rounded-3xl border border-primary/30 bg-card p-6 sm:p-8 shadow-2xl shadow-primary/5"
+            className="relative mx-4 sm:mx-0 flex flex-col gap-6 rounded-3xl border border-primary/30 bg-card p-6 sm:p-8 shadow-2xl shadow-primary/5"
           >
             {/* Glow */}
             <div className="pointer-events-none absolute inset-0 -z-10 rounded-3xl bg-primary/5" />
