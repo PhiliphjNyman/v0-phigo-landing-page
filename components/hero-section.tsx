@@ -28,9 +28,9 @@ export function HeroSection() {
     <section className="relative flex min-h-dvh items-center overflow-hidden pt-20 pb-16 lg:pt-32">
       {/* Background Effects */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        {/* Static Blobs */}
-        <div className="absolute -top-[10%] -left-[10%] size-[500px] rounded-full bg-primary/10 blur-[120px] mix-blend-screen" />
-        <div className="absolute top-[20%] -right-[10%] size-[400px] rounded-full bg-emerald-500/5 blur-[100px] mix-blend-screen" />
+        {/* Blur blobs hidden on mobile — mix-blend-screen + large blur causes scroll jank */}
+        <div className="hidden md:block absolute -top-[10%] -left-[10%] size-[500px] rounded-full bg-primary/10 blur-[120px]" />
+        <div className="hidden md:block absolute top-[20%] -right-[10%] size-[400px] rounded-full bg-emerald-500/5 blur-[100px]" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 lg:px-8">

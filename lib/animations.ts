@@ -8,7 +8,7 @@ export const springTransition: Transition = {
 }
 
 export const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
@@ -45,7 +45,7 @@ export const scaleIn: Variants = {
 }
 
 export const revealVariant: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
     y: 0,
