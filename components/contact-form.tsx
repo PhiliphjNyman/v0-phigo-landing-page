@@ -238,7 +238,7 @@ export function ContactForm() {
                       name="forbattra"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Vad vill ni förbättra?</FormLabel>
+                          <FormLabel>Vad vill du förbättra?</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger className="h-12 w-full bg-background/50 border-border">
@@ -267,7 +267,7 @@ export function ContactForm() {
                           <FormLabel>Meddelande</FormLabel>
                           <FormControl>
                             <Textarea
-                              placeholder="Berätta lite om ert projekt och era mål..."
+                              placeholder="Berätta lite om ditt projekt och dina mål..."
                               className="min-h-32 resize-none bg-background/50 border-border"
                               {...field}
                             />
@@ -356,7 +356,7 @@ export function ContactForm() {
               <h2 className="text-balance text-4xl font-black text-foreground mb-4">Tack för visat intresse!</h2>
               <p className="text-pretty text-lg text-muted-foreground max-w-sm mb-10">
                 Vi har tagit emot din förfrågan och kommer att påbörja
-                analysen av er webbplats omedelbart.
+                analysen av din webbplats omedelbart.
               </p>
               <Button
                 onClick={() => setIsSubmitted(false)}
@@ -364,7 +364,7 @@ export function ContactForm() {
                 className="rounded-xl px-8 h-12"
               >
                 Tillbaka till start
-                <ArrowRight className="ml-2 size-4" />
+                <ArrowRight className="ml-2 size-4" aria-hidden="true" />
               </Button>
             </motion.div>
           )}

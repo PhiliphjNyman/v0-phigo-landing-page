@@ -15,7 +15,6 @@ export const metadata: Metadata = {
   title: 'PHIGO | Hemsidor som ger dig fler kunder',
   description:
     'Vi bygger hemsidor åt lokala företag som faktiskt gör att folk tar kontakt. Fast pris, live inom 14 dagar. Granska din hemsida kostnadsfritt.',
-  generator: 'Next.js',
   alternates: {
     canonical: 'https://phigo.se',
   },

@@ -8,22 +8,23 @@ import Link from 'next/link'
 import * as Framer from '@/components/framer-exports'
 
 export const metadata: Metadata = {
-    title: 'Case – Utvalda projekt | PHIGO',
-    description: 'Se exempel på hur PHIGO hjälper företag att växa genom modern design och teknisk expertis.',
+    title: 'Exempel | PHIGO',
+    description: 'Här är tre designexempel som visar hur en hemsida från PHIGO kan se ut för olika branscher.',
     alternates: {
         canonical: 'https://phigo.se/cases',
     },
     openGraph: {
-        title: 'Case – Utvalda projekt | PHIGO',
-        description: 'Se exempel på hur PHIGO hjälper företag att växa genom modern design och teknisk expertis.',
+        title: 'Exempel | PHIGO',
+        description: 'Här är tre designexempel som visar hur en hemsida från PHIGO kan se ut för olika branscher.',
         url: 'https://phigo.se/cases',
         type: 'website',
         locale: 'sv_SE',
+        images: [{ url: 'https://phigo.se/opengraph-image', width: 1200, height: 630, alt: 'PHIGO – Hemsidor som ger dig fler kunder' }],
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Case – Utvalda projekt | PHIGO',
-        description: 'Se exempel på hur PHIGO hjälper företag att växa genom modern design och teknisk expertis.',
+        title: 'Exempel | PHIGO',
+        description: 'Här är tre designexempel som visar hur en hemsida från PHIGO kan se ut för olika branscher.',
     },
 }
 
@@ -42,21 +43,21 @@ export default function CasesPage() {
                     >
                         <Framer.MotionSpan
                             variants={fadeInUp}
-                            className="text-sm font-bold uppercase tracking-widest text-primary block"
+                            className="text-sm font-bold uppercase text-primary block"
                         >
-                            Våra projekt
+                            Designexempel
                         </Framer.MotionSpan>
                         <Framer.MotionH1
                             variants={fadeInUp}
                             className="mt-4 text-4xl font-extrabold tracking-tight text-foreground sm:text-6xl"
                         >
-                            Case
+                            Exempel
                         </Framer.MotionH1>
                         <Framer.MotionP
                             variants={fadeInUp}
                             className="mt-6 text-xl text-muted-foreground max-w-2xl mx-auto"
                         >
-                            Exempel på leveranser från PHIGO där design och teknik skapat verklig affärsnytta.
+                            Här är tre designexempel som visar hur en hemsida från PHIGO kan se ut för olika branscher.
                         </Framer.MotionP>
                     </Framer.MotionDiv>
 
@@ -70,12 +71,12 @@ export default function CasesPage() {
                         className="mt-24 p-12 lg:p-16 rounded-[3rem] bg-muted/30 border border-border text-center overflow-hidden relative"
                     >
                         <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 size-96 bg-primary/10 blur-[100px] rounded-full" />
-                        <h2 className="text-3xl font-extrabold text-foreground mb-6">Redo att skapa nästa succé?</h2>
+                        <h2 className="text-3xl font-extrabold text-foreground mb-6">Vill du veta hur din bransch kan se ut?</h2>
                         <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-10">
-                            Låt oss diskutera hur PHIGO kan hjälpa ditt företag att nå liknande resultat genom modern design och teknisk expertis.
+                            Vi granskar din nuvarande hemsida kostnadsfritt.
                         </p>
                         <Button size="lg" className="rounded-2xl px-10 h-14 text-base font-bold shadow-xl shadow-primary/20" asChild>
-                            <Link href="/#kontakt">Kontakta oss idag</Link>
+                            <Link href="/#kontakt">Boka kostnadsfri granskning</Link>
                         </Button>
                     </Framer.MotionDiv>
                 </div>

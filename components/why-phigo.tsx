@@ -42,7 +42,7 @@ export function WhyPhigo() {
           >
             <motion.span
               variants={fadeInUp}
-              className="text-xs font-semibold uppercase tracking-wider text-primary"
+              className="text-xs font-semibold uppercase text-primary"
             >
               Varför PHIGO
             </motion.span>

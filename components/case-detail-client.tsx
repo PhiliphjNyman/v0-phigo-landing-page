@@ -108,7 +108,7 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                     >
                         <Image
                             src={c.heroImage}
-                            alt={c.title}
+                            alt={`Webbplats mockup för ${c.title}`}
                             fill
                             className="object-cover object-top"
                             priority
@@ -156,12 +156,23 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.1 }}
-                            className="p-8 border-l-2 border-primary/20 bg-primary/5 rounded-r-3xl"
+                            className="bg-muted/30 border border-border rounded-3xl p-8 space-y-4"
                         >
-                            <p className="text-sm italic text-muted-foreground leading-relaxed">
-                                "Arbetet med PHIGO har varit transformativt för vår digitala närvaro. De kombinerar teknisk spets med en djup förståelse för vår affär."
-                            </p>
-                            <p className="mt-4 text-sm font-bold text-primary">— Referens från projektet</p>
+                            <h3 className="text-sm font-bold uppercase text-muted-foreground">Om projektet</h3>
+                            <dl className="space-y-3 text-sm">
+                                <div className="flex justify-between gap-4">
+                                    <dt className="text-muted-foreground">Bransch</dt>
+                                    <dd className="font-semibold text-foreground text-right">{c.category}</dd>
+                                </div>
+                                <div className="flex justify-between gap-4">
+                                    <dt className="text-muted-foreground">Typ</dt>
+                                    <dd className="font-semibold text-foreground">One-page</dd>
+                                </div>
+                                <div className="flex justify-between gap-4">
+                                    <dt className="text-muted-foreground">Leveranstid</dt>
+                                    <dd className="font-semibold text-foreground">14 dagar</dd>
+                                </div>
+                            </dl>
                         </motion.div>
                     </aside>
                 </div>
@@ -181,13 +192,13 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
 
                         <div className="grid gap-8 md:grid-cols-2">
                             {relatedCases.map((rc) => (
-                                <Link key={rc.slug} href={`/cases/${rc.slug}`}>
+                                <Link key={rc.slug} href={`/cases/${rc.slug}`} aria-label={rc.title}>
                                     <article className="group relative overflow-hidden rounded-[2rem] border border-border bg-card/50 transition-[border-color,background-color] duration-200 hover:border-primary/20 hover:bg-card">
                                         <div className="flex flex-col md:flex-row h-full">
                                             <div className="relative aspect-video md:aspect-square md:w-48 overflow-hidden shrink-0">
                                                 <Image
                                                     src={rc.heroImage}
-                                                    alt={rc.title}
+                                                    alt={`Webbplats mockup för ${rc.title}`}
                                                     fill
                                                     className="object-cover transition-transform duration-150 group-hover:scale-110"
                                                 />
@@ -216,7 +227,7 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                 >
                     <h2 className="text-balance text-4xl lg:text-5xl font-black mb-8 relative z-10">Vill du ha liknande resultat?</h2>
                     <p className="text-pretty text-xl text-background/70 max-w-2xl mx-auto mb-12 relative z-10">
-                        Vi hjälper er att definiera er digitala framtid och bygga lösningar som levererar mätbara framgångar.
+                        Vill du se hur en sajt kan se ut för ditt företag? Vi granskar din nuvarande hemsida kostnadsfritt.
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
                         <Button size="lg" className="h-14 px-10 rounded-2xl bg-primary text-primary-foreground font-bold text-lg hover:scale-105 transition-transform" asChild>

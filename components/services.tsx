@@ -61,7 +61,7 @@ export function Services() {
             variants={fadeInUp}
             className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"
           >
-            Allt ni behöver för en sajt som levererar
+            Allt du behöver för en sajt som levererar
           </motion.h2>
         </motion.div>
 
@@ -93,7 +93,7 @@ export function Services() {
                 )}
 
                 <div className={`flex size-14 items-center justify-center rounded-2xl transition-transform duration-200 group-hover:scale-110 group-hover:rotate-3 ${isFeatured ? 'bg-primary shadow-lg shadow-primary/20 text-white' : 'bg-primary/10 text-primary'}`}>
-                  <Icon className="size-7" />
+                  <Icon className="size-7" aria-hidden="true" />
                 </div>
 
                 <div className="space-y-4">

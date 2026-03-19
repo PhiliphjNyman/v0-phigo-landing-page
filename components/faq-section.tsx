@@ -71,7 +71,7 @@ export function FaqSection() {
         >
           <motion.span
             variants={fadeInUp}
-            className="text-sm font-bold uppercase tracking-widest text-primary"
+            className="text-sm font-bold uppercase text-primary"
             aria-hidden="true"
           >
             Vanliga frågor

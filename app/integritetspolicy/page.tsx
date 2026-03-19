@@ -15,9 +15,10 @@ export const metadata: Metadata = {
     url: 'https://phigo.se/integritetspolicy',
     type: 'website',
     locale: 'sv_SE',
+    images: [{ url: 'https://phigo.se/opengraph-image', width: 1200, height: 630, alt: 'PHIGO – Hemsidor som ger dig fler kunder' }],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',
     title: 'Integritetspolicy – PHIGO',
     description: 'Läs om hur PHIGO hanterar dina personuppgifter i enlighet med GDPR.',
   },
@@ -53,7 +54,7 @@ export default function IntegritetspolicyPage() {
               phigo.se
             </a>
             . Vi erbjuder tjänster inom webbdesign och webbutveckling för
-            B2B-företag. Vid frågor om hur vi hanterar dina personuppgifter är
+            lokala företag och småföretagare. Vid frågor om hur vi hanterar dina personuppgifter är
             du välkommen att kontakta oss på{' '}
             <a
               href="mailto:info@phigo.se"

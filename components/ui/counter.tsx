@@ -41,7 +41,11 @@ export function Counter({
     }, [springValue, prefix, suffix])
 
     return (
-        <span ref={ref} className={`tabular-nums${className ? ` ${className}` : ''}`}>
+        <span
+            ref={ref}
+            className={`tabular-nums${className ? ` ${className}` : ''}`}
+            aria-label={`${prefix}${value}${suffix}`}
+        >
             {prefix}0{suffix}
         </span>
     )

@@ -53,7 +53,7 @@ export function HeroVisual() {
                     rotateY,
                     transformStyle: 'preserve-3d',
                 }}
-                className="relative aspect-video w-[600px] rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-transparent p-4"
+                className="relative aspect-video w-[600px] rounded-2xl border border-white/10 bg-white/5 p-4"
             >
                 {/* Title Bar */}
                 <div className="flex items-center gap-2 border-b border-white/5 pb-3">
@@ -88,7 +88,7 @@ export function HeroVisual() {
                             {/* Floating elements with Z translation */}
                             <motion.div
                                 style={{ translateZ: 50 }}
-                                className="absolute -right-4 top-10 flex h-32 w-24 items-center justify-center rounded-xl border border-white/10 bg-card/80 shadow-xl backdrop-blur-sm"
+                                className="absolute -right-4 top-10 flex h-32 w-24 items-center justify-center rounded-xl border border-white/10 bg-card shadow-xl"
                             >
                                 <div className="flex flex-col items-center gap-2">
                                     <div className="size-8 rounded-full bg-primary/20 flex items-center justify-center">
@@ -114,7 +114,7 @@ export function HeroVisual() {
                 {/* Decorative elements */}
                 <motion.div
                     style={{ translateZ: 100 }}
-                    className="absolute -bottom-6 -left-6 flex gap-2 rounded-2xl border border-white/10 bg-background/50 p-3 shadow-xl backdrop-blur-sm"
+                    className="absolute -bottom-6 -left-6 flex gap-2 rounded-2xl border border-white/10 bg-background p-3 shadow-xl"
                 >
                     <Smartphone className="size-5 text-muted-foreground" />
                     <Monitor className="size-5 text-primary" />

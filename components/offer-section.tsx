@@ -54,7 +54,7 @@ export function OfferSection() {
         >
           <motion.span
             variants={fadeInUp}
-            className="text-sm font-bold uppercase tracking-widest text-primary"
+            className="text-sm font-bold uppercase text-primary"
           >
             Erbjudande
           </motion.span>
@@ -145,7 +145,7 @@ export function OfferSection() {
             <div className="pointer-events-none absolute inset-0 -z-10 rounded-3xl bg-primary/5" />
 
             <div>
-              <p className="text-sm font-semibold uppercase tracking-widest text-primary">Fast pris</p>
+              <p className="text-sm font-semibold uppercase text-primary">Fast pris</p>
               <div className="mt-3 flex items-end gap-2">
                 <span className="text-5xl font-black text-foreground">8 000 kr</span>
                 <span className="mb-1 text-sm text-muted-foreground">engång</span>

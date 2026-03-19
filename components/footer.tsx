@@ -27,7 +27,7 @@ export function Footer() {
 
           {/* Navigation */}
           <nav aria-label="Sidfot navigation" className="flex flex-col gap-3">
-            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <span className="text-xs font-semibold uppercase text-muted-foreground">
               Navigation
             </span>
             {footerLinks.map((link) => (
@@ -43,7 +43,7 @@ export function Footer() {
 
           {/* Contact */}
           <div className="flex flex-col gap-3">
-            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <span className="text-xs font-semibold uppercase text-muted-foreground">
               Kontakt
             </span>
             <a

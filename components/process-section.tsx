@@ -45,7 +45,7 @@ export function ProcessSection() {
         >
           <motion.span
             variants={fadeInUp}
-            className="text-sm font-bold uppercase tracking-widest text-primary"
+            className="text-sm font-bold uppercase text-primary"
           >
             Så funkar det
           </motion.span>
@@ -111,7 +111,7 @@ export function ProcessSection() {
                     </div>
 
                     {/* Rotating border effect on hover */}
-                    <div className="absolute inset-0 rounded-full border-2 border-dashed border-primary/20 opacity-0 transition-[opacity,transform] duration-[200ms,1500ms] ease-linear group-hover:opacity-100 group-hover:rotate-180" />
+                    <div className="absolute inset-0 rounded-full border-2 border-dashed border-primary/20 opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
                   </div>
 
                   {/* Content */}
