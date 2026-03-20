@@ -9,8 +9,8 @@ Prioritetsordning: Kritiskt → Hög → Medium → Långsiktig.
 
 Dessa blockar Googles förmåga att indexera sajten korrekt.
 
-- [ ] **1.1** Skapa `app/robots.ts` — genererar `/robots.txt` med sitemap-referens
-- [ ] **1.2** Skapa `app/sitemap.ts` — genererar `/sitemap.xml` med alla sidor (/, /cases, /cases/[slug])
+- [x] **1.1** Skapa `app/robots.ts` — genererar `/robots.txt` med sitemap-referens
+- [x] **1.2** Skapa `app/sitemap.ts` — genererar `/sitemap.xml` med alla sidor (/, /cases, /cases/[slug])
 - [ ] **1.3** Verifiera www → non-www 301-redirect i Vercel-dashboarden (Project → Settings → Domains)
 - [ ] **1.4** Lägg till sitemap-URL i Google Search Console efter deploy
 
