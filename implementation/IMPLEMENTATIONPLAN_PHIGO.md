@@ -11,8 +11,8 @@ Dessa blockar Googles förmåga att indexera sajten korrekt.
 
 - [x] **1.1** Skapa `app/robots.ts` — genererar `/robots.txt` med sitemap-referens
 - [x] **1.2** Skapa `app/sitemap.ts` — genererar `/sitemap.xml` med alla sidor (/, /cases, /cases/[slug])
-- [ ] **1.3** Verifiera www → non-www 301-redirect i Vercel-dashboarden (Project → Settings → Domains)
-- [ ] **1.4** Lägg till sitemap-URL i Google Search Console efter deploy
+- [x] **1.3** Verifiera www → non-www 301-redirect i Vercel-dashboarden (Project → Settings → Domains)
+- [x] **1.4** Lägg till sitemap-URL i Google Search Console efter deploy
 
 ---
 
@@ -68,11 +68,11 @@ Kräver riktiga kundcase och/eller ny innehållsproduktion.
 
 Markera inte faserna som klara utan att:
 
-- [ ] `pnpm build` kompilerar utan fel
-- [ ] `/robots.txt` är åtkomlig i webbläsaren med korrekt innehåll
-- [ ] `/sitemap.xml` är åtkomlig och listar alla sidor
+- [x] `pnpm build` kompilerar utan fel
+- [x] `/robots.txt` är åtkomlig i webbläsaren med korrekt innehåll
+- [x] `/sitemap.xml` är åtkomlig och listar alla sidor
 - [ ] Google Rich Results Test godkänner schema-implementationen
-- [ ] Sitemap är inlagd i Google Search Console
+- [x] Sitemap är inlagd i Google Search Console
 
 ---
 
