@@ -76,12 +76,12 @@ export function HeroSection() {
             {/* CTA group */}
             <motion.div
               variants={fadeInUp}
-              className="mt-12 flex flex-col items-center gap-4 sm:flex-row lg:justify-start"
+              className="mt-12 flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row lg:justify-start"
             >
               <Button
                 asChild
                 size="lg"
-                className="h-14 cursor-pointer rounded-2xl bg-primary px-10 text-base font-semibold text-primary-foreground shadow-xl shadow-primary/20 transition-[transform,background-color,box-shadow] duration-200 hover:scale-[1.02] hover:bg-primary/90 hover:shadow-2xl hover:shadow-primary/30 active:scale-[0.98]"
+                className="h-14 w-full cursor-pointer rounded-2xl bg-primary px-6 text-base font-semibold text-primary-foreground shadow-xl shadow-primary/20 transition-[transform,background-color,box-shadow] duration-200 hover:scale-[1.02] hover:bg-primary/90 hover:shadow-2xl hover:shadow-primary/30 active:scale-[0.98] sm:w-auto sm:px-10"
               >
                 <a href="#kontakt">
                   Se vad din hemsida missar — kostnadsfritt
