@@ -44,10 +44,10 @@ Förbättrar befintliga sidors relevans för sökfrågor.
 
 Bygger trovärdighet och synlighet för lokala sökningar.
 
-- [ ] **4.1** Lägg till ortnamn (Linköping) i footer-text och eventuellt hero-subtext
-- [ ] **4.2** Lägg till `LocalBusiness`- eller `ProfessionalService`-schema med adress/kontaktuppgifter
-- [ ] **4.3** Skapa/gör anspråk på Google Business Profile för PHIGO
-- [ ] **4.4** Lägg till ett "Om oss"-avsnitt eller -sida med grundarnas namn, foto och plats
+- [x] **4.1** Lägg till ortnamn (Linköping) i footer-text och eventuellt hero-subtext
+- [x] **4.2** Lägg till `LocalBusiness`- eller `ProfessionalService`-schema med adress/kontaktuppgifter
+- [x] **4.3** Skapa/gör anspråk på Google Business Profile för PHIGO
+- [x] **4.4** Lägg till ett "Om oss"-avsnitt eller -sida med grundarnas namn, foto och plats
 
 ---
 
