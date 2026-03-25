@@ -16,7 +16,7 @@ const organizationSchema = {
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer service',
-    email: 'hej@phigo.se',
+    email: 'info@phigo.se',
     availableLanguage: 'Swedish',
   },
   areaServed: {
@@ -30,6 +30,27 @@ const websiteSchema = {
   '@type': 'WebSite',
   name: 'PHIGO',
   url: 'https://phigo.se',
+}
+
+const professionalServiceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'PHIGO',
+  url: 'https://phigo.se',
+  description:
+    'Vi bygger hemsidor åt lokala företag som faktiskt gör att folk tar kontakt. Fast pris, live inom 14 dagar.',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Linköping',
+    addressRegion: 'Östergötland',
+    addressCountry: 'SE',
+  },
+  email: 'info@phigo.se',
+  areaServed: {
+    '@type': 'Country',
+    name: 'Sweden',
+  },
+  priceRange: '$$',
 }
 
 const _inter = Inter({ subsets: ['latin'] })
@@ -80,6 +101,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }}
         />
       </head>
       <body className="font-sans antialiased relative">

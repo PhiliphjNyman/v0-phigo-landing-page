@@ -4,6 +4,7 @@ import { CaseStudies } from '@/components/case-studies'
 import { OfferSection } from '@/components/offer-section'
 import { ProcessSection } from '@/components/process-section'
 import { WhyPhigo } from '@/components/why-phigo'
+import { AboutSection } from '@/components/about-section'
 import { FaqSection } from '@/components/faq-section'
 import { FinalCta } from '@/components/final-cta'
 import { ContactForm } from '@/components/contact-form'
@@ -86,6 +87,7 @@ export default function Home() {
         <OfferSection />
         <ProcessSection />
         <WhyPhigo />
+        <AboutSection />
         <FaqSection />
         <FinalCta />
         <ContactForm />

@@ -5,6 +5,7 @@ const footerLinks = [
   { label: 'Exempel', href: '/cases' },
   { label: 'Erbjudande', href: '/#erbjudande' },
   { label: 'Så funkar det', href: '/#process' },
+  { label: 'Om oss', href: '/#om-oss' },
   { label: 'Vanliga frågor', href: '/#faq' },
   { label: 'Kontakt', href: '/#kontakt' },
 ]
@@ -20,8 +21,8 @@ export function Footer() {
               <PhigoLogo size="lg" />
             </Link>
             <p className="mt-3 text-sm leading-relaxed text-pretty text-muted-foreground">
-              Vi bygger hemsidor som ger lokala företag fler kunder. Fast pris,
-              klart inom 14 dagar.
+              Vi bygger hemsidor som ger lokala företag fler kunder. Baserade i
+              Linköping — klart inom 14 dagar.
             </p>
           </div>
 
@@ -52,6 +53,9 @@ export function Footer() {
             >
               info@phigo.se
             </a>
+            <span className="text-sm text-muted-foreground">
+              Linköping, Sverige
+            </span>
           </div>
         </div>
 
