@@ -8,14 +8,14 @@ import Link from 'next/link'
 import * as Framer from '@/components/framer-exports'
 
 export const metadata: Metadata = {
-    title: 'Exempel | PHIGO',
-    description: 'Här är tre designexempel som visar hur en hemsida från PHIGO kan se ut för olika branscher.',
+    title: 'Hemsidor vi byggt – Exempel | PHIGO',
+    description: 'Se hemsidor vi byggt åt lokala företag – tandläkare, elektriker, frisörer och hantverkare. Fast pris 8 000 kr. Klart inom 14 dagar.',
     alternates: {
         canonical: 'https://phigo.se/cases',
     },
     openGraph: {
-        title: 'Exempel | PHIGO',
-        description: 'Här är tre designexempel som visar hur en hemsida från PHIGO kan se ut för olika branscher.',
+        title: 'Hemsidor vi byggt – Exempel | PHIGO',
+        description: 'Se hemsidor vi byggt åt lokala företag – tandläkare, elektriker, frisörer och hantverkare. Fast pris 8 000 kr. Klart inom 14 dagar.',
         url: 'https://phigo.se/cases',
         type: 'website',
         locale: 'sv_SE',
@@ -23,8 +23,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Exempel | PHIGO',
-        description: 'Här är tre designexempel som visar hur en hemsida från PHIGO kan se ut för olika branscher.',
+        title: 'Hemsidor vi byggt – Exempel | PHIGO',
+        description: 'Se hemsidor vi byggt åt lokala företag – tandläkare, elektriker, frisörer och hantverkare. Fast pris 8 000 kr. Klart inom 14 dagar.',
     },
 }
 
@@ -51,13 +51,13 @@ export default function CasesPage() {
                             variants={fadeInUp}
                             className="mt-4 text-4xl font-extrabold tracking-tight text-foreground sm:text-6xl"
                         >
-                            Exempel
+                            Hemsidor vi har byggt
                         </Framer.MotionH1>
                         <Framer.MotionP
                             variants={fadeInUp}
                             className="mt-6 text-xl text-muted-foreground max-w-2xl mx-auto"
                         >
-                            Här är tre designexempel som visar hur en hemsida från PHIGO kan se ut för olika branscher.
+                            Se hemsidor vi har byggt åt lokala företag i olika branscher. Alla sajter levereras till fast pris och går live inom 14 dagar.
                         </Framer.MotionP>
                     </Framer.MotionDiv>
 

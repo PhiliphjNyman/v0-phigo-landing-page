@@ -24,7 +24,7 @@ Ger Google tydliga signaler om verksamheten + möjlighet till rich results i sö
 - [x] **2.2** Lägg till `WebSite`-schema i `app/layout.tsx` (sitelinks searchbox-signal)
 - [x] **2.3** Lägg till `FAQPage`-schema på startsidan baserat på FAQ-sektionens frågor och svar
 - [x] **2.4** Lägg till `BreadcrumbList`-schema på `/cases/[slug]`-sidorna
-- [ ] **2.5** Validera samtliga scheman via [Google Rich Results Test](https://search.google.com/test/rich-results)
+- [x] **2.5** Validera samtliga scheman via [Google Rich Results Test](https://search.google.com/test/rich-results)
 
 ---
 
@@ -32,9 +32,9 @@ Ger Google tydliga signaler om verksamheten + möjlighet till rich results i sö
 
 Förbättrar befintliga sidors relevans för sökfrågor.
 
-- [ ] **3.1** Uppdatera `/cases`-sidans title: `"Hemsidor vi byggt – Exempel | PHIGO"`
-- [ ] **3.2** Uppdatera `/cases`-sidans H1: `"Hemsidor vi har byggt"` (eller liknande)
-- [ ] **3.3** Uppdatera `/cases`-sidans meta description med sökordsfokus och CTA
+- [x] **3.1** Uppdatera `/cases`-sidans title: `"Hemsidor vi byggt – Exempel | PHIGO"`
+- [x] **3.2** Uppdatera `/cases`-sidans H1: `"Hemsidor vi har byggt"` (eller liknande)
+- [x] **3.3** Uppdatera `/cases`-sidans meta description med sökordsfokus och CTA
 - [ ] **3.4** Expandera `description`-fältet i `lib/cases.ts` för alla tre case till 400–600 ord vardera
 - [ ] **3.5** Överväg mer sökordsrika titlar på case-detaljsidor (bransch + stad)
 
