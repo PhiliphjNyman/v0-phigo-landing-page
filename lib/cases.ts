@@ -16,6 +16,7 @@ export interface Case {
     stats?: CaseStat[]
     featured: boolean
     accent: 'amber' | 'emerald' | 'cyan'
+    caseType: 'concept' | 'real'
 }
 
 export const cases: Case[] = [
@@ -31,6 +32,7 @@ export const cases: Case[] = [
         heroImage: '/images/case-leendekliniken.png',
         featured: true,
         accent: 'cyan',
+        caseType: 'concept',
     },
     {
         slug: 'cafe-alma',
@@ -44,6 +46,7 @@ export const cases: Case[] = [
         heroImage: '/images/case-cafe-alma.png',
         featured: true,
         accent: 'amber',
+        caseType: 'concept',
     },
     {
         slug: 'andersson-el',
@@ -57,6 +60,7 @@ export const cases: Case[] = [
         heroImage: '/images/case-andersson-el.png',
         featured: true,
         accent: 'amber',
+        caseType: 'concept',
     },
 ]
 
