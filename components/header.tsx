@@ -21,6 +21,7 @@ const navLinks = [
   { label: 'Erbjudande', href: '/#erbjudande', sectionId: 'erbjudande' },
   { label: 'Så funkar det', href: '/#process', sectionId: 'process' },
   { label: 'Vanliga frågor', href: '/#faq', sectionId: 'faq' },
+  { label: 'Blogg', href: '/blogg', sectionId: null },
 ]
 
 const SCROLL_SPY_SECTIONS = ['erbjudande', 'process', 'faq', 'kontakt']
@@ -80,7 +81,7 @@ export function Header() {
         <nav className="hidden items-center gap-8 md:flex" aria-label="Huvudnavigering">
           {navLinks.map((link) => {
             const isActive =
-              (link.href === '/cases' && pathname === '/cases') ||
+              (link.sectionId === null && (pathname === link.href || pathname.startsWith(link.href + '/'))) ||
               (link.sectionId !== null && activeSection === link.sectionId)
             return (
               <Link

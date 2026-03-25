@@ -93,9 +93,9 @@ export function CaseStudies() {
                   {/* Content */}
                   <div className="flex flex-1 flex-col gap-4 p-7">
                     <div className="flex flex-col gap-2">
-                      {/* Designexempel badge */}
+                      {/* Case type badge */}
                       <span className="text-[10px] font-semibold uppercase text-muted-foreground/60">
-                        Designexempel
+                        {c.caseType === 'concept' ? 'Designexempel' : 'Kundcase'}
                       </span>
                       <div className="flex items-center justify-between">
                         <Badge

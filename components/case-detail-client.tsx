@@ -61,9 +61,16 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                         variants={staggerContainer}
                     >
                         <motion.div variants={fadeInUp}>
-                            <Badge variant="secondary" className="mb-6 rounded-full px-4 py-1 text-primary bg-primary/10">
-                                {c.category}
-                            </Badge>
+                            <div className="mb-6 flex flex-wrap items-center gap-2">
+                                <Badge variant="secondary" className="rounded-full px-4 py-1 text-primary bg-primary/10">
+                                    {c.category}
+                                </Badge>
+                                {c.caseType === 'concept' && (
+                                    <Badge variant="outline" className="rounded-full px-3 py-1 text-[10px] font-semibold uppercase text-muted-foreground/70 border-muted-foreground/20">
+                                        Designexempel
+                                    </Badge>
+                                )}
+                            </div>
                             <h1 className="text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-6xl mb-6">
                                 {c.title}
                             </h1>
