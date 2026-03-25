@@ -15,14 +15,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const c = getCaseBySlug(slug)
     if (!c) return { title: 'Case hittades inte | PHIGO', robots: { index: false } }
 
+    const seoTitle = `${c.title} – ${c.category} i ${c.city} | PHIGO`
+
     return {
-        title: `${c.title} – Case | PHIGO`,
+        title: seoTitle,
         description: c.shortDescription,
         alternates: {
             canonical: `https://phigo.se/cases/${slug}`,
         },
         openGraph: {
-            title: `${c.title} – Case | PHIGO`,
+            title: seoTitle,
             description: c.shortDescription,
             url: `https://phigo.se/cases/${slug}`,
             type: 'article',
@@ -31,7 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         },
         twitter: {
             card: 'summary_large_image',
-            title: `${c.title} – Case | PHIGO`,
+            title: seoTitle,
             description: c.shortDescription,
         },
     }

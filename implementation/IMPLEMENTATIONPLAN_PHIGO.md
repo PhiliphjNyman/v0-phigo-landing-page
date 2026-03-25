@@ -36,7 +36,7 @@ Förbättrar befintliga sidors relevans för sökfrågor.
 - [x] **3.2** Uppdatera `/cases`-sidans H1: `"Hemsidor vi har byggt"` (eller liknande)
 - [x] **3.3** Uppdatera `/cases`-sidans meta description med sökordsfokus och CTA
 - [x] **3.4** Expandera `description`-fältet i `lib/cases.ts` för alla tre case till 400–600 ord vardera
-- [ ] **3.5** Överväg mer sökordsrika titlar på case-detaljsidor (bransch + stad)
+- [x] **3.5** Överväg mer sökordsrika titlar på case-detaljsidor (bransch + stad)
 
 ---
 
