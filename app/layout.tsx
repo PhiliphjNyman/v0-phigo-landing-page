@@ -7,6 +7,31 @@ import { PageBackground } from '@/components/page-background'
 import { MotionProvider } from '@/components/framer-exports'
 import './globals.css'
 
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'PHIGO',
+  url: 'https://phigo.se',
+  logo: 'https://phigo.se/icon.svg',
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer service',
+    email: 'hej@phigo.se',
+    availableLanguage: 'Swedish',
+  },
+  areaServed: {
+    '@type': 'Country',
+    name: 'Sweden',
+  },
+}
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'PHIGO',
+  url: 'https://phigo.se',
+}
+
 const _inter = Inter({ subsets: ['latin'] })
 const _geistMono = Geist_Mono({ subsets: ['latin'] })
 
@@ -47,6 +72,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="sv" className="dark">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+      </head>
       <body className="font-sans antialiased relative">
         <MotionProvider>
           <PageBackground />

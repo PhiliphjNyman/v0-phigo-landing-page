@@ -20,10 +20,10 @@ Dessa blockar Googles förmåga att indexera sajten korrekt.
 
 Ger Google tydliga signaler om verksamheten + möjlighet till rich results i sökresultaten.
 
-- [ ] **2.1** Lägg till `Organization`-schema i `app/layout.tsx` (namn, URL, logotyp, kontakt)
-- [ ] **2.2** Lägg till `WebSite`-schema i `app/layout.tsx` (sitelinks searchbox-signal)
-- [ ] **2.3** Lägg till `FAQPage`-schema på startsidan baserat på FAQ-sektionens frågor och svar
-- [ ] **2.4** Lägg till `BreadcrumbList`-schema på `/cases/[slug]`-sidorna
+- [x] **2.1** Lägg till `Organization`-schema i `app/layout.tsx` (namn, URL, logotyp, kontakt)
+- [x] **2.2** Lägg till `WebSite`-schema i `app/layout.tsx` (sitelinks searchbox-signal)
+- [x] **2.3** Lägg till `FAQPage`-schema på startsidan baserat på FAQ-sektionens frågor och svar
+- [x] **2.4** Lägg till `BreadcrumbList`-schema på `/cases/[slug]`-sidorna
 - [ ] **2.5** Validera samtliga scheman via [Google Rich Results Test](https://search.google.com/test/rich-results)
 
 ---

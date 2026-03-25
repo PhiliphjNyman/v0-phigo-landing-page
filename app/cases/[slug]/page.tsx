@@ -47,5 +47,38 @@ export default async function CaseDetailPage({ params }: { params: Promise<{ slu
 
     const relatedCases = getRelatedCases(c.slug)
 
-    return <CaseDetailClient c={c} relatedCases={relatedCases} />
+    const breadcrumbSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Hem',
+                item: 'https://phigo.se',
+            },
+            {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Exempel',
+                item: 'https://phigo.se/cases',
+            },
+            {
+                '@type': 'ListItem',
+                position: 3,
+                name: c.title,
+                item: `https://phigo.se/cases/${c.slug}`,
+            },
+        ],
+    }
+
+    return (
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
+            <CaseDetailClient c={c} relatedCases={relatedCases} />
+        </>
+    )
 }
