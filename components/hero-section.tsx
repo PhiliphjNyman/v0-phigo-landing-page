@@ -5,7 +5,7 @@ import { motion, useAnimation, useInView } from 'framer-motion'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { fadeInUp, fadeIn, staggerContainer } from '@/lib/animations'
-import { HeroVisual } from '@/components/hero-visual'
+import { PhigoMetricsBlock } from '@/components/ui/phigo-metrics-block'
 
 export function HeroSection() {
   const arrowRef = useRef(null)
@@ -119,7 +119,7 @@ export function HeroSection() {
             transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
             className="relative perspective-1000 hidden lg:block"
           >
-            <HeroVisual />
+            <PhigoMetricsBlock />
           </motion.div>
         </div>
       </div>
