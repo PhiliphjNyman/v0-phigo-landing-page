@@ -20,8 +20,8 @@ export function PhigoLogo({ className, size = 'md' }: PhigoLogoProps) {
         className,
       )}
     >
-      <span className="text-primary">phi</span>
-      <span className="text-foreground">go</span>
+      <span className="text-primary">PHI</span>
+      <span className="text-foreground">GO</span>
     </div>
   )
 }
