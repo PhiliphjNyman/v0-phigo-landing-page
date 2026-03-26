@@ -150,8 +150,9 @@ export function OfferSection() {
                 <span className="text-4xl sm:text-5xl font-black text-foreground">8 000 kr</span>
                 <span className="mb-1 text-sm text-muted-foreground">engång</span>
               </div>
+              <p className="mt-1 text-xs text-muted-foreground/70">exkl. moms</p>
               <p className="mt-1 text-sm text-muted-foreground">
-                + <span className="font-semibold text-foreground">399 kr/mån</span> — drift, säkerhet och support
+                + <span className="font-semibold text-foreground">399 kr/mån</span> <span className="text-xs text-muted-foreground/70">(exkl. moms)</span> — drift, säkerhet och support
               </p>
             </div>
 

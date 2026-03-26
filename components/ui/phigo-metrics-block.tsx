@@ -8,7 +8,7 @@ const metrics = [
     label: "Fast pris",
     value: "8 000",
     delta: "kr",
-    description: "Engångsbelopp utan dolda kostnader",
+    description: "Engångsbelopp exkl. moms, utan dolda kostnader",
   },
   {
     label: "Leveranstid",
@@ -20,7 +20,7 @@ const metrics = [
     label: "Hosting & support",
     value: "399",
     delta: "kr/mån",
-    description: "Drift, säkerhet och löpande ändringar",
+    description: "Drift, säkerhet och löpande ändringar (exkl. moms)",
   },
   {
     label: "Laddningstid",

@@ -14,7 +14,7 @@ const reasons = [
   {
     title: 'Fast pris, inga överraskningar',
     description:
-      '8 000 kr för sajten, 399 kr/mån för drift och support. Det är allt. Inga dolda kostnader.',
+      '8 000 kr för sajten (exkl. moms), 399 kr/mån för drift och support (exkl. moms). Det är allt. Inga dolda kostnader.',
   },
   {
     title: 'Snabb och säker',

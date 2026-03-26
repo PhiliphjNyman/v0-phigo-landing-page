@@ -19,7 +19,7 @@ const faqSchema = {
       name: 'Vad kostar en hemsida?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'En hemsida kostar 8 000 kr (engång) och 399 kr/mån för drift, säkerhet och support. Inga dolda kostnader — priset är fast oavsett hur lång tid det tar.',
+        text: 'En hemsida kostar 8 000 kr exkl. moms (engång) och 399 kr/mån exkl. moms för drift, säkerhet och support. Inga dolda kostnader — priset är fast oavsett hur lång tid det tar.',
       },
     },
     {
@@ -35,7 +35,7 @@ const faqSchema = {
       name: 'Vad händer efter att sajten är live?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Vi ser till att sajten alltid är uppe och funkar. Månadsavgiften på 399 kr/mån täcker hosting, säkerhet och mindre ändringar — som att uppdatera öppettider, priser eller kontaktuppgifter.',
+        text: 'Vi ser till att sajten alltid är uppe och funkar. Månadsavgiften på 399 kr/mån (exkl. moms) täcker hosting, säkerhet och mindre ändringar — som att uppdatera öppettider, priser eller kontaktuppgifter.',
       },
     },
     {
