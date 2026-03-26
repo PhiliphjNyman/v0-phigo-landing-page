@@ -60,7 +60,7 @@ Kräver riktiga kundcase och/eller ny innehållsproduktion.
   - "Vad kostar en hemsida för småföretag?"
   - "Hemsida för elektriker / frisör / tandläkare"
   - "Varför syns inte mitt företag på Google?"
-- [ ] **5.3** Skapa `app/blogg/[slug]/page.tsx` + sitemap-integration när bloggen startas
+- [x] **5.3** Skapa `app/blogg/[slug]/page.tsx` + sitemap-integration när bloggen startas
 
 ---
 

@@ -181,7 +181,7 @@ export default async function BloggPostPage({ params }: { params: Promise<{ slug
                     </header>
 
                     {/* Post content */}
-                    <div className="prose prose-invert prose-lg max-w-none leading-loose text-muted-foreground">
+                    <div className="prose prose-invert prose-lg max-w-none leading-loose text-foreground/75 prose-p:mb-8 prose-headings:mt-12 prose-headings:mb-4 prose-li:mb-2 prose-table:my-8">
                         {post.content ? (
                             <div dangerouslySetInnerHTML={{ __html: post.content }} />
                         ) : null}
