@@ -43,9 +43,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             locale: 'sv_SE',
             publishedTime: post.publishedAt,
             modifiedTime: post.updatedAt ?? post.publishedAt,
-            ...(post.ogImage && {
-                images: [{ url: post.ogImage, width: 1200, height: 630, alt: post.title }],
-            }),
+            images: post.ogImage
+                ? [{ url: post.ogImage, width: 1200, height: 630, alt: post.title }]
+                : [{ url: '/og-image.png', width: 1200, height: 630, alt: post.title }],
         },
         twitter: {
             card: 'summary_large_image',

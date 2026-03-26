@@ -71,12 +71,21 @@ export const metadata: Metadata = {
     url: 'https://phigo.se',
     type: 'website',
     locale: 'sv_SE',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'PHIGO — Hemsidor som ger dig fler kunder',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'PHIGO | Hemsidor som ger dig fler kunder',
     description:
       'Vi bygger hemsidor åt lokala företag som faktiskt gör att folk tar kontakt. Fast pris, live inom 14 dagar. Granska din hemsida kostnadsfritt.',
+    images: ['/og-image.png'],
   },
 }
 

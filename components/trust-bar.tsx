@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { motion, useAnimation, useInView } from 'framer-motion'
+import { motion, useAnimation, useInView, useReducedMotion } from 'framer-motion'
 import { fadeIn } from '@/lib/animations'
 
 const placeholderLogos = [
@@ -19,14 +19,16 @@ export function TrustBar() {
   const marqueeRef = useRef(null)
   const isInView = useInView(marqueeRef)
   const controls = useAnimation()
+  const prefersReducedMotion = useReducedMotion()
 
   useEffect(() => {
+    if (prefersReducedMotion) return
     if (isInView) {
       controls.start({ x: '-50%', transition: { duration: 30, repeat: Infinity, ease: 'linear' } })
     } else {
       controls.stop()
     }
-  }, [isInView, controls])
+  }, [isInView, controls, prefersReducedMotion])
 
   return (
     <section className="border-y border-border bg-muted/20 py-12 relative overflow-hidden">

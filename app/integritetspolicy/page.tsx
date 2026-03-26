@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     url: 'https://phigo.se/integritetspolicy',
     type: 'website',
     locale: 'sv_SE',
-    images: [{ url: 'https://phigo.se/opengraph-image', width: 1200, height: 630, alt: 'PHIGO – Hemsidor som ger dig fler kunder' }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'PHIGO – Hemsidor som ger dig fler kunder' }],
   },
   twitter: {
     card: 'summary',

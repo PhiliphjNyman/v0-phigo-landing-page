@@ -46,7 +46,7 @@ export function PhigoMetricsBlock() {
     >
       {metrics.map((metric) => (
         <motion.div key={metric.label} variants={fadeUp}>
-          <Card className="group relative overflow-hidden rounded-2xl border border-border/50 bg-background/45 p-5 backdrop-blur-2xl transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-primary/60">
+          <Card className="group relative overflow-hidden rounded-2xl border border-border/50 bg-background/45 p-5 backdrop-blur-sm transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-primary/60">
             <div className="absolute inset-0 bg-gradient-to-br from-foreground/[0.04] via-transparent to-transparent" />
             <div className="relative z-10 space-y-2">
               <span className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">

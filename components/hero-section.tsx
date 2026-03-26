@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { motion, useAnimation, useInView } from 'framer-motion'
+import { motion, useAnimation, useInView, useReducedMotion } from 'framer-motion'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { fadeInUp, fadeIn, staggerContainer } from '@/lib/animations'
@@ -11,8 +11,10 @@ export function HeroSection() {
   const arrowRef = useRef(null)
   const isArrowInView = useInView(arrowRef)
   const arrowControls = useAnimation()
+  const prefersReducedMotion = useReducedMotion()
 
   useEffect(() => {
+    if (prefersReducedMotion) return
     if (isArrowInView) {
       arrowControls.start({
         opacity: [0, 1],
@@ -22,7 +24,7 @@ export function HeroSection() {
     } else {
       arrowControls.stop()
     }
-  }, [isArrowInView, arrowControls])
+  }, [isArrowInView, arrowControls, prefersReducedMotion])
 
   return (
     <section className="relative flex min-h-dvh items-center overflow-hidden pt-20 pb-16 lg:pt-32">
@@ -51,9 +53,9 @@ export function HeroSection() {
                 <span className="relative z-10 text-primary">kunder</span>
                 <svg className="absolute -bottom-2 lg:-bottom-4 left-0 -z-10 w-full" viewBox="0 0 358 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <motion.path
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 1, delay: 1 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.4, delay: 1 }}
                     d="M3 17C118.333 5.66667 239.667 5.66667 355 17"
                     stroke="currentColor"
                     strokeWidth="5"

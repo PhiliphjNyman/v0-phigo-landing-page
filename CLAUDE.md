@@ -94,6 +94,13 @@ lib/
   utils.ts                # cn() utility
   animations.ts           # Återanvändbara Framer Motion variants
   cases.ts                # Case-data (single source of truth)
+
+brand_assets/
+  icon.svg                # Favicon — P-logotyp (emerald på dark slate)
+  PHIGO_fullzize_screenshot.png  # Fullstorlek screenshot (används som källa för OG-bild)
+
+public/
+  og-image.png            # OG-bild 1200×630 (croppat från brand_assets/PHIGO_fullzize_screenshot.png)
 ```
 
 ---

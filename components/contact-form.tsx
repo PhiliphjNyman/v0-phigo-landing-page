@@ -137,7 +137,7 @@ export function ContactForm() {
                   <motion.div
                     className="h-full w-full bg-primary origin-left"
                     animate={{ scaleX: progress / 100 }}
-                    transition={{ duration: 0.5 }}
+                    transition={{ duration: 0.2 }}
                   />
                 </div>
 
@@ -160,6 +160,7 @@ export function ContactForm() {
                               <Input
                                 placeholder="Anna Andersson"
                                 className="h-12 bg-background/50 border-border focus:border-primary/50"
+                                required
                                 {...field}
                               />
                             </FormControl>
@@ -180,6 +181,7 @@ export function ContactForm() {
                               <Input
                                 placeholder="Ert företag AB"
                                 className="h-12 bg-background/50 border-border focus:border-primary/50"
+                                required
                                 {...field}
                               />
                             </FormControl>
@@ -204,6 +206,7 @@ export function ContactForm() {
                                 type="email"
                                 placeholder="anna@foretag.se"
                                 className="h-12 bg-background/50 border-border focus:border-primary/50"
+                                required
                                 {...field}
                               />
                             </FormControl>
@@ -241,7 +244,7 @@ export function ContactForm() {
                           <FormLabel>Vad vill du förbättra?</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
-                              <SelectTrigger className="h-12 w-full bg-background/50 border-border">
+                              <SelectTrigger className="h-12 w-full bg-background/50 border-border" aria-required="true">
                                 <SelectValue placeholder="Välj ett alternativ" />
                               </SelectTrigger>
                             </FormControl>
@@ -269,6 +272,7 @@ export function ContactForm() {
                             <Textarea
                               placeholder="Berätta lite om ditt projekt och dina mål..."
                               className="min-h-32 resize-none bg-background/50 border-border"
+                              required
                               {...field}
                             />
                           </FormControl>
@@ -287,6 +291,7 @@ export function ContactForm() {
                               checked={field.value}
                               onCheckedChange={field.onChange}
                               id="gdpr-checkbox"
+                              aria-required="true"
                               className="mt-0.5"
                             />
                           </FormControl>
