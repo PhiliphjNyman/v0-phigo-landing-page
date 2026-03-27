@@ -98,7 +98,7 @@ export default async function BloggPostPage({ params }: { params: Promise<{ slug
 
     const articleSchema = {
         '@context': 'https://schema.org',
-        '@type': 'Article',
+        '@type': 'BlogPosting',
         headline: post.title,
         description: post.description,
         datePublished: post.publishedAt,

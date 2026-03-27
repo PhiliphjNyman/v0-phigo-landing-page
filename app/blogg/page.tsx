@@ -24,11 +24,25 @@ export const metadata: Metadata = {
     },
 }
 
+const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Hem', item: 'https://phigo.se' },
+        { '@type': 'ListItem', position: 2, name: 'Blogg', item: 'https://phigo.se/blogg' },
+    ],
+}
+
 export default function BloggPage() {
     const published = getPublishedBlogPosts()
     const planned = getBlogPosts().filter((p) => p.status === 'draft')
 
     return (
+        <>
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
         <div className="min-h-dvh pt-24 pb-24">
             <div className="mx-auto max-w-7xl px-4 lg:px-8">
                 {/* Header */}
@@ -114,5 +128,6 @@ export default function BloggPage() {
                 )}
             </div>
         </div>
+        </>
     )
 }
