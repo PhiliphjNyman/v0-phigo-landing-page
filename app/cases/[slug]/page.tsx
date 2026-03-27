@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             title: seoTitle,
             description: c.shortDescription,
             url: `https://phigo.se/cases/${slug}`,
-            type: 'article',
+            type: 'website',
             locale: 'sv_SE',
             images: [{ url: c.heroImage, width: 1200, height: 630, alt: c.title }],
         },

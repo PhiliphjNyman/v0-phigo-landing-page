@@ -9,48 +9,45 @@ import './globals.css'
 
 const organizationSchema = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
+  '@type': ['ProfessionalService', 'LocalBusiness'],
+  '@id': 'https://phigo.se/#organization',
   name: 'PHIGO',
   url: 'https://phigo.se',
-  logo: 'https://phigo.se/icon.svg',
-  contactPoint: {
-    '@type': 'ContactPoint',
-    contactType: 'customer service',
-    email: 'info@phigo.se',
-    availableLanguage: 'Swedish',
+  logo: {
+    '@type': 'ImageObject',
+    url: 'https://phigo.se/icon.svg',
   },
-  areaServed: {
-    '@type': 'Country',
-    name: 'Sweden',
-  },
-}
-
-const websiteSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: 'PHIGO',
-  url: 'https://phigo.se',
-}
-
-const professionalServiceSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  name: 'PHIGO',
-  url: 'https://phigo.se',
   description:
     'Vi bygger hemsidor åt lokala företag som faktiskt gör att folk tar kontakt. Fast pris, live inom 14 dagar.',
+  email: 'info@phigo.se',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Linköping',
     addressRegion: 'Östergötland',
     addressCountry: 'SE',
   },
-  email: 'info@phigo.se',
   areaServed: {
     '@type': 'Country',
     name: 'Sweden',
   },
   priceRange: '$$',
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer service',
+    email: 'info@phigo.se',
+    availableLanguage: 'Swedish',
+  },
+}
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': 'https://phigo.se/#website',
+  name: 'PHIGO',
+  url: 'https://phigo.se',
+  publisher: {
+    '@id': 'https://phigo.se/#organization',
+  },
 }
 
 const _inter = Inter({ subsets: ['latin'] })
@@ -69,6 +66,7 @@ export const metadata: Metadata = {
     description:
       'Vi bygger hemsidor åt lokala företag som faktiskt gör att folk tar kontakt. Fast pris, live inom 14 dagar. Granska din hemsida kostnadsfritt.',
     url: 'https://phigo.se',
+    siteName: 'PHIGO',
     type: 'website',
     locale: 'sv_SE',
     images: [
@@ -110,10 +108,6 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }}
         />
       </head>
       <body className="font-sans antialiased relative">

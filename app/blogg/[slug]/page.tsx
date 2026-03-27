@@ -105,13 +105,16 @@ export default async function BloggPostPage({ params }: { params: Promise<{ slug
         dateModified: post.updatedAt ?? post.publishedAt,
         author: {
             '@type': 'Organization',
+            '@id': 'https://phigo.se/#organization',
             name: 'PHIGO',
             url: 'https://phigo.se',
         },
         publisher: {
-            '@type': 'Organization',
-            name: 'PHIGO',
-            url: 'https://phigo.se',
+            '@id': 'https://phigo.se/#organization',
+        },
+        mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': `https://phigo.se/blogg/${post.slug}`,
         },
         url: `https://phigo.se/blogg/${post.slug}`,
         ...(post.ogImage && { image: `https://phigo.se${post.ogImage}` }),

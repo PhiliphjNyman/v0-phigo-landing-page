@@ -8,19 +8,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
-      lastModified: new Date(),
+      lastModified: new Date('2026-03-26'),
       changeFrequency: 'monthly',
       priority: 1.0,
     },
     {
       url: `${baseUrl}/cases`,
-      lastModified: new Date(),
+      lastModified: new Date('2026-03-26'),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/blogg`,
-      lastModified: new Date(),
+      lastModified: new Date('2026-03-26'),
       changeFrequency: 'weekly',
       priority: 0.8,
     },
@@ -28,7 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const caseRoutes: MetadataRoute.Sitemap = getCases().map((c) => ({
     url: `${baseUrl}/cases/${c.slug}`,
-    lastModified: new Date(),
+    lastModified: new Date('2026-03-26'),
     changeFrequency: 'monthly' as const,
     priority: 0.7,
   }))

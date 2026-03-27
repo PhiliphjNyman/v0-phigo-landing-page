@@ -5,6 +5,10 @@ export const metadata: Metadata = {
   title: 'Integritetspolicy – PHIGO',
   description:
     'Läs om hur PHIGO hanterar dina personuppgifter i enlighet med GDPR.',
+  robots: {
+    index: false,
+    follow: true,
+  },
   alternates: {
     canonical: 'https://phigo.se/integritetspolicy',
   },
