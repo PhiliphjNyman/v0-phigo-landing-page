@@ -15,7 +15,7 @@ export const metadata: Metadata = {
         description: 'Tips och guider för lokala företag som vill ha fler kunder via sin hemsida.',
         url: 'https://phigo.se/blogg',
         locale: 'sv_SE',
-        images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'PHIGO – Hemsidor som ger dig fler kunder' }],
+        images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'PHIGO – Hemsidor som ger dig fler kunder' }],
     },
     twitter: {
         card: 'summary_large_image',

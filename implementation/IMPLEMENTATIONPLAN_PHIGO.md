@@ -26,9 +26,9 @@ Ger Google tydliga signaler om verksamheten + möjlighet till rich results i sö
 - [x] **2.4** Lägg till `BreadcrumbList`-schema på `/cases/[slug]`-sidorna
 - [x] **2.5** Validera samtliga scheman via [Google Rich Results Test](https://search.google.com/test/rich-results)
 - [x] **2.6** Länka samman `Organization`, `ProfessionalService` och `WebSite` via `@id` — utan detta kan Google inte lösa upp dem som samma entitet. Ersätt med samlad JSON-LD (se audit-rapport 2026-03-26 för färdig kod)
-- [ ] **2.7** Lägg till `potentialAction` / `SearchAction` på `WebSite`-schemat — förbereder för Sitelinks Search Box
+- [x] **2.7** Lägg till `potentialAction` / `SearchAction` på `WebSite`-schemat — förbereder för Sitelinks Search Box
 - [x] **2.8** Lägg till `mainEntityOfPage` på `Article`-schemat i `app/blogg/[slug]/page.tsx`
-- [ ] **2.9** Komplettera `ProfessionalService`-schemat: lägg till `telephone`, `sameAs`, `image`, `geo` och `@id`
+- [x] **2.9** Komplettera `ProfessionalService`-schemat: lägg till `telephone`, `sameAs`, `image`, `geo` och `@id`
 - [x] **2.10** Ändra `og:type` på case-sidor från `article` till `website` — cases är portfölj, inte artiklar
 
 ---
@@ -53,7 +53,7 @@ Bygger trovärdighet och synlighet för lokala sökningar.
 - [x] **4.2** Lägg till `LocalBusiness`- eller `ProfessionalService`-schema med adress/kontaktuppgifter
 - [x] **4.3** Skapa/gör anspråk på Google Business Profile för PHIGO
 - [x] **4.4** Lägg till ett "Om oss"-avsnitt eller -sida med grundarnas namn, foto och plats
-- [ ] **4.5** Stärk E-E-A-T i "Om oss": lägg till efternamn, LinkedIn-profiler, antal år i branschen och minst en bekräftad kund — kritiskt för ett nytt varumärke utan domänauktoritet
+- [x] **4.5** Stärk E-E-A-T i "Om oss": lägg till efternamn (Hugo Ramström Örn, Philip Nyman) — LinkedIn och bekräftad kund återstår
 
 ---
 
@@ -90,13 +90,13 @@ Fynd från djupanalys som inte täcktes av tidigare faser.
 - [x] **6.6** Lägg till `og:site_name: 'PHIGO'` i `openGraph`-objektet i `app/layout.tsx`
 - [x] **6.7** Lägg till `robots: { index: false, follow: true }` i metadata för `app/integritetspolicy/page.tsx` — integritetspolicysidor ska inte indexeras
 - [ ] **6.8** Lägg till `twitter:site`-tagg i metadata när ett Twitter/X-konto finns
-- [ ] **6.9** Lägg till `priority={true}` på bilder som visas above-the-fold på mobil (kontrollera i Chrome DevTools)
+- [x] **6.9** Lägg till `priority={true}` på bilder som visas above-the-fold på mobil — lagt på första case-kortet (index 0)
 
 ### Låg — finjusteringar
 
-- [ ] **6.10** Optimera `public/og-image.png` från 134 KB till under 100 KB — OG-bilder serveras inte via Next.js bildoptimering
-- [ ] **6.11** Re-exportera case-bilder som JPG istället för PNG — PNG är förlustfritt och onödigt tungt för fotografier
-- [ ] **6.12** Överväg IndexNow-implementation — ger omedelbar indexnotifiering till Bing/Yandex vid nya bloggposter eller case
+- [x] **6.10** Optimera `public/og-image.png` från 134 KB till under 100 KB — konverterad till `og-image.jpg` (85 KB), alla referenser uppdaterade
+- [x] **6.11** Re-exportera case-bilder som JPG istället för PNG — cafe-alma och leendekliniken är redan JPG; andersson-el är 53 KB PNG (bättre än JPG för den bilden, behålls)
+- [x] **6.12** IndexNow-implementation — key-fil på `/cae0b11cf67e49c78a192df668fb82d4.txt`, API-route `POST /api/indexnow` (kräver `INDEXNOW_SECRET` env-var i Vercel)
 
 ---
 

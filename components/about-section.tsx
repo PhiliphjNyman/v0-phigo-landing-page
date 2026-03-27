@@ -6,14 +6,14 @@ import { fadeInUp, staggerContainer } from '@/lib/animations'
 
 const founders = [
   {
-    initials: 'H',
-    name: 'Hugo',
+    initials: 'HR',
+    name: 'Hugo Ramström Örn',
     role: 'Grundare & webbutvecklare',
     bio: 'Bygger sajter med fokus på konvertering och prestanda. Har sett för många lokala företag förlora kunder till en sajt som inte gör sitt jobb — det är vad PHIGO är till för att ändra på.',
   },
   {
-    initials: 'P',
-    name: 'Philip',
+    initials: 'PN',
+    name: 'Philip Nyman',
     role: 'Grundare & webbutvecklare',
     bio: 'Kombinerar teknisk precision med ett öga för design. Tror att en bra hemsida ska vara ett säljverktyg, inte bara ett visitkort på nätet.',
   },

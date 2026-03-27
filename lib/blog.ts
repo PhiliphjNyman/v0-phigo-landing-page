@@ -148,12 +148,87 @@ export const blogPosts: BlogPost[] = [
         slug: 'syns-inte-pa-google',
         title: 'Varför syns inte mitt företag på Google?',
         description: 'De vanligaste anledningarna till att ditt företag inte dyker upp när folk söker — och vad du kan göra åt det.',
-        publishedAt: '2026-04-29',
-        status: 'draft',
+        publishedAt: '2026-03-27',
+        status: 'published',
         category: 'Guide',
         tags: ['Google', 'Synlighet', 'Småföretag'],
         readingTime: 6,
-        content: '',
+        content: `
+<p>Du driver ett bra företag. Dina kunder är nöjda. Men när någon i närheten söker på det du gör — dyker ditt namn inte upp.</p>
+
+<p>Det är ett vanligt problem, och det finns nästan alltid en konkret förklaring. Här är de vanligaste anledningarna till att lokala företag inte syns på Google — och vad du kan göra åt varje enskild.</p>
+
+<h2>1. Du har ingen Google-företagsprofil</h2>
+
+<p>Det här är den vanligaste orsaken av alla.</p>
+
+<p>Google visar lokala företag i sin karta och i de tre första resultaten baserat på din <strong>Google-företagsprofil</strong>. Det är en gratis profil som du skapar på <a href="https://business.google.com" rel="noopener noreferrer">business.google.com</a>.</p>
+
+<p>Har du ingen profil är chansen liten att du syns när folk söker lokalt — oavsett hur bra din hemsida är.</p>
+
+<p><strong>Vad du gör:</strong> Skapa eller bekräfta din Google-företagsprofil. Fyll i adress, telefonnummer, öppettider och kategori. Lägg till minst fem foton. Det tar ungefär en timme och är förmodligen den enskilt mest effektiva åtgärden du kan ta.</p>
+
+<h2>2. Din hemsida saknas eller är inte kopplad</h2>
+
+<p>Google läser igenom hemsidor för att förstå vad du gör, var du finns och vem du riktar dig till. Om du inte har en hemsida alls — eller om den är felkonfigurerad — har Google väldigt lite att gå på.</p>
+
+<p>En saknad hemsida är som att ha en butik utan skylt på en bakgata. De som redan vet om dig kan hitta dig, men ingen ny kund hittar dig av en slump.</p>
+
+<p><strong>Vad du gör:</strong> Se till att du har en hemsida och att den är länkad från din Google-företagsprofil. Hemsidan behöver inte vara stor — men den måste tydligt beskriva vad du gör och var du finns.</p>
+
+<h2>3. Hemsidan funkar inte på mobilen</h2>
+
+<p>Mer än hälften av alla Google-sökningar görs från en telefon. Google vet det, och prioriterar sajter som fungerar bra på mobil när de väljer vad de ska visa i sökresultaten.</p>
+
+<p>En hemsida som är svårläst, långsam eller som kräver att man zoomar och scrollar i sidled — den straffas.</p>
+
+<p><strong>Vad du gör:</strong> Testa din sajt på din telefon just nu. Är texten läsbar? Är knapparna enkla att trycka på? Laddar sidan snabbt? Om svaret är nej på någon av frågorna är det dags att se över sajten.</p>
+
+<h2>4. Google förstår inte vad du gör eller var du finns</h2>
+
+<p>Google läser din hemsida som text och försöker lista ut vad ditt företag gör, vilka tjänster du erbjuder och vilket geografiskt område du verkar i. Om hemsidan saknar tydlig text om detta vet Google inte när den ska visa dig.</p>
+
+<p>Vanliga misstag:</p>
+<ul>
+  <li>Hemsidan säger "vi jobbar med det du behöver" istället för "vi är elektriker i Linköping"</li>
+  <li>Adressen och telefonnumret finns inte på sajten</li>
+  <li>Det finns ingen sida som listar dina tjänster med namn</li>
+</ul>
+
+<p><strong>Vad du gör:</strong> Kontrollera att din hemsida tydligt nämner vad du gör, var du gör det och hur man når dig. Ju mer specifikt, desto bättre. "Rörmokare i Norrköping — dygnet runt" är bättre än "Din lokala hantverkare".</p>
+
+<h2>5. Du har inga eller för få recensioner</h2>
+
+<p>Google väger in recensioner när det rangordnar lokala företag. Ett företag med tjugo Google-recensioner och snittbetyg 4,7 syns nästan alltid före ett företag utan en enda recension — även om de annars är jämförbara.</p>
+
+<p>Recensioner fungerar som ett bevis för Google — och för potentiella kunder — att du faktiskt gör ett bra jobb.</p>
+
+<p><strong>Vad du gör:</strong> Börja fråga nöjda kunder om de kan lämna ett omdöme. Skicka länken direkt till din Google-profil — det sänker tröskeln rejält. Tre till fem nya recensioner kan göra märkbar skillnad.</p>
+
+<h2>6. Din hemsida är för ny</h2>
+
+<p>Har du precis lanserat en ny sajt? Då kan det ta tid innan Google hittar den och börjar visa den i sökresultaten — normalt några veckor upp till ett par månader. Det är inget fel, det är bara så det fungerar.</p>
+
+<p><strong>Vad du gör:</strong> Skapa ett Google-konto för webbansvariga (Google Search Console) och anmäl din sajts adress manuellt. Det påskyndar processen. Länka också hemsidan från din Google-företagsprofil — det hjälper Google hitta den snabbare.</p>
+
+<h2>Snabb checklista — syns ditt företag?</h2>
+
+<ul>
+  <li>☐ Har du en bekräftad Google-företagsprofil med fullständig info?</li>
+  <li>☐ Är hemsidan länkad från din Google-profil?</li>
+  <li>☐ Funkar hemsidan bra på mobilen?</li>
+  <li>☐ Framgår det tydligt på sajten vad du gör och var du finns?</li>
+  <li>☐ Har du minst fem Google-recensioner?</li>
+</ul>
+
+<p>Stämmer alla fem? Bra — då har du gjort grunden. Stämmer bara ett par av dem finns det konkreta saker att ta tag i som kan ge tydlig skillnad på relativt kort tid.</p>
+
+<h2>Vill du ha hjälp?</h2>
+
+<p>En hemsida som är byggd rätt från start — med tydliga texter, snabb laddning och korrekt uppbyggnad — gör att Google förstår ditt företag utan att du behöver göra ett stort arbete efteråt.</p>
+
+<p>Vi på PHIGO bygger hemsidor åt lokala företag som ska synas och ge fler förfrågningar. Fast pris, live inom 14 dagar. <a href="/#kontakt">Kontakta oss</a> om du vill att vi tittar på din sajt — det kostar ingenting.</p>
+        `.trim(),
         ogImage: '/images/blog/syns-inte-pa-google.png',
     },
     {

@@ -13,18 +13,27 @@ const organizationSchema = {
   '@id': 'https://phigo.se/#organization',
   name: 'PHIGO',
   url: 'https://phigo.se',
+  telephone: '+46723305002',
+  email: 'info@phigo.se',
   logo: {
     '@type': 'ImageObject',
     url: 'https://phigo.se/icon.svg',
   },
+  image: 'https://phigo.se/og-image.jpg',
   description:
     'Vi bygger hemsidor åt lokala företag som faktiskt gör att folk tar kontakt. Fast pris, live inom 14 dagar.',
-  email: 'info@phigo.se',
   address: {
     '@type': 'PostalAddress',
+    streetAddress: 'Hejdegatan 46',
     addressLocality: 'Linköping',
     addressRegion: 'Östergötland',
+    postalCode: '582 46',
     addressCountry: 'SE',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 58.4108,
+    longitude: 15.6214,
   },
   areaServed: {
     '@type': 'Country',
@@ -34,6 +43,7 @@ const organizationSchema = {
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer service',
+    telephone: '+46723305002',
     email: 'info@phigo.se',
     availableLanguage: 'Swedish',
   },
@@ -47,6 +57,14 @@ const websiteSchema = {
   url: 'https://phigo.se',
   publisher: {
     '@id': 'https://phigo.se/#organization',
+  },
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: 'https://phigo.se/cases?q={search_term_string}',
+    },
+    'query-input': 'required name=search_term_string',
   },
 }
 
@@ -71,7 +89,7 @@ export const metadata: Metadata = {
     locale: 'sv_SE',
     images: [
       {
-        url: '/og-image.png',
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'PHIGO — Hemsidor som ger dig fler kunder',
@@ -83,7 +101,7 @@ export const metadata: Metadata = {
     title: 'PHIGO | Hemsidor som ger dig fler kunder',
     description:
       'Vi bygger hemsidor åt lokala företag som faktiskt gör att folk tar kontakt. Fast pris, live inom 14 dagar. Granska din hemsida kostnadsfritt.',
-    images: ['/og-image.png'],
+    images: ['/og-image.jpg'],
   },
 }
 

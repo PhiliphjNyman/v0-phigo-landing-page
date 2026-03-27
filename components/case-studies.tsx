@@ -69,7 +69,7 @@ export function CaseStudies() {
           viewport={{ once: true }}
           className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {cases.map((c) => {
+          {cases.map((c, index) => {
             const stat = c.stats?.[0]
             const MetricIcon = iconMap[c.slug] || TrendingUp
             const accentStyles = accentMap[c.accent]
@@ -87,6 +87,7 @@ export function CaseStudies() {
                       fill
                       className="object-cover transition-transform duration-150 group-hover:scale-110"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      priority={index === 0}
                     />
                   </div>
 
