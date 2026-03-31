@@ -236,11 +236,142 @@ export const blogPosts: BlogPost[] = [
         title: 'Hemsida-guide: allt du behöver veta om pris och leverans',
         description: 'En komplett guide för dig som funderar på att skaffa ny hemsida — från pris och leveranstid till vad som faktiskt spelar roll.',
         publishedAt: '2026-05-06',
-        status: 'draft',
+        status: 'published',
         category: 'Guide',
         tags: ['Pris', 'Guide', 'Hemsida'],
         readingTime: 7,
-        content: '',
+        content: `
+<p>Att köpa en hemsida är för de flesta ett köp man gör sällan — och det märks. Priserna varierar enormt, det är svårt att veta vad som ingår, och leveranstiderna stämmer sällan med vad som lovades från början.</p>
+
+<p>Den här guiden reder ut det. Vad kostar en hemsida egentligen, vad bör ingå, och vad ska du fråga innan du bestämmer dig?</p>
+
+<h2>Vad ingår i en hemsida?</h2>
+
+<p>En hemsida är inte ett enda sak — det är tre saker som måste fungera ihop:</p>
+
+<ul>
+  <li><strong>Design.</strong> Hur sajten ser ut. Färger, typografi, layout. Det är det första en besökare ser, och det avgör på några sekunder om de stannar kvar eller lämnar.</li>
+  <li><strong>Texter.</strong> Vad sajten säger. En snygg hemsida utan tydliga texter ger inga kunder. Besökaren behöver på ett ögonblick förstå vad du gör, vem du riktar dig till och varför de ska välja just dig.</li>
+  <li><strong>Teknik.</strong> Hur sajten fungerar. Laddningstid, att den fungerar på telefonen, att kontaktformuläret skickar iväg meddelanden, att sajten alltid är uppe. Teknik märks inte när den fungerar — men den märks direkt när den inte gör det.</li>
+</ul>
+
+<p>De flesta leverantörer är bra på ett av dessa tre. En del webbyrå levererar snygg design men glömmer texterna. En frilansare kanske kan koden men är ingen copywriter. En DIY-lösning ger dig ett verktyg men inte kompetensen att använda det rätt.</p>
+
+<p>En hemsida som faktiskt ger dig kunder behöver alla tre delarna — och de behöver fungera ihop.</p>
+
+<h2>Vad kostar olika alternativ?</h2>
+
+<p>Här är en ärlig genomgång av vad du kan förvänta dig att betala — och vad du faktiskt får:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Alternativ</th>
+      <th>Engångskostnad</th>
+      <th>Löpande kostnad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>DIY (Wix, Squarespace)</td>
+      <td><strong>0 kr</strong></td>
+      <td><strong>150–300 kr/mån</strong></td>
+    </tr>
+    <tr>
+      <td>Frilansare</td>
+      <td><strong>5 000–30 000 kr</strong></td>
+      <td>Varierar</td>
+    </tr>
+    <tr>
+      <td>Webbyrå</td>
+      <td><strong>30 000–150 000 kr+</strong></td>
+      <td><strong>1 000–5 000 kr/mån</strong></td>
+    </tr>
+    <tr>
+      <td>Fast pris (som PHIGO)</td>
+      <td><strong>8 000 kr</strong></td>
+      <td><strong>399 kr/mån</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>DIY-verktyg</strong> som Wix eller Squarespace är lockande — priset är lågt och du kan komma igång snabbt. Nackdelen är att resultatet ofta ser generiskt ut, att du lägger ner många timmar på att lära dig verktyget, och att du ensam ansvarar för allt underhåll. Fungerar om du har tid och tålamod, men är sällan rätt val för ett etablerat företag.</p>
+
+<p><strong>Frilansare</strong> varierar enormt i kvalitet och pris. En erfaren frilansare kan leverera utmärkt arbete, men det är svårt att veta vad du får på förhand. Vad händer om frilansaren slutar svara efter leveransen? Vem hjälper dig när något går sönder sex månader senare?</p>
+
+<p><strong>Webbyrå</strong> är rätt val för medelstora och stora företag med komplexa krav. För ett litet lokalt företag betalar du i regel för tjänster du inte behöver — projektledare, accountmanagers, långa avtalstider.</p>
+
+<p><strong>Fast pris</strong> — det vi på PHIGO erbjuder — är ett mellanting. Du vet exakt vad du betalar, vad som ingår och vem du pratar med. Inget mer, inga dolda avgifter.</p>
+
+<h2>Vad ingår — och vad ingår inte?</h2>
+
+<p>Oavsett vem du anlitar, fråga alltid vad som faktiskt ingår i priset. Det är inte alltid självklart.</p>
+
+<p>Det här ingår i en hemsida från PHIGO:</p>
+
+<ul>
+  <li>Design anpassad för ditt företag — inte en generisk mall</li>
+  <li>Texter skrivna för att besökare ska ta kontakt</li>
+  <li>Kontaktformulär och tydliga knappar</li>
+  <li>Funkar perfekt på mobilen</li>
+  <li>Laddar snabbt</li>
+  <li>Uppbyggd så att Google förstår vad du gör och var du finns</li>
+  <li>Vi ser till att sajten alltid är uppe (hosting och säkerhet)</li>
+  <li>Backup och löpande underhåll</li>
+  <li>Löpande support för mindre ändringar</li>
+</ul>
+
+<p>Det här ingår <em>inte</em> i en standardleverans:</p>
+
+<ul>
+  <li>Stor webbutik med hundratals produkter</li>
+  <li>Inloggningssystem eller kundportaler</li>
+  <li>Komplexa bokningssystem med betalning</li>
+  <li>Möjlighet att själv redigera texter och bilder (tillval)</li>
+</ul>
+
+<p>De flesta lokala företag — elektriker, frisörer, tandläkare, caféer — behöver inte något av det som inte ingår. De behöver en sajt som ser trovärdig ut, förklarar vad de gör och gör det lätt att ta kontakt. Det är precis vad en standardleverans ger.</p>
+
+<h2>Hur lång tid tar det?</h2>
+
+<p>En vanlig webbyrå tar 6–12 veckor. En frilansare kan ta allt från tre veckor till tre månader beroende på hur deras andra projekt ser ut.</p>
+
+<p>Vi på PHIGO levererar inom 14 dagar. Det är inte en tillfällighet — vi har byggt hela vår process kring det.</p>
+
+<p>Så här ser det ut:</p>
+
+<ol>
+  <li><strong>Dag 1–3: Vi lär känna ditt företag.</strong> Ett samtal där vi förstår vad du gör, vilka dina kunder är och vad du vill att hemsidan ska åstadkomma. Vi samlar in det vi behöver — logotyp, bilder, information om tjänster.</li>
+  <li><strong>Dag 4–12: Vi bygger din sajt.</strong> Du kan följa processen och lämna synpunkter längs vägen. Inga obehagliga överraskningar i slutet.</li>
+  <li><strong>Dag 13–14: Din sajt går live.</strong> Vi gör de sista justeringarna, testar allt och publicerar.</li>
+</ol>
+
+<p>Varför spelar leveranstiden roll? För att en hemsida som inte finns ännu inte kan ge dig en enda ny kund. Varje vecka utan sajt är en vecka där potentiella kunder hittar någon annan.</p>
+
+<h2>Vad du bör fråga innan du skriver under</h2>
+
+<p>Oavsett vem du väljer att anlita — frilansare, byrå eller ett fast pris som vårt — ställ de här frågorna innan du bestämmer dig:</p>
+
+<ol>
+  <li><strong>Vad ingår exakt i priset?</strong> Texter? Bilder? Formulär? Hur många undersidor? Be om ett skriftligt svar.</li>
+  <li><strong>Vem äger sajten när den är klar?</strong> Du ska äga din hemsida — inte vara låst till en leverantör som tar med sig sajten om du avslutar samarbetet.</li>
+  <li><strong>Vad händer om något går sönder?</strong> Finns det support? Hur snabbt kan du förvänta dig hjälp?</li>
+  <li><strong>Syns sajten när folk söker efter det jag gör?</strong> Fråga specifikt om sajten är byggd på ett sätt som gör att Google förstår ditt företag. Det är inte alltid inkluderat.</li>
+  <li><strong>Hur lång tid tar det?</strong> Och vad händer om det drar ut på tiden?</li>
+</ol>
+
+<p>En seriös leverantör svarar gärna på alla fem frågorna utan att tveka. Om svaren är vaga eller du inte får dem skriftligt — ta det som en varningssignal.</p>
+
+<h2>Det viktigaste att komma ihåg</h2>
+
+<p>Priset på en hemsida är inte det som avgör om den ger dig kunder. Det som avgör är om den är byggd med rätt sak i fokus: att besökare ska ta kontakt.</p>
+
+<p>En hemsida för 150 000 kr som ser imponerande ut men inte gör det lätt att boka eller ringa ger dig färre kunder än en hemsida för 8 000 kr som är byggd för att konvertera besökare till förfrågningar.</p>
+
+<p>Fråga inte bara "vad kostar det?" — fråga "vad kommer den ge mig?"</p>
+
+<p>Vi på PHIGO bygger hemsidor åt lokala företag som ska synas och ge fler förfrågningar. Fast pris, live inom 14 dagar. <a href="/#kontakt">Kontakta oss</a> om du vill att vi tittar på din sajt — det kostar ingenting.</p>
+        `.trim(),
         ogImage: '/images/blog/hemsida-guide.png',
     },
 ]
