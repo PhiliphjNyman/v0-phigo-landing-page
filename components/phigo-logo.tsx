@@ -6,9 +6,9 @@ interface PhigoLogoProps {
 }
 
 const sizeClasses = {
-  sm: 'text-xl',
+  sm: 'text-2xl',
   md: 'text-3xl',
-  lg: 'text-3xl',
+  lg: 'text-4xl',
 }
 
 export function PhigoLogo({ className, size = 'md' }: PhigoLogoProps) {
