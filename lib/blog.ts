@@ -124,12 +124,96 @@ export const blogPosts: BlogPost[] = [
         slug: 'hemsida-frisor',
         title: 'Hemsida för frisör — vad som faktiskt ger fler bokningar',
         description: 'Vad ska finnas på en frisörs hemsida? Vi går igenom de viktigaste delarna som gör att besökare bokar tid.',
-        publishedAt: '2026-04-15',
-        status: 'draft',
+        publishedAt: '2026-04-07',
+        status: 'published',
         category: 'Branschguide',
         tags: ['Frisör', 'Bokningar', 'Hemsida'],
         readingTime: 4,
-        content: '',
+        content: `
+<p>De flesta frisörer har en hemsida. Men väldigt få får faktiska bokningar från den.</p>
+
+<p>Det är inte för att folk inte söker. Tvärtom — "frisör [stad]" söks tusentals gånger varje månad. Problemet är vad de hittar när de klickar in.</p>
+
+<h2>Varför din hemsida inte ger bokningar (ännu)</h2>
+
+<p>Tänk på hur en ny kund hittar dig. De söker på Google, klickar på din sajt, och bestämmer sig på några sekunder om de ska boka — eller klicka vidare.</p>
+
+<p>Under de där sekunderna ställer de sig tre frågor:</p>
+
+<ol>
+  <li>Verkar det här stället bra?</li>
+  <li>Kan jag boka enkelt?</li>
+  <li>Finns det någon anledning att välja just dem?</li>
+</ol>
+
+<p>Om din hemsida inte svarar på alla tre — direkt och tydligt — försvinner de. Inte för att de inte var intresserade. Utan för att nästa sida svarade snabbare.</p>
+
+<h2>Det som faktiskt spelar roll</h2>
+
+<h3>1. Att den syns när folk söker</h3>
+
+<p>Det hjälper inte hur bra din hemsida är om ingen hittar den. Google prioriterar sajter som är snabba, välstrukturerade och tydligt handlar om det folk söker.</p>
+
+<p>En frisörsajt som syns högt för "frisör i [din stad]" får besökare varje dag — utan att du behöver göra något aktivt.</p>
+
+<h3>2. Att den fungerar på mobilen</h3>
+
+<p>Över 70 procent av alla som söker efter lokala tjänster gör det i telefonen. Om din hemsida är jobbig att navigera på en skärm i handflatsstorleken — om texten är för liten, knapparna för tätt ihop, eller laddningen tar mer än tre sekunder — stänger de flesta ner den och försöker med nästa träff.</p>
+
+<p>En hemsida som funkar perfekt på mobilen är inte en bonus. Det är ett grundkrav.</p>
+
+<h3>3. Tydliga knappar som gör det lätt att boka</h3>
+
+<p>Den vanligaste orsaken till att frisörsajter inte ger bokningar är inte att sajten ser dålig ut — det är att det är oklart vad besökaren ska göra härnäst.</p>
+
+<p>"Kontakta oss" duger inte. Besökaren vill inte behöva ringa och fråga om lediga tider. De vill boka direkt, nu, utan friktion.</p>
+
+<p>En tydlig knapp — "Boka tid" — synlig direkt när sidan laddas, gör hela skillnaden. Och om den knappen leder till ett enkelt bokningsformulär eller ett bokat samtal, inte en lång e-postadress, fungerar den.</p>
+
+<h3>4. Att den visar vem du är</h3>
+
+<p>Folk bokar inte bara ett klippresultat — de bokar en person. Din hemsida ska ge en känsla för stilen, atmosfären och kompetensen i salongen.</p>
+
+<p>Det behöver inte vara avancerat. Några riktiga foton på jobbet du gjort, en mening om vad du specialiserar dig på, och gärna ett omdöme från en nöjd kund räcker långt.</p>
+
+<p>Stockfoton och generiska texter gör motsatsen — de signalerar att ingen riktigt bryr sig om detaljerna.</p>
+
+<h3>5. Att priset syns (eller åtminstone inte döljs)</h3>
+
+<p>Många frisörer lämnar priser utanför sin hemsida för att "det beror på". Det förstår folk. Men om det inte finns någon indikation alls, väljer en del besökare bort sidan helt — de vill inte bli chockade vid kassan.</p>
+
+<p>En ungefärlig prislista, eller åtminstone ett startpris, bygger förtroende. Det signalerar öppenhet.</p>
+
+<h2>Vad en bra frisörsajt faktiskt innehåller</h2>
+
+<p>Utan krusiduller — det här är vad som fungerar:</p>
+
+<ul>
+  <li><strong>En tydlig rubrik</strong> som direkt säger vad du erbjuder och var du finns</li>
+  <li><strong>En "Boka tid"-knapp</strong> högt upp på sidan, synlig utan att scrolla</li>
+  <li><strong>Foton på riktigt arbete</strong> — inte stockfoton</li>
+  <li><strong>Prislista</strong> (eller startpris)</li>
+  <li><strong>Adress och öppettider</strong> lätta att hitta</li>
+  <li><strong>Minst ett omdöme</strong> från en riktig kund</li>
+  <li><strong>En sajt som laddar snabbt och funkar på mobilen</strong></li>
+</ul>
+
+<p>Det är det. Inget mer krävs för att gå från en hemsida som "bara finns" till en som faktiskt ger bokningar.</p>
+
+<h2>Vad händer om du inte åtgärdar det</h2>
+
+<p>Ingenting dramatiskt. Salongen fortsätter att gå runt på stamkunder och Instagramtips. Men de nya kunderna — de som söker aktivt och är redo att boka nu — hittar en konkurrent vars hemsida svarade snabbare på deras frågor.</p>
+
+<p>Varje månad med en hemsida som inte fungerar är en månad av missade bokningar.</p>
+
+<h2>Vill du veta hur din sajt presterar?</h2>
+
+<p>Vi på PHIGO tittar gärna på din hemsida och berättar konkret vad som kan förbättras — utan kostnad och utan förpliktelse.</p>
+
+<p>Vi bygger hemsidor åt lokala företag för 8 000 kr (engångskostnad) med drift för 399 kr/mån. Klart inom 14 dagar.</p>
+
+<p><a href="/#kontakt">Skicka din sajt så berättar vi vad du missar.</a></p>
+        `.trim(),
         ogImage: '/images/blog/hemsida-frisor.png',
     },
     {
