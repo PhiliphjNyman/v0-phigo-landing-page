@@ -128,6 +128,20 @@
   }
 }
 
+/* Hero LCP animation — CSS-driven so H1 is visible before JS hydrates */
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-entrance > h1 {
+  animation: hero-fade-up 0.7s ease-out forwards;
+}
+
+.hero-entrance > p {
+  animation: hero-fade-up 0.7s ease-out 0.15s both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

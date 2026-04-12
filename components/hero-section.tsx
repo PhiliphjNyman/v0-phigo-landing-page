@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 import { motion, useAnimation, useInView, useReducedMotion } from 'framer-motion'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { fadeInUp, fadeIn, staggerContainer } from '@/lib/animations'
+import { fadeInUp, fadeIn } from '@/lib/animations'
 import { PhigoMetricsBlock } from '@/components/ui/phigo-metrics-block'
 
 export function HeroSection() {
@@ -38,16 +38,8 @@ export function HeroSection() {
       <div className="relative mx-auto max-w-7xl px-4 lg:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-8">
           {/* Text Content */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-            className="flex flex-col items-center text-center lg:items-start lg:text-left"
-          >
-            <motion.h1
-              variants={fadeInUp}
-              className="mt-8 text-balance text-4xl font-extrabold leading-[1.1] tracking-tight text-foreground sm:text-6xl xl:text-7xl"
-            >
+          <div className="hero-entrance flex flex-col items-center text-center lg:items-start lg:text-left">
+            <h1 className="mt-8 text-balance text-4xl font-extrabold leading-[1.1] tracking-tight text-foreground sm:text-6xl xl:text-7xl">
               Din hemsida borde ge dig{' '}
               <span className="relative">
                 <span className="relative z-10 text-primary">kunder</span>
@@ -65,18 +57,17 @@ export function HeroSection() {
                 </svg>
               </span>
               {' '}— inte bara finnas.
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              variants={fadeInUp}
-              className="mt-8 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl"
-            >
+            <p className="mt-8 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl">
               Vi bygger hemsidor åt lokala företag som faktiskt gör att folk tar
               kontakt. Fast pris, live inom 14 dagar.
-            </motion.p>
+            </p>
 
             {/* CTA group */}
             <motion.div
+              initial="hidden"
+              animate="visible"
               variants={fadeInUp}
               className="mt-12 flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row lg:justify-start"
             >
@@ -105,6 +96,8 @@ export function HeroSection() {
 
             {/* Microcopy */}
             <motion.div
+              initial="hidden"
+              animate="visible"
               variants={fadeIn}
               className="mt-6 flex items-center gap-4 text-xs text-muted-foreground font-medium"
             >
@@ -112,7 +105,7 @@ export function HeroSection() {
               <span className="size-1 rounded-full bg-border" aria-hidden="true" />
               <span><span aria-hidden="true">✓</span> Ingen förpliktelse</span>
             </motion.div>
-          </motion.div>
+          </div>
 
           {/* Hero Visual Column */}
           <motion.div
