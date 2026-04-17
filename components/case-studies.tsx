@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { ArrowUpRight, TrendingUp, Zap, Heart } from 'lucide-react'
+import { ArrowUpRight, TrendingUp, Zap, Heart, Flame } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { fadeInUp, staggerContainer, scaleIn } from '@/lib/animations'
 import { Counter } from '@/components/ui/counter'
@@ -10,7 +10,7 @@ import { Counter } from '@/components/ui/counter'
 import Link from 'next/link'
 import { getCases } from '@/lib/cases'
 
-const cases = getCases()
+const cases = getCases().filter((c) => c.featured)
 
 const accentMap = {
   amber: 'group-hover:border-amber-500/30 text-amber-500 bg-amber-500/10',
@@ -19,6 +19,7 @@ const accentMap = {
 }
 
 const iconMap: Record<string, any> = {
+  'malte-orn': Flame,
   'leendekliniken': Heart,
   'andersson-el': Zap,
 }

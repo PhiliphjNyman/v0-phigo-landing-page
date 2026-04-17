@@ -21,6 +21,34 @@ export interface Case {
 
 export const cases: Case[] = [
     {
+        slug: 'malte-orn',
+        title: 'Malte Örn',
+        category: 'Muay Thai / Personlig profil',
+        city: 'Linköping',
+        shortDescription: 'En fighter på uppgång som behövde ett digitalt hem — ett ställe där meriter, highlights och alla sociala kanaler samlas.',
+        description: `Malte Örn är en Muay Thai-fighter från Linköping på väg uppåt. Han vinner matcher, tränar hårt och delar sin resa med tusentals följare på Instagram, YouTube och TikTok.
+
+Men när arrangörer och sponsorer sökte upp hans namn möttes de av splittrade intryck. Varje kanal berättade bara en del av historien. Det saknades ett ställe där helheten kom fram — och där rätt person enkelt kunde ta kontakt.
+
+Det fixade vi.
+
+Vi byggde en sajt för att bli ett namn. Meriter, kampstatistik och highlights presenteras samlat och tydligt — så att en arrangör på tio sekunder kan avgöra om Malte passar deras gala.
+
+En blogg han sköter helt på egen hand. Malte publicerar regelbundet om träning, recept och teknik. Varje inlägg får automatiskt sin egen sida. Inga mellanhänder, inget krångel.
+
+Full kontroll utan teknisk kunskap. Via ett enkelt inlogg kan Malte ändra texter, ladda upp bilder och skriva blogginlägg — med möjlighet att spara utkast och publicera när han är redo. Allt uppdateras direkt.
+
+Alla kanaler på ett ställe. Instagram, YouTube och TikTok samlas på sajten. Följare hittar vidare, och sponsorer behöver inte leta.
+
+Malte är nöjd. Det är vi också.`,
+        tags: ['Kundcase', 'Muay Thai', 'Linköping'],
+        liveUrl: 'https://ornmuaythai.se/',
+        heroImage: '/images/case-malte-orn.webp',
+        featured: true,
+        accent: 'amber',
+        caseType: 'real',
+    },
+    {
         slug: 'leendekliniken',
         title: 'Leendekliniken',
         category: 'Tandvård',
@@ -58,7 +86,7 @@ export const cases: Case[] = [
         tags: ['Konceptcase', 'Hantverkare', 'Linköping'],
         liveUrl: 'https://elektriker.phigo.se/',
         heroImage: '/images/case-andersson-el.png',
-        featured: true,
+        featured: false,
         accent: 'amber',
         caseType: 'concept',
     },
