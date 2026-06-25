@@ -17,7 +17,7 @@ const organizationSchema = {
   email: 'info@phigo.se',
   logo: {
     '@type': 'ImageObject',
-    url: 'https://phigo.se/icon.svg',
+    url: 'https://phigo.se/icon.png',
   },
   image: 'https://phigo.se/og-image.jpg',
   description:

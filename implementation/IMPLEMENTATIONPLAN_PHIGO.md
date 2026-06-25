@@ -61,7 +61,7 @@ Bygger trovärdighet och synlighet för lokala sökningar.
 
 Kräver riktiga kundcase och/eller ny innehållsproduktion.
 
-- [ ] **5.1** Ersätt minst ett konceptcase med ett riktigt kundcase (med tillstånd)
+- [x] **5.1** Ersätt minst ett konceptcase med ett riktigt kundcase (med tillstånd)
 - [ ] **5.2** Planera 4–6 blogginlägg som svarar på sökfrågor:
   - "Vad kostar en hemsida för småföretag?"
   - "Hemsida för elektriker / frisör / tandläkare"
@@ -107,7 +107,7 @@ Markera inte faserna som klara utan att:
 - [x] `pnpm build` kompilerar utan fel
 - [x] `/robots.txt` är åtkomlig i webbläsaren med korrekt innehåll
 - [x] `/sitemap.xml` är åtkomlig och listar alla sidor
-- [ ] Google Rich Results Test godkänner schema-implementationen
+- [x] Google Rich Results Test godkänner schema-implementationen
 - [x] Sitemap är inlagd i Google Search Console
 
 ---
