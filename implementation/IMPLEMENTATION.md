@@ -227,3 +227,9 @@ Följande är medvetna avgränsningar:
 - **Confetti/celebration-effekter** — skippad, inte premium B2B-känsla.
 - **Infinite marquee på trust bar** — riskerar att kännas billigt.
 - **Morphing SVG-former** — svårt att få premium, sparas eventuellt till senare.
+
+---
+
+## Future / backlog
+
+- **Återinför kund-logotypkarusell (trust bar)** när riktiga kunder finns — bygg från grunden med riktiga kundlogotyper och nuvarande design-tokens. Gamla `trust-bar.tsx` togs bort i städningen.
