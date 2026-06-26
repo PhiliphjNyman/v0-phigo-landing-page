@@ -160,6 +160,18 @@ Lägg till nya lessons efter varje korrigering.
 - **Regel:** För långkörande servrar under verifiering, använd tool-anropets
   `run_in_background` (håller processen vid liv mellan turer), inte `Start-Job`.
 
+### [2026-06] Verifiera mot en FÄRSK server — port 3000 kan ha en stale instans
+- **Vad hände:** Vid Fas 6-verifiering av tema-toggeln byggde jag (`pnpm build`),
+  men en server från en tidigare session låg redan kvar på port 3000. `pnpm start`
+  gav EADDRINUSE, och Playwright-testet körde mot den gamla servern → 0 toggle-
+  knappar i DOM (komponenten saknades). Misstolkades först som fel selector.
+- **Varför:** Den körande processen serverade en gammal `.next`-build utan mina
+  ändringar. En lyckad build på disk betyder inte att den körande servern laddat om.
+- **Regel:** Innan verifiering, säkerställ att servern på 3000 kör senaste build:
+  döda den befintliga processen (`Get-NetTCPConnection -LocalPort 3000 ... |
+  Stop-Process`) och starta om med `run_in_background`. Om `pnpm start` ger
+  EADDRINUSE — anta INTE att den gamla servern duger; den är troligen stale.
+
 ---
 
 ## Att lägga till löpande

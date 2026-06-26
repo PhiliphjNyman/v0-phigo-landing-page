@@ -12,6 +12,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { PhigoLogo } from '@/components/phigo-logo'
+import { ThemeToggle } from '@/components/theme-toggle'
 import { cn } from '@/lib/utils'
 
 import Link from 'next/link'
@@ -106,6 +107,9 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
+          {/* Theme toggle — desktop, right of the nav links */}
+          <ThemeToggle className="hidden md:inline-flex" />
+
           <Button
             asChild
             size="sm"
@@ -113,6 +117,9 @@ export function Header() {
           >
             <Link href="/#kontakt">Se vad din hemsida missar</Link>
           </Button>
+
+          {/* Theme toggle — mobile, visible in the top bar (no menu needed) */}
+          <ThemeToggle className="size-11 md:hidden" />
 
           {/* Mobile menu */}
           <Sheet open={open} onOpenChange={setOpen}>
