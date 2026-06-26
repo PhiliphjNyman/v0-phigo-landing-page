@@ -14,7 +14,7 @@ const faqs = [
   {
     question: 'Vad kostar en hemsida?',
     answer:
-      'En hemsida kostar 8 000 kr exkl. moms (engång) och 399 kr/mån exkl. moms för drift, säkerhet och support. Inga dolda kostnader — priset är fast oavsett hur lång tid det tar.',
+      'En hemsida kostar 8 000 kr exkl. moms (engång) och 399 kr/mån exkl. moms för drift, säkerhet och support. Inga dolda kostnader. Priset är fast oavsett hur lång tid det tar.',
     icon: CreditCard,
   },
   {
@@ -26,13 +26,13 @@ const faqs = [
   {
     question: 'Vad händer efter att sajten är live?',
     answer:
-      'Vi ser till att sajten alltid är uppe och funkar. Månadsavgiften på 399 kr/mån (exkl. moms) täcker hosting, säkerhet och mindre ändringar — som att uppdatera öppettider, priser eller kontaktuppgifter.',
+      'Vi ser till att sajten alltid är uppe och funkar. Månadsavgiften på 399 kr/mån (exkl. moms) täcker hosting, säkerhet och mindre ändringar, som att uppdatera öppettider, priser eller kontaktuppgifter.',
     icon: ShieldCheck,
   },
   {
     question: 'Fungerar sajten på mobilen?',
     answer:
-      'Ja. Alla sajter vi bygger fungerar perfekt på mobilen — det är ofta där dina kunder hittar dig.',
+      'Ja. Alla sajter vi bygger fungerar perfekt på mobilen. Det är ofta där dina kunder hittar dig.',
     icon: Smartphone,
   },
   {
@@ -44,13 +44,13 @@ const faqs = [
   {
     question: 'Behöver du ändra texter och bilder själv?',
     answer:
-      'Ja. Vi kan lägga till ett enkelt admin-system där du ändrar texter, bilder och priser själv — utan att kunna något om teknik. Det är ett tillägg utöver baspaketet. Vill du hellre slippa helt gör vi det åt dig — mindre ändringar ingår i månadsavtalet.',
+      'Ja. Vi kan lägga till ett enkelt admin-system där du ändrar texter, bilder och priser själv, utan att kunna något om teknik. Det är ett tillägg utöver baspaketet. Vill du hellre slippa helt gör vi det åt dig. Mindre ändringar ingår i månadsavtalet.',
     icon: Pencil,
   },
   {
     question: 'Kan jag köpa bara hemsidan utan månadsavtal?',
     answer:
-      'Ja, det går bra. Vi bygger sajten och överlämnar den till dig. Då ansvarar du själv för hosting, säkerhet och uppdateringar. De flesta av våra kunder väljer månadsavtalet för att slippa tänka på teknik — men det är inget krav.',
+      'Ja, det går bra. Vi bygger sajten och överlämnar den till dig. Då ansvarar du själv för hosting, säkerhet och uppdateringar. De flesta av våra kunder väljer månadsavtalet för att slippa tänka på teknik, men det är inget krav.',
     icon: PackageMinus,
   },
 ]

@@ -14,7 +14,7 @@ const steps = [
   {
     number: '2',
     title: 'Vi bygger en ny hemsida',
-    description: 'En enkel, snabb och tydlig sajt byggd för att besökare ska ta kontakt — inte bara titta.',
+    description: 'En enkel, snabb och tydlig sajt byggd för att besökare ska ta kontakt, inte bara titta.',
   },
   {
     number: '3',
@@ -68,7 +68,7 @@ export function OfferSection() {
             variants={fadeInUp}
             className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-muted-foreground"
           >
-            De flesta hemsidor behandlar alla besökare likadant — vi bygger ett
+            De flesta hemsidor behandlar alla besökare likadant. Vi bygger ett
             tydligt flöde som gör att rätt person tar kontakt med dig.
           </motion.p>
         </motion.div>
@@ -152,7 +152,7 @@ export function OfferSection() {
               </div>
               <p className="mt-1 text-xs text-muted-foreground/70">exkl. moms</p>
               <p className="mt-1 text-sm text-muted-foreground">
-                + <span className="font-semibold text-foreground">399 kr/mån</span> <span className="text-xs text-muted-foreground/70">(exkl. moms)</span> — drift, säkerhet och support
+                + <span className="font-semibold text-foreground">399 kr/mån</span> <span className="text-xs text-muted-foreground/70">(exkl. moms)</span>, drift, säkerhet och support
               </p>
             </div>
 
@@ -177,7 +177,7 @@ export function OfferSection() {
               className="h-auto min-h-12 w-full cursor-pointer whitespace-normal rounded-2xl bg-primary py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-[transform,background-color,box-shadow] duration-200 hover:scale-[1.02] hover:bg-primary/90 hover:shadow-2xl active:scale-[0.98] sm:min-h-14 sm:py-0 sm:text-base"
             >
               <a href="#kontakt">
-                Se vad din hemsida missar — kostnadsfritt
+                Se vad din hemsida missar, kostnadsfritt
                 <ArrowRight className="ml-2 size-5" aria-hidden="true" />
               </a>
             </Button>

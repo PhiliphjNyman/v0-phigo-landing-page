@@ -53,7 +53,7 @@ export function HeroSection() {
                   />
                 </svg>
               </span>
-              {' '}— inte bara finnas.
+              , inte bara finnas.
             </h1>
 
             <p className="mt-8 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl">
@@ -74,7 +74,7 @@ export function HeroSection() {
                 className="h-auto w-full cursor-pointer rounded-2xl bg-primary px-6 py-4 text-base font-semibold whitespace-normal text-center text-primary-foreground shadow-xl shadow-primary/20 transition-[transform,background-color,box-shadow] duration-200 hover:scale-[1.02] hover:bg-primary/90 hover:shadow-2xl hover:shadow-primary/30 active:scale-[0.98] sm:h-14 sm:w-auto sm:whitespace-nowrap sm:px-10 sm:py-0"
               >
                 <a href="#kontakt">
-                  Se vad din hemsida missar — kostnadsfritt
+                  Se vad din hemsida missar, kostnadsfritt
                   <ArrowRight className="ml-2 size-5 shrink-0" aria-hidden="true" />
                 </a>
               </Button>

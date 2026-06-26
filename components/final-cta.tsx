@@ -32,7 +32,7 @@ export function FinalCta() {
               variants={fadeInUp}
               className="mx-auto mt-4 max-w-xl text-pretty leading-relaxed text-anchor-fg-muted"
             >
-              Vi granskar din sajt och visar konkret vad som kan förbättras —
+              Vi granskar din sajt och visar konkret vad som kan förbättras,
               kostnadsfritt och utan förpliktelse.
             </motion.p>
             <motion.div
@@ -45,7 +45,7 @@ export function FinalCta() {
                 className="cursor-pointer rounded-xl bg-white px-8 text-anchor-ink shadow-lg shadow-black/25 hover:bg-white/90 hover:shadow-xl hover:shadow-black/30 focus-visible:border-white focus-visible:ring-white/70 active:scale-[0.98] transition-[transform,background-color,box-shadow] duration-200"
               >
                 <a href="#kontakt">
-                  Skicka din sajt — vi visar vad du missar
+                  Skicka din sajt, vi visar vad du missar
                   <ArrowRight className="ml-1 size-4" aria-hidden="true" />
                 </a>
               </Button>

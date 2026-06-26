@@ -9,22 +9,22 @@ import * as Framer from '@/components/framer-exports'
 
 export const metadata: Metadata = {
     title: 'Hemsidor vi byggt – Exempel | PHIGO',
-    description: 'Se hemsidor vi byggt åt lokala företag – tandläkare, elektriker, frisörer och hantverkare. Fast pris 8 000 kr exkl. moms. Klart inom 14 dagar.',
+    description: 'Se hemsidor vi byggt åt lokala företag, tandläkare, elektriker, frisörer och hantverkare. Fast pris 8 000 kr exkl. moms. Klart inom 14 dagar.',
     alternates: {
         canonical: 'https://phigo.se/cases',
     },
     openGraph: {
         title: 'Hemsidor vi byggt – Exempel | PHIGO',
-        description: 'Se hemsidor vi byggt åt lokala företag – tandläkare, elektriker, frisörer och hantverkare. Fast pris 8 000 kr exkl. moms. Klart inom 14 dagar.',
+        description: 'Se hemsidor vi byggt åt lokala företag, tandläkare, elektriker, frisörer och hantverkare. Fast pris 8 000 kr exkl. moms. Klart inom 14 dagar.',
         url: 'https://phigo.se/cases',
         type: 'website',
         locale: 'sv_SE',
-        images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'PHIGO – Hemsidor som ger dig fler kunder' }],
+        images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'PHIGO, Hemsidor som ger dig fler kunder' }],
     },
     twitter: {
         card: 'summary_large_image',
         title: 'Hemsidor vi byggt – Exempel | PHIGO',
-        description: 'Se hemsidor vi byggt åt lokala företag – tandläkare, elektriker, frisörer och hantverkare. Fast pris 8 000 kr exkl. moms. Klart inom 14 dagar.',
+        description: 'Se hemsidor vi byggt åt lokala företag, tandläkare, elektriker, frisörer och hantverkare. Fast pris 8 000 kr exkl. moms. Klart inom 14 dagar.',
     },
 }
 

@@ -329,6 +329,35 @@ Lägg till nya lessons efter varje korrigering.
   (annars out-of-bounds svart från crop utanför bilden). Sampla ett tätt rutnät
   över alla kort och ta MIN-ratio (ljusaste mesh-ytan = värsta fallet i mörkt).
 
+### [2026-06] Em-dash-svep: komma/punkt-regler + JSX `{' '}—`-fälla
+- **Vad hände:** Fas 7 rensade em-dash (—) ur all kundvänd copy (komponenter,
+  `lib/cases.ts`, `lib/blog.ts`, metadata-beskrivningar, integritetspolicy).
+  Regel 15 lades till i CLAUDE.md.
+- **Bedömning per instans:** hårt tankebrott (egen fullständig sats) → punkt +
+  versal på nästa ord; lätt paus/apposition/antites ("X — inte Y", "X — och Y")
+  → komma; parentetiska par ("ord — inskott — ord") → komma på båda; i listor där
+  förklaringen efter strecket är en egen sats ("Term — den gör Z.") → punkt
+  ("Term. Den gör Z.") för konsekvens.
+- **Behölls medvetet (inte paus-streck):** en-dash i sifferintervall
+  (`8 000–15 000 kr`, `Dag 1–3`, `150–300 kr/mån`), titelseparatorer i metadata
+  (`Titel – PHIGO`, `... | PHIGO`) och interna mejlmallar i `app/api/contact/route.ts`
+  (visas aldrig för besökaren). OG-`alt` och `aria-label` med "PHIGO – tagline"
+  gjordes om till komma (läses upp av skärmläsare → räknas som synlig text).
+- **JSX-fälla:** hero-rubriken var `...kunder</span>{' '}— inte bara finnas.`. När
+  em-dash blir komma MÅSTE den explicita `{' '}` (mellanslaget) tas bort, annars
+  renderas "kunder , inte" (komma med space före). Rätt: `</span>, inte bara finnas.`
+  så att kommat sitter direkt mot ordet. (Hero-beslutet blev komma, inte punkt —
+  "X, inte bara Y" är den naturliga svenska antites-konstruktionen, lugnare än en
+  fragment-mening.)
+- **Verifieringsfälla:** att strippa HTML-taggar till mellanslag gör att
+  "kunder, inte" ser ut som "kunder , inte" i den strippade texten (taggen `</span>`
+  blev ett mellanslag). Bekräfta kommats placering mot RÅ-HTML (`</span>, inte`),
+  inte mot tag-strippad text. Räkna `—`/`–` i strippad text för att hitta läckor
+  (0 = rent), men verifiera spacing i rå-HTML.
+- **Regel:** Följ CLAUDE.md regel 15. Vid em-dash → komma intill ett ord i JSX:
+  ta bort ev. `{' '}` så kommat fäster direkt. Lämna sifferintervall och
+  titelseparatorer som en-dash.
+
 ---
 
 ## Att lägga till löpande

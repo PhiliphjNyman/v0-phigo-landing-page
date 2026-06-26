@@ -74,7 +74,7 @@ export function Header() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 lg:px-6">
-        <Link href="/" aria-label="PHIGO – Gå till startsidan">
+        <Link href="/" aria-label="PHIGO, gå till startsidan">
           <PhigoLogo size="md" />
         </Link>
 

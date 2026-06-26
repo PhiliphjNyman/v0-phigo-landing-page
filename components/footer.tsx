@@ -22,7 +22,7 @@ export function Footer() {
             </Link>
             <p className="mt-3 text-sm leading-relaxed text-pretty text-muted-foreground">
               Vi bygger hemsidor som ger lokala företag fler kunder. Baserade i
-              Linköping — klart inom 14 dagar.
+              Linköping, klart inom 14 dagar.
             </p>
           </div>
 

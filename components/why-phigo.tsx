@@ -56,7 +56,7 @@ export function WhyPhigo() {
               variants={fadeInUp}
               className="mt-4 text-pretty leading-relaxed text-muted-foreground"
             >
-              Vi bygger hemsidor för lokala företag som vill ha fler kunder —
+              Vi bygger hemsidor för lokala företag som vill ha fler kunder,
               inte en snygg sajt som ingen agerar på.
             </motion.p>
 

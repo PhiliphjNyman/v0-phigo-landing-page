@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     url: 'https://phigo.se/integritetspolicy',
     type: 'website',
     locale: 'sv_SE',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'PHIGO – Hemsidor som ger dig fler kunder' }],
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'PHIGO, Hemsidor som ger dig fler kunder' }],
   },
   twitter: {
     card: 'summary',
@@ -112,7 +112,7 @@ export default function IntegritetspolicyPage() {
           </p>
           <ul>
             <li>
-              <strong className="text-foreground">Resend</strong> — den
+              <strong className="text-foreground">Resend</strong>, den
               tjänst vi använder för att skicka och ta emot e-post. Resend
               behandlar uppgifterna enbart för att möjliggöra mailutskicket och
               agerar som personuppgiftsbiträde under vår instruktion.
@@ -140,20 +140,20 @@ export default function IntegritetspolicyPage() {
           </p>
           <ul>
             <li>
-              <strong className="text-foreground">Rätt till insyn</strong> —
-              du kan begära ett utdrag av de uppgifter vi har om dig.
+              <strong className="text-foreground">Rätt till insyn</strong>. Du
+              kan begära ett utdrag av de uppgifter vi har om dig.
             </li>
             <li>
-              <strong className="text-foreground">Rätt till rättelse</strong>{' '}
-              — du kan begära att felaktiga uppgifter korrigeras.
+              <strong className="text-foreground">Rätt till rättelse</strong>.{' '}
+              Du kan begära att felaktiga uppgifter korrigeras.
             </li>
             <li>
-              <strong className="text-foreground">Rätt till radering</strong>{' '}
-              — du kan begära att dina uppgifter raderas.
+              <strong className="text-foreground">Rätt till radering</strong>.{' '}
+              Du kan begära att dina uppgifter raderas.
             </li>
             <li>
-              <strong className="text-foreground">Rätt att återkalla samtycke</strong>{' '}
-              — du kan när som helst återkalla ditt samtycke, utan att det
+              <strong className="text-foreground">Rätt att återkalla samtycke</strong>.{' '}
+              Du kan när som helst återkalla ditt samtycke, utan att det
               påverkar lagligheten av behandling som skett dessförinnan.
             </li>
           </ul>

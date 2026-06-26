@@ -9,7 +9,7 @@ const founders = [
     initials: 'HR',
     name: 'Hugo Ramström Örn',
     role: 'Grundare & webbutvecklare',
-    bio: 'Bygger sajter med fokus på konvertering och prestanda. Har sett för många lokala företag förlora kunder till en sajt som inte gör sitt jobb — det är vad PHIGO är till för att ändra på.',
+    bio: 'Bygger sajter med fokus på konvertering och prestanda. Har sett för många lokala företag förlora kunder till en sajt som inte gör sitt jobb. Det är vad PHIGO är till för att ändra på.',
   },
   {
     initials: 'PN',
@@ -48,7 +48,7 @@ export function AboutSection() {
           >
             Vi är Hugo och Philip, två webbutvecklare från Linköping. Vi tröttnade på
             att se lokala företag betala dyrt för generiska sajter som aldrig gav dem
-            fler kunder — och bestämde oss för att göra det bättre.
+            fler kunder, och bestämde oss för att göra det bättre.
           </motion.p>
 
           <motion.div

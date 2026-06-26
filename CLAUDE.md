@@ -424,6 +424,7 @@ Markera aldrig en uppgift som klar utan att:
 12. **Aldrig tekniska begrepp i kundvänd text.** Följ ordlistan.
 13. **Aldrig pris på tilläggstjänster i FAQ.** Baspris visas, tillägg beskrivs utan siffra.
 14. **Grönt = accent, aldrig yta i ljust läge.** I ljust läge får emerald endast användas på accenter (knappar, logotyp, länkar, fokusringar, ikoner) — aldrig som bakgrunds- eller yttton. I mörkt läge behålls den gröna yttonen (hue 160) i ytsystemet. `--primary` är samma i båda lägena.
+15. **Inga em-dash (—) i synlig text.** Hårda tankebrott → punkt och ny mening; lätta pauser → komma. Em-dash (och en-dash – använd som paus) läses som "AI-skrivet" och ska undvikas i all kundvänd copy. Undantag: en-dash i sifferintervall (8 000–15 000 kr, Dag 1–3) och som titelseparator i metadata (`Titel – PHIGO`).
 
 ---
 

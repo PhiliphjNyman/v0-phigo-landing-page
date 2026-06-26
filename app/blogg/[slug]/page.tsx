@@ -196,14 +196,14 @@ export default async function BloggPostPage({ params }: { params: Promise<{ slug
                             Vill du veta hur din hemsida kan ge dig fler kunder?
                         </h2>
                         <p className="text-background/70 mb-8 leading-relaxed">
-                            Vi granskar din nuvarande sajt och visar konkret vad som kan förbättras — kostnadsfritt och utan förpliktelse.
+                            Vi granskar din nuvarande sajt och visar konkret vad som kan förbättras, kostnadsfritt och utan förpliktelse.
                         </p>
                         <Button
                             size="lg"
                             className="h-12 px-8 rounded-2xl bg-primary text-primary-foreground font-bold hover:scale-105 transition-transform"
                             asChild
                         >
-                            <Link href="/#kontakt">Skicka din sajt — vi visar vad du missar</Link>
+                            <Link href="/#kontakt">Skicka din sajt, vi visar vad du missar</Link>
                         </Button>
                     </div>
                 </article>

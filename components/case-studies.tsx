@@ -58,7 +58,7 @@ export function CaseStudies() {
             className="max-w-md text-pretty text-center text-muted-foreground sm:text-right"
           >
             Här är exempel på hemsidor vi byggt åt företag som ditt. Varje sajt
-            är byggd för att besökare ska ta kontakt — inte bara titta.
+            är byggd för att besökare ska ta kontakt, inte bara titta.
           </motion.p>
         </div>
 
