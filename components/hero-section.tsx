@@ -6,6 +6,7 @@ import { ArrowRight, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { fadeInUp, fadeIn } from '@/lib/animations'
 import { PhigoMetricsBlock } from '@/components/ui/phigo-metrics-block'
+import { HeroMesh } from '@/components/hero-mesh'
 
 export function HeroSection() {
   const arrowRef = useRef(null)
@@ -28,12 +29,8 @@ export function HeroSection() {
 
   return (
     <section className="relative flex min-h-dvh items-center overflow-hidden pt-20 pb-16 lg:pt-32">
-      {/* Background Effects */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        {/* Blur blobs hidden on mobile — mix-blend-screen + large blur causes scroll jank */}
-        <div className="hidden md:block absolute -top-[10%] -left-[10%] size-[500px] rounded-full bg-primary/10 blur-[120px]" />
-        <div className="hidden md:block absolute top-[20%] -right-[10%] size-[400px] rounded-full bg-accent-hero/5 blur-[100px]" />
-      </div>
+      {/* Background — Stripe-style emerald mesh sweep (top-right, fades to center-left) */}
+      <HeroMesh />
 
       <div className="relative mx-auto max-w-7xl px-4 lg:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-8">

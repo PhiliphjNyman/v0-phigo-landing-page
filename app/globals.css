@@ -176,6 +176,130 @@
     );
 }
 
+/* Hero mesh-gradient sweep — Stripe-style WOVEN emerald bands concentrated in
+   the top-right, dissolving toward center-left. Rather than one diffuse blob,
+   several distinct ribbons of DIFFERENT emerald shades (light → mid → deep →
+   near-black, hue ~160) cross at different angles and weave past each other,
+   giving visible directional structure. Each band is an elongated ellipse
+   (high aspect ratio) rotated to its own base angle; blur is moderate — enough
+   to soften, not so much that the ribbons merge back into a blob. A STATIC
+   radial mask (anchored top-right) handles the diffuse fade so there are no
+   hard edges and the bottom/left fall fully to transparent. The bands animate
+   ONLY transform (slow drift + slight rotate + scale around their base angle),
+   so frames are GPU-composited — blur radius, mask and background never animate.
+   The resting (base-transform) layout is already a complete woven mesh, so
+   disabling the animation (mobile / reduced-motion) yields a clean static
+   sweep. */
+.hero-mesh {
+  -webkit-mask-image: radial-gradient(135% 120% at 100% 0%, #000 0%, #000 30%, transparent 70%);
+  mask-image: radial-gradient(135% 120% at 100% 0%, #000 0%, #000 30%, transparent 70%);
+}
+
+.hero-mesh__band {
+  position: absolute;
+  border-radius: 9999px;
+  /* Static blur — softens each ribbon once; never animated (no per-frame
+     repaint). Lighter than the old blob blur so bands stay separable. */
+  filter: blur(40px);
+}
+
+/* Light emerald — large, airy ribbon that sets the soft top glow. */
+.hero-mesh__band--1 {
+  top: -14%;
+  right: -22%;
+  width: 90%;
+  height: 40%;
+  background: radial-gradient(ellipse closest-side at 50% 50%, oklch(0.85 0.10 162) 0%, oklch(0.85 0.10 162) 26%, transparent 78%);
+  transform: rotate(-26deg);
+  filter: blur(52px);
+}
+/* Mid emerald — the main body ribbon, weaving across the light wash. */
+.hero-mesh__band--2 {
+  top: 2%;
+  right: -12%;
+  width: 80%;
+  height: 26%;
+  background: radial-gradient(ellipse closest-side at 50% 50%, oklch(0.72 0.165 161) 0%, oklch(0.72 0.165 161) 24%, transparent 76%);
+  transform: rotate(17deg);
+}
+/* Deep emerald — narrower ribbon threading under the body for depth. */
+.hero-mesh__band--3 {
+  top: -20%;
+  right: -4%;
+  width: 72%;
+  height: 20%;
+  background: radial-gradient(ellipse closest-side at 50% 50%, oklch(0.50 0.145 160) 0%, oklch(0.50 0.145 160) 22%, transparent 75%);
+  transform: rotate(-13deg);
+  filter: blur(36px);
+}
+/* Near-black emerald — short, deepest ribbon tucked into the very corner. */
+.hero-mesh__band--4 {
+  top: -12%;
+  right: -16%;
+  width: 50%;
+  height: 18%;
+  background: radial-gradient(ellipse closest-side at 50% 50%, oklch(0.33 0.085 158) 0%, oklch(0.33 0.085 158) 22%, transparent 74%);
+  transform: rotate(34deg);
+  filter: blur(34px);
+}
+/* Bright emerald — thin highlight streak crossing the weave, the sense of flow. */
+.hero-mesh__band--5 {
+  top: 24%;
+  right: -2%;
+  width: 66%;
+  height: 13%;
+  background: radial-gradient(ellipse closest-side at 50% 50%, oklch(0.86 0.085 164) 0%, oklch(0.86 0.085 164) 20%, transparent 76%);
+  transform: rotate(-43deg);
+  filter: blur(30px);
+}
+
+/* Motion only where it belongs: desktop + motion-allowed. Mobile and
+   reduced-motion keep the static resting weave (and skip will-change so we
+   don't hold idle compositor layers). Each keyframe carries the band's base
+   rotation so the ribbon drifts around its angle rather than snapping flat. */
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .hero-mesh__band {
+    will-change: transform;
+  }
+  .hero-mesh__band--1 {
+    animation: hero-mesh-drift-1 27s ease-in-out infinite;
+  }
+  .hero-mesh__band--2 {
+    animation: hero-mesh-drift-2 31s ease-in-out infinite;
+  }
+  .hero-mesh__band--3 {
+    animation: hero-mesh-drift-3 24s ease-in-out infinite;
+  }
+  .hero-mesh__band--4 {
+    animation: hero-mesh-drift-4 29s ease-in-out infinite;
+  }
+  .hero-mesh__band--5 {
+    animation: hero-mesh-drift-5 22s ease-in-out infinite;
+  }
+}
+
+@keyframes hero-mesh-drift-1 {
+  0%, 100% { transform: rotate(-26deg) translate3d(0, 0, 0) scale(1); }
+  50%      { transform: rotate(-23deg) translate3d(-3%, 4%, 0) scale(1.06); }
+}
+@keyframes hero-mesh-drift-2 {
+  0%, 100% { transform: rotate(17deg) translate3d(0, 0, 0) scale(1.03); }
+  50%      { transform: rotate(20deg) translate3d(4%, -3%, 0) scale(0.96); }
+}
+@keyframes hero-mesh-drift-3 {
+  0%, 100% { transform: rotate(-13deg) translate3d(0, 0, 0) scale(1); }
+  50%      { transform: rotate(-10deg) translate3d(3%, 4%, 0) scale(1.08); }
+}
+@keyframes hero-mesh-drift-4 {
+  0%, 100% { transform: rotate(34deg) translate3d(0, 0, 0) scale(1); }
+  33%      { transform: rotate(31deg) translate3d(-4%, -2%, 0) scale(1.07); }
+  66%      { transform: rotate(37deg) translate3d(3%, 3%, 0) scale(0.95); }
+}
+@keyframes hero-mesh-drift-5 {
+  0%, 100% { transform: rotate(-43deg) translate3d(0, 0, 0) scale(1); }
+  50%      { transform: rotate(-46deg) translate3d(-3%, 2%, 0) scale(1.1); }
+}
+
 /* Hero LCP animation — CSS-driven so H1 is visible before JS hydrates */
 @keyframes hero-fade-up {
   from { opacity: 0; transform: translateY(16px); }

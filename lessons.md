@@ -247,6 +247,88 @@ Lägg till nya lessons efter varje korrigering.
   mörk-emeralden (värsta fall = gradientens ljusaste stop): rubrik 10,5:1,
   undertext 8,2:1, knapptext (mörk-emerald på vit) 11,5:1 — alla klarar AA.
 
+### [2026-06] Stripe-lik mesh-sweep: STATISK mask + blobbar som animerar ENBART transform
+- **Vad hände:** Fas 6 steg 4 lade en animerad emerald mesh-gradient i hero
+  (`components/hero-mesh.tsx` + `.hero-mesh*` i globals.css). Sweepen ska kännas
+  som Stripe: mjuka emerald-moln koncentrerade uppe till HÖGER som löses upp diffust
+  mot center-vänster, utan hårda kanter, med långsam meditativ rörelse.
+- **Teknik som funkade:** 4 absolut-positionerade radial-gradient-"blobbar" (ljus →
+  mid → djup → nära-svart emerald, hue ~160), var och en `filter: blur(64px)`
+  (statiskt, aldrig animerat). Den diffusa uttoningen görs av en **statisk**
+  `mask-image: radial-gradient(... at 100% 0%, #000 .. , transparent 66%)` på
+  containern — inte av animerade properties. Blobbarna driver med
+  `@keyframes` som ENBART rör `transform: translate3d()/scale()` (20–31 s loopar).
+  Resultat: varje frame är GPU-komponerad, ingen repaint (blur/mask/bakgrund är
+  konstanta). Vilo-läget (utan transform) är redan en komplett mesh.
+- **Regel/perf:** För en kontinuerligt animerad gradient-atmosfär: animera ALDRIG
+  blur-radie, `background-position`, mask eller färg. Lägg blur+mask statiskt och
+  animera bara `transform` på blobbarna. `will-change: transform` ENDAST i den
+  media-query där animationen faktiskt körs (`min-width:768px` +
+  `prefers-reduced-motion: no-preference`) — så mobil och reduced-motion får den
+  statiska meshen utan att hålla tomma compositor-lager. Eftersom vilo-läget är en
+  hel mesh blir reduced-motion-fallbacken gratis (en ren statisk version).
+- **Ljus vs mörk:** Samma emerald-shades i båda lägena (oklch-stops i CSS-klass,
+  inte JSX — jfr anchor-lessonen). Endast wrapper-opaciteten skiljer:
+  `opacity-65 dark:opacity-100`, så sweepen blir en mjuk hörn-accent på den nära-vita
+  heron i ljust läge och ett fylligare sken på den mörka heron — sidan läser
+  fortfarande som LJUS i ljust läge.
+- **Glas-kort över mesh:** Metrics-korten gjordes till ljust glas
+  (`bg-card/60 dark:bg-card/45 backdrop-blur-md`) så meshen syns mjukt bakom. Glaset
+  + blur normaliserar ytan; uppmätt kontrast (kanvas-konverterade textfärger mot
+  uppmätt glas-yta): ljust läge värde 17,0:1 / brödtext 5,65:1, mörkt läge
+  15,5:1 / 5,55:1 — alla klarar AA.
+
+### [2026-06] Mät kontrast mot UPPMÄTT yta — computed `color` kan vara oklab
+- **Vad hände:** Vid kontrollen av kort-text över meshen ville jag mäta riktiga
+  ratios. `getComputedStyle(el).color` returnerade `oklab(...)`/`oklch(...)` (inte
+  rgb), så naiv regex-parsning kraschade.
+- **Regel:** Konvertera valfri CSS-färg till sRGB i webbläsaren via en 1×1 canvas
+  (`ctx.fillStyle = col; ctx.fillRect(); getImageData`) innan WCAG-beräkning. Och
+  när text ligger på en halvtransparent yta över en gradient: sampla den FAKTISKT
+  renderade ytfärgen från en screenshot (medelvärde av en tom kort-yta) — räkna inte
+  mot tokenens nominella bakgrund, för glas + mesh ger en annan effektiv yta.
+
+### [2026-06] Woven BANDS, inte en blob: elongerade ellipser med olika vinklar
+- **Vad hände:** Fas 6 steg 4b. Den första mesh-versionen (4 cirkulära
+  `closest-side`-radialer med blur(64px)) läste som EN diffus grön blob — ingen
+  riktning, ingen struktur. Målet var Stripes form: flera distinkta emerald-
+  ribbons i olika SHADES som väver om varandra.
+- **Varför blob:** Cirkulär radial (lika bred/hög) + tung blur = ingen riktning,
+  och 64px blur smälter ihop alla lager till ett moln. Strukturen försvinner.
+- **Teknik som gav woven bands:** Byt cirkel → **elongerad ellips**
+  (`radial-gradient(ellipse closest-side ...)` i en bred/låg box, t.ex. 80%×26%),
+  och rotera varje band till sin EGEN basvinkel (-43°, -26°, -13°, +17°, +34°) så
+  de korsar varandra. **Lättare blur (30–52px, inte 64)** så ribbonsen förblir
+  separerbara istället för att smälta till blob. Inre platå i gradienten
+  (`färg 0% → färg ~22% → transparent ~76%`) ger varje ribbon en solid kärna som
+  tonar ut — mer ribbon-känsla än en ren radial. 5 band (ljus wash → mid body →
+  djup → nära-svart hörn → tunn ljus highlight-streak) ger den vävda formen.
+- **Rotation + animation:** Basvinkeln sätts som `transform: rotate(Xdeg)` i
+  default-regeln (statiskt/reduced-motion ser roterade ribbons). Keyframes MÅSTE
+  inkludera basrotationen (`rotate(-26deg) translate3d(...) scale(...)`) annars
+  snäpper bandet platt vid animationsstart. Animerar fortfarande ENBART transform
+  (drift + liten rotate-wobble + scale); blur/mask/färg statiska → GPU-komponerat,
+  ingen repaint. Reduced-motion = `animationName: none` på alla band (verifierat).
+- **Mer djup i ljust läge:** Höjde wrapper-opacitet 0.65 → 0.90 i ljust läge
+  (`opacity-90 dark:opacity-100`). Djupet kommer från de MÖRKA banden (0.72/0.50/
+  0.33 L), inte de ljusa — så när kontrast krävde nedtoning kunde de två LJUSASTE
+  banden dämpas (0.88→0.85, 0.91→0.86) utan att tappa ljus-lägets rikedom.
+  Sidan läser fortfarande ljus (rent vänster/center, sweep = djärv hörn-accent).
+- **Kontrast-regression att se upp för:** Rikare/ljusare band läcker mer ljus
+  genom glas-korten i MÖRKT läge → sänkte beskrivningstextens kontrast från 5,55:1
+  till 4,06:1 (under AA). Fix: höj mörk-lägets glas-opacitet (`dark:bg-card/45` →
+  `/66`) + dämpa de två ljusaste banden. Slutvärden (uppmätt mot ljusaste glas-yta
+  under sweepen): ljust värde 16,4:1 / brödtext 5,45:1; mörkt värde 12,7:1 /
+  brödtext 4,57:1 — alla AA. **Regel:** när du gör hero-meshen ljusare/rikare,
+  mät ALLTID om glas-kortens text i MÖRKT läge — den ljusare ytan kan tippa den
+  lilla brödtexten under 4,5:1.
+- **Mät worst-case rätt:** Att sampla "tom kort-yta" på fasta fraktioner träffar
+  ofta TEXT (etiketter/delta) eller anti-aliasade text-kanter (mid-grå pixlar med
+  spread ≥5 som ser ut som yta). Filtrera bort dem: kräv låg patch-variance
+  (`max per-kanal-spread < 14` = platt glas, inte glyf-kant) OCH `max(rgb) ≥ 4`
+  (annars out-of-bounds svart från crop utanför bilden). Sampla ett tätt rutnät
+  över alla kort och ta MIN-ratio (ljusaste mesh-ytan = värsta fallet i mörkt).
+
 ---
 
 ## Att lägga till löpande
