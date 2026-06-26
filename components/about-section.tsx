@@ -46,9 +46,13 @@ export function AboutSection() {
             variants={fadeInUp}
             className="mt-4 max-w-xl text-pretty leading-relaxed text-muted-foreground"
           >
-            Vi är Hugo och Philip, två webbutvecklare från Linköping. Vi tröttnade på
-            att se lokala företag betala dyrt för generiska sajter som aldrig gav dem
-            fler kunder, och bestämde oss för att göra det bättre.
+            Vi heter Hugo och Philip och studerar kognitionsvetenskap tillsammans
+            på Linköpings universitet. Det innebär människa-dator-interaktion:
+            hur ögat rör sig över en sida, var uppmärksamheten fastnar,
+            vad får någon att klicka istället för att lämna sidan.
+            Detta är varför PHIGO finns. Vi bygger inte hemsidor
+            på känsla, utan på hur perception och beslutsfattande
+            faktiskt fungerar.
           </motion.p>
 
           <motion.div
