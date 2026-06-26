@@ -114,6 +114,21 @@ Lägg till nya lessons efter varje korrigering.
   `@theme inline`. Sätt token-värdet exakt lika med det gamla hårdkodade värdet
   (t.ex. amber-500 = `oklch(0.769 0.188 70.08)`) så att utseendet är identiskt.
 
+### [2026-06] Playwright full-page-screenshot fångar scroll-animationer på opacity-0
+- **Vad hände:** Vid Fas 4-preview av ljust läge såg `full_page`-screenshoten ut
+  att ha tomma vita sektioner under hero, och enskilda kort (om-oss-kortet,
+  kontakt-knappen) såg uttvättade/svaga ut. Misstolkades först som
+  kontrastproblem i ljust läge.
+- **Varför:** Sektionerna använder intersection-baserade entrance-animationer
+  (Framer Motion, `opacity: 0` → 1). En `full_page`-screenshot renderar allt
+  utanför viewporten innan animationen triggats, så det fångas på opacity-0.
+  Elementen var i själva verket `bg-primary`/`text-primary` (solid emerald) —
+  inget fel på paletten.
+- **Regel:** För att verifiera färg/kontrast med Playwright: scrolla varje
+  sektion in i viewporten och vänta ut animationen (eller inaktivera animationer)
+  INNAN screenshot. Lita aldrig på en `full_page`-bild för kontrastbedömning av
+  scroll-animerat innehåll.
+
 ---
 
 ## Att lägga till löpande

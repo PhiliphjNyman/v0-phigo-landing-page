@@ -28,14 +28,28 @@ pågående och framtida arbete. Hierarki: CLAUDE.md > denna plan._
       i process-section (→ color-mix). Mörkt läge verifierat identiskt (accent-
       tokens resolvar exakt till gamla *-500-värden). themeColor + e-postmall +
       confetti-färger lämnade medvetet (Fas 5 / kräver literala värden).
-- [ ] Fas 4 — Definiera en RIKTIG ljus palett i :root (idag är :root en dubblett
-      av .dark). Neutralt grå/vita ytor, INTE den gröna tonen översatt till ljust.
-      Ännu ingen toggle.
+- [x] Fas 4 — Definiera en RIKTIG ljus palett i :root (var tidigare en dubblett
+      av .dark). Neutralt grå/vita ytor (zero chroma), grönt endast som accent.
+      .dark orörd (byte-för-byte). Ingen toggle ännu. Build OK, ljust läge
+      preview-verifierat, mörkt läge oförändrat. Fas 6-flaggor noterade nedan.
 - [ ] Fas 5 — Koppla in next-themes: montera ThemeProvider i layout, ta bort
       hårdkodad class="dark", suppressHydrationWarning, tema-medveten themeColor.
 - [ ] Fas 6 — Toggle-knapp i header + finputs: WCAG AA-kontrast i båda lägena,
       accent-blobbar kontrollerade mot vit fond, logotypvarianter (grå GO för
       ljust läge, ljus GO för mörkt läge).
+      Konkreta flaggor från Fas 4-preview av ljust läge:
+      - Dekorativa gröna blobbar tintar de neutrala vita ytorna grönt i ljust
+        läge (bryter mot regel 14 "grönt = accent, aldrig yta i ljust läge"):
+        components/page-background.tsx (bg-primary/10 + bg-accent-hero/5) och
+        contact-form.tsx rad 100 (bg-primary/5 blur-[120px]). Dämpa/byt till
+        neutral eller dölj i ljust läge.
+      - Logotypens "GO" renderar nära-svart i ljust läge; Fas 6 vill ha en grå
+        GO-variant (phigo-logo.tsx).
+      - Mörk-tunade skuggor på kort (t.ex. about-section hover:shadow-black/20)
+        bör kontrolleras mot vit fond — kan se fel ut i ljust läge.
+      - Verifiera slutläget (efter entrance-animation) för om-oss-kortet och
+        kontakt-knappen i ljust läge — de såg svaga ut i screenshot men det var
+        opacity-0-artefakt (se lessons.md), inte palettfel. Bekräfta visuellt.
 
 ---
 

@@ -3,45 +3,50 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* PHIGO Dark Emerald Theme - Dark mode is the primary (and only) theme */
+/* PHIGO theme — :root is the LIGHT palette (default, neutral surfaces + emerald
+   accent). .dark holds the dark emerald palette. --primary is identical in both. */
 :root {
-  --background: oklch(0.12 0.030 160);
-  --foreground: oklch(0.95 0 0);
-  --card: oklch(0.16 0.027 160);
-  --card-foreground: oklch(0.95 0 0);
-  --popover: oklch(0.16 0.027 160);
-  --popover-foreground: oklch(0.95 0 0);
+  /* Surfaces — neutral, zero chroma */
+  --background: oklch(0.985 0 0);
+  --foreground: oklch(0.20 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.20 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.20 0 0);
+  --secondary: oklch(0.968 0 0);
+  --secondary-foreground: oklch(0.25 0 0);
+  --muted: oklch(0.968 0 0);
+  --muted-foreground: oklch(0.50 0 0);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  /* Accents — green allowed; --primary unchanged from .dark */
   --primary: oklch(0.55 0.17 160);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.22 0.023 160);
-  --secondary-foreground: oklch(0.92 0 0);
-  --muted: oklch(0.20 0.023 160);
-  --muted-foreground: oklch(0.65 0 0);
-  --accent: oklch(0.30 0.06 160);
-  --accent-foreground: oklch(0.95 0 0);
+  --accent: oklch(0.95 0.03 160);
+  --accent-foreground: oklch(0.35 0.10 160);
+  --ring: oklch(0.55 0.17 160);
   --destructive: oklch(0.55 0.2 27);
   --destructive-foreground: oklch(0.95 0 0);
-  --border: oklch(0.25 0.023 160);
-  --input: oklch(0.22 0.023 160);
-  --ring: oklch(0.55 0.17 160);
-  /* Section accent tokens — same values in both modes for now (real light
-     values land in Fas 4). Values mirror Tailwind amber/cyan/emerald-500. */
-  --accent-cases: oklch(0.769 0.188 70.08); /* amber-500 */
-  --accent-process: oklch(0.715 0.143 215.221); /* cyan-500 */
-  --accent-hero: oklch(0.696 0.17 162.48); /* emerald-500 */
+  /* Section accent tokens — light-mode values (darker, to pass AA on white).
+     .dark keeps the brighter *-500 values. */
+  --accent-cases: oklch(0.55 0.13 55);
+  --accent-process: oklch(0.52 0.11 230);
+  --accent-hero: oklch(0.52 0.15 162.48);
+  /* Charts — light-readable spread (not visibly used on the marketing site) */
   --chart-1: oklch(0.55 0.17 160);
-  --chart-2: oklch(0.60 0.12 185);
-  --chart-3: oklch(0.50 0.10 200);
-  --chart-4: oklch(0.65 0.15 140);
-  --chart-5: oklch(0.45 0.08 220);
+  --chart-2: oklch(0.55 0.13 55);
+  --chart-3: oklch(0.52 0.11 230);
+  --chart-4: oklch(0.55 0.15 300);
+  --chart-5: oklch(0.55 0.13 25);
   --radius: 0.75rem;
-  --sidebar: oklch(0.14 0.027 160);
-  --sidebar-foreground: oklch(0.95 0 0);
+  /* Sidebar — neutral light surfaces, dark text, emerald accent */
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.20 0 0);
   --sidebar-primary: oklch(0.55 0.17 160);
   --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.22 0.023 160);
-  --sidebar-accent-foreground: oklch(0.95 0 0);
-  --sidebar-border: oklch(0.25 0.023 160);
+  --sidebar-accent: oklch(0.968 0 0);
+  --sidebar-accent-foreground: oklch(0.25 0 0);
+  --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.55 0.17 160);
 }
 
