@@ -129,6 +129,37 @@ Lägg till nya lessons efter varje korrigering.
   INNAN screenshot. Lita aldrig på en `full_page`-bild för kontrastbedömning av
   scroll-animerat innehåll.
 
+### [2026-06] Vercel Analytics/Speed-Insights ger 404 i lokal `next start`
+- **Vad hände:** Vid Fas 5-verifiering av tema visade konsolen fyra `error`-rader:
+  404 + "Refused to execute script" för `/_vercel/insights/script.js` och
+  `/_vercel/speed-insights/script.js`. Såg ut att bryta mot "Inga console errors".
+- **Varför:** `@vercel/analytics` och `@vercel/speed-insights` injicerar skript som
+  bara serveras av Vercels infrastruktur i produktion. Lokalt (`next start`/`dev`)
+  finns inte routen, så den faller tillbaka till HTML 404 → MIME-fel. Förväntat.
+- **Regel:** Dessa två 404/MIME-fel är miljöartefakter, inte riktiga buggar — räkna
+  bort dem vid lokal konsollkontroll. Verifiera "inga console errors" mot riktiga
+  app-fel (hydration, React, tema), inte Vercel-skriptens lokala 404.
+
+### [2026-06] Verifiera OS-tema med Playwright `color_scheme`, inte class-byte
+- **Vad hände:** Fas 5 kopplade in next-themes (defaultTheme="system"). För att
+  bekräfta att OS-preferens styr läget användes `browser.new_context(color_scheme=
+  'light'/'dark')` + avläsning av `<html>`-klassen och `body` bakgrundsfärg.
+- **Varför:** next-themes med `enableSystem` läser `prefers-color-scheme`. Att
+  manuellt sätta `.dark` testar inte systemvägen. Playwrights `color_scheme`
+  emulerar OS-preferensen på riktigt och visar att klassen blir 'light'/'dark'
+  automatiskt (samt att anti-FOUC-skriptet sätter klassen före paint).
+- **Regel:** För att verifiera tema-via-OS: emulera `color_scheme` i ett nytt
+  context och läs av `<html>`-klassen + computed `body` bakgrund. Bekräfta också
+  att next-themes blockerande inline-skript finns i `<head>` (förhindrar flash).
+
+### [2026-06] PowerShell `Start-Job` överlever inte mellan tool-anrop
+- **Vad hände:** Startade `pnpm start` via `Start-Job` i ett PowerShell-anrop;
+  nästa anrop fick ERR_CONNECTION_REFUSED — servern var död.
+- **Varför:** Varje PowerShell-tool-anrop är en ny session; bakgrundsjobbet dödas
+  när sessionen avslutas. Shell-state persisterar inte mellan anrop.
+- **Regel:** För långkörande servrar under verifiering, använd tool-anropets
+  `run_in_background` (håller processen vid liv mellan turer), inte `Start-Job`.
+
 ---
 
 ## Att lägga till löpande

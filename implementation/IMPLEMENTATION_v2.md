@@ -32,8 +32,13 @@ pågående och framtida arbete. Hierarki: CLAUDE.md > denna plan._
       av .dark). Neutralt grå/vita ytor (zero chroma), grönt endast som accent.
       .dark orörd (byte-för-byte). Ingen toggle ännu. Build OK, ljust läge
       preview-verifierat, mörkt läge oförändrat. Fas 6-flaggor noterade nedan.
-- [ ] Fas 5 — Koppla in next-themes: montera ThemeProvider i layout, ta bort
-      hårdkodad class="dark", suppressHydrationWarning, tema-medveten themeColor.
+- [x] Fas 5 — Koppla in next-themes: ThemeProvider monterad i layout (attribute=
+      "class", defaultTheme="system", enableSystem), hårdkodad class="dark"
+      borttagen, suppressHydrationWarning på <html>, tema-medveten themeColor
+      (light #fafafa / dark #000903 = respektive lägets --background). Build OK.
+      Verifierat: light-via-OS → html.light, dark-via-OS → html.dark (Playwright
+      color_scheme-emulering), anti-FOUC-skript i <head>, inga hydration-warnings.
+      Ingen toggle ännu (Fas 6).
 - [ ] Fas 6 — Toggle-knapp i header + finputs: WCAG AA-kontrast i båda lägena,
       accent-blobbar kontrollerade mot vit fond, logotypvarianter (grå GO för
       ljust läge, ljus GO för mörkt läge).

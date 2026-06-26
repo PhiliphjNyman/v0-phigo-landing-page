@@ -5,6 +5,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Toaster } from '@/components/ui/sonner'
 import { PageBackground } from '@/components/page-background'
 import { MotionProvider } from '@/components/framer-exports'
+import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 
 const organizationSchema = {
@@ -97,7 +98,12 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#1a1a2e',
+  // Theme-aware browser chrome color: matches each mode's --background.
+  // Light: oklch(0.985 0 0) ≈ #fafafa. Dark: oklch(0.12 0.030 160) ≈ #000903.
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#fafafa' },
+    { media: '(prefers-color-scheme: dark)', color: '#000903' },
+  ],
   width: 'device-width',
   initialScale: 1,
 }
@@ -108,7 +114,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="sv" className="dark">
+    <html lang="sv" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -120,11 +126,13 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased relative">
-        <MotionProvider>
-          <PageBackground />
-          {children}
-          <Toaster />
-        </MotionProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <MotionProvider>
+            <PageBackground />
+            {children}
+            <Toaster />
+          </MotionProvider>
+        </ThemeProvider>
         <Analytics />
         <SpeedInsights />
       </body>
