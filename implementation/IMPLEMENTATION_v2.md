@@ -42,6 +42,22 @@ pågående och framtida arbete. Hierarki: CLAUDE.md > denna plan._
 - [ ] Fas 6 — Toggle-knapp i header + finputs: WCAG AA-kontrast i båda lägena,
       accent-blobbar kontrollerade mot vit fond, logotypvarianter (grå GO för
       ljust läge, ljus GO för mörkt läge).
+      - [x] Steg 3 — Emerald anchor (STATIC) på FINAL CTA. (Hero-anchorn provades
+            men revertades: såg bra ut i mörkt läge men dåligt i ljust — hero är
+            nu åter ljus/neutral i båda lägena.) Den djupa mörk-emeralden
+            (hero-mörkläges-gradienten som såg bra ut) återanvänds som final-CTA:s
+            bakgrund och är FIXERAD — ser identisk ut i ljust + mörkt läge (klass
+            utan .dark-override). Tokens i globals.css: --anchor-fg /
+            --anchor-fg-muted / --anchor-ink (ljus text + mörk-emerald-knapptext,
+            samma i båda lägena). Final CTA: mörk-emerald-block, ljus rubrik/
+            undertext, vit knapp med mörk-emerald text. Kontraster (värsta fall =
+            gradientens ljusaste stop): rubrik 10,5:1, undertext 8,2:1, knapptext
+            11,5:1 — alla ≥ AA. --anchor-highlight borttagen (var bara hero-ordet
+            "kunder"; ingen död CSS). Build OK, verifierat färskt i ljust + mörkt
+            läge (Playwright color_scheme) — final CTA identisk i båda.
+      Återstående Fas 6 (separata steg):
+      - [ ] Logotypens grå "GO" i ljust läge (phigo-logo.tsx) — se nedan.
+      - [ ] Mörk-tunade skuggor på vita kort kontrollerade mot vit fond — se nedan.
       Konkreta flaggor från Fas 4-preview av ljust läge:
       - Dekorativa gröna blobbar tintar de neutrala vita ytorna grönt i ljust
         läge (bryter mot regel 14 "grönt = accent, aldrig yta i ljust läge"):

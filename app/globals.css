@@ -35,6 +35,13 @@
   --accent-cases: oklch(0.55 0.13 55);
   --accent-process: oklch(0.52 0.11 230);
   --accent-hero: oklch(0.52 0.15 162.48);
+  /* Emerald anchor (final CTA) — deep brand color anchoring the page bottom.
+     The surface (gradient) is a fixed deep dark-emerald in BOTH modes via the
+     .anchor-emerald class below. These text tokens are light on that emerald in
+     both modes, so they live in :root only (no .dark override needed). */
+  --anchor-fg: oklch(0.985 0.005 160); /* heading / primary text on emerald */
+  --anchor-fg-muted: oklch(0.9 0.02 160); /* subtext / microcopy on emerald */
+  --anchor-ink: oklch(0.33 0.09 160); /* deep emerald text on white buttons */
   /* Charts — light-readable spread (not visibly used on the marketing site) */
   --chart-1: oklch(0.55 0.17 160);
   --chart-2: oklch(0.55 0.13 55);
@@ -118,6 +125,9 @@
   --color-accent-cases: var(--accent-cases);
   --color-accent-process: var(--accent-process);
   --color-accent-hero: var(--accent-hero);
+  --color-anchor-fg: var(--anchor-fg);
+  --color-anchor-fg-muted: var(--anchor-fg-muted);
+  --color-anchor-ink: var(--anchor-ink);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -147,6 +157,23 @@
   html {
     scroll-behavior: smooth;
   }
+}
+
+/* Emerald anchor surface — deep, layered brand gradient anchoring the final CTA
+   above the footer. A soft radial highlight (top-left) over a diagonal
+   deep→slightly-lighter emerald base gives depth without looking loud.
+   This is a FIXED deep dark-emerald block: identical in light and dark mode (not
+   theme-aware), so the CTA reads as the same bold colored anchor regardless of
+   theme. Its text tokens (--anchor-*) are light on the emerald in both modes. */
+.anchor-emerald {
+  background:
+    radial-gradient(115% 115% at 12% 0%, oklch(0.345 0.09 158) 0%, transparent 55%),
+    linear-gradient(
+      150deg,
+      oklch(0.185 0.05 162) 0%,
+      oklch(0.26 0.075 160) 55%,
+      oklch(0.215 0.06 159) 100%
+    );
 }
 
 /* Hero LCP animation — CSS-driven so H1 is visible before JS hydrates */

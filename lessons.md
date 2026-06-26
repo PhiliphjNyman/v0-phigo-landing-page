@@ -201,6 +201,52 @@ Lägg till nya lessons efter varje korrigering.
   T.ex. foreground 0.20 på background 0.98 → 17.1:1; muted-foreground 0.50 på
   muted 0.94 → 5.03:1 (värsta fallet, klarar AA bekvämt).
 
+### [2026-06] Mörkt-läge: WCAG-luminans underskattar hur väl en emerald-yta sticker ut
+- **Vad hände:** Fas 6 steg 3 lade en djup emerald-anchor bakom hero + final CTA.
+  I mörkt läge är sidan redan mörkgrön (--background oklch 0.12 chroma 0.030).
+  Första emerald-värdena hade bara 1.07–1.27:1 WCAG-luminanskontrast mot sidan —
+  "samma färg" enligt WCAG — men såg ändå urskiljbara ut tack vare chroma-skillnad.
+- **Varför:** WCAG-kontrast mäter ENBART luminans (Y). Två mörkgröna ytor med olika
+  chroma (0.030 vs 0.065) kan ha nästan identisk Y men ändå se tydligt olika ut för
+  ögat. Att bara titta på WCAG-talet missar den perceptuella skillnaden.
+- **Regel:** För att en mörk färgad yta ska "sticka ut" mot en mörk fond i mörkt
+  läge: höj BÅDE luminans (sikta ≥~1.8:1 mot fonden) OCH chroma (~2×+), och förstärk
+  med en hairline-border (white/10) + mjuk glow/shadow. Lita inte på WCAG-luminans
+  ensam för att avgöra urskiljbarhet — den är till för text/bakgrund, inte för
+  "syns det här blocket mot sin granne".
+
+### [2026-06] Tema-medveten gradient-yta: klass i globals.css, ljus text via tokens
+- **Vad hände:** Emerald-anchorn behövde olika gradient i ljust/mörkt läge men SAMMA
+  ljusa text i båda. Lösning: `.anchor-emerald` + `.dark .anchor-emerald` för
+  gradienten (oklch-stops får inte ligga i JSX), och text-tokens (--anchor-fg m.fl.)
+  i `:root` ENBART eftersom texten är ljus i båda lägena (cascade räcker, ingen
+  `.dark`-override).
+- **Regel:** När en yta byter utseende per läge men dess text inte gör det: lägg
+  gradient/ytfärg i en `.dark`-overridad klass, och text-tokens i `:root` utan
+  override. Registrera färg-tokens i `@theme inline` (--color-anchor-fg: …) för att
+  få `text-anchor-fg`-utilities (jfr lesson om accent-tokens). Worst case för
+  ljus-text-kontrast = gradientens LJUSASTE stop (inkl. radial-highlight-toppen) —
+  räkna AA mot den, inte mot basfärgen.
+
+### [2026-06] Fixerad (icke-tema-medveten) färgyta: definiera klassen UTAN .dark-override
+- **Vad hände:** Emerald-anchorn flyttades från hero (revertad till ljus/neutral
+  i båda lägena) till FINAL CTA, som ska se IDENTISK ut i ljust + mörkt läge —
+  alltid den djupa mörk-emeralden (den som såg bra ut i hero i mörkt läge).
+- **Varför:** Den gamla `.anchor-emerald` var tema-medveten (separat ljus gradient
+  + `.dark .anchor-emerald`). En yta som ska se LIKADAN ut i båda lägena ska INTE
+  ha en `.dark`-override — då ärver båda lägena samma värde via cascade. Att i
+  stället sätta ljusa-läges-värdet = mörka-läges-värdet vore dubbel kod.
+- **Regel:** Vill du ha en yta/färg som är identisk i båda lägena: definiera
+  klassen EN gång (med de önskade värdena, här .dark-emeraldens) utan
+  `.dark`-variant. Tema-medvetna ytor = klass + `.dark`-override; fixerade ytor =
+  klass utan override. (Jfr lesson om tema-medveten gradient — detta är motsatsen.)
+- **Städning:** När en token bara användes av den revertade delen (här
+  `--anchor-highlight`, hero-ordet "kunder"), ta bort både `:root`-definitionen
+  OCH `@theme inline`-mappningen — lämna ingen död CSS. Verifiera med grep att
+  ingen `.tsx` refererar tokenen innan borttag. Kontraster på final-CTA mot
+  mörk-emeralden (värsta fall = gradientens ljusaste stop): rubrik 10,5:1,
+  undertext 8,2:1, knapptext (mörk-emerald på vit) 11,5:1 — alla klarar AA.
+
 ---
 
 ## Att lägga till löpande
