@@ -53,7 +53,7 @@ export function HeroSection() {
                   />
                 </svg>
               </span>
-              , inte bara finnas.
+              . Inte bara finnas.
             </h1>
 
             <p className="mt-8 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl">
