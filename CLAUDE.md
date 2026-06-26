@@ -56,7 +56,7 @@ Lokala, etablerade småföretag med bevisad verksamhet men låg digital mognad. 
 | Animationer | Framer Motion |
 | Formulär | React Hook Form + Zod |
 | Ikoner | Lucide React |
-| Tema | next-themes (forcerad dark mode) |
+| Tema | next-themes (ljust + mörkt läge, ljust som standard) |
 | Toast | Sonner |
 | Pakethanterare | pnpm |
 
@@ -68,19 +68,20 @@ Lokala, etablerade småföretag med bevisad verksamhet men låg digital mognad. 
 
 ```
 app/
-  layout.tsx              # Root layout (dark mode, Inter, SEO metadata)
+  layout.tsx              # Root layout (next-themes, Inter, SEO metadata)
   page.tsx                # Huvudsida — importerar alla sektioner
-  globals.css             # PHIGO dark emerald-tema tokens
+  globals.css             # Tema-tokens: ljus palett i :root, mörk emerald i .dark
   cases/
     page.tsx              # Case index med filter
     [slug]/page.tsx       # Case-detaljsida
+  blogg/
+    [slug]/page.tsx       # Blogginlägg-detaljsida
 
 components/
   ui/                     # shadcn/ui (rör ej)
-  phigo-logo.tsx          # Textlogotyp: "phi" (emerald) + "go" (ljus)
+  phigo-logo.tsx          # Textlogotyp: PHI (emerald) + GO (ljus)
   header.tsx              # Sticky header + mobilmeny
   hero-section.tsx        # Hero med CTA
-  trust-bar.tsx           # Social proof / trust logos
   case-studies.tsx        # Case-kort (data från lib/cases.ts)
   offer-section.tsx       # Erbjudande (ersätter gamla services.tsx)
   process-section.tsx     # 3-stegs process
@@ -100,8 +101,10 @@ brand_assets/
   PHIGO_fullzize_screenshot.png  # Fullstorlek screenshot (används som källa för OG-bild)
 
 public/
-  og-image.png            # OG-bild 1200×630 (croppat från brand_assets/PHIGO_fullzize_screenshot.png)
+  og-image.jpg            # OG-bild 1200×630 (croppat från brand_assets/PHIGO_fullzize_screenshot.png)
 ```
+
+> **Borttaget:** trust-bar.tsx (kund-logotyp-karusell) togs bort i städningen — endast backlog tills riktiga kundlogotyper finns.
 
 ---
 
@@ -125,23 +128,29 @@ public/
 
 Sajten ska kännas som en 50 000 kr-leverans. Det som skiljer premium från mall är typografi, luft, konsekvent spacing, genomtänkta hover-states och mjuka animationer. Tonen är **Apple/Stripe** — aldrig lekfull.
 
-### Färgpalett (Dark Mode)
+### Färgpalett (Ljust + Mörkt läge)
 
-| Token | Syfte | Beskrivning |
-|---|---|---|
-| `--background` | Huvudbakgrund | Nära svart / dark slate |
-| `--foreground` | Primär text | Off-white |
-| `--primary` | CTA, accenter | Mörk emerald |
-| `--muted` | Sekundära ytor | Mörkgrå |
-| `--muted-foreground` | Sekundär text | Ljusgrå |
-| `--card` | Kort-bakgrund | Något ljusare än background |
-| `--border` | Ramar | Subtil grå |
-| `--accent` | Hover, highlights | Emerald-tint |
+Sajten har två lägen. Ljust läge är standard: vita/ljusgrå ytor, mörk text, grönt enbart som accent. Mörkt läge behåller den gröna emerald-atmosfären (hue 160 genom hela ytsystemet). --primary (emerald-accenten) är identisk i båda lägena — endast ytfärgerna (--background, --card, --muted, --border, text) skiljer sig.
+
+| Token | Syfte | Ljust läge | Mörkt läge |
+|---|---|---|---|
+| `--background` | Huvudbakgrund | Vit/ljusgrå | Nära svart |
+| `--foreground` | Primär text | Mörk grå | Off-white |
+| `--primary` | CTA, accenter | Mörk emerald (samma) | Mörk emerald (samma) |
+| `--muted` | Sekundära ytor | Ljusgrå | Mörkgrå |
+| `--muted-foreground` | Sekundär text | Mörkgrå | Ljusgrå |
+| `--card` | Kort-bakgrund | Vit lätt upphöjd | Något ljusare än background |
+| `--border` | Ramar | Subtil ljusgrå | Subtil mörkgrå |
+| `--accent` | Hover, highlights | Emerald-tint | Emerald-tint |
+
+> **Tema-tokens:** `:root` innehåller den ljusa paletten (standardläget) — neutrala vita/grå ytor, inte den gröna tonen översatt till ljust. `.dark` innehåller den mörka emerald-paletten. `--primary` är identisk i båda. (Idag är `:root` en dubblett av `.dark`; en riktig ljus palett definieras i Fas 4.)
 
 **Accentfärger per sektion:**
 - Case Studies: Warm Gold / Amber
 - Process: Cool Teal / Cyan
 - Hero/CTA: Vivid Emerald
+
+Dessa ska bli namngivna tokens definierade per läge i `:root`/`.dark`: `--accent-cases` (amber), `--accent-process` (cyan), `--accent-hero` (emerald). De måste klara WCAG AA mot vit bakgrund i ljust läge. Själva tokeniseringen sker i Fas 3 — detta är endast dokumentregeln.
 
 ### Typografi
 
@@ -152,7 +161,7 @@ Sajten ska kännas som en 50 000 kr-leverans. Det som skiljer premium från mall
 
 ### Logotyp
 
-Textbaserad: **phi** (emerald) + **go** (ljus/vit). Gemener, modern känsla. Ingen ikon.
+Textbaserad: **PHI** (emerald) + **GO** (ljus/vit). Versaler, modern känsla. Ingen ikon.
 
 ---
 
@@ -412,3 +421,10 @@ Markera aldrig en uppgift som klar utan att:
 11. **Aldrig fiktiva företagsnamn som riktiga kunder.** Märk demos som "Konceptcase".
 12. **Aldrig tekniska begrepp i kundvänd text.** Följ ordlistan.
 13. **Aldrig pris på tilläggstjänster i FAQ.** Baspris visas, tillägg beskrivs utan siffra.
+14. **Grönt = accent, aldrig yta i ljust läge.** I ljust läge får emerald endast användas på accenter (knappar, logotyp, länkar, fokusringar, ikoner) — aldrig som bakgrunds- eller yttton. I mörkt läge behålls den gröna yttonen (hue 160) i ytsystemet. `--primary` är samma i båda lägena.
+
+---
+
+## Sessionsrutin
+
+Vid start, läs `lessons.md` och relevant plan, fråga om något är oklart. Vid slut, uppdatera `lessons.md` med eventuella misstag (vad, varför, och en regel som förhindrar upprepning), uppdatera plan-checkboxar, och sammanfatta vad som gjordes. Verifiera alltid att något fungerar innan det markeras klart — anta aldrig.
