@@ -57,7 +57,7 @@ const faqs = [
 
 export function FaqSection() {
   return (
-    <section id="faq" className="py-24 lg:py-32 bg-muted/5 relative overflow-hidden">
+    <section id="faq" className="py-24 lg:py-32 bg-muted dark:bg-muted/5 relative overflow-hidden">
       {/* Ornamental background element */}
       <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 -z-10 size-96 rounded-full bg-primary/5 blur-3xl" />
 

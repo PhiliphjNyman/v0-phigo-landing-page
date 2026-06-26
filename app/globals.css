@@ -6,8 +6,11 @@
 /* PHIGO theme — :root is the LIGHT palette (default, neutral surfaces + emerald
    accent). .dark holds the dark emerald palette. --primary is identical in both. */
 :root {
-  /* Surfaces — neutral, zero chroma */
-  --background: oklch(0.985 0 0);
+  /* Surfaces — neutral, zero chroma. Three light levels for section rhythm:
+     muted band (0.94) < off-white base (0.98) < pure-white card (1.0).
+     ~0.04 gap base→band so the alternation reads clearly, not flat; base
+     pushed toward white keeps it a clean white site, not heavy grey. */
+  --background: oklch(0.98 0 0);
   --foreground: oklch(0.20 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.20 0 0);
@@ -15,7 +18,7 @@
   --popover-foreground: oklch(0.20 0 0);
   --secondary: oklch(0.968 0 0);
   --secondary-foreground: oklch(0.25 0 0);
-  --muted: oklch(0.968 0 0);
+  --muted: oklch(0.94 0 0);
   --muted-foreground: oklch(0.50 0 0);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);

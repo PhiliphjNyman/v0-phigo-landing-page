@@ -39,7 +39,7 @@ const notIncluded = [
 
 export function OfferSection() {
   return (
-    <section id="erbjudande" className="relative border-t border-border bg-muted/10 py-24 lg:py-32 overflow-hidden">
+    <section id="erbjudande" className="relative border-t border-border bg-muted dark:bg-muted/10 py-24 lg:py-32 overflow-hidden">
       {/* Background accent */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 h-px w-full max-w-4xl bg-border" />
 

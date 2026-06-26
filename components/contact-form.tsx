@@ -95,7 +95,7 @@ export function ContactForm() {
   }
 
   return (
-    <section id="kontakt" className="relative border-t border-border bg-muted/20 py-24 lg:py-32 overflow-hidden">
+    <section id="kontakt" className="relative border-t border-border bg-muted dark:bg-muted/20 py-24 lg:py-32 overflow-hidden">
       {/* Background accent */}
       <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 size-[600px] rounded-full bg-primary/5 blur-[120px] -z-10" />
 

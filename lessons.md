@@ -172,6 +172,35 @@ Lägg till nya lessons efter varje korrigering.
   Stop-Process`) och starta om med `run_in_background`. Om `pnpm start` ger
   EADDRINUSE — anta INTE att den gamla servern duger; den är troligen stale.
 
+### [2026-06] Låg opacitet på `bg-muted/X` dödar sektionsrytmen i ljust läge
+- **Vad hände:** Ljust läge såg nästan helvitt och platt — sektioner gick ihop.
+  Orsaken: de "tonade" sektionerna använde `bg-muted/5`–`/20`. Med ljus `--muted`
+  (0.96) och `--background` (0.975) så nära varandra blev 5–20 % opacitet helt
+  omärkbart (blandat värde hamnade ~0.001 L från basen).
+- **Varför:** En liten L-skillnad mellan två redan ljusa neutraler, ytterligare
+  utspädd av opacitetsmodifierare, ger ingen synlig kontrast. Stripe-känslan kräver
+  att den tonade ytan visas SOLID, och att vita kort (1.0) lyfter mot den.
+- **Regel:** För sektionsrytm i ljust läge: använd solid `bg-muted` (inte `/10`),
+  och håll tre neutrala nivåer med tillräckligt gap. Eftersom samma
+  className styr båda lägena: skriv `bg-muted dark:bg-muted/10` så att mörkt läge
+  behålls byte-för-byte (mörka tonade sektioner SKA vara svaga) medan ljust läge får
+  solid ton. Ändra aldrig den delade opaciteten utan `dark:`-override — det ändrar
+  mörkt läge.
+- **Uppföljning (steg 2b):** muted 0.96 < base 0.975 (gap 0.015) var fortfarande
+  för subtilt för att läsas. Fördjupat till **muted 0.94 < base 0.98 < card 1.0**
+  (gap base→band 0.04, ~2,6× tydligare). Att HÖJA basen mot vitt (0.975→0.98)
+  samtidigt som bandet sänks ger en renare "vit sajt med grå band" och får vita
+  kort att lyfta mer — bättre än att bara mörka bandet. Tumregel: gap mellan två
+  stora intilliggande neutralytor behöver ≥~0.03–0.04 oklch-L för att kännas.
+
+### [2026-06] Neutral oklch → WCAG-kontrast kan räknas som L³
+- **Vad hände:** Behövde verifiera AA efter att ha gjort `--background`/`--muted`
+  gråare. För neutrala (chroma 0) oklch-färger är linjär sRGB = L³ per kanal, så
+  relativ luminans Y = L³. Kontrast = (Yljus+0.05)/(Ymörk+0.05).
+- **Regel:** Snabb AA-koll för neutrala ytor/text utan färgbibliotek: Y = L³.
+  T.ex. foreground 0.20 på background 0.98 → 17.1:1; muted-foreground 0.50 på
+  muted 0.94 → 5.03:1 (värsta fallet, klarar AA bekvämt).
+
 ---
 
 ## Att lägga till löpande

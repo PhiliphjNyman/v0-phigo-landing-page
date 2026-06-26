@@ -30,7 +30,7 @@ const reasons = [
 
 export function WhyPhigo() {
   return (
-    <section className="border-t border-border bg-muted/20 py-20 lg:py-28">
+    <section className="border-t border-border bg-muted dark:bg-muted/20 py-20 lg:py-28">
       <div className="mx-auto max-w-6xl px-4 lg:px-6">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Text side */}
