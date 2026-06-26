@@ -9,9 +9,9 @@ import { Counter } from '@/components/ui/counter'
 import { Case } from '@/lib/cases'
 
 const accentMap = {
-    amber: 'group-hover:border-amber-500/30 text-amber-500 bg-amber-500/10',
-    emerald: 'group-hover:border-emerald-500/30 text-emerald-500 bg-emerald-500/10',
-    cyan: 'group-hover:border-cyan-500/30 text-cyan-500 bg-cyan-500/10',
+    amber: 'group-hover:border-accent-cases/30 text-accent-cases bg-accent-cases/10',
+    emerald: 'group-hover:border-accent-hero/30 text-accent-hero bg-accent-hero/10',
+    cyan: 'group-hover:border-accent-process/30 text-accent-process bg-accent-process/10',
 }
 
 const iconMap: Record<string, any> = {

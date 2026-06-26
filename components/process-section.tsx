@@ -73,7 +73,7 @@ export function ProcessSection() {
               whileInView={{ scaleX: 1 }}
               transition={{ duration: 1.5, ease: 'easeInOut' }}
               viewport={{ once: true }}
-              className="absolute inset-0 h-full bg-primary origin-left shadow-[0_0_10px_rgba(var(--primary),0.5)]"
+              className="absolute inset-0 h-full bg-primary origin-left shadow-[0_0_10px_color-mix(in_oklch,var(--primary)_50%,transparent)]"
             />
           </div>
 

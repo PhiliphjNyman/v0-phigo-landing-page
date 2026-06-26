@@ -24,6 +24,11 @@
   --border: oklch(0.25 0.023 160);
   --input: oklch(0.22 0.023 160);
   --ring: oklch(0.55 0.17 160);
+  /* Section accent tokens — same values in both modes for now (real light
+     values land in Fas 4). Values mirror Tailwind amber/cyan/emerald-500. */
+  --accent-cases: oklch(0.769 0.188 70.08); /* amber-500 */
+  --accent-process: oklch(0.715 0.143 215.221); /* cyan-500 */
+  --accent-hero: oklch(0.696 0.17 162.48); /* emerald-500 */
   --chart-1: oklch(0.55 0.17 160);
   --chart-2: oklch(0.60 0.12 185);
   --chart-3: oklch(0.50 0.10 200);
@@ -60,6 +65,11 @@
   --border: oklch(0.25 0.023 160);
   --input: oklch(0.22 0.023 160);
   --ring: oklch(0.55 0.17 160);
+  /* Section accent tokens — identical to :root for now (Fas 3 keeps dark
+     appearance unchanged; light-mode values come in Fas 4). */
+  --accent-cases: oklch(0.769 0.188 70.08); /* amber-500 */
+  --accent-process: oklch(0.715 0.143 215.221); /* cyan-500 */
+  --accent-hero: oklch(0.696 0.17 162.48); /* emerald-500 */
   --chart-1: oklch(0.55 0.17 160);
   --chart-2: oklch(0.60 0.12 185);
   --chart-3: oklch(0.50 0.10 200);
@@ -97,6 +107,9 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-accent-cases: var(--accent-cases);
+  --color-accent-process: var(--accent-process);
+  --color-accent-hero: var(--accent-hero);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);

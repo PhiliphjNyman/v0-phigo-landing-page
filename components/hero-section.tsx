@@ -32,7 +32,7 @@ export function HeroSection() {
       <div className="pointer-events-none absolute inset-0 -z-10">
         {/* Blur blobs hidden on mobile — mix-blend-screen + large blur causes scroll jank */}
         <div className="hidden md:block absolute -top-[10%] -left-[10%] size-[500px] rounded-full bg-primary/10 blur-[120px]" />
-        <div className="hidden md:block absolute top-[20%] -right-[10%] size-[400px] rounded-full bg-emerald-500/5 blur-[100px]" />
+        <div className="hidden md:block absolute top-[20%] -right-[10%] size-[400px] rounded-full bg-accent-hero/5 blur-[100px]" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 lg:px-8">
@@ -85,7 +85,7 @@ export function HeroSection() {
                 asChild
                 variant="ghost"
                 size="lg"
-                className="h-14 cursor-pointer text-base font-medium text-muted-foreground hover:bg-white/5 hover:text-foreground"
+                className="h-14 cursor-pointer text-base font-medium text-muted-foreground hover:bg-foreground/5 hover:text-foreground"
               >
                 <a href="#case">
                   Se exempel

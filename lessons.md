@@ -94,6 +94,26 @@ Lägg till nya lessons efter varje korrigering.
 - **Varför:** Att presentera demos som riktiga kundprojekt kan upptäckas och förstöra förtroende.
 - **Regel:** Märk tydligt som "Konceptcase" eller "Demo" tills riktiga kundprojekt finns.
 
+### [2026-06] Wrappa aldrig en oklch-variabel i rgba()
+- **Vad hände:** process-section hade `shadow-[0_0_10px_rgba(var(--primary),0.5)]`.
+  `--primary` är ett `oklch()`-värde, så `rgba(oklch(...), 0.5)` är ogiltig CSS —
+  glödet renderades aldrig (tyst trasigt, ingen byggfel).
+- **Varför:** `rgba()`/`hsla()` förväntar sig numeriska kanaler, inte en
+  färgfunktion. En token som är `oklch()` kan inte stoppas in där.
+- **Regel:** För att lägga opacitet på en färg-token, använd
+  `color-mix(in oklch, var(--token) 50%, transparent)` eller Tailwinds
+  opacitetsmodifierare (`bg-primary/50`). Aldrig `rgba(var(--token), …)`.
+
+### [2026-06] Tailwind 4: egna färg-tokens måste registreras i @theme inline
+- **Vad hände:** Fas 3 införde `--accent-cases/--accent-process/--accent-hero`.
+- **Varför:** En CSS-variabel i `:root`/`.dark` ger INTE automatiskt
+  utilities som `text-accent-hero` eller `bg-accent-cases/10`. Tailwind 4
+  genererar bara klassen om färgen är mappad som `--color-*` i `@theme inline`.
+- **Regel:** När du tokeniserar en färg som ska användas som Tailwind-klass:
+  definiera värdet i `:root` + `.dark` OCH lägg `--color-x: var(--x)` i
+  `@theme inline`. Sätt token-värdet exakt lika med det gamla hårdkodade värdet
+  (t.ex. amber-500 = `oklch(0.769 0.188 70.08)`) så att utseendet är identiskt.
+
 ---
 
 ## Att lägga till löpande

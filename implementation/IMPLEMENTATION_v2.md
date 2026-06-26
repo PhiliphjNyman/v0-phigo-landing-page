@@ -22,9 +22,12 @@ pågående och framtida arbete. Hierarki: CLAUDE.md > denna plan._
       Gamla DEPRECATED-ikoner behålls tills vidare.
 - [ ] Fas 2 — Uppdatera CLAUDE.md: ersätt "forcerad dark mode" med dual-mode-policy
       ovan; lägg till regeln "grönt = accent i ljust läge, ytton endast i mörkt".
-- [ ] Fas 3 — Tokenisera kvarvarande hårdkodade färger (utom shadcn ui/). Bl.a.
-      bg-zinc-900, hover:bg-white/5, samt den trasiga rgba(var(--primary)) i
-      process-section. Sajten ska se identisk ut i mörkt läge efteråt.
+- [x] Fas 3 — Tokenisera kvarvarande hårdkodade färger (utom shadcn ui/). Bl.a.
+      bg-zinc-900 → bg-muted, hover:bg-white/5 → bg-foreground/5, emerald/amber/
+      cyan-500 → nya accent-tokens, samt fix av den trasiga rgba(var(--primary))
+      i process-section (→ color-mix). Mörkt läge verifierat identiskt (accent-
+      tokens resolvar exakt till gamla *-500-värden). themeColor + e-postmall +
+      confetti-färger lämnade medvetet (Fas 5 / kräver literala värden).
 - [ ] Fas 4 — Definiera en RIKTIG ljus palett i :root (idag är :root en dubblett
       av .dark). Neutralt grå/vita ytor, INTE den gröna tonen översatt till ljust.
       Ännu ingen toggle.

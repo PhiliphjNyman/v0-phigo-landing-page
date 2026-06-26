@@ -111,7 +111,7 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                         variants={scaleIn}
                         initial="hidden"
                         animate="visible"
-                        className="relative aspect-video overflow-hidden rounded-2xl bg-zinc-900 shadow-2xl"
+                        className="relative aspect-video overflow-hidden rounded-2xl bg-muted shadow-2xl"
                     >
                         <Image
                             src={c.heroImage}
