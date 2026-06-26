@@ -394,6 +394,8 @@ Kör audit-skills i denna ordning efter varje större förändring:
 
 ## Verifikation innan "klar"
 
+> **Döda zombie-/stale dev-servrar före verifiering.** En kvarvarande `next`-process kan servera en gammal build på port 3000 och ge missvisande testresultat (kod som ser trasig ut men inte är det). Innan du startar `pnpm dev` eller verifierar något: säkerställ att ingen gammal server lever på porten. På Windows/Git Bash, döda kvarvarande Node/next-processer först (t.ex. via `taskkill` eller `Get-NetTCPConnection -LocalPort 3000 ... | Stop-Process`), och starta sedan en färsk server. Verifiera alltid mot en nystartad build — aldrig mot en redan körande instans av oklar ålder. (Se lessons.md: "Verifiera mot en FÄRSK server".)
+
 Markera aldrig en uppgift som klar utan att:
 - Sajten laddas korrekt i `pnpm dev`
 - Mobilvy testad (Chrome DevTools → responsiv)
