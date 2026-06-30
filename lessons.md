@@ -383,6 +383,30 @@ Lägg till nya lessons efter varje korrigering.
   "Resultatet"-stycke; den ska säga "Konceptsajten ... visar hur ...", inte
   påstå ett utfall.
 
+### [2026-06] Logga-varianter: byt ALDRIG namn på phigo-logo.png
+- **Vad hände:** E-postsignaturen pekade på `/public/brand/phigo-logo.png`. Den
+  filen är mörk-läge-varianten (ljus "GO" #EEEEEE), så på vit mejlbakgrund
+  försvann "GO" och det såg ut att stå bara "PHI". Vi tog fram en ljus-bakgrund-
+  variant med mörk "GO" istället.
+- **Varför:** Loggan finns i ett enda läge per fil. En fil byggd för mörk yta
+  (ljus text) blir oläslig på ljus yta, och tvärtom. Signaturer renderas alltid
+  på vit bakgrund.
+- **Regel:** Vi har nu flera logga-varianter i `/public/brand/`, håll isär dem:
+  - **`phigo-logo.png`** — mörk-läge (ljus "GO"), för MÖRK bakgrund. Full storlek
+    (4400×1680).
+  - **`phigo-logo-light.png`** — ljus-bakgrund (mörk "GO" #161616 = sajtens ljusa
+    `--foreground`), för VIT/ljus bakgrund. Full storlek.
+  - **`phigo-logo-email.png`** — samma som light men nedskalad till 600px bred
+    (2x retina för ~120-150px visningsbredd), optimerad. Detta är den signaturen
+    ska peka på: `https://phigo.se/brand/phigo-logo-email.png`.
+  - **Byt ALDRIG namn på eller ta bort `phigo-logo.png`** (eller andra publicerade
+    varianter). Redan utskickade mejl pekar på den exakta URL:en
+    `https://phigo.se/brand/phigo-logo.png`; ett namnbyte släcker loggan i all
+    historisk korrespondens. Lägg ENBART till nya varianter, ändra aldrig befintliga
+    publika filnamn.
+  - Filer i `/public` serveras från roten: `/public/brand/X.png` →
+    `https://phigo.se/brand/X.png`.
+
 ---
 
 ## Att lägga till löpande
