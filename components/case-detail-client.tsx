@@ -188,7 +188,7 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                 {relatedCases.length > 0 && (
                     <section className="border-t border-border pt-24 mb-24">
                         <div className="flex items-center justify-between mb-12">
-                            <h2 className="text-balance text-3xl font-bold text-foreground">Relaterade kundcase</h2>
+                            <h2 className="text-balance text-3xl font-bold text-foreground">Relaterade exempel</h2>
                             <Button variant="ghost" className="gap-2 group transition-[background-color,color]" asChild>
                                 <Link href="/cases">
                                     Visa alla
@@ -232,7 +232,9 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                     viewport={{ once: true }}
                     className="rounded-[3rem] bg-foreground text-background p-12 lg:p-20 text-center relative overflow-hidden"
                 >
-                    <h2 className="text-balance text-4xl lg:text-5xl font-black mb-8 relative z-10">Vill du ha liknande resultat?</h2>
+                    <h2 className="text-balance text-4xl lg:text-5xl font-black mb-8 relative z-10">
+                        {c.caseType === 'concept' ? 'Vill du ha en sajt som den här?' : 'Vill du ha liknande resultat?'}
+                    </h2>
                     <p className="text-pretty text-xl text-background/70 max-w-2xl mx-auto mb-12 relative z-10">
                         Vill du se hur en sajt kan se ut för ditt företag? Vi granskar din nuvarande hemsida kostnadsfritt.
                     </p>

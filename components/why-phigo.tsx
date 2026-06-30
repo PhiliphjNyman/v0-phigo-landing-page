@@ -14,7 +14,7 @@ const reasons = [
   {
     title: 'Fast pris, inga överraskningar',
     description:
-      '8 000 kr för sajten (exkl. moms), 399 kr/mån för drift och support (exkl. moms). Det är allt. Inga dolda kostnader.',
+      '8 000 kr för sajten (exkl. moms), 399 kr/mån för drift och support (exkl. moms). Det är allt. Inga dolda kostnader. En traditionell webbyrå tar ofta 15 000–50 000 kr för en liknande sajt.',
   },
   {
     title: 'Snabb och säker',

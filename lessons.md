@@ -358,6 +358,31 @@ Lägg till nya lessons efter varje korrigering.
   ta bort ev. `{' '}` så kommat fäster direkt. Lämna sifferintervall och
   titelseparatorer som en-dash.
 
+### [2026-06] "Kundcase" vs "Designexempel" — orden får aldrig glida ihop
+- **Vad hände:** Ärlighetspass inför kall outreach. Konceptcasen (Leendekliniken,
+  Café Alma, Andersson El, alla `caseType: 'concept'`) hade `shortDescription` som
+  claimade levererade utfall ("fick fler bokningar", "gick från mun-till-mun till
+  förfrågningar via sin sajt"), trots att de är fiktiva designexempel. Dessutom
+  kallade den delade case-mallen (`case-detail-client.tsx`) ALLA case för
+  "Relaterade kundcase" och visade CTA-rubriken "Vill du ha liknande resultat?"
+  även på konceptsidor, vilket implicerar ett uppmätt resultat vi aldrig mätt.
+- **Varför:** Att presentera koncept som levererade kunduppdrag (eller antyda
+  mätbara resultat från dem) är samma förtroenderisk som fiktiva logotyper, se
+  lessonen "Märk demos som demos". Besökare och kalla leads granskar case; en
+  upptäckt överdrift dödar trovärdigheten precis när den behövs som mest.
+- **Regel:** Håll isär två ord strikt. **"Kundcase"** = ENBART riktiga, levererade
+  kunder (idag bara Malte Örn, `caseType: 'real'`) och får claima faktiska utfall.
+  **"Designexempel"/"Konceptcase"** (`caseType: 'concept'`) = beskriv som vad vi
+  KAN bygga ("Ett designkoncept som visar hur ...") — aldrig påstå mätbara resultat
+  i vare sig `shortDescription` eller den långa beskrivningen. När delad UI-copy
+  (rubriker, CTA) renderas för båda case-typerna: gör den villkorad på `caseType`
+  (konceptsidor får "Vill du ha en sajt som den här?", riktiga case behåller "Vill
+  du ha liknande resultat?") eller välj en neutral formulering som stämmer för båda
+  ("Relaterade exempel", inte "Relaterade kundcase"). Källan till sanning är
+  `lib/cases.ts` + `caseType` — granska alltid den långa beskrivningens
+  "Resultatet"-stycke; den ska säga "Konceptsajten ... visar hur ...", inte
+  påstå ett utfall.
+
 ---
 
 ## Att lägga till löpande

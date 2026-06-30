@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowRight, Check, X } from 'lucide-react'
+import { ArrowRight, Check, X, ShieldCheck } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
@@ -153,6 +153,14 @@ export function OfferSection() {
               <p className="mt-1 text-xs text-muted-foreground/70">exkl. moms</p>
               <p className="mt-1 text-sm text-muted-foreground">
                 + <span className="font-semibold text-foreground">399 kr/mån</span> <span className="text-xs text-muted-foreground/70">(exkl. moms)</span>, drift, säkerhet och support
+              </p>
+            </div>
+
+            {/* Trust promise — split payment */}
+            <div className="flex items-center gap-3 rounded-2xl border border-primary/20 bg-primary/5 p-4">
+              <ShieldCheck className="size-5 shrink-0 text-primary" aria-hidden="true" />
+              <p className="text-left text-sm font-medium text-foreground">
+                Betala hälften nu, resten först när du är nöjd
               </p>
             </div>
 
