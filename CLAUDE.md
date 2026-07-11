@@ -96,12 +96,15 @@ lib/
   animations.ts           # Återanvändbara Framer Motion variants
   cases.ts                # Case-data (single source of truth)
 
-brand_assets/
-  icon.svg                # Favicon — P-logotyp (emerald på dark slate)
-  PHIGO_fullzize_screenshot.png  # Fullstorlek screenshot (används som källa för OG-bild)
+brand_assets/             # brand kit (BRAND.md, palette.png, logo/, archive/, scripts/)
+  BRAND.md                # källa till sanning för färg, typografi, logga
+  logo/                   # ordbild + logomärke (P) + profil/avatar-varianter
+  archive/                # utfasade assets (gammal icon.svg, screenshot, konceptlogga)
+
+# Favicon/app-ikon: app/icon.png + app/apple-icon.png (P-symbolen, mint #02b77f)
 
 public/
-  og-image.jpg            # OG-bild 1200×630 (croppat från brand_assets/PHIGO_fullzize_screenshot.png)
+  og-image.jpg            # OG-bild 1200×630 (croppat från brand_assets/archive/PHIGO_fullzize_screenshot.png)
 ```
 
 > **Borttaget:** trust-bar.tsx (kund-logotyp-karusell) togs bort i städningen — endast backlog tills riktiga kundlogotyper finns.
