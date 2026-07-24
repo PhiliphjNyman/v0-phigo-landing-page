@@ -50,7 +50,7 @@ export function PhigoMetricsBlock() {
           <motion.div key={metric.label} variants={fadeUp}>
             <Card className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card/60 p-5 backdrop-blur-md transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-primary/60 dark:bg-card/66">
               <div className="absolute inset-0 bg-gradient-to-br from-foreground/[0.04] via-transparent to-transparent" />
-              <div className="relative z-10 space-y-2">
+              <div data-orb-protect className="relative z-10 space-y-2">
                 <span className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
                   {metric.label}
                 </span>
@@ -80,7 +80,7 @@ export function PhigoMetricsBlock() {
         className="flex items-center justify-center gap-2 rounded-2xl border border-primary/20 bg-primary/5 px-4 py-3 text-center"
       >
         <ShieldCheck className="size-4 shrink-0 text-primary" aria-hidden="true" />
-        <span className="text-xs font-medium text-foreground">
+        <span data-orb-protect className="text-xs font-medium text-foreground">
           Betala hälften nu, resten först när du är nöjd
         </span>
       </motion.div>

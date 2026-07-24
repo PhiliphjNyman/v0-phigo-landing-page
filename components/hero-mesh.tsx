@@ -26,7 +26,7 @@ export function HeroMesh() {
   return (
     <div
       aria-hidden="true"
-      className="hero-mesh pointer-events-none absolute inset-0 -z-10 overflow-hidden opacity-90 dark:opacity-100"
+      className="hero-mesh pointer-events-none absolute inset-0 -z-10 overflow-hidden opacity-70 dark:opacity-80"
     >
       <div className="hero-mesh__band hero-mesh__band--1" />
       <div className="hero-mesh__band hero-mesh__band--2" />

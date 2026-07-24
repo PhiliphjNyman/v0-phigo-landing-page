@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { HeroOrb } from '@/components/hero-orb'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
 export function FinalCta() {
@@ -14,6 +15,7 @@ export function FinalCta() {
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
           variants={staggerContainer}
+          data-anchor
           className="anchor-emerald relative overflow-hidden rounded-3xl border border-white/10 px-6 py-16 text-center shadow-2xl shadow-primary/10 sm:px-12 lg:px-20"
         >
           {/* Decorative glow — soft light sheen over the emerald */}
@@ -21,7 +23,35 @@ export function FinalCta() {
             <div className="absolute -top-20 left-1/2 size-60 -translate-x-1/2 rounded-full bg-white/10 blur-3xl" />
           </div>
 
-          <div className="relative">
+          {/* Anchor orbs — a lower-left cluster on the emerald card (text-dense
+              centre; the lower-left is the free atmospheric area). onDark forces
+              the silhouette rim (the card is dark in both themes). Rotation +
+              parallax, NO proximity. Desktop only — the mobile card is too text-
+              dense to place one without covering the heading (fewer on mobile). */}
+          <HeroOrb
+            size={124}
+            period={62}
+            direction={1}
+            parallax={0.24}
+            textureOpacity={0.55}
+            onDark
+            glow="card"
+            label="anchor-lg"
+            className="hidden bottom-[9%] left-[4%] lg:block"
+          />
+          <HeroOrb
+            size={72}
+            period={48}
+            direction={-1}
+            parallax={0.16}
+            textureOpacity={0.5}
+            onDark
+            glow="card"
+            label="anchor-sm"
+            className="hidden bottom-[34%] left-[15%] lg:block"
+          />
+
+          <div className="relative z-10">
             <motion.h2
               variants={fadeInUp}
               className="text-balance text-3xl font-bold tracking-tight text-anchor-fg sm:text-4xl"

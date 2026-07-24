@@ -19,7 +19,15 @@ export function ThemeToggle({ className }: { className?: string }) {
   useEffect(() => setMounted(true), [])
 
   const isDark = resolvedTheme === 'dark'
-  const label = isDark ? 'Växla till ljust läge' : 'Växla till mörkt läge'
+  // Until mounted, resolvedTheme is undefined (server + first client render),
+  // so use a neutral, theme-agnostic label that is identical on both — the
+  // theme-specific label only appears once we know the theme on the client.
+  // This keeps aria-label/title from mismatching during hydration.
+  const label = !mounted
+    ? 'Växla färgtema'
+    : isDark
+      ? 'Växla till ljust läge'
+      : 'Växla till mörkt läge'
 
   return (
     <Button

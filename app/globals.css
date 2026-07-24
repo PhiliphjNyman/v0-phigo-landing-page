@@ -300,6 +300,177 @@
   50%      { transform: rotate(-46deg) translate3d(-3%, 2%, 0) scale(1.1); }
 }
 
+/* Hero fills the visible viewport WITHOUT the mobile address-bar reflow jank.
+   svh (small viewport height) is stable: it stays the bar-visible height and
+   never grows when the URL bar hides, so nothing below the hero reflows
+   mid-scroll (the cause of the scroll "hopp"). 100vh is the fallback for
+   browsers without svh support; the second declaration wins where supported.
+   Defined as a class (not stacked Tailwind utilities) to guarantee the
+   fallback cascade order. */
+.hero-shell {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+/* --- Hero orb (prototype) — a sculpted 3D emerald sphere, NOT fog ------------
+   No filter: blur anywhere. The 3D read comes from layered gradients + inset
+   shadows: a lit top-left, a dark bottom-right terminator/core shadow, a soft
+   emerald fill on the lit side, a bounced rim light at the bottom edge, and a
+   small glossy specular hotspot for the "polished glass" pop. The living
+   surface is a specular sheen layer that a rAF loop drifts via transform/opacity
+   only (never background-position) so every frame is GPU-composited. All motion
+   values arrive as CSS vars set by components/hero-orb.tsx. */
+.hero-orb {
+  position: absolute;
+  width: var(--orb-size, 200px);
+  height: var(--orb-size, 200px);
+  border-radius: 50%;
+  overflow: hidden;
+  /* proximity pull (toward pointer) — transform only */
+  transform: translate3d(var(--orb-x, 0px), var(--orb-y, 0px), 0);
+  /* sphere body: bright lit point top-left → deep emerald → near-black edge.
+     This is the FIXED base; lighting layers below it stay put while the
+     texture layer rotates underneath them. */
+  background:
+    radial-gradient(
+      circle at 32% 27%,
+      #12915a 0%,
+      #007a41 22%,
+      #005c31 40%,
+      #004726 60%,
+      #002e17 82%,
+      #001a0d 100%
+    );
+  box-shadow:
+    inset -16px -20px 48px rgba(0, 0, 0, 0.55),   /* core / terminator shadow */
+    inset 12px 14px 34px rgba(0, 141, 77, 0.20),  /* soft fill on the lit side */
+    0 28px 52px -14px rgba(0, 20, 10, 0.55),      /* ground shadow */
+    0 8px 18px -8px rgba(0, 20, 10, 0.6);
+}
+
+/* Rotating surface — the planet structure that drifts UNDER the fixed lighting.
+   2–3 soft, low-contrast emerald tone bands; the whole layer spins via
+   --orb-rot (rAF-driven). Oversized (inset:-22%) and clipped by the parent's
+   overflow:hidden, so no layer boundary ever enters the visible circle. Sits
+   BELOW rim/sheen/gloss so the lit side stays constant — reads glossy first,
+   rotating second. soft-light keeps the bands sensed, not dominant. */
+.hero-orb__texture {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  transform: rotate(var(--orb-rot, 0deg));
+  transform-origin: 50% 50%;
+  background:
+    /* Storm — THE landmark: one distinct, bright, asymmetric spot so the eye
+       has something to track around the rotation. */
+    radial-gradient(13% 10% at 66% 45%, rgba(0, 158, 86, 0.98) 0%, rgba(0, 130, 72, 0.55) 42%, transparent 70%),
+    /* Dark wide band, upper — two overlapping ellipses give it a lumpy,
+       irregular (non-elliptical) edge rather than a clean stripe. */
+    radial-gradient(54% 24% at 41% 27%, rgba(0, 20, 10, 0.95) 0%, rgba(0, 20, 10, 0.4) 46%, transparent 72%),
+    radial-gradient(30% 15% at 61% 33%, rgba(0, 14, 7, 0.75) 0%, transparent 64%),
+    /* Light mid band, tilted */
+    radial-gradient(46% 18% at 55% 57%, rgba(0, 107, 58, 0.9) 0%, transparent 66%),
+    /* Dark lower-left patch (uneven width vs the upper band) */
+    radial-gradient(32% 21% at 31% 71%, rgba(0, 18, 9, 0.85) 0%, transparent 62%),
+    /* Light lower streak */
+    radial-gradient(40% 12% at 47% 82%, rgba(0, 95, 52, 0.6) 0%, transparent 70%);
+  /* Foreshortening cheat: strongest at the centre, thinning toward the limb, so
+     flat 2D rotation reads as a curved spherical surface. Circular mask →
+     rotation-invariant, so it stays fixed while the bands spin under it. */
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 0%, #000 30%, transparent 68%);
+  mask-image: radial-gradient(circle at 50% 50%, #000 0%, #000 30%, transparent 68%);
+  mix-blend-mode: overlay;
+  /* Per-orb texture strength: primary = full contrast, secondaries dialed down
+     to keep them in a supporting role. */
+  opacity: var(--orb-tex, 0.95);
+}
+
+/* Bounced rim light — thin reflected emerald crescent along the bottom edge (fixed). */
+.hero-orb__rim {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(58% 42% at 60% 93%, rgba(2, 183, 127, 0.55) 0%, rgba(0, 141, 77, 0.22) 38%, transparent 62%);
+  mix-blend-mode: screen;
+}
+
+/* Specular sheen — soft emerald-white highlight marking the fixed light point. */
+.hero-orb__sheen {
+  position: absolute;
+  top: 6%;
+  left: 8%;
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  background:
+    radial-gradient(closest-side at 50% 50%, rgba(180, 255, 220, 0.85) 0%, rgba(60, 220, 150, 0.35) 22%, transparent 60%);
+  mix-blend-mode: screen;
+  opacity: 0.72;
+}
+
+/* Glossy hotspot — tiny hard white dot that sells the polished-glass surface (fixed). */
+.hero-orb__gloss {
+  position: absolute;
+  top: 15%;
+  left: 17%;
+  width: 15%;
+  height: 11%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 72%);
+  opacity: 0.55;
+}
+
+/* Dark mode: define the silhouette so the sphere doesn't melt into the
+   near-black background — a hairline mint rim plus a soft outer glow. */
+.dark .hero-orb {
+  box-shadow:
+    inset -16px -20px 48px rgba(0, 0, 0, 0.5),
+    inset 12px 14px 34px rgba(0, 141, 77, 0.22),
+    inset 0 0 0 1px rgba(2, 183, 127, 0.10),   /* faint inner edge definition */
+    0 0 0 1px rgba(2, 183, 127, 0.16),         /* hairline outer rim */
+    0 0 34px -4px rgba(2, 183, 127, 0.24),     /* soft outer glow lifts it off the dark bg */
+    0 28px 52px -14px rgba(0, 0, 0, 0.6);
+}
+
+/* Always-on silhouette rim for orbs on a dark surface (e.g. the anchor card),
+   regardless of theme. The .dark rim only fires under .dark; on the anchor the
+   surface is dark even in light mode, so we force the rim here. */
+.hero-orb--on-dark {
+  box-shadow:
+    inset -16px -20px 48px rgba(0, 0, 0, 0.5),
+    inset 12px 14px 34px rgba(0, 141, 77, 0.22),
+    inset 0 0 0 1px rgba(2, 183, 127, 0.10),
+    0 0 0 1px rgba(2, 183, 127, 0.16),
+    0 0 34px -4px rgba(2, 183, 127, 0.24),
+    0 28px 52px -14px rgba(0, 0, 0, 0.6);
+}
+
+/* Flat variant — a single-gradient static sphere for mobile/tablet: no child
+   layers, no blend modes, no animation, so it never repaints on scroll. Cheap
+   and discrete. Inherits the base inset shading + ground shadow; the first
+   gradient is a built-in specular so it still reads as a lit sphere. */
+.hero-orb--flat {
+  background:
+    radial-gradient(circle at 33% 28%, rgba(190, 255, 225, 0.5) 0%, rgba(120, 230, 175, 0.16) 15%, transparent 32%),
+    radial-gradient(
+      circle at 32% 27%,
+      #12915a 0%,
+      #007a41 20%,
+      #005c31 40%,
+      #004726 62%,
+      #002e17 85%,
+      #001a0d 100%
+    );
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-orb:not(.hero-orb--flat),
+  .hero-orb__texture {
+    will-change: transform;
+  }
+}
+
 /* Hero LCP animation — CSS-driven so H1 is visible before JS hydrates */
 @keyframes hero-fade-up {
   from { opacity: 0; transform: translateY(16px); }

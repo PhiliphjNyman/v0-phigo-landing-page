@@ -34,9 +34,21 @@ export function Header() {
   const pathname = usePathname()
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
+    // rAF-throttle: coalesce scroll events to one read per frame, so the
+    // listener never does layout work more than once per painted frame.
+    let raf = 0
+    const onScroll = () => {
+      if (raf) return
+      raf = requestAnimationFrame(() => {
+        raf = 0
+        setScrolled(window.scrollY > 20)
+      })
+    }
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (raf) cancelAnimationFrame(raf)
+    }
   }, [])
 
   useEffect(() => {
@@ -69,7 +81,10 @@ export function Header() {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 pt-[env(safe-area-inset-top)] transition-[background-color,border-color,box-shadow] duration-300',
         scrolled
-          ? 'bg-background/80 backdrop-blur-xl border-b border-border shadow-sm'
+          ? // Mobile: near-solid bar, NO backdrop-filter (a fixed blur layer
+            // re-samples the page every scroll frame = the main mobile jank).
+            // Desktop (md:) keeps the glassmorphism — more GPU headroom there.
+            'bg-background/90 border-b border-border shadow-sm md:bg-background/80 md:backdrop-blur-xl'
           : 'bg-transparent',
       )}
     >

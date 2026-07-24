@@ -1,12 +1,13 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useAnimation, useInView, useReducedMotion } from 'framer-motion'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { fadeInUp, fadeIn } from '@/lib/animations'
 import { PhigoMetricsBlock } from '@/components/ui/phigo-metrics-block'
 import { HeroMesh } from '@/components/hero-mesh'
+import { HeroOrb } from '@/components/hero-orb'
 
 export function HeroSection() {
   const arrowRef = useRef(null)
@@ -27,12 +28,79 @@ export function HeroSection() {
     }
   }, [isArrowInView, arrowControls, prefersReducedMotion])
 
+  // DEV-ONLY comparison toggle for judging the orbs: ?orbs=off to start hidden,
+  // or press "o" to flip on the fly (ignored while typing in a field). Gated to
+  // development so no judging tool ships to visitors — in production showOrbs
+  // stays true and the listener is never attached.
+  const [showOrbs, setShowOrbs] = useState(true)
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'production') return
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('orbs') === 'off') setShowOrbs(false)
+    const onKey = (e: KeyboardEvent) => {
+      const t = e.target as HTMLElement | null
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return
+      if (e.key === 'o' || e.key === 'O') setShowOrbs((v) => !v)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
+
   return (
-    <section className="relative flex min-h-dvh items-center overflow-hidden pt-20 pb-16 lg:pt-32">
+    <section data-hero className="hero-shell relative flex items-center overflow-hidden pt-20 pb-16 lg:pt-32">
       {/* Background — Stripe-style emerald mesh sweep (top-right, fades to center-left) */}
       <HeroMesh />
 
-      <div className="relative mx-auto max-w-7xl px-4 lg:px-8">
+      {/* Orbs (moment 2). Rendered above the mesh but before the content, so
+          text/CTAs always stack on top (content is z-10). Orbs may only live
+          WHERE THE MESH GIVES THEM ATMOSPHERE — the upper-right glow along the
+          mesh diagonal — never on the bare white left/lower area (reads as a
+          sticker). They form ONE cluster: a large primary + a smaller secondary
+          near each other (clear size difference = composition, not sprinkles),
+          each with its own period/direction so they never spin in sync. Only the
+          primary reacts to the pointer. Toggle with ?orbs=off / the "o" key. */}
+      {showOrbs && (
+        <>
+          {/* DESKTOP (lg+) — the interactive cluster in the top-right glow. */}
+          {/* PRIMARY — heart of the glow, full size/contrast, the only interactive
+              one, biggest parallax. */}
+          <HeroOrb
+            size={200}
+            period={45}
+            direction={1}
+            parallax={0.32}
+            interactive
+            textureOpacity={0.95}
+            label="primary"
+            glow="tr"
+            className="hidden top-[12%] right-[6%] lg:block"
+          />
+          {/* SECONDARY — smaller, offset upper-left of the primary, still inside
+              the glow, forming a diagonal big+small cluster. */}
+          <HeroOrb
+            size={104}
+            period={57}
+            direction={-1}
+            parallax={0.22}
+            textureOpacity={0.5}
+            label="cluster-sm"
+            glow="tr"
+            className="hidden top-[8%] right-[22%] lg:block"
+          />
+          {/* MOBILE/TABLET (<lg) — one discrete flat sphere in the top-right glow,
+              low opacity, static, no pointer logic. Text owns the centre. */}
+          <HeroOrb
+            flat
+            size={92}
+            textureOpacity={0.5}
+            label="mobile"
+            glow="tr"
+            className="block top-[9%] right-[8%] opacity-60 lg:hidden"
+          />
+        </>
+      )}
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 lg:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-8">
           {/* Text Content */}
           <div className="hero-entrance flex flex-col items-center text-center lg:items-start lg:text-left">

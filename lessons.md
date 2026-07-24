@@ -407,6 +407,152 @@ Lägg till nya lessons efter varje korrigering.
   - Filer i `/public` serveras från roten: `/public/brand/X.png` →
     `https://phigo.se/brand/X.png`.
 
+### [2026-07] backdrop-filter på fixed element = per-frame-repaint på mobil
+- **Vad hände:** Moment 1 (scroll-jank). Headern hade `backdrop-blur-xl` på ett
+  `fixed` element, aktivt vid scroll. Den upplevdes hackig vid scroll på mobil.
+- **Varför:** En backdrop-filter på ett fixed/sticky element tvingar webbläsaren
+  att sampla om och blur:a innehållet bakom **varje scroll-frame**. Det är en
+  GPU/compositor-kostnad som svaga mobil-GPU:er inte hinner med.
+- **Regel:** Under `md`-brytpunkten: solid/near-solid bar (`bg-background/90`)
+  **utan** backdrop-filter. Behåll glaset endast på desktop (`md:backdrop-blur-*`),
+  där GPU-marginalen är större. Verifierat supersmooth på riktig mobil.
+
+### [2026-07] min-h-dvh ger reflow-hopp när mobilens adressfält glider
+- **Vad hände:** Heron var `min-h-dvh`. Vid scroll på mobil hoppade sidan mitt i
+  rörelsen.
+- **Varför:** `dvh` (dynamic viewport) växer/krymper när adressfältet döljs/visas.
+  Heron ändrar då höjd → allt under reflowas mitt i scrollen → synligt hopp.
+- **Regel:** För fullhöjds-sektioner, använd `100svh` (small viewport) — en
+  **stabil** höjd som aldrig ändras när baren glider (en skymt av nästa sektion
+  visas istället, utan reflow). Lägg `100vh` på raden före som fallback för
+  browsers utan svh. Definiera som klass (t.ex. `.hero-shell`) så fallback-
+  cascaden garanteras (staplade Tailwind-utilities garanterar inte källordning).
+  OBS: detta avviker medvetet från ett `dvh`-recept — `dvh` är orsaken till
+  hoppet, inte lösningen.
+
+### [2026-07] Headless CPU-throttle-rigg ser INTE de två vanligaste mobil-jank-orsakerna
+- **Vad hände:** Byggde en Playwright-rigg (production, iPhone-viewport, 4× CPU-
+  throttle) för before/after av moment 1. Både före och efter mätte rena 60fps,
+  CLS 0 — ingen skillnad, trots att den riktiga mobilen kändes tydligt bättre efter.
+- **Varför:** (1) CDP:s `Emulation.setCPUThrottlingRate` bromsar bara
+  **huvudtråden**, inte GPU:n. `backdrop-filter`-blur är en GPU-kostnad → osynlig
+  för riggen (även med `--disable-gpu`/software-raster surfade den knappt på stark
+  desktop). (2) Headless har **inget adressfält** → `dvh`-reflowen kan per
+  definition inte återskapas. Riggen bevisar bara att huvudtråden/JS/layout är ren.
+- **Regel:** Använd headless-riggen för att utesluta JS-/layout-/CLS-flaskhalsar,
+  men **slutverifiera alltid mobilkänslan på en riktig enhet via lokalt IP**
+  (`http://<din-ip>:3000`). GPU-blur och adressfälts-reflow går inte att mäta bort
+  i en headless desktop-rigg.
+
+### [2026-07] pnpm alltid, aldrig npm — npm kraschar på pnpm:s node_modules
+- **Vad hände:** `npm i -D playwright` gav `Cannot read properties of null
+  (reading 'matches')`, även efter `npm cache clean --force`. `pnpm add -D
+  playwright` fungerade direkt.
+- **Varför:** npm kvävs av pnpms symlänkade `node_modules`-struktur och skapar
+  dessutom en konkurrerande `package-lock.json` bredvid `pnpm-lock.yaml`.
+- **Regel:** Projektets pakethanterare är pnpm. Installera med `pnpm add` /
+  `pnpm add -D`, kör verktyg med `pnpm exec`, scripts med `pnpm <script>`. Blanda
+  aldrig in npm/yarn. (Även dokumenterat som Hård Regel 16 i CLAUDE.md.)
+
+### [2026-07] Dekorelement: HELT synliga eller skymda av ett INNEHÅLLSELEMENT, aldrig kant-klippta
+- **Vad hände:** Första fyra-orb-kompositionen la alla orbs i utkanterna, tre
+  avklippta av skärm-/sektionskanter (halvmånar vid kanten). Det såg avhugget ut,
+  som om orbsen flydde ur bilden i stället för att bo i den.
+- **Varför:** En orb skymd av ett innehållselement (kort, knapp) läser som DJUP.
+  En orb kapad av en rak sektionsgräns, skärmkant eller headern läser som TRASIG,
+  en sfär mot en rak linje ser kapad ut. Särskilt gränsen mot nästa (vita) sektion.
+- **Regel:** Varje dekorelement ska ANTINGEN vara helt synligt ANTINGEN skymmas av
+  ett innehållselement (knapp/opakt kort). Aldrig klippas av skärmkant, header
+  eller sektionsgräns. Hierarki: en primär (full storlek/kontrast, i en textfri
+  yta), få sekundära (mindre, lägre kontrast). Bara EN orb reagerar på musen,
+  fyra som svarar blir ett akvarium. OBS: skym bara mot OPAKA element, de
+  translucenta metrics-korten (`bg-card/60 backdrop-blur`) släpper igenom orben
+  bakom siffrorna, det bryter regeln "ingen orb under text".
+
+### [2026-07] Playwright-grind för geometriska UI-regler (scripts/visual-rules.mjs)
+- **Vad hände:** Klippnings-felet ovan hade kunnat fångas automatiskt. Byggde
+  `scripts/visual-rules.mjs` (Playwright) som körs inför moment-godkännande:
+  R1 ingen `.hero-orb` klippt av viewport- eller sektionskant (occlusion av
+  innehåll undantas via `data-occlude-ok` på orben, men R1/klippning gäller alltid),
+  R2 ingen orb överlappar skyddat innehåll (`h1`, hero-`p`, CTA-`a`,
+  `[data-orb-protect]` = stat-korten + förtroendebaren) om inte `occlude-ok`,
+  R3 ingen horisontell scroll vid 360px. Kör ljust + mörkt, rapporterar pass/fail.
+- **Regel:** Visuella omdömen är människans (dominans, blickföring, elegans);
+  varje mänskligt fynd som kan FORMULERAS som en geometrisk regel ska flytta in i
+  skriptet och köras som grind. Kör `pnpm exec node scripts/visual-rules.mjs`
+  (server på :3000) före varje moment-godkännande, utöver screenshot-loopen där
+  jag själv granskar mot en visuell checklista (dominans, ren underkant, CTA
+  hittas) innan jag visar Hugo/Philip. Markera skyddade textytor med
+  `data-orb-protect` och hero-sektionen med `data-hero` så grinden hittar dem.
+- **Pakethanterare:** kör skriptet med `pnpm exec node` (aldrig npm), se Hård Regel 16.
+
+### [2026-07] Orbs behöver ATMOSFÄR, inte bara fri yta — de får bo där meshen glöder
+- **Vad hände:** Efter att klippnings-regeln var uppfylld låg orbsen ändå fel: en
+  i mesh-glöden (övre höger) såg rätt ut, men två som flöt på tom vit yta läste
+  som ditsatta klistermärken. Regeln "undvik text/kanter" räckte inte.
+- **Varför:** Ett objekt behöver omgivning för att kännas förankrat. Orbsen är
+  emerald mot en nära-vit vänsteryta = ingen kontext, ser pålimmat ut. I
+  mesh-glöden får de en grön atmosfär att sitta i.
+- **Regel:** Orbs (och liknande dekorobjekt) får bara placeras DÄR MESHEN GER
+  ATMOSFÄR (övre höger-glöden längs mesh-diagonalen), aldrig på bar vit/tom yta.
+  Arrangera dem som ETT kluster med tydlig storleksskillnad (stor + liten nära =
+  komposition; jämnt utspritt = strössel). Behöver primären mer atmosfär där den
+  hamnar: förläng/bredda mesh-glöden hellre än att flytta orben ut på vitt.
+  Detta är nu geometriskt kodat som **R4 i `scripts/visual-rules.mjs`** (orb-
+  centrum inom glöd-zonen `GLOW_ZONE`, en approximation av mesh-masken, håll i
+  synk om meshen omformas) + **R5** (ingen orb under den fixerade headern).
+- **A/B-verktyg:** en toggle för att bedöma om heron är bättre MED orbsen än utan
+  (`?orbs=off` eller tangent "o" i hero-section). Slutliga testet är alltid
+  jämförelsen med/utan, inte orbsen i isolering.
+
+### [2026-07] Orb-systemet: on-dark-rim, mobil flat-variant, rAF-gate på synlighet, sektionsrelativ parallax
+- **Anchor/mörk yta:** `.dark .hero-orb`-rimmen fyrar bara i mörkt tema. Orbs på en
+  yta som är mörk i BÅDA teman (anchor-emerald-kortet) behöver en egen
+  `.hero-orb--on-dark`-klass som alltid sätter rimmen, annars smälter orben in i
+  ljust tema. (Jfr hero-rim-fixen.)
+- **Mobil = flat static:** de detaljerade orbsen (roterande textur med
+  `mix-blend-mode`, flera lager) är en DESKTOP-sak (`hidden lg:block`). På mobil
+  (`lg:hidden`) renderas en `.hero-orb--flat`: EN gradient-sfär, inga barnlager,
+  inga blend-modes, ingen rAF. Billig och diskret. Uppmätt: 60fps, 0 jank, CLS 0
+  (production, 390px, 4× CPU).
+- **rAF-gate på synlighet:** `display:none` (responsiva varianter) UNMOUNTAR inte
+  komponenten, så en dold orb kör annars sin rAF-loop i onödan. Gate:a loopen på
+  `el.offsetParent !== null` (starta/stoppa i en `syncVisibility` som även körs på
+  resize). Annars brinner de dolda desktop-orbsen frames på mobil.
+- **Sektionsrelativ parallax:** absolut `window.scrollY * factor` fungerar för
+  heron (rest = scroll 0) men KRASCHAR för sektioner långt ned (parallaxen når
+  taket direkt och står still). Beräkna vilopunkten som "scroll där sektionen är
+  centrerad" (`sectionTop + scrollY + sectionH/2 - vh/2`) och ta
+  `(scrollY - restScroll) * factor`, cap ±40. Då vilar orben på sin CSS-position
+  när sektionen är i vy, oavsett var på sidan.
+- **Dev-gate bedömningsverktyg:** toggle (`?orbs=off` / "o") ska INTE följa med
+  till besökare. Gate:a effekten med `if (process.env.NODE_ENV === 'production') return`
+  så listenern aldrig kopplas i produktion (behåll koden för framtida justering).
+
+### [2026-07] Headless Playwright = SwiftShader (software rendering) → desktop-GPU-siffror är opålitliga
+- **Vad hände:** Vid moment-2-perf mätte desktop-scroll (1440px) ~12fps även utan
+  CPU-throttle, medan mobil (390px) var 60fps. Isolering visade hero-meshen som
+  orsak (dölj den → 60fps); orbsen var oskyldiga (SHOWN 11,8fps ≈ HIDDEN 12,4fps).
+- **Varför:** `WEBGL_debug_renderer_info` avslöjade renderaren =
+  **SwiftShader** (mjukvara, ingen hårdvaru-GPU). Meshens 5 stora blurrade lager
+  med `will-change` + animerad `transform` mjukvaru-rasteras på CPU → dyrt. På en
+  riktig GPU hårdvaru-komponeras de och scrollar sannolikt i 60fps. Både
+  `animation:none` OCH `will-change:auto` behövdes för 60fps under mjukvara, vilket
+  bekräftar att det är GPU-lagret (blur-kompositering), inte huvudtråden.
+- **Regel:** Kontrollera renderaren (`UNMASKED_RENDERER_WEBGL`) innan du drar
+  perf-slutsatser från headless. Är det SwiftShader/llvmpipe är GPU-tunga effekter
+  (blur, blend, filter) MYCKET pessimistiska, inte representativa för riktig
+  hårdvara. Använd headless för att UTESLUTA huvudtråds-/layout-/CLS-kostnad och
+  för RELATIV A/B (orb shown vs hidden), men **slutverifiera GPU-känslan på riktig
+  enhet** (jfr moment-1-lessonen). Orbsen är perf-neutrala; meshens
+  desktop-kostnad kräver riktig-GPU-bekräftelse innan man ändrar något.
+- **Uppföljning (bekräftat 2026-07):** slutverifierat på riktig desktop-GPU —
+  meshen scrollar smooth, SwiftShader-fps:en var en ren mätartefakt (mjukvaru-
+  rastrering), inte ett riktigt problem. Den kirurgiska mesh-fixen (pausa +
+  demota `will-change` när heron är utanför vyn) är sparad som recept men
+  behövdes INTE. Moment 2 slutgodkänt på riktig desktop + riktig mobil (lokalt IP).
+  Sensmoral: rör inte den approved meshen på en headless-mätartefakt.
+
 ---
 
 ## Att lägga till löpande
