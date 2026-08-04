@@ -7,7 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import { fadeInUp, staggerContainer } from '@/lib/animations'
+import { reveal, revealStagger } from '@/lib/animations'
 import { HelpCircle, CreditCard, Clock, ShieldCheck, Smartphone, MapPin, Pencil, PackageMinus } from 'lucide-react'
 
 const faqs = [
@@ -66,24 +66,24 @@ export function FaqSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          variants={staggerContainer}
+          variants={revealStagger}
           className="text-center mb-16"
         >
           <motion.span
-            variants={fadeInUp}
+            variants={reveal}
             className="text-sm font-bold uppercase text-primary"
             aria-hidden="true"
           >
             Vanliga frågor
           </motion.span>
           <motion.h2
-            variants={fadeInUp}
+            variants={reveal}
             className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"
           >
             Vanliga frågor
           </motion.h2>
           <motion.p
-            variants={fadeInUp}
+            variants={reveal}
             className="mt-6 mx-auto max-w-xl text-pretty text-muted-foreground text-lg"
           >
             Hittar du inte svaret du söker? Hör av dig direkt.
@@ -94,7 +94,7 @@ export function FaqSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          variants={fadeInUp}
+          variants={reveal}
           className="relative"
         >
           <Accordion type="single" collapsible className="w-full space-y-4">
@@ -123,8 +123,9 @@ export function FaqSection() {
 
         {/* Support CTA under FAQ */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          variants={reveal}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
           className="mt-16 text-center"
         >

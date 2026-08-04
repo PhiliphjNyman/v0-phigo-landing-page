@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { MapPin } from 'lucide-react'
-import { fadeInUp, staggerContainer } from '@/lib/animations'
+import { reveal, revealStagger } from '@/lib/animations'
 
 const founders = [
   {
@@ -27,23 +27,23 @@ export function AboutSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          variants={staggerContainer}
+          variants={revealStagger}
           className="flex flex-col items-center text-center"
         >
           <motion.span
-            variants={fadeInUp}
+            variants={reveal}
             className="text-xs font-semibold uppercase text-primary"
           >
             Om oss
           </motion.span>
           <motion.h2
-            variants={fadeInUp}
+            variants={reveal}
             className="mt-3 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
           >
             Vilka är vi?
           </motion.h2>
           <motion.p
-            variants={fadeInUp}
+            variants={reveal}
             className="mt-4 max-w-xl text-pretty leading-relaxed text-muted-foreground"
           >
             Vi heter Hugo och Philip och studerar kognitionsvetenskap tillsammans
@@ -56,14 +56,14 @@ export function AboutSection() {
           </motion.p>
 
           <motion.div
-            variants={staggerContainer}
+            variants={revealStagger}
             className="mt-12 grid w-full max-w-2xl gap-6 sm:grid-cols-2"
           >
             {founders.map((founder) => (
               <motion.div
                 key={founder.name}
-                variants={fadeInUp}
-                className="flex flex-col items-center gap-4 rounded-2xl border border-border bg-card p-6 text-center transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20"
+                variants={reveal}
+                className="card-depth flex flex-col items-center gap-4 rounded-2xl border border-border bg-card p-6 text-center transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20"
               >
                 {/* Avatar placeholder — swap for <Image> when photos are available */}
                 <div
@@ -88,7 +88,7 @@ export function AboutSection() {
           </motion.div>
 
           <motion.div
-            variants={fadeInUp}
+            variants={reveal}
             className="mt-8 flex items-center gap-2 text-sm text-muted-foreground"
           >
             <MapPin className="size-4 text-primary" aria-hidden="true" />

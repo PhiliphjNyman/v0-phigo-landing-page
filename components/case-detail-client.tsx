@@ -7,7 +7,7 @@ import { ArrowLeft, ArrowUpRight, CheckCircle2, ChevronRight } from 'lucide-reac
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Counter } from '@/components/ui/counter'
-import { fadeInUp, staggerContainer, scaleIn } from '@/lib/animations'
+import { reveal, revealStagger, scaleIn } from '@/lib/animations'
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -58,9 +58,9 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                     <motion.div
                         initial="hidden"
                         animate="visible"
-                        variants={staggerContainer}
+                        variants={revealStagger}
                     >
-                        <motion.div variants={fadeInUp}>
+                        <motion.div variants={reveal}>
                             <div className="mb-6 flex flex-wrap items-center gap-2">
                                 <Badge variant="secondary" className="rounded-full px-4 py-1 text-primary bg-primary/10">
                                     {c.category}
@@ -79,9 +79,9 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                             </p>
                         </motion.div>
 
-                        <motion.div variants={fadeInUp} className="flex flex-wrap gap-4 items-center">
+                        <motion.div variants={reveal} className="flex flex-wrap gap-4 items-center">
                             {c.stats?.map((stat, i) => (
-                                <div key={i} className="bg-card border border-border rounded-2xl p-6 flex flex-col gap-1 shadow-sm">
+                                <div key={i} className="card-depth bg-card border border-border rounded-2xl p-6 flex flex-col gap-1">
                                     <span className="text-3xl font-black text-primary">
                                         <Counter
                                             value={parseInt(stat.value.replace(/[^0-9]/g, ''))}
@@ -127,8 +127,9 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                 {/* Content Section */}
                 <div className="grid gap-16 lg:grid-cols-3 mb-24 lg:mb-32">
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                        variants={reveal}
+                        initial="hidden"
+                        whileInView="visible"
                         viewport={{ once: true }}
                         className="lg:col-span-2 prose prose-invert prose-lg max-w-none"
                     >
@@ -138,13 +139,15 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                         </p>
                     </motion.div>
 
-                    <aside
+                    <motion.aside
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: '-80px' }}
+                        variants={revealStagger}
                         className="space-y-8"
                     >
                         <motion.div
-                            initial={{ opacity: 0, x: 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
+                            variants={reveal}
                             className="bg-muted/30 border border-border rounded-3xl p-8"
                         >
                             <h3 className="text-balance text-xl font-bold text-foreground mb-6">Vad vi gjorde</h3>
@@ -159,10 +162,7 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                         </motion.div>
 
                         <motion.div
-                            initial={{ opacity: 0, x: 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 }}
+                            variants={reveal}
                             className="bg-muted/30 border border-border rounded-3xl p-8 space-y-4"
                         >
                             <h3 className="text-sm font-bold uppercase text-muted-foreground">Om projektet</h3>
@@ -181,7 +181,7 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                                 </div>
                             </dl>
                         </motion.div>
-                    </aside>
+                    </motion.aside>
                 </div>
 
                 {/* Related Cases */}
@@ -200,7 +200,7 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                         <div className="grid gap-8 md:grid-cols-2">
                             {relatedCases.map((rc) => (
                                 <Link key={rc.slug} href={`/cases/${rc.slug}`} aria-label={rc.title}>
-                                    <article className="group relative overflow-hidden rounded-[2rem] border border-border bg-card/50 transition-[border-color,background-color] duration-200 hover:border-primary/20 hover:bg-card">
+                                    <article className="card-depth group relative overflow-hidden rounded-[2rem] border border-border bg-card/50 transition-[border-color,background-color] duration-200 hover:border-primary/20 hover:bg-card">
                                         <div className="flex flex-col md:flex-row h-full">
                                             <div className="relative aspect-video md:aspect-square md:w-48 overflow-hidden shrink-0">
                                                 <Image

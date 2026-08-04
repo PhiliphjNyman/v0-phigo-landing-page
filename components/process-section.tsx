@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Search, Paintbrush, RocketIcon } from 'lucide-react'
-import { fadeInUp, staggerContainer } from '@/lib/animations'
+import { reveal, revealStagger } from '@/lib/animations'
 
 const steps = [
   {
@@ -40,23 +40,23 @@ export function ProcessSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          variants={staggerContainer}
+          variants={revealStagger}
           className="text-center"
         >
           <motion.span
-            variants={fadeInUp}
+            variants={reveal}
             className="text-sm font-bold uppercase text-primary"
           >
             Så funkar det
           </motion.span>
           <motion.h2
-            variants={fadeInUp}
+            variants={reveal}
             className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"
           >
             Din nya hemsida på 14 dagar
           </motion.h2>
           <motion.p
-            variants={fadeInUp}
+            variants={reveal}
             className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-muted-foreground"
           >
             Tre enkla steg från första kontakt till live sajt.
@@ -81,7 +81,7 @@ export function ProcessSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-80px' }}
-            variants={staggerContainer}
+            variants={revealStagger}
             className="grid gap-12 md:grid-cols-3 md:gap-8"
           >
             {steps.map((step, i) => {
@@ -89,7 +89,7 @@ export function ProcessSection() {
               return (
                 <motion.div
                   key={step.number}
-                  variants={fadeInUp}
+                  variants={reveal}
                   className="group relative flex flex-col items-center text-center md:items-start md:text-left"
                 >
                   {/* Step Visual */}

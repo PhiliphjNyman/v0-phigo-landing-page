@@ -28,7 +28,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import Link from 'next/link'
-import { fadeInUp, staggerContainer, scaleIn } from '@/lib/animations'
+import { reveal, revealStagger, scaleIn } from '@/lib/animations'
 
 const contactSchema = z.object({
   namn: z.string().min(2, 'Namn måste vara minst 2 tecken'),
@@ -108,23 +108,23 @@ export function ContactForm() {
               whileInView="visible"
               exit={{ opacity: 0, scale: 0.95 }}
               viewport={{ once: true, margin: '-80px' }}
-              variants={staggerContainer}
+              variants={revealStagger}
             >
               <div className="text-center mb-12">
                 <motion.span
-                  variants={fadeInUp}
+                  variants={reveal}
                   className="text-sm font-bold uppercase text-primary"
                 >
                   Kontakta oss
                 </motion.span>
                 <motion.h2
-                  variants={fadeInUp}
+                  variants={reveal}
                   className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"
                 >
                   Låt oss titta på din hemsida
                 </motion.h2>
                 <motion.p
-                  variants={fadeInUp}
+                  variants={reveal}
                   className="mt-6 text-pretty text-muted-foreground text-lg"
                 >
                   Fyll i så återkommer vi inom 24 timmar med en granskning och
@@ -132,7 +132,7 @@ export function ContactForm() {
                 </motion.p>
               </div>
 
-              <motion.div variants={fadeInUp} className="relative mt-12 overflow-hidden rounded-3xl border border-border bg-card shadow-2xl">
+              <motion.div variants={reveal} className="relative mt-12 overflow-hidden rounded-3xl border border-border bg-card shadow-2xl">
                 <div className="absolute top-0 left-0 w-full h-1 bg-muted" aria-hidden="true">
                   <motion.div
                     className="h-full w-full bg-primary origin-left"

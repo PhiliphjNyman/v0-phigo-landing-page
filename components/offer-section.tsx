@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, Check, X, ShieldCheck } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { fadeInUp, staggerContainer } from '@/lib/animations'
+import { reveal, revealStagger } from '@/lib/animations'
 
 const steps = [
   {
@@ -49,23 +49,23 @@ export function OfferSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          variants={staggerContainer}
+          variants={revealStagger}
           className="text-center"
         >
           <motion.span
-            variants={fadeInUp}
+            variants={reveal}
             className="text-sm font-bold uppercase text-primary"
           >
             Erbjudande
           </motion.span>
           <motion.h2
-            variants={fadeInUp}
+            variants={reveal}
             className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"
           >
             En hemsida som ger dig fler kunder
           </motion.h2>
           <motion.p
-            variants={fadeInUp}
+            variants={reveal}
             className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-muted-foreground"
           >
             De flesta hemsidor behandlar alla besökare likadant. Vi bygger ett
@@ -78,14 +78,14 @@ export function OfferSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          variants={staggerContainer}
+          variants={revealStagger}
           className="mt-20 grid gap-8 md:grid-cols-3"
         >
           {steps.map((step) => (
             <motion.div
               key={step.number}
-              variants={fadeInUp}
-              className="group relative flex flex-col gap-4 rounded-3xl border border-border bg-card/40 p-8 transition-[box-shadow,background-color] duration-200 hover:bg-card hover:shadow-xl hover:shadow-primary/5"
+              variants={reveal}
+              className="card-depth group relative flex flex-col gap-4 rounded-3xl border border-border bg-card/40 p-8 transition-[box-shadow,background-color] duration-200 hover:bg-card hover:shadow-xl hover:shadow-primary/5"
             >
               <div className="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary text-lg font-black">
                 {step.number}
@@ -105,10 +105,10 @@ export function OfferSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-80px' }}
-            variants={staggerContainer}
+            variants={revealStagger}
             className="flex flex-col gap-6"
           >
-            <motion.div variants={fadeInUp}>
+            <motion.div variants={reveal}>
               <h3 className="text-balance text-xl font-bold text-foreground mb-4">Vad som ingår</h3>
               <ul className="flex flex-col gap-3">
                 {included.map((item) => (
@@ -120,7 +120,7 @@ export function OfferSection() {
               </ul>
             </motion.div>
 
-            <motion.div variants={fadeInUp}>
+            <motion.div variants={reveal}>
               <h3 className="text-balance text-xl font-bold text-foreground mb-4">Vad som inte ingår</h3>
               <ul className="flex flex-col gap-3">
                 {notIncluded.map((item) => (

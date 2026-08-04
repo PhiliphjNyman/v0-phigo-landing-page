@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { ArrowUpRight, TrendingUp, Zap, Heart, Flame } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
-import { fadeInUp, staggerContainer, scaleIn } from '@/lib/animations'
+import { reveal, revealStagger } from '@/lib/animations'
 import { Counter } from '@/components/ui/counter'
 
 import Link from 'next/link'
@@ -34,17 +34,17 @@ export function CaseStudies() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-80px' }}
-            variants={staggerContainer}
+            variants={revealStagger}
             className="text-center sm:text-left"
           >
             <motion.span
-              variants={fadeInUp}
+              variants={reveal}
               className="text-sm font-bold uppercase text-primary"
             >
               Exempel
             </motion.span>
             <motion.h2
-              variants={fadeInUp}
+              variants={reveal}
               className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"
             >
               Så kan din hemsida se ut
@@ -52,8 +52,9 @@ export function CaseStudies() {
           </motion.div>
 
           <motion.p
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            variants={reveal}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
             className="max-w-md text-pretty text-center text-muted-foreground sm:text-right"
           >
@@ -64,10 +65,10 @@ export function CaseStudies() {
 
         {/* Grid */}
         <motion.div
-          variants={scaleIn}
+          variants={revealStagger}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: '-80px' }}
           className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
           {cases.map((c, index) => {
@@ -78,7 +79,8 @@ export function CaseStudies() {
             return (
               <Link key={c.slug} href={`/cases/${c.slug}`} aria-label={c.title}>
                 <motion.article
-                  className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card/50 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-1 hover:border-primary/20 hover:bg-card hover:shadow-2xl hover:shadow-primary/5 cursor-pointer"
+                  variants={reveal}
+                  className="card-depth group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card/50 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-1 hover:border-primary/20 hover:bg-card hover:shadow-2xl hover:shadow-primary/5 cursor-pointer"
                 >
                   {/* Image */}
                   <div className="relative aspect-[16/11] overflow-hidden bg-muted">

@@ -30,7 +30,7 @@ briefingen** för produktombyggnaden; fas 2 är alltså sanktionerad, inget utö
 |---|---|---|---|
 | — | Moment 1–2 | Jank-diagnos + orbs | ✅ KLAR (se §2) |
 | 0 | Produktdefinitioner | Prosa, Hugo levererar — blockerar fas 2 | ⬜ |
-| 1 | Moment 3 + 4 | Lagerdjup + reveal-refaktorn | ⬜ |
+| 1 | Moment 3 + 4 | Lagerdjup + reveal-refaktorn | ✅ KLAR (3B parallax uppskjuten, se §5) |
 | 2 | Produktombyggnad | Produktsidor, navigering, guide-yta | ⬜ |
 | 3 | Moment 5 + 6 | Swipe-kort + typografisk skärpa (sajtbrett inkl. nya sidor) | ⬜ |
 | 4 | Moment 7 + 8 | Viewport/a11y + slutmätning | ⬜ |
@@ -124,11 +124,14 @@ Code skriver aldrig produktcopy fritt.
 ## 5. FAS 1 — Moment 3 + 4 (scroll-liv)
 
 ### Moment 3: Lagerdjup i ljusa sektioner
-- Kort/stat-block får mjuk flerlagerskugga med svag grön ton
-  (t.ex. `0 8px 24px rgba(0,141,77,0.08)` + `0 2px 6px rgba(0,0,0,0.05)`).
-- Vid scroll förskjuts kort och ev. accentdetalj (badge/etikett) marginellt
-  olika (faktor ~1.0 vs ~1.3) för djupkänsla. Max ~12px.
-- Desktop only — mobil behåller skuggorna, parallaxen av.
+- ✅ **Del A (KLAR):** Kort/stat-block får mjuk flerlagerskugga med svag grön ton.
+  Implementerat som `.card-depth`-utility + tema-tokens i `globals.css` (grön-tonad
+  tvålagerskugga i ljust läge, `none` i mörkt så shippat mörkt läge bevaras).
+  Applicerad sajtbrett på innehållskort (case, erbjudande-steg, varför-PHIGO,
+  om-oss, case-detalj, blogg).
+- ⬜ **Del B (UPPSKJUTEN — uppföljningssteg):** Vid scroll förskjuts kort och ev.
+  accentdetalj (badge/etikett) marginellt olika (faktor ~1.0 vs ~1.3) för
+  djupkänsla. Max ~12px. Desktop only, mobil/reduced-motion av. Byggs separat.
 - INGET rastermönster eller bakgrundsbild i ljusa sektioner.
 
 ### Moment 4: Scroll-reveals sajtbrett (Framer-refaktorn)

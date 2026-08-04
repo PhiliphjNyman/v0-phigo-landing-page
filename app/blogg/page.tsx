@@ -62,7 +62,7 @@ export default function BloggPage() {
                         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                             {published.map((post) => (
                                 <Link key={post.slug} href={`/blogg/${post.slug}`} aria-label={post.title}>
-                                    <article className="group flex h-full flex-col rounded-3xl border border-border bg-card/50 p-8 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-1 hover:border-primary/20 hover:bg-card hover:shadow-2xl hover:shadow-primary/5">
+                                    <article className="card-depth group flex h-full flex-col rounded-3xl border border-border bg-card/50 p-8 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-1 hover:border-primary/20 hover:bg-card hover:shadow-2xl hover:shadow-primary/5">
                                         <div className="mb-4 flex items-center justify-between">
                                             <Badge variant="secondary" className="rounded-lg bg-muted/50 text-xs font-semibold text-muted-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary">
                                                 {post.category}

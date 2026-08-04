@@ -7,6 +7,7 @@ import { ArrowUpRight, TrendingUp, Zap, Heart } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Counter } from '@/components/ui/counter'
 import { Case } from '@/lib/cases'
+import { reveal, revealStagger } from '@/lib/animations'
 
 const accentMap = {
     amber: 'group-hover:border-accent-cases/30 text-accent-cases bg-accent-cases/10',
@@ -21,22 +22,22 @@ const iconMap: Record<string, any> = {
 
 export function CasesClient({ allCases }: { allCases: Case[] }) {
     return (
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <motion.div
+            className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+            variants={revealStagger}
+            initial="hidden"
+            animate="visible"
+        >
             {allCases.map((c) => {
                 const stat = c.stats?.[0]
                 const MetricIcon = iconMap[c.slug] || TrendingUp
                 const accentStyles = accentMap[c.accent]
 
                 return (
-                    <motion.div
-                        key={c.slug}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3 }}
-                    >
+                    <motion.div key={c.slug} variants={reveal}>
                         <Link href={`/cases/${c.slug}`} aria-label={c.title}>
                             <article
-                                className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card/50 transition-[border-color,background-color,box-shadow] duration-200 hover:border-primary/20 hover:bg-card hover:shadow-2xl hover:shadow-primary/5 cursor-pointer"
+                                className="card-depth group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card/50 transition-[border-color,background-color,box-shadow] duration-200 hover:border-primary/20 hover:bg-card hover:shadow-2xl hover:shadow-primary/5 cursor-pointer"
                             >
                                 <div className="relative aspect-[16/11] overflow-hidden bg-muted">
                                     <Image
@@ -94,6 +95,6 @@ export function CasesClient({ allCases }: { allCases: Case[] }) {
                     </motion.div>
                 )
             })}
-        </div>
+        </motion.div>
     )
 }

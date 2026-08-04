@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { HeroOrb } from '@/components/hero-orb'
-import { fadeInUp, staggerContainer } from '@/lib/animations'
+import { reveal, revealStagger } from '@/lib/animations'
 
 export function FinalCta() {
   return (
@@ -14,7 +14,7 @@ export function FinalCta() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          variants={staggerContainer}
+          variants={revealStagger}
           data-anchor
           className="anchor-emerald relative overflow-hidden rounded-3xl border border-white/10 px-6 py-16 text-center shadow-2xl shadow-primary/10 sm:px-12 lg:px-20"
         >
@@ -53,20 +53,20 @@ export function FinalCta() {
 
           <div className="relative z-10">
             <motion.h2
-              variants={fadeInUp}
+              variants={reveal}
               className="text-balance text-3xl font-bold tracking-tight text-anchor-fg sm:text-4xl"
             >
               Vill du veta var din hemsida tappar kunder?
             </motion.h2>
             <motion.p
-              variants={fadeInUp}
+              variants={reveal}
               className="mx-auto mt-4 max-w-xl text-pretty leading-relaxed text-anchor-fg-muted"
             >
               Vi granskar din sajt och visar konkret vad som kan förbättras,
               kostnadsfritt och utan förpliktelse.
             </motion.p>
             <motion.div
-              variants={fadeInUp}
+              variants={reveal}
               className="mt-8 flex flex-col items-center gap-3"
             >
               <Button

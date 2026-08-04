@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { fadeInUp, staggerContainer } from '@/lib/animations'
+import { reveal, revealStagger } from '@/lib/animations'
 import { getCases } from '@/lib/cases'
 import { Metadata } from 'next'
 import { CasesClient } from '@/components/cases-client'
@@ -52,23 +52,23 @@ export default function CasesPage() {
                     <Framer.MotionDiv
                         initial="hidden"
                         animate="visible"
-                        variants={staggerContainer}
+                        variants={revealStagger}
                         className="text-center mb-16"
                     >
                         <Framer.MotionSpan
-                            variants={fadeInUp}
+                            variants={reveal}
                             className="text-sm font-bold uppercase text-primary block"
                         >
                             Designexempel
                         </Framer.MotionSpan>
                         <Framer.MotionH1
-                            variants={fadeInUp}
+                            variants={reveal}
                             className="mt-4 text-4xl font-extrabold tracking-tight text-foreground sm:text-6xl"
                         >
                             Hemsidor vi har byggt
                         </Framer.MotionH1>
                         <Framer.MotionP
-                            variants={fadeInUp}
+                            variants={reveal}
                             className="mt-6 text-xl text-muted-foreground max-w-2xl mx-auto"
                         >
                             Se hemsidor vi har byggt åt lokala företag i olika branscher. Alla sajter levereras till fast pris och går live inom 14 dagar.
@@ -79,8 +79,9 @@ export default function CasesPage() {
 
                     {/* Bottom CTA */}
                     <Framer.MotionDiv
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                        variants={reveal}
+                        initial="hidden"
+                        whileInView="visible"
                         viewport={{ once: true }}
                         className="mt-24 p-12 lg:p-16 rounded-[3rem] bg-muted/30 border border-border text-center overflow-hidden relative"
                     >
