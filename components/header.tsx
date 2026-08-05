@@ -70,7 +70,10 @@ export function Header() {
           : 'bg-transparent',
       )}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 lg:px-6">
+      {/* In the md–lg (tablet/hamburger) range, pull the toggle + hamburger
+          well inward with a wide right gutter (they sit roughly above the hero
+          midline, not tight in the corner); the logo keeps its left gutter. */}
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:pl-10 md:pr-32 lg:px-6">
         <Link href="/" aria-label="PHIGO, gå till startsidan">
           <PhigoLogo size="md" />
         </Link>
