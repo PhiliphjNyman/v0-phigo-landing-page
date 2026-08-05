@@ -163,7 +163,7 @@ representerade". **Kräver fas 0 levererad + separat plangodkännande.**
 **Delstatus (uppdateras per delsteg-commit):**
 - [x] ✅ Flytt av hemsideinnehåll till `/hemsida` + Tjänster-nav
 - [x] ✅ `/ai-receptionist` (delad produktmall)
-- [ ] ⬜ `/chatbot` (variation på produktmallen, copy ur fas 0 §4)
+- [x] ✅ `/chatbot` (variation på produktmallen, copy ur fas 0 §4)
 - [ ] ⬜ Produktöversikt på startsidan (`#produkter`, 3 card-depth-kort)
 - [ ] ⬜ Guide-yta "Hitta rätt lösning" (designad container, ingen Voiceflow)
 
