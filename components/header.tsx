@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
-import { Menu } from 'lucide-react'
+import { Menu, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -11,26 +11,33 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { PhigoLogo } from '@/components/phigo-logo'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { cn } from '@/lib/utils'
 
 import Link from 'next/link'
 
-const navLinks = [
-  { label: 'Exempel', href: '/cases', sectionId: null },
-  { label: 'Erbjudande', href: '/#erbjudande', sectionId: 'erbjudande' },
-  { label: 'Så funkar det', href: '/#process', sectionId: 'process' },
-  { label: 'Vanliga frågor', href: '/#faq', sectionId: 'faq' },
-  { label: 'Blogg', href: '/blogg', sectionId: null },
+/* Product pages under "Tjänster". Add /ai-receptionist and /chatbot here as
+   those pages land — the desktop dropdown and the mobile group read from this. */
+const products = [
+  { label: 'Hemsida', href: '/hemsida', desc: 'Sajt som ger dig fler kunder' },
 ]
 
-const SCROLL_SPY_SECTIONS = ['erbjudande', 'process', 'faq', 'kontakt']
+/* Top-level route links either side of the Tjänster group. */
+const routeLinks = [
+  { label: 'Exempel', href: '/cases' },
+  { label: 'Blogg', href: '/blogg' },
+]
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState<string>('')
   const pathname = usePathname()
 
   useEffect(() => {
@@ -51,30 +58,9 @@ export function Header() {
     }
   }, [])
 
-  useEffect(() => {
-    if (pathname !== '/') {
-      setActiveSection('')
-      return
-    }
-
-    const observers: IntersectionObserver[] = []
-
-    SCROLL_SPY_SECTIONS.forEach((id) => {
-      const el = document.getElementById(id)
-      if (!el) return
-
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id)
-        },
-        { rootMargin: '-35% 0px -55% 0px', threshold: 0 },
-      )
-      obs.observe(el)
-      observers.push(obs)
-    })
-
-    return () => observers.forEach((obs) => obs.disconnect())
-  }, [pathname])
+  const isRouteActive = (href: string) =>
+    pathname === href || pathname.startsWith(href + '/')
+  const isProductsActive = products.some((p) => isRouteActive(p.href))
 
   return (
     <header
@@ -95,30 +81,79 @@ export function Header() {
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-8 md:flex" aria-label="Huvudnavigering">
-          {navLinks.map((link) => {
-            const isActive =
-              (link.sectionId === null && (pathname === link.href || pathname.startsWith(link.href + '/'))) ||
-              (link.sectionId !== null && activeSection === link.sectionId)
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                aria-current={isActive ? (link.sectionId === null ? 'page' : 'true') : undefined}
+          {/* Exempel */}
+          <Link
+            href="/cases"
+            aria-current={isRouteActive('/cases') ? 'page' : undefined}
+            className={cn(
+              'relative text-sm font-medium transition-colors duration-200',
+              isRouteActive('/cases')
+                ? 'text-foreground'
+                : 'text-muted-foreground hover:text-foreground',
+            )}
+          >
+            Exempel
+            <span
+              className={cn(
+                'absolute -bottom-1 left-0 h-px w-full bg-primary transition-transform duration-300 origin-left',
+                isRouteActive('/cases') ? 'scale-x-100' : 'scale-x-0',
+              )}
+            />
+          </Link>
+
+          {/* Tjänster dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              className={cn(
+                'group relative flex cursor-pointer items-center gap-1 text-sm font-medium outline-none transition-colors duration-200 focus-visible:text-foreground',
+                isProductsActive
+                  ? 'text-foreground'
+                  : 'text-muted-foreground hover:text-foreground',
+              )}
+            >
+              Tjänster
+              <ChevronDown
+                className="size-4 transition-transform duration-200 group-data-[state=open]:rotate-180"
+                aria-hidden="true"
+              />
+              <span
                 className={cn(
-                  'relative text-sm font-medium transition-colors duration-200',
-                  isActive ? 'text-foreground' : 'text-muted-foreground hover:text-foreground',
+                  'absolute -bottom-1 left-0 h-px w-[calc(100%-1.25rem)] bg-primary transition-transform duration-300 origin-left',
+                  isProductsActive ? 'scale-x-100' : 'scale-x-0',
                 )}
-              >
-                {link.label}
-                <span
-                  className={cn(
-                    'absolute -bottom-1 left-0 h-px w-full bg-primary transition-transform duration-300 origin-left',
-                    isActive ? 'scale-x-100' : 'scale-x-0',
-                  )}
-                />
-              </Link>
-            )
-          })}
+              />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" className="w-64 rounded-xl border-border bg-popover p-2">
+              {products.map((product) => (
+                <DropdownMenuItem key={product.href} asChild className="cursor-pointer rounded-lg p-0">
+                  <Link href={product.href} className="flex flex-col items-start gap-0.5 px-3 py-2.5">
+                    <span className="text-sm font-semibold text-foreground">{product.label}</span>
+                    <span className="text-xs text-muted-foreground">{product.desc}</span>
+                  </Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          {/* Blogg */}
+          <Link
+            href="/blogg"
+            aria-current={isRouteActive('/blogg') ? 'page' : undefined}
+            className={cn(
+              'relative text-sm font-medium transition-colors duration-200',
+              isRouteActive('/blogg')
+                ? 'text-foreground'
+                : 'text-muted-foreground hover:text-foreground',
+            )}
+          >
+            Blogg
+            <span
+              className={cn(
+                'absolute -bottom-1 left-0 h-px w-full bg-primary transition-transform duration-300 origin-left',
+                isRouteActive('/blogg') ? 'scale-x-100' : 'scale-x-0',
+              )}
+            />
+          </Link>
         </nav>
 
         <div className="flex items-center gap-3">
@@ -157,16 +192,39 @@ export function Header() {
                 </SheetTitle>
               </SheetHeader>
               <nav className="flex flex-col gap-4 px-4 pt-4" aria-label="Mobilnavigering">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className="text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+                <Link
+                  href="/cases"
+                  onClick={() => setOpen(false)}
+                  className="text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  Exempel
+                </Link>
+
+                {/* Tjänster group — heading + nested product links */}
+                <div className="flex flex-col gap-3">
+                  <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground/70">
+                    Tjänster
+                  </span>
+                  {products.map((product) => (
+                    <Link
+                      key={product.href}
+                      href={product.href}
+                      onClick={() => setOpen(false)}
+                      className="pl-3 text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {product.label}
+                    </Link>
+                  ))}
+                </div>
+
+                <Link
+                  href="/blogg"
+                  onClick={() => setOpen(false)}
+                  className="text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  Blogg
+                </Link>
+
                 <Button
                   asChild
                   className="mt-4 w-full cursor-pointer rounded-lg bg-primary text-primary-foreground hover:bg-primary/90"

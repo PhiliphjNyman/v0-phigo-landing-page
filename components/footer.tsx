@@ -3,10 +3,10 @@ import Link from 'next/link'
 
 const footerLinks = [
   { label: 'Exempel', href: '/cases' },
-  { label: 'Erbjudande', href: '/#erbjudande' },
-  { label: 'Så funkar det', href: '/#process' },
+  { label: 'Hemsida', href: '/hemsida' },
+  { label: 'Så funkar det', href: '/hemsida#process' },
   { label: 'Om oss', href: '/#om-oss' },
-  { label: 'Vanliga frågor', href: '/#faq' },
+  { label: 'Vanliga frågor', href: '/hemsida#faq' },
   { label: 'Kontakt', href: '/#kontakt' },
 ]
 

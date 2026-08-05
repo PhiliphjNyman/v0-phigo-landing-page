@@ -20,7 +20,7 @@ const faqs = [
   {
     question: 'Hur lång tid tar det?',
     answer:
-      'Din sajt är live inom 14 dagar från att vi fått all information vi behöver. Ofta går det snabbare.',
+      'Din sajt är live inom 14 dagar från att vi fått dina uppgifter. Ofta går det snabbare.',
     icon: Clock,
   },
   {
@@ -132,7 +132,7 @@ export function FaqSection() {
           <div className="inline-flex items-center gap-3 rounded-full border border-border bg-background px-6 py-3 text-sm font-medium text-muted-foreground">
             <HelpCircle className="size-4 text-primary" aria-hidden="true" />
             Fortfarande osäker?
-            <a href="#kontakt" className="font-bold text-primary hover:underline">Chatta med oss</a>
+            <a href="/#kontakt" className="font-bold text-primary hover:underline">Chatta med oss</a>
           </div>
         </motion.div>
       </div>
