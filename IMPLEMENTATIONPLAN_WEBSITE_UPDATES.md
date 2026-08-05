@@ -348,15 +348,35 @@ med telefon/mejl-CTA och embedden görs i efterhand (femminutersjobb).
 
 ---
 
-## 10. FAS 6 — Audits + deploy ⬜ EJ PÅBÖRJAD
+## 10. FAS 6 — Audits + deploy 🔄 PÅGÅR
 
-Efter moment 8, FÖRE push (ordning enligt CLAUDE.md):
-1. `/baseline-ui` — AI-slop, spacing, typografi
-2. `/fixing-accessibility` — tangentbord, aria, fokus
-3. `/fixing-motion-performance` — animationsprestanda
-4. `/fixing-metadata` — SEO, OG, favicon
-5. `/mindset` — ALL ny copy från fas 2 (produkttexter, guide-utfall, CTA:er)
-6. `/security-audit` — nya ytor: Voiceflow-embed, HubSpot-lead-flöde, formulär
+Ordningen är omprioriterad efter undersök-först: branchen ligger nu på en publik
+preview-URL, så säkerhetssteget körs FÖRST. Skill-avvikelser (godkända): `/mindset`
+och `/security-audit` finns inte installerade, de ersätts av manuell
+copy-granskning mot klarspråkslistan respektive skillen `security-review`.
+
+**Delstatus (uppdateras per delsteg-commit):**
+- [x] ✅ **F. Säkerhet** — `security-review` på branch-diffen (0 nya fynd) + härdning
+      av fyra befintliga risker: HTML-escaping i kontaktmejlet, http(s)-only href,
+      rate limit, guardad JSON-parse, HSTS, CSP i Report-Only med Voiceflow-hostar
+      förberedda för fas 5
+- [ ] ⬜ **Verktyg** — laga döda `pnpm lint`, avväpna `ignoreBuildErrors`
+- [ ] ⬜ **A.** `/baseline-ui` — AI-slop, spacing, typografi
+- [ ] ⬜ **B.** `/fixing-accessibility` — tangentbord, aria, fokus
+- [ ] ⬜ **C.** `/fixing-motion-performance` — animationsprestanda
+- [ ] ⬜ **D.** `/fixing-metadata` — SEO, OG, favicon + IndexNow-URL:er, sitemap, FAQPage
+- [ ] ⬜ **E.** Copy-granskning av all fas 2-copy (klarspråk, em-dash, Johnny-regeln)
+- [ ] ⬜ **G.** PageSpeed Insights mot preview-URL (kräver att Philip stänger av
+      Deployment Protection)
+- [ ] ⬜ **H.** Slutgrind: visual-rules ALL PASS + build + tsc + Hugos mobilkoll på preview
+
+**CSP-beslut (fas 5-förberedelse):** policyn skeppar som
+`Content-Security-Policy-Report-Only` med `cdn.voiceflow.com`,
+`general-runtime.voiceflow.com` och `*.voiceflow.com` redan tillåtna. Den flippas
+till skarp `Content-Security-Policy` FÖRST när fas 5-embedden är live och konsolen
+rapporterar noll överträdelser. `'unsafe-inline'` i script-src är ett medvetet val:
+Next App Routers hydrerings-payload kräver det, och nonce-alternativet tvingar varje
+sida dynamisk och kostar oss den statiska prerendern av samtliga 23 routes.
 
 Deploy-sekvens:
 1. Alla grindar gröna + audits åtgärdade
