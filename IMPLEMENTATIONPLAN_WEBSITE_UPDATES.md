@@ -213,7 +213,8 @@ på riktig mobil.
 - [x] ✅ Moment 6 — Clamp-skala (text-fluid-h1/h2/stat, @theme, ankrad 360→1440) på 2 hero-H1 + 13 sektions-H2 + statvärde; verifierad emitterad i byggd CSS
 - [x] ✅ Moment 6 — Hero-stats mobil förtroenderad: delad SplitPaymentPromise (1:1-swap i statblocket) + kompakt mobilplats under CTA (lg:hidden, ordning CTA→pill→mikrocopy)
 - [x] ✅ Moment 5 — Swipe-rad på mobil (case-studies + produktöversikt): scroll-snap-center, dold scrollbar (.scrollbar-none), delad `<SwipeDots>` (rAF, reduced-motion-medveten). Desktop-grid: case 2-up sm→md, produktöversikt md 3-up oförändrad
-- [ ] ⬜ Mesh-omvärdering mot helhetsintrycket (efter mobilkoll)
+- [x] ✅ Grind: visual-rules ALL PASS (ljus+mörkt @1440, mobil @360, R3 ingen h-scroll), `pnpm build` + `tsc --noEmit` rena. Två tuningar för att passera grinden: statvärdets clamp-max 56→48px (56px lyfte 2x2-blocket 2px in i hörn-orben @1440; 1024–1280 var redan rena) och mobil flat-orb 92→68px (förtroende-pillret höjde H1 16px in i orben). Screenshots granskade i båda lägen + båda bevakningspunkter (statblock 1024–1280, case-swipe 640–767→grid 768)
+- [ ] ⬜ Mesh-omvärdering mot helhetsintrycket (Hugos ögon på mobilkollen; opacity-lever i `hero-mesh.tsx`, nu `opacity-70 dark:opacity-80`)
 
 ### Moment 5: Swipe-kort på mobil 🔄 (scroll-snap)
 - CASE-KORTEN görs om till horisontellt svepbar rad på mobil (<768px):

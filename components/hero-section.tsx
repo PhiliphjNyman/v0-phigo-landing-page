@@ -90,9 +90,12 @@ export function HeroSection() {
           />
           {/* MOBILE/TABLET (<lg) — one discrete flat sphere in the top-right glow,
               low opacity, static, no pointer logic. Text owns the centre. */}
+          {/* Sized to clear the H1: the mobile trust pill (moment 6) makes the
+              centered hero content taller, raising the H1; a smaller flat orb keeps
+              the top-right accent clear of the heading (see visual-rules R2). */}
           <HeroOrb
             flat
-            size={92}
+            size={68}
             textureOpacity={0.5}
             label="mobile"
             glow="tr"
