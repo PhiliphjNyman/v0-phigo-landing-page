@@ -61,6 +61,10 @@ const websiteSchema = {
   },
 }
 
+// Looks unused, is not: calling the next/font loader is what emits the
+// self-hosted Inter @font-face (and the 'Inter Fallback' metric-matched family)
+// into the build. globals.css then references them via --font-sans. Delete this
+// line and the site silently falls back to the generic sans-serif.
 const _inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {

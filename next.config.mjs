@@ -40,7 +40,9 @@ const nextConfig = {
     root: __dirname,
   },
   typescript: {
-    ignoreBuildErrors: true,
+    // Type errors fail the build. Was true, which silently skipped validation;
+    // tsc --noEmit is green, so the trap is disarmed rather than worked around.
+    ignoreBuildErrors: false,
   },
   images: {
     formats: ['image/avif', 'image/webp'],

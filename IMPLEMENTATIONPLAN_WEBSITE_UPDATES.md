@@ -360,7 +360,9 @@ copy-granskning mot klarspråkslistan respektive skillen `security-review`.
       av fyra befintliga risker: HTML-escaping i kontaktmejlet, http(s)-only href,
       rate limit, guardad JSON-parse, HSTS, CSP i Report-Only med Voiceflow-hostar
       förberedda för fas 5
-- [ ] ⬜ **Verktyg** — laga döda `pnpm lint`, avväpna `ignoreBuildErrors`
+- [x] ✅ **Verktyg** — `pnpm lint` lever igen (eslint 9 + eslint-config-next 16 i flat
+      config), `ignoreBuildErrors` satt till false (bygget typkollar nu på riktigt),
+      kommentar på next/font-raden. Lintens 5 kvarvarande errors är agendan för steg A
 - [ ] ⬜ **A.** `/baseline-ui` — AI-slop, spacing, typografi
 - [ ] ⬜ **B.** `/fixing-accessibility` — tangentbord, aria, fokus
 - [ ] ⬜ **C.** `/fixing-motion-performance` — animationsprestanda
