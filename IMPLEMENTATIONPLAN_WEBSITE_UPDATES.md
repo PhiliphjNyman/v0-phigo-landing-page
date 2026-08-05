@@ -7,6 +7,11 @@
 >
 > **Ribba för hela planen: SÄLJBART, INTE PERFEKT.** Deadline: deploybar sajt
 > senast 13 aug. Polering sker efter deploy, inte före.
+>
+> **Stående regel — statusrutor:** varje fas och moment nedan bär en statusruta
+> (✅ klar / 🔄 pågår / ⬜ ej påbörjad). Rutorna uppdateras vid VARJE
+> delsteg-commit, så en ny session direkt ser var arbetet står. Uppdatera både
+> statustabellen (§1) och den berörda momentrubriken i samma commit.
 
 ---
 
@@ -29,9 +34,9 @@ briefingen** för produktombyggnaden; fas 2 är alltså sanktionerad, inget utö
 | # | Fas | Innehåll | Status |
 |---|---|---|---|
 | — | Moment 1–2 | Jank-diagnos + orbs | ✅ KLAR (se §2) |
-| 0 | Produktdefinitioner | Prosa, Hugo levererar — blockerar fas 2 | ⬜ |
+| 0 | Produktdefinitioner | Prosa, Hugo levererar — blockerar fas 2 | ✅ KLAR (se `Fas0_produktdefinitioner.md`) |
 | 1 | Moment 3 + 4 | Lagerdjup + reveal-refaktorn | ✅ KLAR (3B parallax uppskjuten, se §5) |
-| 2 | Produktombyggnad | Produktsidor, navigering, guide-yta | ⬜ |
+| 2 | Produktombyggnad | Produktsidor, navigering, guide-yta | 🔄 PÅGÅR (delstatus i §6) |
 | 3 | Moment 5 + 6 | Swipe-kort + typografisk skärpa (sajtbrett inkl. nya sidor) | ⬜ |
 | 4 | Moment 7 + 8 | Viewport/a11y + slutmätning | ⬜ |
 | 5 | Integrationer | Chatbot-widget, guide-embed, receptionist-nummer | ⬜ |
@@ -42,7 +47,7 @@ Commit per godkänt delmoment. Bocka av tabellen ovan när en fas godkänts.
 
 ---
 
-## 2. Skeppat läge (moment 1–2 — RÖR EJ utan explicit uppdrag)
+## 2. Skeppat läge ✅ KLAR (moment 1–2 — RÖR EJ utan explicit uppdrag)
 
 - **Moment 1 (jank):** header med rAF-throttlad scroll-lyssnare; solid bar
   (`bg/90`) på mobil, glas på desktop. Hero-höjd `100vh; 100svh;` — svh är en
@@ -95,21 +100,22 @@ Applicera PRINCIPERNA, kopiera inte designen:
 
 ---
 
-## 4. FAS 0 — Produktdefinitioner (prosa, FÖRE fas 2 — ingen kod)
+## 4. FAS 0 — Produktdefinitioner ✅ KLAR (prosa, FÖRE fas 2 — ingen kod)
 
 Hugo levererar/godkänner. Varje produkt definieras enligt offer-ramverket i
 CLAUDE.md (Outcome → Mechanism → Differentiator → Boundaries → Price) plus
 primär CTA:
 
-- [ ] **Hemsida** — 8 000 kr + 399 kr/mån (kärnprodukten; befintligt offer i
+- [x] **Hemsida** — 8 000 kr + 399 kr/mån (kärnprodukten; befintligt offer i
       CLAUDE.md är utgångspunkt). "Betala hälften nu, resten först när du är
       nöjd" är sajtens viktigaste förtroenderad.
-- [ ] **AI-Receptionist** — paketering + pris låses här. Demo = ring
-      receptionist-numret (samma som visitkorten).
-- [ ] **Chatbot** — paketering + pris låses här. Demo = widgeten på sajten.
-- [ ] Ev. **Underhåll / Sociala medier** — med endast om Hugo aktivt vill,
-      annars uttryckligen struken.
-- [ ] **Guide-flödets frågor** (5–7 st) + utfallsmallar per svar-kombination.
+- [x] **AI-Receptionist** — paketering + pris låst (7 000 kr + 1 495 kr/mån).
+      Demo = ring receptionist-numret (samma som visitkorten).
+- [x] **Chatbot** — paketering + pris låst (4 000 kr + 695 kr/mån). Demo =
+      widgeten på sajten.
+- [x] ~~Ev. **Underhåll / Sociala medier**~~ — struken, ej med i
+      fas 0-leveransen.
+- [x] **Guide-flödets frågor** (5–7 st) + utfallsmallar per svar-kombination.
 
 **Johnny-regeln (obligatorisk för alla produkttexter och guide-utfall):**
 kunden får UTFALL + prisindikation + CTA ("En sajt som fångar bokningar dygnet
@@ -121,9 +127,9 @@ Code skriver aldrig produktcopy fritt.
 
 ---
 
-## 5. FAS 1 — Moment 3 + 4 (scroll-liv)
+## 5. FAS 1 — Moment 3 + 4 ✅ KLAR (scroll-liv)
 
-### Moment 3: Lagerdjup i ljusa sektioner
+### Moment 3: Lagerdjup i ljusa sektioner ✅ (Del A klar, Del B uppskjuten)
 - ✅ **Del A (KLAR):** Kort/stat-block får mjuk flerlagerskugga med svag grön ton.
   Implementerat som `.card-depth`-utility + tema-tokens i `globals.css` (grön-tonad
   tvålagerskugga i ljust läge, `none` i mörkt så shippat mörkt läge bevaras).
@@ -134,7 +140,7 @@ Code skriver aldrig produktcopy fritt.
   djupkänsla. Max ~12px. Desktop only, mobil/reduced-motion av. Byggs separat.
 - INGET rastermönster eller bakgrundsbild i ljusa sektioner.
 
-### Moment 4: Scroll-reveals sajtbrett (Framer-refaktorn)
+### Moment 4: Scroll-reveals sajtbrett ✅ KLAR (Framer-refaktorn)
 - Ersätt de ~100 spridda `whileInView`-anropen med ETT gemensamt reveal-system:
   sektioner/kort tonar in (opacity 0→1 + translateY 16px→0), 300–400 ms
   ease-out, stagger 60–80 ms per kort i grid, triggas en gång.
@@ -149,10 +155,17 @@ Code skriver aldrig produktcopy fritt.
 
 ---
 
-## 6. FAS 2 — Produktombyggnad
+## 6. FAS 2 — Produktombyggnad 🔄 PÅGÅR
 
 Sajten går från "en produkt + lös text" till "alla produkter snyggt
 representerade". **Kräver fas 0 levererad + separat plangodkännande.**
+
+**Delstatus (uppdateras per delsteg-commit):**
+- [x] ✅ Flytt av hemsideinnehåll till `/hemsida` + Tjänster-nav
+- [x] ✅ `/ai-receptionist` (delad produktmall)
+- [ ] ⬜ `/chatbot` (variation på produktmallen, copy ur fas 0 §4)
+- [ ] ⬜ Produktöversikt på startsidan (`#produkter`, 3 card-depth-kort)
+- [ ] ⬜ Guide-yta "Hitta rätt lösning" (designad container, ingen Voiceflow)
 
 ### 6.1 Undersök-först (rapport före bygge)
 - Nuvarande sidstruktur/routes, navigering, var produktinnehåll bor idag
@@ -193,9 +206,9 @@ på riktig mobil.
 
 ---
 
-## 7. FAS 3 — Moment 5 + 6 (appliceras sajtbrett INKL. fas 2:s nya ytor)
+## 7. FAS 3 — Moment 5 + 6 ⬜ EJ PÅBÖRJAD (appliceras sajtbrett INKL. fas 2:s nya ytor)
 
-### Moment 5: Swipe-kort på mobil (scroll-snap)
+### Moment 5: Swipe-kort på mobil ⬜ (scroll-snap)
 - CASE-KORTEN görs om till horisontellt svepbar rad på mobil (<768px):
   `scroll-snap-type: x mandatory` på containern, `scroll-snap-align: center`
   på korten. Ett kort ~85vw så nästa skymtar i kanten. Ingen JS för swipen,
@@ -206,7 +219,7 @@ på riktig mobil.
 - Dölj scrollbaren visuellt, behåll scrollbarheten. Prick-indikatorer under
   korten (ren CSS + minimal JS). Desktop: grid som tidigare.
 
-### Moment 6: Typografisk skärpa
+### Moment 6: Typografisk skärpa ⬜
 - Uppercase-etiketter i accentgrönt ovanför VARJE sektionsrubrik — konsekvent
   sajtbrett inkl. nya produktsidor (finns delvis).
 - Rubriker med clamp() för flytande skalning.
@@ -221,9 +234,9 @@ på riktig mobil.
 
 ---
 
-## 8. FAS 4 — Moment 7 + 8 (viewport, tillgänglighet, slutmätning)
+## 8. FAS 4 — Moment 7 + 8 ⬜ EJ PÅBÖRJAD (viewport, tillgänglighet, slutmätning)
 
-### Moment 7: Mobilexakt viewport + tillgänglighet
+### Moment 7: Mobilexakt viewport + tillgänglighet ⬜
 - Hero-höjden: redan löst i moment 1 (`100vh; 100svh;`) — RÖR EJ.
 - `overflow-x: clip` på body som säkerhetsbälte.
 - Safe areas: padding via `env(safe-area-inset-left/right)` på yttersta containern.
@@ -233,7 +246,7 @@ på riktig mobil.
 - Endast transform/opacity animeras. `will-change: transform` enbart på element
   som rör sig.
 
-### Moment 8: Slutverifiering med siffror
+### Moment 8: Slutverifiering med siffror ⬜
 - Playwright-mätning: stabil 60 fps vid scroll (mobilemulering 4× CPU), hela
   sajten inkl. nya sidor. Slutkänsla ALLTID på riktig mobil + desktop.
 - Ingen horisontell scroll vid 360px.
@@ -243,7 +256,7 @@ på riktig mobil.
 
 ---
 
-## 9. FAS 5 — Integrationer (körs när respektive del finns)
+## 9. FAS 5 — Integrationer ⬜ EJ PÅBÖRJAD (körs när respektive del finns)
 
 - [ ] **Chatbot-widget:** Voiceflow-snippet på sajten. Laddas efter interaktiv —
       får inte påverka LCP. Verifiera moment 8-siffrorna igen efter inkoppling.
@@ -251,12 +264,22 @@ på riktig mobil.
       Johnny-regeln; svar + kontaktuppgifter → HubSpot som lead med valen ifyllda.
 - [ ] **Receptionist-numret** live på AI-receptionistytan (samma som visitkorten).
 
+      **Förkrav från `RECEPTIONIST_SYSTEMRAPPORT.md` innan numret publiceras:**
+      - [ ] HMAC-härdning av post-call-webhooken (fail-closed)
+      - [ ] Transfer-test ×2 i skarp miljö
+      - [ ] Engelska verifierad live
+      - [ ] Legacy-workflow 04 `send_call_summary` avaktiverat + testsvit grön
+      - [ ] Agentens kunskapsbas uppdaterad med fas 0-produkter och priser
+            (chatbot, receptionist), testsvit grön efteråt
+      - [ ] Demo-inramning på `/ai-receptionist`: numret är den skarpa
+            receptionisten, bokning innebär att Hugo ringer upp den tiden
+
 Om Voiceflow-delarna inte är klara blockerar de INTE fas 6 — guide-ytan skeppar
 med telefon/mejl-CTA och embedden görs i efterhand (femminutersjobb).
 
 ---
 
-## 10. FAS 6 — Audits + deploy
+## 10. FAS 6 — Audits + deploy ⬜ EJ PÅBÖRJAD
 
 Efter moment 8, FÖRE push (ordning enligt CLAUDE.md):
 1. `/baseline-ui` — AI-slop, spacing, typografi
