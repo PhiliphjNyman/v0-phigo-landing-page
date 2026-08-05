@@ -36,7 +36,7 @@ briefingen** för produktombyggnaden; fas 2 är alltså sanktionerad, inget utö
 | — | Moment 1–2 | Jank-diagnos + orbs | ✅ KLAR (se §2) |
 | 0 | Produktdefinitioner | Prosa, Hugo levererar — blockerar fas 2 | ✅ KLAR (se `Fas0_produktdefinitioner.md`) |
 | 1 | Moment 3 + 4 | Lagerdjup + reveal-refaktorn | ✅ KLAR (3B parallax uppskjuten, se §5) |
-| 2 | Produktombyggnad | Produktsidor, navigering, guide-yta | 🔄 PÅGÅR (delstatus i §6) |
+| 2 | Produktombyggnad | Produktsidor, navigering, guide-yta | ✅ KLAR (delstatus i §6) |
 | 3 | Moment 5 + 6 | Swipe-kort + typografisk skärpa (sajtbrett inkl. nya sidor) | ⬜ |
 | 4 | Moment 7 + 8 | Viewport/a11y + slutmätning | ⬜ |
 | 5 | Integrationer | Chatbot-widget, guide-embed, receptionist-nummer | ⬜ |
@@ -155,7 +155,7 @@ Code skriver aldrig produktcopy fritt.
 
 ---
 
-## 6. FAS 2 — Produktombyggnad 🔄 PÅGÅR
+## 6. FAS 2 — Produktombyggnad ✅ KLAR
 
 Sajten går från "en produkt + lös text" till "alla produkter snyggt
 representerade". **Kräver fas 0 levererad + separat plangodkännande.**
