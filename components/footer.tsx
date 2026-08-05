@@ -59,7 +59,12 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-border pt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        {/* Bottom row: centered stack on mobile (the two legal lines read as a
+            finished unit, not loose left-aligned rows), reverting to the desktop
+            left/right split at sm. Copyright nearly fills the line at 360px, so a
+            single-line "·" separator isn't feasible on phones without dropping
+            copy — centered stack is the clean result. */}
+        <div className="mt-10 border-t border-border pt-6 flex flex-col items-center gap-1 text-center sm:flex-row sm:items-center sm:justify-between sm:gap-2 sm:text-left">
           <p className="text-xs text-muted-foreground">
             &copy; {new Date().getFullYear()} PHIGO. Alla rättigheter förbehållna.
           </p>

@@ -38,7 +38,7 @@ briefingen** för produktombyggnaden; fas 2 är alltså sanktionerad, inget utö
 | 1 | Moment 3 + 4 | Lagerdjup + reveal-refaktorn | ✅ KLAR (3B parallax uppskjuten, se §5) |
 | 2 | Produktombyggnad | Produktsidor, navigering, guide-yta | ✅ KLAR (delstatus i §6) |
 | 3 | Moment 5 + 6 | Swipe-kort + typografisk skärpa (sajtbrett inkl. nya sidor) | ✅ KLAR |
-| 4 | Moment 7 + 8 | Viewport/a11y + slutmätning | 🔄 (M7 byggt, grind grön, inväntar mobilkoll; M8 ej start) |
+| 4 | Moment 7 + 8 | Viewport/a11y + slutmätning | 🔄 (M7 ✅ godkänd + footer-justering; M8 pågår) |
 | 5 | Integrationer | Chatbot-widget, guide-embed, receptionist-nummer | ⬜ |
 | 6 | Audits + deploy | Skills-audits, push-OK, prod-verifiering | ⬜ |
 
@@ -245,7 +245,7 @@ på riktig mobil.
 
 ## 8. FAS 4 — Moment 7 + 8 🔄 PÅGÅR (viewport, tillgänglighet, slutmätning)
 
-### Moment 7: Mobilexakt viewport + tillgänglighet 🔄 BYGGT (grind grön, inväntar mobilkoll)
+### Moment 7: Mobilexakt viewport + tillgänglighet ✅ KLAR (mobilkoll godkänd 2026-08-05)
 - Hero-höjden: redan löst i moment 1 (`100vh; 100svh;`) — RÖR EJ.
 - `overflow-x: clip` på body som säkerhetsbälte.
 - Safe areas: padding via `env(safe-area-inset-left/right)` på yttersta containern.
@@ -262,8 +262,9 @@ på riktig mobil.
   `.mx-auto.px-4 { padding-inline: max(1rem, env(safe-area-inset-left/right)) }`
   scopad `<1024px` (desktop-gutters lg:px-6/8 orörda; full-bleed-bakgrunder på
   `<section>` förblir kant-till-kant). Aktiverad av `viewportFit: 'cover'` i
-  layout.tsx (utan cover är `env()` = 0; headern hade redan `pt-[env(...top)]`
-  som låg inert). **Mobilkoll:** liggande läge på notch-telefon + status-bar-zon.
+  layout.tsx (utan cover är `env()` = 0; headern hade redan en
+  `env(safe-area-inset-top)`-toppadding som låg inert). **Mobilkoll:** liggande
+  läge på notch-telefon + status-bar-zon.
 - ✅ `scroll-behavior: smooth` flyttad bakom `@media (prefers-reduced-motion:
   no-preference)` (ankarhopp blir direkta vid reduced-motion; globala reset:en
   rör bara animation/transition-duration).
@@ -277,6 +278,13 @@ på riktig mobil.
 - **Grind:** visual-rules ALL PASS (ljus+mörkt @1440, mobil @360, R3), `pnpm
   build` + `tsc --noEmit` rena, Playwright-beteendecheck grön (viewport-fit,
   overflow-x, gutter 16px @390, scroll-behavior smooth/auto).
+- ✅ **Mobilkoll godkänd** (stående + liggande på notch-telefon): allt smooth,
+  ingen h-scroll, header/status-bar/home-indicator korrekta. Bekräftat att
+  content-gutter använder `max()`, inte `calc()` — den bredare landskapsmarginalen
+  är förväntad safe-area, ingen ändring. Följdjustering: footerns bottenrad
+  (copyright + Integritetspolicy) centreras staplad på mobil (Navigation/Kontakt
+  kvar vänsterställda; sm+ oförändrad). Bonus: rensat en Tailwind-CSS-varning
+  (`pt-[env(...top)]`-shorthand i denna plan skannades och gav ogiltig CSS).
 
 ### Moment 8: Slutverifiering med siffror ⬜
 - Playwright-mätning: stabil 60 fps vid scroll (mobilemulering 4× CPU), hela
