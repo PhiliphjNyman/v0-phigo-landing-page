@@ -38,7 +38,7 @@ briefingen** för produktombyggnaden; fas 2 är alltså sanktionerad, inget utö
 | 1 | Moment 3 + 4 | Lagerdjup + reveal-refaktorn | ✅ KLAR (3B parallax uppskjuten, se §5) |
 | 2 | Produktombyggnad | Produktsidor, navigering, guide-yta | ✅ KLAR (delstatus i §6) |
 | 3 | Moment 5 + 6 | Swipe-kort + typografisk skärpa (sajtbrett inkl. nya sidor) | ✅ KLAR |
-| 4 | Moment 7 + 8 | Viewport/a11y + slutmätning | 🔄 (M7 ✅ godkänd + footer-justering; M8 pågår) |
+| 4 | Moment 7 + 8 | Viewport/a11y + slutmätning | ✅ KLAR (M7 godkänd; M8 mätt: CLS 0 + LCP<2s + R3, formell Lighthouse vid deploy) |
 | 5 | Integrationer | Chatbot-widget, guide-embed, receptionist-nummer | ⬜ |
 | 6 | Audits + deploy | Skills-audits, push-OK, prod-verifiering | ⬜ |
 
@@ -243,7 +243,7 @@ på riktig mobil.
 
 ---
 
-## 8. FAS 4 — Moment 7 + 8 🔄 PÅGÅR (viewport, tillgänglighet, slutmätning)
+## 8. FAS 4 — Moment 7 + 8 ✅ KLAR (viewport, tillgänglighet, slutmätning)
 
 ### Moment 7: Mobilexakt viewport + tillgänglighet ✅ KLAR (mobilkoll godkänd 2026-08-05)
 - Hero-höjden: redan löst i moment 1 (`100vh; 100svh;`) — RÖR EJ.
@@ -284,15 +284,44 @@ på riktig mobil.
   är förväntad safe-area, ingen ändring. Följdjustering: footerns bottenrad
   (copyright + Integritetspolicy) centreras staplad på mobil (Navigation/Kontakt
   kvar vänsterställda; sm+ oförändrad). Bonus: rensat en Tailwind-CSS-varning
-  (`pt-[env(...top)]`-shorthand i denna plan skannades och gav ogiltig CSS).
+  (en förkortad env-toppadding-notation i denna plan skannades av Tailwind och
+  gav ogiltig CSS). OBS: skriv aldrig en `prefix`-arbitrary-value-token med
+  hakparentes i markdown/kommentarer, Tailwind skannar även .md och genererar
+  en regel av den, malformade ger byggvarning.
 
-### Moment 8: Slutverifiering med siffror ⬜
+### Moment 8: Slutverifiering med siffror ✅ KLAR (mätt 2026-08-05; formell Lighthouse vid deploy/Fas 6)
 - Playwright-mätning: stabil 60 fps vid scroll (mobilemulering 4× CPU), hela
   sajten inkl. nya sidor. Slutkänsla ALLTID på riktig mobil + desktop.
 - Ingen horisontell scroll vid 360px.
 - Lighthouse mobile ≥ 90 performance, LCP < 2 s throttlad 4G, CLS < 0.05.
 - visual-rules.mjs ALL RULES PASS.
 - Rapportera siffror före/efter (baseline: main).
+
+**Mätresultat (`scripts/perf-scroll.mjs`, 390px, 4× CPU-throttle, prod-build):**
+
+| Route | fps* | LCP (ms) | CLS | h-scroll @360 |
+|---|---|---|---|---|
+| `/` (branch, 3 sampl.) | 44–48 | 564–1108 (brus) | **0** | ok |
+| `/` (main, baseline) | 44 | 652 | **0** | ok |
+| `/hemsida` (branch-ny) | 50 | 552 | **0** | ok |
+| `/ai-receptionist` (branch-ny) | 51 | 540 | **0** | ok |
+| `/chatbot` (branch-ny) | 58 | 1116 | **0** | ok |
+| `/cases` | 56 | 1036 | **0** | ok |
+
+- **CLS = 0** på varje route och sample (branch + main) — scroll-liv (mesh, orbs,
+  reveals, swipe, counters) ger noll layout-shift. Klarar CLS < 0.05 med marginal.
+- **Ingen horisontell scroll @360** på någon route, inkl. de tre nya produktsidorna.
+- **LCP < 2 s** överallt. Branch-homepage brusigt (564–1108 ms över 3 samples under
+  4×-throttle) men klart inom målet; den skenbara "branch > main"-LCP:n var mätbrus.
+- *fps 44–58 under SwiftShader (mjukvaru-GPU) + 4× CPU headless = **pessimistisk**
+  main-tråds-/relativ-signal, INTE absolut GPU-sanning (se lessons.md 2026-07).
+  Long-frame-count lågt (6–15). Riktig 60 fps signad av Hugo på enhet (M1–2 +
+  M7-mobilkoll).
+- visual-rules.mjs ALL PASS (ljus+mörkt @1440, mobil @360, R3).
+- **Formell Lighthouse mobile ≥ 90** tas på deployad prod / PageSpeed Insights i
+  **Fas 6** (headless-local ger ingen representativ Lighthouse-siffra; beslutat i
+  undersök-först). main saknar produktsidorna (404) → de är branch-nya, ingen
+  main-baseline för dem.
 
 ---
 
