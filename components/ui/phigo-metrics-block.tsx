@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, type Variants } from "framer-motion";
-import { ShieldCheck } from "lucide-react";
+import { SplitPaymentPromise } from "@/components/split-payment-promise";
 import { Card } from "@/components/ui/card";
 
 const metrics = [
@@ -71,18 +71,16 @@ export function PhigoMetricsBlock() {
         ))}
       </motion.div>
 
-      {/* Trust promise — split payment */}
+      {/* Trust promise — split payment (shared SplitPaymentPromise). The motion
+          wrapper keeps the original delayed entrance; the pill itself is shared
+          with the mobile hero placement. */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
-        className="flex items-center justify-center gap-2 rounded-2xl border border-primary/20 bg-primary/5 px-4 py-3 text-center"
       >
-        <ShieldCheck className="size-4 shrink-0 text-primary" aria-hidden="true" />
-        <span data-orb-protect className="text-xs font-medium text-foreground">
-          Betala hälften nu, resten först när du är nöjd
-        </span>
+        <SplitPaymentPromise />
       </motion.div>
     </div>
   );

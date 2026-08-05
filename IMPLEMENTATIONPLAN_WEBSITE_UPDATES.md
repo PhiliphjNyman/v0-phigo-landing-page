@@ -211,7 +211,7 @@ på riktig mobil.
 **Delstatus (uppdateras per delsteg-commit):**
 - [x] ✅ Moment 6 — Eyebrow-migrering: delad `<SectionEyebrow>`, alla 15 sektionsetiketter migrerade till kanon (text-xs bold uppercase tracking-0.15em; on-dark demo-CTA via färg-override i className)
 - [x] ✅ Moment 6 — Clamp-skala (text-fluid-h1/h2/stat, @theme, ankrad 360→1440) på 2 hero-H1 + 13 sektions-H2 + statvärde; verifierad emitterad i byggd CSS
-- [ ] ⬜ Moment 6 — Hero-stats mobil förtroenderad (SplitPaymentPromise + mobilplats)
+- [x] ✅ Moment 6 — Hero-stats mobil förtroenderad: delad SplitPaymentPromise (1:1-swap i statblocket) + kompakt mobilplats under CTA (lg:hidden, ordning CTA→pill→mikrocopy)
 - [ ] ⬜ Moment 5 — Swipe-rad (case-studies + produktöversikt) + prick-indikatorer
 - [ ] ⬜ Mesh-omvärdering mot helhetsintrycket (efter mobilkoll)
 

@@ -6,6 +6,7 @@ import { ArrowRight, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { fadeInUp, fadeIn } from '@/lib/animations'
 import { PhigoMetricsBlock } from '@/components/ui/phigo-metrics-block'
+import { SplitPaymentPromise } from '@/components/split-payment-promise'
 import { HeroMesh } from '@/components/hero-mesh'
 import { HeroOrb } from '@/components/hero-orb'
 
@@ -157,6 +158,19 @@ export function HeroSection() {
                   <ChevronDown className="ml-2 size-5" aria-hidden="true" />
                 </a>
               </Button>
+            </motion.div>
+
+            {/* Mobile trust promise — the split-payment line gets a place below
+                the CTAs on <lg (the desktop stat block that carries it is hidden
+                here). Compact one-liner, same glass style, placed after the CTAs
+                so it never pushes them down. */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={fadeIn}
+              className="mt-6 w-full max-w-sm lg:hidden"
+            >
+              <SplitPaymentPromise className="py-2.5" />
             </motion.div>
 
             {/* Microcopy */}
