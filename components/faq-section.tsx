@@ -8,6 +8,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { reveal, revealStagger } from '@/lib/animations'
+import { SectionEyebrow } from '@/components/section-eyebrow'
 import { HelpCircle, CreditCard, Clock, ShieldCheck, Smartphone, MapPin, Pencil, PackageMinus } from 'lucide-react'
 
 const faqs = [
@@ -69,13 +70,7 @@ export function FaqSection() {
           variants={revealStagger}
           className="text-center mb-16"
         >
-          <motion.span
-            variants={reveal}
-            className="text-sm font-bold uppercase text-primary"
-            aria-hidden="true"
-          >
-            Vanliga frågor
-          </motion.span>
+          <SectionEyebrow aria-hidden="true">Vanliga frågor</SectionEyebrow>
           <motion.h2
             variants={reveal}
             className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"

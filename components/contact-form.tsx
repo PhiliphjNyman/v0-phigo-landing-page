@@ -29,6 +29,7 @@ import {
 } from '@/components/ui/form'
 import Link from 'next/link'
 import { reveal, revealStagger, scaleIn } from '@/lib/animations'
+import { SectionEyebrow } from '@/components/section-eyebrow'
 
 const contactSchema = z.object({
   namn: z.string().min(2, 'Namn måste vara minst 2 tecken'),
@@ -111,12 +112,7 @@ export function ContactForm() {
               variants={revealStagger}
             >
               <div className="text-center mb-12">
-                <motion.span
-                  variants={reveal}
-                  className="text-sm font-bold uppercase text-primary"
-                >
-                  Kontakta oss
-                </motion.span>
+                <SectionEyebrow>Kontakta oss</SectionEyebrow>
                 <motion.h2
                   variants={reveal}
                   className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Check, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { reveal, revealStagger } from '@/lib/animations'
+import { SectionEyebrow } from '@/components/section-eyebrow'
 
 const reasons = [
   {
@@ -40,12 +41,7 @@ export function WhyPhigo() {
             viewport={{ once: true, margin: '-80px' }}
             variants={revealStagger}
           >
-            <motion.span
-              variants={reveal}
-              className="text-xs font-semibold uppercase text-primary"
-            >
-              Varför PHIGO
-            </motion.span>
+            <SectionEyebrow>Varför PHIGO</SectionEyebrow>
             <motion.h2
               variants={reveal}
               className="mt-3 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl"

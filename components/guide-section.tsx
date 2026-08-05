@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Compass, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { reveal, revealStagger } from '@/lib/animations'
+import { SectionEyebrow } from '@/components/section-eyebrow'
 
 /* Guide "Hitta rätt lösning". Fas 2 ships the designed CONTAINER only: heading,
    intro (verbatim from Fas0_produktdefinitioner.md §5) and an interim CTA. The
@@ -37,12 +38,7 @@ export function GuideSection() {
             <Compass className="size-7" aria-hidden="true" />
           </motion.div>
 
-          <motion.span
-            variants={reveal}
-            className="mt-6 block text-xs font-bold uppercase tracking-[0.15em] text-primary"
-          >
-            Guide
-          </motion.span>
+          <SectionEyebrow className="mt-6 block">Guide</SectionEyebrow>
 
           <motion.h2
             id="guide-rubrik"

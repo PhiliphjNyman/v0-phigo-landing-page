@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight, Check, X, ShieldCheck } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { reveal, revealStagger } from '@/lib/animations'
+import { SectionEyebrow } from '@/components/section-eyebrow'
 
 const steps = [
   {
@@ -52,12 +53,7 @@ export function OfferSection() {
           variants={revealStagger}
           className="text-center"
         >
-          <motion.span
-            variants={reveal}
-            className="text-sm font-bold uppercase text-primary"
-          >
-            Erbjudande
-          </motion.span>
+          <SectionEyebrow>Erbjudande</SectionEyebrow>
           <motion.h2
             variants={reveal}
             className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"

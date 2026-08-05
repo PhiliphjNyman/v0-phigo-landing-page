@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { ShieldCheck } from 'lucide-react'
 import { reveal, revealStagger } from '@/lib/animations'
+import { SectionEyebrow } from '@/components/section-eyebrow'
 import { cn } from '@/lib/utils'
 
 /* Boundaries statement (fas 0 "Boundaries" copy) rendered as a calm trust card.
@@ -36,12 +37,7 @@ export function ProductBoundaries({
           variants={revealStagger}
           className="flex flex-col items-center text-center"
         >
-          <motion.span
-            variants={reveal}
-            className="text-sm font-bold uppercase tracking-[0.15em] text-primary"
-          >
-            {eyebrow}
-          </motion.span>
+          <SectionEyebrow>{eyebrow}</SectionEyebrow>
           <motion.h2
             variants={reveal}
             className="mt-4 text-balance text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl"

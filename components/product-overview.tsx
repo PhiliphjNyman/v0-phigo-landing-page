@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Globe, PhoneCall, MessageCircle, ArrowUpRight } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { reveal, revealStagger } from '@/lib/animations'
+import { SectionEyebrow } from '@/components/section-eyebrow'
 
 /* Product overview on the start page. Order: Hemsida / AI-Receptionist /
    Chatbot. Card descriptions are VERBATIM from Fas0_produktdefinitioner.md §1
@@ -65,12 +66,7 @@ export function ProductOverview() {
           variants={revealStagger}
           className="mx-auto max-w-2xl text-center"
         >
-          <motion.span
-            variants={reveal}
-            className="text-xs font-bold uppercase tracking-[0.15em] text-primary"
-          >
-            Tjänster
-          </motion.span>
+          <SectionEyebrow>Tjänster</SectionEyebrow>
           <motion.h2
             id="produkter-rubrik"
             variants={reveal}

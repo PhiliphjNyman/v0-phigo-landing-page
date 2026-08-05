@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { reveal, revealStagger } from '@/lib/animations'
+import { SectionEyebrow } from '@/components/section-eyebrow'
 import { cn } from '@/lib/utils'
 
 /* Shared shell for a product-page section: optional muted tone (solid in light
@@ -42,12 +43,7 @@ export function ProductSection({
           variants={revealStagger}
           className="mx-auto max-w-2xl text-center"
         >
-          <motion.span
-            variants={reveal}
-            className="text-sm font-bold uppercase tracking-[0.15em] text-primary"
-          >
-            {eyebrow}
-          </motion.span>
+          <SectionEyebrow>{eyebrow}</SectionEyebrow>
           <motion.h2
             variants={reveal}
             className="mt-4 text-balance text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-5xl"

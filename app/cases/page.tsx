@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { reveal, revealStagger } from '@/lib/animations'
+import { SectionEyebrow } from '@/components/section-eyebrow'
 import { getCases } from '@/lib/cases'
 import { Metadata } from 'next'
 import { CasesClient } from '@/components/cases-client'
@@ -55,12 +56,7 @@ export default function CasesPage() {
                         variants={revealStagger}
                         className="text-center mb-16"
                     >
-                        <Framer.MotionSpan
-                            variants={reveal}
-                            className="text-sm font-bold uppercase text-primary block"
-                        >
-                            Designexempel
-                        </Framer.MotionSpan>
+                        <SectionEyebrow className="block">Designexempel</SectionEyebrow>
                         <Framer.MotionH1
                             variants={reveal}
                             className="mt-4 text-4xl font-extrabold tracking-tight text-foreground sm:text-6xl"

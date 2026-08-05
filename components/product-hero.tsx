@@ -5,6 +5,7 @@ import { ArrowRight } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { reveal, revealStagger } from '@/lib/animations'
+import { SectionEyebrow } from '@/components/section-eyebrow'
 import { cn } from '@/lib/utils'
 
 type ProductCta = {
@@ -49,12 +50,7 @@ export function ProductHero({
         variants={revealStagger}
         className="mx-auto flex max-w-3xl flex-col items-center px-4 text-center lg:px-8"
       >
-        <motion.span
-          variants={reveal}
-          className="text-sm font-bold uppercase tracking-[0.15em] text-primary"
-        >
-          {label}
-        </motion.span>
+        <SectionEyebrow>{label}</SectionEyebrow>
 
         <motion.h1
           variants={reveal}

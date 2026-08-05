@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { ArrowUpRight, Clock } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { getPublishedBlogPosts, getBlogPosts } from '@/lib/blog'
+import { SectionEyebrow } from '@/components/section-eyebrow'
 
 export const metadata: Metadata = {
     title: 'Blogg | PHIGO',
@@ -47,7 +48,7 @@ export default function BloggPage() {
             <div className="mx-auto max-w-7xl px-4 lg:px-8">
                 {/* Header */}
                 <div className="mb-16 max-w-2xl">
-                    <span className="text-sm font-bold uppercase text-primary">Blogg</span>
+                    <SectionEyebrow>Blogg</SectionEyebrow>
                     <h1 className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
                         Tips för dig som driver ett lokalt företag
                     </h1>

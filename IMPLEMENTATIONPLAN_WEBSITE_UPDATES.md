@@ -37,7 +37,7 @@ briefingen** för produktombyggnaden; fas 2 är alltså sanktionerad, inget utö
 | 0 | Produktdefinitioner | Prosa, Hugo levererar — blockerar fas 2 | ✅ KLAR (se `Fas0_produktdefinitioner.md`) |
 | 1 | Moment 3 + 4 | Lagerdjup + reveal-refaktorn | ✅ KLAR (3B parallax uppskjuten, se §5) |
 | 2 | Produktombyggnad | Produktsidor, navigering, guide-yta | ✅ KLAR (delstatus i §6) |
-| 3 | Moment 5 + 6 | Swipe-kort + typografisk skärpa (sajtbrett inkl. nya sidor) | ⬜ |
+| 3 | Moment 5 + 6 | Swipe-kort + typografisk skärpa (sajtbrett inkl. nya sidor) | 🔄 |
 | 4 | Moment 7 + 8 | Viewport/a11y + slutmätning | ⬜ |
 | 5 | Integrationer | Chatbot-widget, guide-embed, receptionist-nummer | ⬜ |
 | 6 | Audits + deploy | Skills-audits, push-OK, prod-verifiering | ⬜ |
@@ -206,7 +206,14 @@ på riktig mobil.
 
 ---
 
-## 7. FAS 3 — Moment 5 + 6 ⬜ EJ PÅBÖRJAD (appliceras sajtbrett INKL. fas 2:s nya ytor)
+## 7. FAS 3 — Moment 5 + 6 🔄 PÅGÅR (appliceras sajtbrett INKL. fas 2:s nya ytor)
+
+**Delstatus (uppdateras per delsteg-commit):**
+- [x] ✅ Moment 6 — Eyebrow-migrering: delad `<SectionEyebrow>`, alla 15 sektionsetiketter migrerade till kanon (text-xs bold uppercase tracking-0.15em; on-dark demo-CTA via färg-override i className)
+- [ ] ⬜ Moment 6 — Clamp-skala (text-fluid-h1/h2/stat) på hero-H1 + sektions-H2 + statvärde
+- [ ] ⬜ Moment 6 — Hero-stats mobil förtroenderad (SplitPaymentPromise + mobilplats)
+- [ ] ⬜ Moment 5 — Swipe-rad (case-studies + produktöversikt) + prick-indikatorer
+- [ ] ⬜ Mesh-omvärdering mot helhetsintrycket (efter mobilkoll)
 
 ### Moment 5: Swipe-kort på mobil ⬜ (scroll-snap)
 - CASE-KORTEN görs om till horisontellt svepbar rad på mobil (<768px):
@@ -219,7 +226,7 @@ på riktig mobil.
 - Dölj scrollbaren visuellt, behåll scrollbarheten. Prick-indikatorer under
   korten (ren CSS + minimal JS). Desktop: grid som tidigare.
 
-### Moment 6: Typografisk skärpa ⬜
+### Moment 6: Typografisk skärpa 🔄
 - Uppercase-etiketter i accentgrönt ovanför VARJE sektionsrubrik — konsekvent
   sajtbrett inkl. nya produktsidor (finns delvis).
 - Rubriker med clamp() för flytande skalning.

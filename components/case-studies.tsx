@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { ArrowUpRight, TrendingUp, Zap, Heart, Flame } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { reveal, revealStagger } from '@/lib/animations'
+import { SectionEyebrow } from '@/components/section-eyebrow'
 import { Counter } from '@/components/ui/counter'
 
 import Link from 'next/link'
@@ -37,12 +38,7 @@ export function CaseStudies() {
             variants={revealStagger}
             className="text-center sm:text-left"
           >
-            <motion.span
-              variants={reveal}
-              className="text-sm font-bold uppercase text-primary"
-            >
-              Exempel
-            </motion.span>
+            <SectionEyebrow>Exempel</SectionEyebrow>
             <motion.h2
               variants={reveal}
               className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"

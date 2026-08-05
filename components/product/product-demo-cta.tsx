@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Phone, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { reveal, revealStagger } from '@/lib/animations'
+import { SectionEyebrow } from '@/components/section-eyebrow'
 
 type DemoPhone = {
   /* The demo number. null until it is set (fas 5) — the block then shows the
@@ -49,12 +50,7 @@ export function ProductDemoCta({
           </div>
 
           <div className="relative z-10">
-            <motion.span
-              variants={reveal}
-              className="text-sm font-bold uppercase tracking-[0.15em] text-anchor-fg-muted"
-            >
-              {eyebrow}
-            </motion.span>
+            <SectionEyebrow className="text-anchor-fg-muted">{eyebrow}</SectionEyebrow>
             <motion.h2
               variants={reveal}
               className="mt-4 text-balance text-3xl font-bold tracking-tight text-anchor-fg sm:text-4xl"
