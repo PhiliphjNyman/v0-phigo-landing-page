@@ -19,6 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/ai-receptionist`,
+      lastModified: new Date('2026-08-05'),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/cases`,
       lastModified: new Date('2026-03-26'),
       changeFrequency: 'monthly',

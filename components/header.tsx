@@ -27,6 +27,7 @@ import Link from 'next/link'
    those pages land — the desktop dropdown and the mobile group read from this. */
 const products = [
   { label: 'Hemsida', href: '/hemsida', desc: 'Sajt som ger dig fler kunder' },
+  { label: 'AI-Receptionist', href: '/ai-receptionist', desc: 'Svarar i telefon dygnet runt' },
 ]
 
 /* Top-level route links either side of the Tjänster group. */
