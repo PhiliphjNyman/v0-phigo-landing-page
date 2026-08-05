@@ -1,6 +1,15 @@
 'use client'
 
-import { PhoneCall, CalendarCheck, Voicemail, Phone } from 'lucide-react'
+import {
+  PhoneCall,
+  CalendarCheck,
+  Voicemail,
+  Phone,
+  PhoneForwarded,
+  Volume2,
+  MessageSquare,
+  Pencil,
+} from 'lucide-react'
 import { ProductHero } from '@/components/product-hero'
 import { ProductSection } from '@/components/product/product-section'
 import { ProductBenefits } from '@/components/product/product-benefits'
@@ -40,9 +49,9 @@ const steps = [
     description: 'Tjänster, öppettider, hur den ska låta och vad den ska fråga om.',
   },
   {
-    title: 'Vi kopplar in den på ditt nummer',
+    title: 'Vi ger den ett eget lokalt nummer',
     description:
-      'Du behåller ditt vanliga nummer. Receptionisten tar samtalen du inte hinner svara på.',
+      'Vidarekopplas från ditt vanliga nummer, eller visas direkt på din hemsida och Googleprofil om du hellre vill det. Du väljer.',
   },
   {
     title: 'Den svarar, bokar och rapporterar',
@@ -53,10 +62,34 @@ const steps = [
 
 const faqs = [
   {
+    icon: Volume2,
+    question: 'Hur låter den?',
+    answer:
+      'Naturlig och trevlig, på svenska. Du hör själv exakt hur den låter och godkänner rösten innan den tar ett enda riktigt samtal. Ring demo-numret så hör du.',
+  },
+  {
+    icon: PhoneForwarded,
+    question: 'Behåller jag mitt vanliga nummer?',
+    answer:
+      'Ja. Receptionisten får ett eget lokalt nummer som du vidarekopplar till, så kunderna ringer dig precis som vanligt och receptionisten tar samtalen du inte hinner svara på. Vill du hellre att kunderna ringer receptionisten direkt visar du dess nummer på hemsidan eller din Googleprofil istället.',
+  },
+  {
     icon: Phone,
     question: 'Kan den ta alla mina samtal när jag är ledig?',
     answer:
       'Ja. Normalt tar den bara samtalen du inte hinner svara på, men du kan enkelt låta den ta allt, till exempel under semestern.',
+  },
+  {
+    icon: MessageSquare,
+    question: 'Vad händer om den inte kan svara på en fråga?',
+    answer:
+      'Den gissar aldrig. Är den osäker tar den namn och nummer så att du kan ringa upp, och du får hela ärendet i din sammanfattning.',
+  },
+  {
+    icon: Pencil,
+    question: 'Kan jag ändra vad den ska säga?',
+    answer:
+      'Ja. Nya öppettider, nya tjänster eller ett nytt svar på en vanlig fråga. Hör av dig så uppdaterar vi den, mindre ändringar ingår i månadskostnaden.',
   },
 ]
 
