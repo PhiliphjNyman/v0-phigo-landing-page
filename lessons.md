@@ -553,6 +553,26 @@ Lägg till nya lessons efter varje korrigering.
   behövdes INTE. Moment 2 slutgodkänt på riktig desktop + riktig mobil (lokalt IP).
   Sensmoral: rör inte den approved meshen på en headless-mätartefakt.
 
+### [2026-08] Hero-innehåll som VÄXER krockar med den top-right-reserverade orb-zonen
+- **Vad hände:** Fas 3 (moment 6) förstorade statvärdena (clamp mot 56px) och la
+  en mobil förtroende-pill under hero-CTA:n. Båda fick skyddat innehåll att växa
+  in i orb-zonen: desktop-statblocket lyfte 2px in i primary-orben @1440, och den
+  centrerade mobil-heron höjde H1 16px in i den flata mobil-orben @360.
+  `visual-rules` R2 fångade båda (grön grind före → röd efter mina ändringar).
+- **Varför:** Heron är vertikalt centrerad (`items-center`) och orbsen är pinnade
+  top-right. Allt som gör innehållet högre/större (större typografi, en extra rad,
+  en ny komponent) skjuter skyddat innehåll uppåt/utåt in i orb-zonen. På 360px kan
+  H1 (full bredd) ALDRIG klara orben horisontellt, bara vertikalt.
+- **Regel:** Kör `visual-rules` direkt efter VARJE ändring som ändrar
+  hero-innehållets storlek. Top-right (data-hero) och anchor är reserverade
+  orb-zoner. Åtgärda i prioritet: (1) är det en skala, nudga clamp-max (statvärde
+  56→48px räckte; blocket centreras, så ~2px topp-drop kräver ~2×fontminskning);
+  (2) är det den flata mobil-orben, KRYMP den (92→68px) hellre än att flytta upp
+  (`top-[9%]` kan inte höjas, krockar med fixed header = R5); rör aldrig det
+  interaktiva desktop-orb-systemet. Mät exakt overlap (oy) med en getBoundingClient-
+  Rect-loop FÖRE fixen, gissa inte storleken. Statvärdena är statiska (ingen
+  count-up) men storleken är fortfarande en layoutkraft mot orbsen.
+
 ---
 
 ## Att lägga till löpande
