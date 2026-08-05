@@ -183,28 +183,44 @@ export default async function BloggPostPage({ params }: { params: Promise<{ slug
                         </div>
                     </header>
 
-                    {/* Post content */}
+                    {/* Post content. Each <table> is wrapped in a horizontally
+                        scrollable box so wide price tables scroll inside their own
+                        container on narrow screens; the page body never scrolls
+                        sideways (R3). */}
                     <div className="prose prose-invert prose-lg max-w-none leading-loose text-foreground/75 prose-p:mb-8 prose-headings:mt-12 prose-headings:mb-4 prose-li:mb-2 prose-table:my-8">
                         {post.content ? (
-                            <div dangerouslySetInnerHTML={{ __html: post.content }} />
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: post.content
+                                        .replace(/<table>/g, '<div class="table-scroll"><table>')
+                                        .replace(/<\/table>/g, '</table></div>'),
+                                }}
+                            />
                         ) : null}
                     </div>
 
-                    {/* CTA */}
-                    <div className="mt-20 rounded-3xl bg-foreground text-background p-10 text-center">
-                        <h2 className="text-balance text-2xl font-extrabold mb-4">
-                            Vill du veta hur din hemsida kan ge dig fler kunder?
-                        </h2>
-                        <p className="text-background/70 mb-8 leading-relaxed">
-                            Vi granskar din nuvarande sajt och visar konkret vad som kan förbättras, kostnadsfritt och utan förpliktelse.
-                        </p>
-                        <Button
-                            size="lg"
-                            className="h-12 px-8 rounded-2xl bg-primary text-primary-foreground font-bold hover:scale-105 transition-transform"
-                            asChild
-                        >
-                            <Link href="/#kontakt">Skicka din sajt, vi visar vad du missar</Link>
-                        </Button>
+                    {/* CTA — emerald anchor, identical in both themes (the same
+                        fixed deep-emerald surface as the start page final CTA).
+                        Reuses .anchor-emerald + the --anchor-* tokens; copy unchanged. */}
+                    <div className="anchor-emerald relative mt-20 overflow-hidden rounded-3xl border border-white/10 px-6 py-14 text-center shadow-2xl shadow-primary/10 sm:px-12">
+                        <div className="pointer-events-none absolute inset-0">
+                            <div className="absolute -top-20 left-1/2 size-60 -translate-x-1/2 rounded-full bg-white/10 blur-3xl" aria-hidden="true" />
+                        </div>
+                        <div className="relative z-10">
+                            <h2 className="text-balance text-2xl font-extrabold text-anchor-fg mb-4">
+                                Vill du veta hur din hemsida kan ge dig fler kunder?
+                            </h2>
+                            <p className="mx-auto max-w-xl text-anchor-fg-muted mb-8 leading-relaxed">
+                                Vi granskar din nuvarande sajt och visar konkret vad som kan förbättras, kostnadsfritt och utan förpliktelse.
+                            </p>
+                            <Button
+                                size="lg"
+                                className="h-12 px-8 rounded-2xl bg-white text-anchor-ink font-bold shadow-lg shadow-black/25 hover:bg-white/90 hover:shadow-xl hover:shadow-black/30 focus-visible:border-white focus-visible:ring-white/70 active:scale-[0.98] transition-[transform,background-color,box-shadow] duration-200"
+                                asChild
+                            >
+                                <Link href="/#kontakt">Skicka din sajt, vi visar vad du missar</Link>
+                            </Button>
+                        </div>
                     </div>
                 </article>
             </div>

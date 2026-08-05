@@ -26,9 +26,10 @@ export function CasesClient({ allCases }: { allCases: Case[] }) {
             className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
             variants={revealStagger}
             initial="hidden"
-            animate="visible"
+            whileInView="visible"
+            viewport={{ once: true }}
         >
-            {allCases.map((c) => {
+            {allCases.map((c, index) => {
                 const stat = c.stats?.[0]
                 const MetricIcon = iconMap[c.slug] || TrendingUp
                 const accentStyles = accentMap[c.accent]
@@ -44,6 +45,7 @@ export function CasesClient({ allCases }: { allCases: Case[] }) {
                                         src={c.heroImage}
                                         alt={`Webbplats mockup för ${c.title}`}
                                         fill
+                                        priority={index === 0}
                                         className="object-cover transition-transform duration-150 group-hover:scale-110"
                                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                     />

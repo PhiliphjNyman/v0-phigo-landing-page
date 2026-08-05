@@ -52,7 +52,8 @@ export default function CasesPage() {
                 <div className="mx-auto max-w-7xl px-4 lg:px-8">
                     <Framer.MotionDiv
                         initial="hidden"
-                        animate="visible"
+                        whileInView="visible"
+                        viewport={{ once: true }}
                         variants={revealStagger}
                         className="text-center mb-16"
                     >
@@ -73,22 +74,28 @@ export default function CasesPage() {
 
                     <CasesClient allCases={allCases} />
 
-                    {/* Bottom CTA */}
+                    {/* Bottom CTA — emerald anchor, identical in both themes (same
+                        fixed deep-emerald surface as the start page final CTA).
+                        Reuses .anchor-emerald + --anchor-* tokens; copy unchanged. */}
                     <Framer.MotionDiv
                         variants={reveal}
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
-                        className="mt-24 p-12 lg:p-16 rounded-[3rem] bg-muted/30 border border-border text-center overflow-hidden relative"
+                        className="anchor-emerald relative mt-24 overflow-hidden rounded-[3rem] border border-white/10 px-6 py-16 text-center shadow-2xl shadow-primary/10 sm:px-12 lg:px-20"
                     >
-                        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 size-96 bg-primary/10 blur-[100px] rounded-full" />
-                        <h2 className="text-3xl font-extrabold text-foreground mb-6">Vill du veta hur din bransch kan se ut?</h2>
-                        <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-10">
-                            Vi granskar din nuvarande hemsida kostnadsfritt.
-                        </p>
-                        <Button size="lg" className="rounded-2xl px-10 h-14 text-base font-bold shadow-xl shadow-primary/20" asChild>
-                            <Link href="/#kontakt">Boka kostnadsfri granskning</Link>
-                        </Button>
+                        <div className="pointer-events-none absolute inset-0">
+                            <div className="absolute -top-24 left-1/2 size-72 -translate-x-1/2 rounded-full bg-white/10 blur-3xl" aria-hidden="true" />
+                        </div>
+                        <div className="relative z-10">
+                            <h2 className="text-balance text-3xl font-extrabold text-anchor-fg mb-6">Vill du veta hur din bransch kan se ut?</h2>
+                            <p className="text-lg text-anchor-fg-muted max-w-xl mx-auto mb-10">
+                                Vi granskar din nuvarande hemsida kostnadsfritt.
+                            </p>
+                            <Button size="lg" className="rounded-2xl px-10 h-14 text-base font-bold bg-white text-anchor-ink shadow-lg shadow-black/25 hover:bg-white/90 hover:shadow-xl hover:shadow-black/30 focus-visible:border-white focus-visible:ring-white/70 active:scale-[0.98] transition-[transform,background-color,box-shadow] duration-200" asChild>
+                                <Link href="/#kontakt">Boka kostnadsfri granskning</Link>
+                            </Button>
+                        </div>
                     </Framer.MotionDiv>
                 </div>
             </section>

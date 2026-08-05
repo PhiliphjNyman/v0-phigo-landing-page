@@ -225,24 +225,29 @@ export function CaseDetailClient({ c, relatedCases }: { c: Case, relatedCases: C
                     </section>
                 )}
 
-                {/* Big CTA */}
+                {/* Big CTA — emerald anchor, identical in both themes (same fixed
+                    deep-emerald surface as the start page final CTA). Reuses
+                    .anchor-emerald + --anchor-* tokens; copy unchanged. */}
                 <motion.section
                     initial={{ opacity: 0, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    className="rounded-[3rem] bg-foreground text-background p-12 lg:p-20 text-center relative overflow-hidden"
+                    className="anchor-emerald rounded-[3rem] border border-white/10 p-12 lg:p-20 text-center relative overflow-hidden shadow-2xl shadow-primary/10"
                 >
-                    <h2 className="text-balance text-4xl lg:text-5xl font-black mb-8 relative z-10">
+                    <div className="pointer-events-none absolute inset-0">
+                        <div className="absolute -top-24 left-1/2 size-72 -translate-x-1/2 rounded-full bg-white/10 blur-3xl" aria-hidden="true" />
+                    </div>
+                    <h2 className="text-balance text-4xl lg:text-5xl font-black mb-8 relative z-10 text-anchor-fg">
                         {c.caseType === 'concept' ? 'Vill du ha en sajt som den här?' : 'Vill du ha liknande resultat?'}
                     </h2>
-                    <p className="text-pretty text-xl text-background/70 max-w-2xl mx-auto mb-12 relative z-10">
+                    <p className="text-pretty text-xl text-anchor-fg-muted max-w-2xl mx-auto mb-12 relative z-10">
                         Vill du se hur en sajt kan se ut för ditt företag? Vi granskar din nuvarande hemsida kostnadsfritt.
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
-                        <Button size="lg" className="h-14 px-10 rounded-2xl bg-primary text-primary-foreground font-bold text-lg hover:scale-105 transition-transform" asChild>
+                        <Button size="lg" className="h-14 px-10 rounded-2xl bg-white text-anchor-ink font-bold text-lg shadow-lg shadow-black/25 hover:bg-white/90 hover:shadow-xl hover:shadow-black/30 focus-visible:border-white focus-visible:ring-white/70 active:scale-[0.98] transition-[transform,background-color,box-shadow] duration-200" asChild>
                             <Link href="/#kontakt">Boka en kostnadsfri analys</Link>
                         </Button>
-                        <Button size="lg" variant="outline" className="h-14 px-10 rounded-2xl border-background/20 text-background hover:bg-background/10 font-bold" asChild>
+                        <Button size="lg" variant="outline" className="h-14 px-10 rounded-2xl border-white/30 bg-transparent text-anchor-fg hover:bg-white/10 hover:text-white font-bold" asChild>
                             <Link href="/cases">Se fler case</Link>
                         </Button>
                     </div>

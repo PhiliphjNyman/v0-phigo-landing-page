@@ -202,6 +202,63 @@
   }
 }
 
+/* Blog article tables — premium, theme-aware, no ugly amount wrapping. Each
+   <table> in the post HTML is wrapped in .table-scroll (see blogg/[slug]/page.tsx)
+   so a wide table scrolls INSIDE its own box; the page body never scrolls in the
+   side (R3). Styled explicitly (not left to prose) so it reads correctly in both
+   light and dark via the surface tokens. */
+.table-scroll {
+  margin: 2rem 0;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  -webkit-overflow-scrolling: touch;
+}
+.table-scroll table {
+  margin: 0;
+  width: 100%;
+  min-width: 30rem;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+}
+.table-scroll th,
+.table-scroll td {
+  padding: 0.8125rem 1.125rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.table-scroll thead th {
+  background: var(--muted);
+  color: var(--foreground);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.table-scroll tbody tr:last-child td {
+  border-bottom: 0;
+}
+.table-scroll tbody td {
+  color: var(--muted-foreground);
+}
+.table-scroll tbody td:first-child {
+  color: var(--foreground);
+  font-weight: 500;
+}
+/* Amount columns (2+) must never break mid-number ("1 000–5 000 kr/mån"). */
+.table-scroll tbody td:nth-child(n + 2) {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.table-scroll tbody td strong {
+  color: var(--foreground);
+  font-weight: 700;
+}
+
 /* Emerald anchor surface — deep, layered brand gradient anchoring the final CTA
    above the footer. A soft radial highlight (top-left) over a diagonal
    deep→slightly-lighter emerald base gives depth without looking loud.
@@ -236,6 +293,19 @@
 .hero-mesh {
   -webkit-mask-image: radial-gradient(135% 120% at 100% 0%, #000 0%, #000 30%, transparent 70%);
   mask-image: radial-gradient(135% 120% at 100% 0%, #000 0%, #000 30%, transparent 70%);
+}
+
+/* Dark mode on mobile: the woven mesh drifting in over the CENTERED hero text
+   distracts (light text on an uneven dark-green wash). Pull the sweep tight into
+   the top-right corner so the text column reads on clean dark background. Scoped
+   to dark + <md only — light mode (any width, approved as is) and dark desktop
+   keep the original spread. It is the reach toward centre, not the opacity, that
+   bothers, so this repositions the mask rather than dimming it. */
+@media (max-width: 767px) {
+  .dark .hero-mesh {
+    -webkit-mask-image: radial-gradient(120% 82% at 100% 0%, #000 0%, #000 9%, transparent 45%);
+    mask-image: radial-gradient(120% 82% at 100% 0%, #000 0%, #000 9%, transparent 45%);
+  }
 }
 
 .hero-mesh__band {
