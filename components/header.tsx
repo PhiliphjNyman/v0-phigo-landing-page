@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
-import { Menu, ChevronDown } from 'lucide-react'
+import { Menu } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -11,28 +11,24 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
 import { PhigoLogo } from '@/components/phigo-logo'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { cn } from '@/lib/utils'
 
 import Link from 'next/link'
 
-/* Product pages under "Tjänster". Add /ai-receptionist and /chatbot here as
-   those pages land — the desktop dropdown and the mobile group read from this. */
+/* The three product pages. Desktop renders them as direct nav links (no
+   dropdown); the mobile Sheet groups them under a "Tjänster" heading. */
 const products = [
-  { label: 'Hemsida', href: '/hemsida', desc: 'Sajt som ger dig fler kunder' },
-  { label: 'AI-Receptionist', href: '/ai-receptionist', desc: 'Svarar i telefon dygnet runt' },
+  { label: 'Hemsida', href: '/hemsida' },
+  { label: 'AI-Receptionist', href: '/ai-receptionist' },
+  { label: 'Chatbot', href: '/chatbot' },
 ]
 
-/* Top-level route links either side of the Tjänster group. */
-const routeLinks = [
+/* Full desktop nav order: Exempel, the three products, Blogg. */
+const desktopLinks = [
   { label: 'Exempel', href: '/cases' },
+  ...products,
   { label: 'Blogg', href: '/blogg' },
 ]
 
@@ -61,7 +57,6 @@ export function Header() {
 
   const isRouteActive = (href: string) =>
     pathname === href || pathname.startsWith(href + '/')
-  const isProductsActive = products.some((p) => isRouteActive(p.href))
 
   return (
     <header
@@ -80,97 +75,48 @@ export function Header() {
           <PhigoLogo size="md" />
         </Link>
 
-        {/* Desktop nav */}
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Huvudnavigering">
-          {/* Exempel */}
-          <Link
-            href="/cases"
-            aria-current={isRouteActive('/cases') ? 'page' : undefined}
-            className={cn(
-              'relative text-sm font-medium transition-colors duration-200',
-              isRouteActive('/cases')
-                ? 'text-foreground'
-                : 'text-muted-foreground hover:text-foreground',
-            )}
-          >
-            Exempel
-            <span
-              className={cn(
-                'absolute -bottom-1 left-0 h-px w-full bg-primary transition-transform duration-300 origin-left',
-                isRouteActive('/cases') ? 'scale-x-100' : 'scale-x-0',
-              )}
-            />
-          </Link>
-
-          {/* Tjänster dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger
-              className={cn(
-                'group relative flex cursor-pointer items-center gap-1 text-sm font-medium outline-none transition-colors duration-200 focus-visible:text-foreground',
-                isProductsActive
-                  ? 'text-foreground'
-                  : 'text-muted-foreground hover:text-foreground',
-              )}
-            >
-              Tjänster
-              <ChevronDown
-                className="size-4 transition-transform duration-200 group-data-[state=open]:rotate-180"
-                aria-hidden="true"
-              />
-              <span
+        {/* Desktop nav — direct links, no dropdown */}
+        <nav className="hidden items-center gap-8 lg:flex" aria-label="Huvudnavigering">
+          {desktopLinks.map((link) => {
+            const active = isRouteActive(link.href)
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={active ? 'page' : undefined}
                 className={cn(
-                  'absolute -bottom-1 left-0 h-px w-[calc(100%-1.25rem)] bg-primary transition-transform duration-300 origin-left',
-                  isProductsActive ? 'scale-x-100' : 'scale-x-0',
+                  'relative text-sm font-medium transition-colors duration-200',
+                  active
+                    ? 'text-foreground'
+                    : 'text-muted-foreground hover:text-foreground',
                 )}
-              />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-64 rounded-xl border-border bg-popover p-2">
-              {products.map((product) => (
-                <DropdownMenuItem key={product.href} asChild className="cursor-pointer rounded-lg p-0">
-                  <Link href={product.href} className="flex flex-col items-start gap-0.5 px-3 py-2.5">
-                    <span className="text-sm font-semibold text-foreground">{product.label}</span>
-                    <span className="text-xs text-muted-foreground">{product.desc}</span>
-                  </Link>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          {/* Blogg */}
-          <Link
-            href="/blogg"
-            aria-current={isRouteActive('/blogg') ? 'page' : undefined}
-            className={cn(
-              'relative text-sm font-medium transition-colors duration-200',
-              isRouteActive('/blogg')
-                ? 'text-foreground'
-                : 'text-muted-foreground hover:text-foreground',
-            )}
-          >
-            Blogg
-            <span
-              className={cn(
-                'absolute -bottom-1 left-0 h-px w-full bg-primary transition-transform duration-300 origin-left',
-                isRouteActive('/blogg') ? 'scale-x-100' : 'scale-x-0',
-              )}
-            />
-          </Link>
+              >
+                {link.label}
+                <span
+                  className={cn(
+                    'absolute -bottom-1 left-0 h-px w-full bg-primary transition-transform duration-300 origin-left',
+                    active ? 'scale-x-100' : 'scale-x-0',
+                  )}
+                />
+              </Link>
+            )
+          })}
         </nav>
 
         <div className="flex items-center gap-3">
           {/* Theme toggle — desktop, right of the nav links */}
-          <ThemeToggle className="hidden md:inline-flex" />
+          <ThemeToggle className="hidden lg:inline-flex" />
 
           <Button
             asChild
             size="sm"
-            className="hidden cursor-pointer rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 md:inline-flex"
+            className="hidden cursor-pointer rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 lg:inline-flex"
           >
             <Link href="/#kontakt">Se vad din hemsida missar</Link>
           </Button>
 
-          {/* Theme toggle — mobile, visible in the top bar (no menu needed) */}
-          <ThemeToggle className="size-11 md:hidden" />
+          {/* Theme toggle — mobile/tablet, visible in the top bar (no menu needed) */}
+          <ThemeToggle className="size-11 lg:hidden" />
 
           {/* Mobile menu */}
           <Sheet open={open} onOpenChange={setOpen}>
@@ -178,7 +124,7 @@ export function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="md:hidden size-11"
+                className="lg:hidden size-11"
                 aria-label="Öppna meny"
               >
                 <Menu className="size-5" aria-hidden="true" />
