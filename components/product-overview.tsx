@@ -1,11 +1,13 @@
 'use client'
 
+import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Globe, PhoneCall, MessageCircle, ArrowUpRight } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { reveal, revealStagger } from '@/lib/animations'
 import { SectionEyebrow } from '@/components/section-eyebrow'
+import { SwipeDots } from '@/components/ui/swipe-dots'
 
 /* Product overview on the start page. Order: Hemsida / AI-Receptionist /
    Chatbot. Card descriptions are VERBATIM from Fas0_produktdefinitioner.md §1
@@ -51,6 +53,8 @@ const products: OverviewProduct[] = [
 ]
 
 export function ProductOverview() {
+  const scrollRef = useRef<HTMLDivElement>(null)
+
   return (
     <section
       id="produkter"
@@ -84,16 +88,17 @@ export function ProductOverview() {
 
         {/* Cards */}
         <motion.div
+          ref={scrollRef}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
           variants={revealStagger}
-          className="mt-16 grid gap-6 md:grid-cols-3"
+          className="mt-16 flex snap-x snap-mandatory gap-4 overflow-x-auto scrollbar-none -mx-4 px-4 md:mx-0 md:grid md:gap-6 md:overflow-visible md:px-0 md:grid-cols-3"
         >
           {products.map((p) => {
             const Icon = p.icon
             return (
-              <Link key={p.href} href={p.href} aria-label={`${p.name}, läs mer`} className="group">
+              <Link key={p.href} href={p.href} aria-label={`${p.name}, läs mer`} className="group snap-center shrink-0 basis-[85vw] md:basis-auto">
                 <motion.article
                   variants={reveal}
                   className="card-depth flex h-full flex-col gap-5 rounded-3xl border border-border bg-card p-8 transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-1 hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/5"
@@ -128,6 +133,8 @@ export function ProductOverview() {
             )
           })}
         </motion.div>
+
+        <SwipeDots scrollRef={scrollRef} count={products.length} label="tjänst" />
       </div>
     </section>
   )

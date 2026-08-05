@@ -212,10 +212,10 @@ på riktig mobil.
 - [x] ✅ Moment 6 — Eyebrow-migrering: delad `<SectionEyebrow>`, alla 15 sektionsetiketter migrerade till kanon (text-xs bold uppercase tracking-0.15em; on-dark demo-CTA via färg-override i className)
 - [x] ✅ Moment 6 — Clamp-skala (text-fluid-h1/h2/stat, @theme, ankrad 360→1440) på 2 hero-H1 + 13 sektions-H2 + statvärde; verifierad emitterad i byggd CSS
 - [x] ✅ Moment 6 — Hero-stats mobil förtroenderad: delad SplitPaymentPromise (1:1-swap i statblocket) + kompakt mobilplats under CTA (lg:hidden, ordning CTA→pill→mikrocopy)
-- [ ] ⬜ Moment 5 — Swipe-rad (case-studies + produktöversikt) + prick-indikatorer
+- [x] ✅ Moment 5 — Swipe-rad på mobil (case-studies + produktöversikt): scroll-snap-center, dold scrollbar (.scrollbar-none), delad `<SwipeDots>` (rAF, reduced-motion-medveten). Desktop-grid: case 2-up sm→md, produktöversikt md 3-up oförändrad
 - [ ] ⬜ Mesh-omvärdering mot helhetsintrycket (efter mobilkoll)
 
-### Moment 5: Swipe-kort på mobil ⬜ (scroll-snap)
+### Moment 5: Swipe-kort på mobil 🔄 (scroll-snap)
 - CASE-KORTEN görs om till horisontellt svepbar rad på mobil (<768px):
   `scroll-snap-type: x mandatory` på containern, `scroll-snap-align: center`
   på korten. Ett kort ~85vw så nästa skymtar i kanten. Ingen JS för swipen,

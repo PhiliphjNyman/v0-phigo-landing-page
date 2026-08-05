@@ -190,6 +190,16 @@
   .card-depth {
     box-shadow: var(--card-depth-shadow);
   }
+
+  /* Hide the scrollbar on the mobile swipe rows (moment 5) while keeping the row
+     scrollable. Desktop reverts to a grid, so this only affects the mobile row. */
+  .scrollbar-none {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* legacy Edge/IE */
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none; /* WebKit/Blink */
+  }
 }
 
 /* Emerald anchor surface — deep, layered brand gradient anchoring the final CTA

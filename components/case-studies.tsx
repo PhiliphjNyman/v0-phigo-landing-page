@@ -1,11 +1,13 @@
 'use client'
 
+import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { ArrowUpRight, TrendingUp, Zap, Heart, Flame } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { reveal, revealStagger } from '@/lib/animations'
 import { SectionEyebrow } from '@/components/section-eyebrow'
+import { SwipeDots } from '@/components/ui/swipe-dots'
 import { Counter } from '@/components/ui/counter'
 
 import Link from 'next/link'
@@ -26,6 +28,8 @@ const iconMap: Record<string, any> = {
 }
 
 export function CaseStudies() {
+  const scrollRef = useRef<HTMLDivElement>(null)
+
   return (
     <section id="case" className="py-24 lg:py-32 overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
@@ -61,11 +65,12 @@ export function CaseStudies() {
 
         {/* Grid */}
         <motion.div
+          ref={scrollRef}
           variants={revealStagger}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-16 flex snap-x snap-mandatory gap-4 overflow-x-auto scrollbar-none -mx-4 px-4 md:mx-0 md:grid md:gap-6 md:overflow-visible md:px-0 md:grid-cols-2 lg:grid-cols-3"
         >
           {cases.map((c, index) => {
             const stat = c.stats?.[0]
@@ -73,7 +78,7 @@ export function CaseStudies() {
             const accentStyles = accentMap[c.accent]
 
             return (
-              <Link key={c.slug} href={`/cases/${c.slug}`} aria-label={c.title}>
+              <Link key={c.slug} href={`/cases/${c.slug}`} aria-label={c.title} className="snap-center shrink-0 basis-[85vw] md:basis-auto">
                 <motion.article
                   variants={reveal}
                   className="card-depth group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card/50 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-1 hover:border-primary/20 hover:bg-card hover:shadow-2xl hover:shadow-primary/5 cursor-pointer"
@@ -143,6 +148,8 @@ export function CaseStudies() {
             )
           })}
         </motion.div>
+
+        <SwipeDots scrollRef={scrollRef} count={cases.length} label="exempel" />
       </div>
     </section>
   )
