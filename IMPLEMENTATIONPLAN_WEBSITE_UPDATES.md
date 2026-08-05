@@ -37,7 +37,7 @@ briefingen** för produktombyggnaden; fas 2 är alltså sanktionerad, inget utö
 | 0 | Produktdefinitioner | Prosa, Hugo levererar — blockerar fas 2 | ✅ KLAR (se `Fas0_produktdefinitioner.md`) |
 | 1 | Moment 3 + 4 | Lagerdjup + reveal-refaktorn | ✅ KLAR (3B parallax uppskjuten, se §5) |
 | 2 | Produktombyggnad | Produktsidor, navigering, guide-yta | ✅ KLAR (delstatus i §6) |
-| 3 | Moment 5 + 6 | Swipe-kort + typografisk skärpa (sajtbrett inkl. nya sidor) | 🔄 |
+| 3 | Moment 5 + 6 | Swipe-kort + typografisk skärpa (sajtbrett inkl. nya sidor) | ✅ KLAR |
 | 4 | Moment 7 + 8 | Viewport/a11y + slutmätning | ⬜ |
 | 5 | Integrationer | Chatbot-widget, guide-embed, receptionist-nummer | ⬜ |
 | 6 | Audits + deploy | Skills-audits, push-OK, prod-verifiering | ⬜ |
@@ -206,7 +206,7 @@ på riktig mobil.
 
 ---
 
-## 7. FAS 3 — Moment 5 + 6 🔄 PÅGÅR (appliceras sajtbrett INKL. fas 2:s nya ytor)
+## 7. FAS 3 — Moment 5 + 6 ✅ KLAR (appliceras sajtbrett INKL. fas 2:s nya ytor)
 
 **Delstatus (uppdateras per delsteg-commit):**
 - [x] ✅ Moment 6 — Eyebrow-migrering: delad `<SectionEyebrow>`, alla 15 sektionsetiketter migrerade till kanon (text-xs bold uppercase tracking-0.15em; on-dark demo-CTA via färg-override i className)
@@ -214,9 +214,10 @@ på riktig mobil.
 - [x] ✅ Moment 6 — Hero-stats mobil förtroenderad: delad SplitPaymentPromise (1:1-swap i statblocket) + kompakt mobilplats under CTA (lg:hidden, ordning CTA→pill→mikrocopy)
 - [x] ✅ Moment 5 — Swipe-rad på mobil (case-studies + produktöversikt): scroll-snap-center, dold scrollbar (.scrollbar-none), delad `<SwipeDots>` (rAF, reduced-motion-medveten). Desktop-grid: case 2-up sm→md, produktöversikt md 3-up oförändrad
 - [x] ✅ Grind: visual-rules ALL PASS (ljus+mörkt @1440, mobil @360, R3 ingen h-scroll), `pnpm build` + `tsc --noEmit` rena. Två tuningar för att passera grinden: statvärdets clamp-max 56→48px (56px lyfte 2x2-blocket 2px in i hörn-orben @1440; 1024–1280 var redan rena) och mobil flat-orb 92→68px (förtroende-pillret höjde H1 16px in i orben). Screenshots granskade i båda lägen + båda bevakningspunkter (statblock 1024–1280, case-swipe 640–767→grid 768)
-- [ ] ⬜ Mesh-omvärdering mot helhetsintrycket (Hugos ögon på mobilkollen; opacity-lever i `hero-mesh.tsx`, nu `opacity-70 dark:opacity-80`)
+- [x] ✅ Mesh-omvärdering (mobilkoll): mörkt läge på mobil, sweepen repositionerad in i övre högra hörnet (mask, ej opacity) så hero-texten läser rent; ljust läge + mörkt desktop orörda
+- [x] ✅ Övriga mobilkoll-fixar (innan push): premium blogg-tabeller (nowrap belopp + `.table-scroll`, R3), anchor-emerald-CTA på blogg + /cases + case-detalj (`bg-foreground`/`bg-muted/30` utfasad), /cases hydration-mismatch (animate→whileInView) + LCP-priority på Malte Örn-bilden
 
-### Moment 5: Swipe-kort på mobil 🔄 (scroll-snap)
+### Moment 5: Swipe-kort på mobil ✅ (scroll-snap)
 - CASE-KORTEN görs om till horisontellt svepbar rad på mobil (<768px):
   `scroll-snap-type: x mandatory` på containern, `scroll-snap-align: center`
   på korten. Ett kort ~85vw så nästa skymtar i kanten. Ingen JS för swipen,
@@ -227,7 +228,7 @@ på riktig mobil.
 - Dölj scrollbaren visuellt, behåll scrollbarheten. Prick-indikatorer under
   korten (ren CSS + minimal JS). Desktop: grid som tidigare.
 
-### Moment 6: Typografisk skärpa 🔄
+### Moment 6: Typografisk skärpa ✅
 - Uppercase-etiketter i accentgrönt ovanför VARJE sektionsrubrik — konsekvent
   sajtbrett inkl. nya produktsidor (finns delvis).
 - Rubriker med clamp() för flytande skalning.
