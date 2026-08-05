@@ -573,6 +573,51 @@ Lägg till nya lessons efter varje korrigering.
   Rect-loop FÖRE fixen, gissa inte storleken. Statvärdena är statiska (ingen
   count-up) men storleken är fortfarande en layoutkraft mot orbsen.
 
+### [2026-08] Tailwind v4 skannar även .md — skriv aldrig arbitrary-value-tokens i doc
+- **Vad hände:** Fas 4 M7. En status-anteckning i IMPLEMENTATIONPLAN innehöll en
+  förkortad pt-token där jag skrev tre bokstavliga punkter inuti env() i stället för
+  safe-area-inset-top, staplat som en pt-utility med godtyckligt värde i hakparentes.
+  `next build` gav "Found 1 warning while optimizing generated CSS: Unexpected token
+  Delim('.')" — Tailwind genererade en ogiltig CSS-regel av tokenen. Jag återinförde
+  t.o.m. buggen en andra gång i själva meningen som FÖRKLARADE den (och nästan en
+  tredje gång i denna lesson).
+- **Varför:** Tailwind v4:s automatiska content-detection skannar ALLA icke-ignorerade
+  filer, inklusive .md och kod-kommentarer. Varje utility-med-hakparentes-token i
+  brödtext blir en genererad regel. Välformad → giltig men oanvänd regel; malformad
+  → ogiltig CSS + byggvarning.
+- **Regel:** Skriv aldrig en utility med godtyckligt värde (hakparentes-syntax) i
+  markdown eller kommentarer, ens som exempel — beskriv i prosa. Verifiera att
+  `pnpm build` är varningsfritt EFTER varje redigering av en skannad fil; en ren
+  build tidigare i sessionen garanterar inte att en senare doc-edit inte återinför
+  problemet.
+
+### [2026-08] Safe-area kräver viewport-fit: cover; MSYS manglar ledande "/" i env-vars
+- **Vad hände:** Fas 4 M7–M8. Två separata fällor. (1) `env(safe-area-inset-*)`
+  evaluerar till **0** om inte `viewport-fit: cover` sätts i viewporten — safe-area-
+  padding utan cover är en no-op (webbläsaren auto-insettar redan innehållet). Headern
+  hade sedan tidigare en env-toppadding som låg inert just därför. (2) I Git Bash
+  manglade `ROUTES=/,/hemsida ...` den ledande `/` till en Windows-sökväg
+  (`C:/Program Files/Git/`), så perf-scriptet fick en ogiltig URL.
+- **Regel:** (1) Vill du att safe-area-padding ska GÖRA något: sätt `viewportFit:
+  'cover'` i `export const viewport`. Full-bleed-bakgrunder blir då kant-till-kant och
+  content måste skyddas med `max(gutter, env(...))` (aldrig `calc(gutter + env())` —
+  det staplar padding ovanpå safe-arean och blir för brett i landskap). (2) Kör
+  Node-verktyg med sökvägs-liknande env-var-värden via **PowerShell**, inte Git Bash
+  (eller sätt `MSYS_NO_PATHCONV=1`). Content-gutter-regeln träffar alla centrerade
+  containrar via `.mx-auto.px-4` (oskiktad, scopad `<1024px`).
+
+### [2026-08] Headless perf-mätning: CLS/h-scroll pålitligt, fps/LCP brusigt — bekräfta relativt
+- **Vad hände:** Fas 4 M8 mätte main vs branch (`scripts/perf-scroll.mjs`, 390px, 4×
+  CPU). Branch-homepage-LCP såg först ut att vara långsammare än main (1108 vs 652 ms),
+  men 3 samples spände 564–1108 ms — ren mätbrus. fps 44–58 (SwiftShader mjukvaru-GPU).
+- **Varför:** Under 4× CPU-throttle + headless SwiftShader är fps och LCP mycket
+  brusiga/pessimistiska (jfr 2026-07-lessonen). CLS och horisontell-scroll@360 är
+  däremot stabila och pålitliga headless.
+- **Regel:** Läs headless perf som (a) pålitligt för CLS + h-scroll, (b) RELATIVT och
+  fler-sample för fps/LCP — dra aldrig en regressions-slutsats från ETT LCP-sample.
+  Absolut 60 fps signas alltid på riktig enhet, aldrig på riggen. Main-baseline: main
+  saknar branch-nya sidor (404) — jämför bara routes som finns på båda.
+
 ---
 
 ## Att lägga till löpande
