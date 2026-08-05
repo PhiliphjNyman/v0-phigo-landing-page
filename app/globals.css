@@ -177,9 +177,34 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* Moment 7 — safety belt against sideways page scroll from a stray wide
+       child. `clip` (not `hidden`) establishes no scroll container, so scroll
+       anchoring and programmatic scroll stay intact. R3 already passes; this
+       just prevents future regressions. */
+    overflow-x: clip;
   }
-  html {
-    scroll-behavior: smooth;
+  /* Smooth anchor scrolling is motion, so gate it behind no-preference — a
+     reduced-motion user gets instant jumps. The global reduce reset near the end
+     of this file only zeroes animation/transition durations, not scroll-behavior. */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+}
+
+/* Moment 7 — safe-area gutter floor on centered content containers. They all
+   share `mx-auto px-4`, so this compound selector gives them a max(gutter, notch)
+   floor: content never slides under the notch in landscape, while full-bleed
+   section backgrounds (which sit on the <section>, not this inner div) stay
+   edge-to-edge. Scoped below lg because phones are <1024px even in landscape, so
+   desktop gutters (lg:px-6 / lg:px-8) are never touched. env() resolves to 0
+   unless viewport-fit=cover (set in app/layout.tsx), so non-notched / portrait
+   render identically. Unlayered so it outranks Tailwind's px-* utilities. */
+@media (max-width: 1023.98px) {
+  .mx-auto.px-4 {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
   }
 }
 

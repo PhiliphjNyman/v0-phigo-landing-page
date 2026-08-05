@@ -38,7 +38,7 @@ briefingen** för produktombyggnaden; fas 2 är alltså sanktionerad, inget utö
 | 1 | Moment 3 + 4 | Lagerdjup + reveal-refaktorn | ✅ KLAR (3B parallax uppskjuten, se §5) |
 | 2 | Produktombyggnad | Produktsidor, navigering, guide-yta | ✅ KLAR (delstatus i §6) |
 | 3 | Moment 5 + 6 | Swipe-kort + typografisk skärpa (sajtbrett inkl. nya sidor) | ✅ KLAR |
-| 4 | Moment 7 + 8 | Viewport/a11y + slutmätning | ⬜ |
+| 4 | Moment 7 + 8 | Viewport/a11y + slutmätning | 🔄 (M7 byggt, grind grön, inväntar mobilkoll; M8 ej start) |
 | 5 | Integrationer | Chatbot-widget, guide-embed, receptionist-nummer | ⬜ |
 | 6 | Audits + deploy | Skills-audits, push-OK, prod-verifiering | ⬜ |
 
@@ -243,9 +243,9 @@ på riktig mobil.
 
 ---
 
-## 8. FAS 4 — Moment 7 + 8 ⬜ EJ PÅBÖRJAD (viewport, tillgänglighet, slutmätning)
+## 8. FAS 4 — Moment 7 + 8 🔄 PÅGÅR (viewport, tillgänglighet, slutmätning)
 
-### Moment 7: Mobilexakt viewport + tillgänglighet ⬜
+### Moment 7: Mobilexakt viewport + tillgänglighet 🔄 BYGGT (grind grön, inväntar mobilkoll)
 - Hero-höjden: redan löst i moment 1 (`100vh; 100svh;`) — RÖR EJ.
 - `overflow-x: clip` på body som säkerhetsbälte.
 - Safe areas: padding via `env(safe-area-inset-left/right)` på yttersta containern.
@@ -254,6 +254,29 @@ på riktig mobil.
   sajtbrett här, inkl. fas 2:s ytor.
 - Endast transform/opacity animeras. `will-change: transform` enbart på element
   som rör sig.
+
+**Byggt denna session (globals.css + layout.tsx + counter.tsx):**
+- ✅ `overflow-x: clip` på body i `@layer base` (`clip`, ej `hidden` — ingen
+  scroll-container, rör ej scroll-anchoring). R3 passerade redan; detta är bälte.
+- ✅ Safe-area-golv på inre content-containrar via **en** oskiktad regel
+  `.mx-auto.px-4 { padding-inline: max(1rem, env(safe-area-inset-left/right)) }`
+  scopad `<1024px` (desktop-gutters lg:px-6/8 orörda; full-bleed-bakgrunder på
+  `<section>` förblir kant-till-kant). Aktiverad av `viewportFit: 'cover'` i
+  layout.tsx (utan cover är `env()` = 0; headern hade redan `pt-[env(...top)]`
+  som låg inert). **Mobilkoll:** liggande läge på notch-telefon + status-bar-zon.
+- ✅ `scroll-behavior: smooth` flyttad bakom `@media (prefers-reduced-motion:
+  no-preference)` (ankarhopp blir direkta vid reduced-motion; globala reset:en
+  rör bara animation/transition-duration).
+- ✅ Counter (case-metrics) reduced-motion-medveten: hoppar till slutvärdet, ingen
+  count-up (`useSpring` gate:as ej av `MotionConfig`). *Vilande i nuläget:*
+  `lib/cases.ts` har inga `stats`, så ingen räknare renderas än — korrekt men
+  ej live-observerad (verifierad via kod + build).
+- ✅ Verifierat reduced-motion sajtbrett: orbs (early return), mesh (gate:ad),
+  reveals (MotionConfig), swipe-dots (gate:ad), scroll-behavior (nu gate:ad).
+  `transition-all` finns bara i vendored `ui/*` (rör ej), neutraliseras av reset.
+- **Grind:** visual-rules ALL PASS (ljus+mörkt @1440, mobil @360, R3), `pnpm
+  build` + `tsc --noEmit` rena, Playwright-beteendecheck grön (viewport-fit,
+  overflow-x, gutter 16px @390, scroll-behavior smooth/auto).
 
 ### Moment 8: Slutverifiering med siffror ⬜
 - Playwright-mätning: stabil 60 fps vid scroll (mobilemulering 4× CPU), hela

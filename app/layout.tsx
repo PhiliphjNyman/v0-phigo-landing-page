@@ -106,6 +106,11 @@ export const viewport: Viewport = {
   ],
   width: 'device-width',
   initialScale: 1,
+  // Extend the page under the notch/status bar so full-bleed section backgrounds
+  // reach the physical screen edge. Content is kept clear of the notch by the
+  // safe-area gutter floor in globals.css and the header's
+  // pt-[env(safe-area-inset-top)]. Without this, env(safe-area-inset-*) is 0.
+  viewportFit: 'cover',
 }
 
 export default function RootLayout({
