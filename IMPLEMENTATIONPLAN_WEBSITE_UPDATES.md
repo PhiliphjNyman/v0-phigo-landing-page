@@ -165,7 +165,7 @@ representerade". **Kräver fas 0 levererad + separat plangodkännande.**
 - [x] ✅ `/ai-receptionist` (delad produktmall)
 - [x] ✅ `/chatbot` (variation på produktmallen, copy ur fas 0 §4)
 - [x] ✅ Produktöversikt på startsidan (`#produkter`, 3 card-depth-kort)
-- [ ] ⬜ Guide-yta "Hitta rätt lösning" (designad container, ingen Voiceflow)
+- [x] ✅ Guide-yta "Hitta rätt lösning" (designad container, ingen Voiceflow)
 
 ### 6.1 Undersök-först (rapport före bygge)
 - Nuvarande sidstruktur/routes, navigering, var produktinnehåll bor idag

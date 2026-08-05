@@ -1,6 +1,7 @@
 import { Header } from '@/components/header'
 import { HeroSection } from '@/components/hero-section'
 import { ProductOverview } from '@/components/product-overview'
+import { GuideSection } from '@/components/guide-section'
 import { CaseStudies } from '@/components/case-studies'
 import { WhyPhigo } from '@/components/why-phigo'
 import { AboutSection } from '@/components/about-section'
@@ -15,6 +16,7 @@ export default function Home() {
       <main>
         <HeroSection />
         <ProductOverview />
+        <GuideSection />
         <CaseStudies />
         <WhyPhigo />
         <AboutSection />
