@@ -56,7 +56,7 @@ export function OfferSection() {
           <SectionEyebrow>Erbjudande</SectionEyebrow>
           <motion.h2
             variants={reveal}
-            className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"
+            className="mt-4 text-balance text-fluid-h2 font-extrabold tracking-tight text-foreground"
           >
             En hemsida som ger dig fler kunder
           </motion.h2>

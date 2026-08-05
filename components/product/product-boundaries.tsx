@@ -40,7 +40,7 @@ export function ProductBoundaries({
           <SectionEyebrow>{eyebrow}</SectionEyebrow>
           <motion.h2
             variants={reveal}
-            className="mt-4 text-balance text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl"
+            className="mt-4 text-balance text-fluid-h2 font-extrabold tracking-tight text-foreground"
           >
             {title}
           </motion.h2>

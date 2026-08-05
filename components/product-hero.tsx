@@ -54,7 +54,7 @@ export function ProductHero({
 
         <motion.h1
           variants={reveal}
-          className="mt-5 text-balance text-4xl font-extrabold leading-[1.1] tracking-tight text-foreground sm:text-5xl lg:text-6xl"
+          className="mt-5 text-balance text-fluid-h1 font-extrabold tracking-tight text-foreground"
         >
           {title}
         </motion.h1>

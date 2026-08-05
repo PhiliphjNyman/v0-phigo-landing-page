@@ -115,7 +115,7 @@ export function ContactForm() {
                 <SectionEyebrow>Kontakta oss</SectionEyebrow>
                 <motion.h2
                   variants={reveal}
-                  className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"
+                  className="mt-4 text-balance text-fluid-h2 font-extrabold tracking-tight text-foreground"
                 >
                   Låt oss titta på din hemsida
                 </motion.h2>

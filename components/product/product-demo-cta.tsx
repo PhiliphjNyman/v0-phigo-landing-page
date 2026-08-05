@@ -53,7 +53,7 @@ export function ProductDemoCta({
             <SectionEyebrow className="text-anchor-fg-muted">{eyebrow}</SectionEyebrow>
             <motion.h2
               variants={reveal}
-              className="mt-4 text-balance text-3xl font-bold tracking-tight text-anchor-fg sm:text-4xl"
+              className="mt-4 text-balance text-fluid-h2 font-bold tracking-tight text-anchor-fg"
             >
               {title}
             </motion.h2>

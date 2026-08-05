@@ -70,7 +70,7 @@ export function ProductOverview() {
           <motion.h2
             id="produkter-rubrik"
             variants={reveal}
-            className="mt-4 text-balance text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
+            className="mt-4 text-balance text-fluid-h2 font-extrabold tracking-tight text-foreground"
           >
             Tre sätt att få fler kunder
           </motion.h2>

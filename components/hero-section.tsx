@@ -104,7 +104,7 @@ export function HeroSection() {
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-8">
           {/* Text Content */}
           <div className="hero-entrance flex flex-col items-center text-center lg:items-start lg:text-left">
-            <h1 className="mt-8 text-balance text-4xl font-extrabold leading-[1.1] tracking-tight text-foreground sm:text-6xl xl:text-7xl">
+            <h1 className="mt-8 text-balance text-fluid-h1 font-extrabold tracking-tight text-foreground">
               Din hemsida borde ge dig{' '}
               <span className="relative">
                 <span className="relative z-10 text-primary">kunder</span>

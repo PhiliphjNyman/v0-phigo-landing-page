@@ -41,7 +41,7 @@ export function CaseStudies() {
             <SectionEyebrow>Exempel</SectionEyebrow>
             <motion.h2
               variants={reveal}
-              className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"
+              className="mt-4 text-balance text-fluid-h2 font-extrabold tracking-tight text-foreground"
             >
               Så kan din hemsida se ut
             </motion.h2>

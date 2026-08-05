@@ -156,6 +156,21 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* Fluid typographic scale (moment 6) — clamp-based sizes for the largest type so
+   it scales smoothly with the viewport instead of jumping at breakpoints.
+   Anchored 360→1440px with a shared 1.5rem intercept. Rolled out in this moment
+   ONLY to hero-H1, section-H2 and the hero stat value; smaller headings and body
+   keep stepped breakpoints (the scale can extend wider later). Each token pairs a
+   line-height so applying the utility carries both. */
+@theme {
+  --text-fluid-h1: clamp(2.25rem, 1.5rem + 3.33vw, 4.5rem); /* 36 → 72px */
+  --text-fluid-h1--line-height: 1.05;
+  --text-fluid-h2: clamp(1.875rem, 1.5rem + 1.67vw, 3rem); /* 30 → 48px */
+  --text-fluid-h2--line-height: 1.1;
+  --text-fluid-stat: clamp(2rem, 1.5rem + 2.22vw, 3.5rem); /* 32 → 56px */
+  --text-fluid-stat--line-height: 1;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

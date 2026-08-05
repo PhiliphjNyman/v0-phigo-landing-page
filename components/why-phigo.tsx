@@ -44,7 +44,7 @@ export function WhyPhigo() {
             <SectionEyebrow>Varför PHIGO</SectionEyebrow>
             <motion.h2
               variants={reveal}
-              className="mt-3 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
+              className="mt-3 text-balance text-fluid-h2 font-bold tracking-tight text-foreground"
             >
               Därför väljer företagare oss
             </motion.h2>

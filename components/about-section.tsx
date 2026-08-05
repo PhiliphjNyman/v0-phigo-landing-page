@@ -34,7 +34,7 @@ export function AboutSection() {
           <SectionEyebrow>Om oss</SectionEyebrow>
           <motion.h2
             variants={reveal}
-            className="mt-3 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
+            className="mt-3 text-balance text-fluid-h2 font-bold tracking-tight text-foreground"
           >
             Vilka är vi?
           </motion.h2>

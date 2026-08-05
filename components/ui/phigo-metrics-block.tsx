@@ -55,7 +55,7 @@ export function PhigoMetricsBlock() {
                   {metric.label}
                 </span>
                 <div className="flex items-end gap-2">
-                  <span className="text-3xl font-semibold tracking-tight text-foreground">
+                  <span className="text-fluid-stat font-semibold tracking-tight text-foreground">
                     {metric.value}
                   </span>
                   <span className="mb-0.5 text-xs font-medium text-muted-foreground">

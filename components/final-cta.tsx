@@ -54,7 +54,7 @@ export function FinalCta() {
           <div className="relative z-10">
             <motion.h2
               variants={reveal}
-              className="text-balance text-3xl font-bold tracking-tight text-anchor-fg sm:text-4xl"
+              className="text-balance text-fluid-h2 font-bold tracking-tight text-anchor-fg"
             >
               Vill du veta var din hemsida tappar kunder?
             </motion.h2>
