@@ -159,9 +159,14 @@ export function HeroOrb({
       raf = requestAnimationFrame(frame)
     }
 
-    // Only run the loop while the orb is actually visible. Hidden responsive
-    // variants (display:none via lg:block / lg:hidden) must not burn a rAF —
-    // e.g. the desktop cluster is display:none on mobile.
+    // Only run the loop while the orb can actually be seen. Two independent
+    // gates, both required:
+    //  - offsetParent: hidden responsive variants (display:none via lg:block /
+    //    lg:hidden) must not burn a rAF — e.g. the desktop cluster on mobile.
+    //  - IntersectionObserver: an orb scrolled out of the viewport must not
+    //    keep the page from going idle for the rest of the session. Rotation
+    //    freezes off-screen and resumes on re-entry (100px early), which is
+    //    visually indistinguishable — you cannot see a paused orb.
     const start = () => {
       if (running) return
       running = true
@@ -173,10 +178,18 @@ export function HeroOrb({
       if (raf) cancelAnimationFrame(raf)
       raf = 0
     }
+    let inViewport = false
     const syncVisibility = () => {
-      if (el.offsetParent !== null) start()
+      if (el.offsetParent !== null && inViewport) start()
       else stop()
     }
+    const io = new IntersectionObserver(
+      (entries) => {
+        inViewport = entries[0].isIntersecting
+        syncVisibility()
+      },
+      { rootMargin: '100px' },
+    )
     const onResize = () => {
       queueGeom()
       syncVisibility()
@@ -186,10 +199,11 @@ export function HeroOrb({
     if (proximity) window.addEventListener('pointermove', onMove, { passive: true })
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onResize, { passive: true })
-    syncVisibility()
+    io.observe(el)
 
     return () => {
       stop()
+      io.disconnect()
       window.removeEventListener('pointermove', onMove)
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onResize)

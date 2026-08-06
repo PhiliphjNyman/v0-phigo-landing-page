@@ -380,7 +380,14 @@ på kontaktformuläret, inte bara att klicket inte kraschar.
       routes), global fokusring-golv i globals.css (3px `--ring` via `:where` så
       shadcn-ringar vinner), SwipeDots aria-current-polish. Beteendeverifierat med
       Playwright: skip-länk, fokusindikatorer, Escape/fokusretur i mobilmenyn
-- [ ] ⬜ **C.** `/fixing-motion-performance` — animationsprestanda
+- [x] ✅ **C.** `/fixing-motion-performance` — kodgranskning (M8-siffrorna fanns redan).
+      Rent: alla keyframes transform/opacity-only, passiva rAF-throttlade lyssnare,
+      IO-baserade reveals, reduced-motion sajtbrett. Ett fynd åtgärdat: orbens
+      rAF-loop stannar nu via IntersectionObserver när orben är ur viewport
+      (körde tidigare hela sessionen på desktop). Playwright-verifierad:
+      kör-i-vy/fryst-ur-vy/återupptas. Flaggat utan ändring: mesh-CSS-looparna
+      kör off-screen (medvetet parkerat i §11), desktop-headerns backdrop-blur
+      (signad M1)
 - [ ] ⬜ **D.** `/fixing-metadata` — SEO, OG, favicon + IndexNow-URL:er, sitemap, FAQPage
 - [ ] ⬜ **E.** Copy-granskning av all fas 2-copy (klarspråk, em-dash, Johnny-regeln)
 - [ ] ⬜ **G.** PageSpeed Insights mot preview-URL (kräver att Philip stänger av
