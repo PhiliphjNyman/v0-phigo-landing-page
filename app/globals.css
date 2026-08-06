@@ -183,6 +183,14 @@
        just prevents future regressions. */
     overflow-x: clip;
   }
+  /* Focus-ring floor (CLAUDE.md: visible 3px accent ring on every interactive
+     element). Plain links in the nav/footer/body have no component-level ring;
+     this gives them the brand outline. :where() keeps specificity at zero, so
+     shadcn primitives that set outline-none + their own ring utilities win. */
+  :where(a, button, [role='button'], summary):focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: 2px;
+  }
   /* Smooth anchor scrolling is motion, so gate it behind no-preference — a
      reduced-motion user gets instant jumps. The global reduce reset near the end
      of this file only zeroes animation/transition durations, not scroll-behavior. */

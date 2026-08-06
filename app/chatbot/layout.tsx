@@ -9,7 +9,8 @@ export default function ChatbotLayout({
   return (
     <>
       <Header />
-      <main>{children}</main>
+      {/* id + tabIndex: target of the header skip link (see header.tsx) */}
+      <main id="innehall" tabIndex={-1}>{children}</main>
       <Footer />
     </>
   )

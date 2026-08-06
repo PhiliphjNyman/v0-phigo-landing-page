@@ -96,7 +96,7 @@ export function SwipeDots({
           type="button"
           onClick={() => goTo(i)}
           aria-label={`Gå till ${label} ${i + 1}`}
-          aria-current={i === active}
+          aria-current={i === active ? 'true' : undefined}
           className={cn(
             'h-1.5 rounded-full transition-[width,background-color] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
             i === active ? 'w-5 bg-primary' : 'w-1.5 bg-border',

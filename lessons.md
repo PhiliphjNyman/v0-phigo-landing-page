@@ -636,8 +636,13 @@ Varje gång Claude Code gör ett misstag, eller ni upptäcker något som borde g
   100vh, bilder, reveals). `next/link` navigerar klientsidigt och scrollar när
   målet finns. Eslint-regeln såg inte de trasiga fallen eftersom href kommer in
   som prop, inte som literal, så en grön lint gav falsk trygghet.
-- **Regel:** Interna mål (href som börjar med `/`) renderas alltid via
+- **Regel:** (1) Interna mål (href som börjar med `/`) renderas alltid via
   `<CtaLink>` (`components/cta-link.tsx`), som väljer `next/link` för interna
-  routes och plain anchor för tel:/mailto:/samma-sidas `#ankare`. Efter varje
-  ändring av en CTA: kör `pnpm exec node scripts/cta-anchors.mjs` mot en färsk
-  prod-server. Lita aldrig på en grön lint för länkar vars href är en prop.
+  routes och plain anchor för tel:/mailto:/samma-sidas `#ankare`. (2) Generellt:
+  statisk analys ser inte genom komponentindirektion — en href/handler som
+  kommer in som prop är osynlig för lint, så en grön lint bevisar inget om
+  beteendet. (3) Konverteringskritiska flöden (CTA → kontaktformulär, framtida
+  guide → lead) beteendeverifieras därför alltid i prod-build: mät faktisk
+  scrollposition/destination (`scripts/cta-anchors.mjs` mot färsk server på
+  :3001), inte bara att klicket inte kraschar. Grinden ingår i varje
+  fas 6-audit-steg och körs efter varje ändring av en CTA eller länkkomponent.

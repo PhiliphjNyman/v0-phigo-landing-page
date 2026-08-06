@@ -13,7 +13,9 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main>
+      {/* tabIndex -1: the header skip link moves focus here; Safari needs the
+          target to be programmatically focusable for that to work. */}
+      <main id="innehall" tabIndex={-1}>
         <HeroSection />
         <ProductOverview />
         <GuideSection />

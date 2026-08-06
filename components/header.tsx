@@ -70,6 +70,16 @@ export function Header() {
           : 'bg-transparent',
       )}
     >
+      {/* Skip link — first tabbable element on every page carrying the header.
+          Same-page fragment, so a plain anchor is correct (not CtaLink). Visible
+          only on keyboard focus; every route's <main> carries id="innehall". */}
+      <a
+        href="#innehall"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary-foreground"
+      >
+        Hoppa till innehållet
+      </a>
+
       {/* In the md–lg (tablet/hamburger) range, pull the toggle + hamburger
           well inward with a wide right gutter (they sit roughly above the hero
           midline, not tight in the corner); the logo keeps its left gutter. */}

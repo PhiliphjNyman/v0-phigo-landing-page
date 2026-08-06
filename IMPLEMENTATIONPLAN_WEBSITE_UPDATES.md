@@ -355,6 +355,12 @@ preview-URL, så säkerhetssteget körs FÖRST. Skill-avvikelser (godkända): `/
 och `/security-audit` finns inte installerade, de ersätts av manuell
 copy-granskning mot klarspråkslistan respektive skillen `security-review`.
 
+**Stående grind för varje audit-steg i fas 6** (utökad efter steg A:s CTA-fynd):
+`pnpm lint` (0 errors) + `tsc --noEmit` + `pnpm build` + `visual-rules.mjs` ALL PASS
++ `cta-anchors.mjs` ALL PASS (färsk prod-server på :3001). Cta-anchors-grinden är
+beteendeverifiering av konverteringsflödet: den mäter att besökaren faktiskt landar
+på kontaktformuläret, inte bara att klicket inte kraschar.
+
 **Delstatus (uppdateras per delsteg-commit):**
 - [x] ✅ **F. Säkerhet** — `security-review` på branch-diffen (0 nya fynd) + härdning
       av fyra befintliga risker: HTML-escaping i kontaktmejlet, http(s)-only href,
@@ -368,7 +374,12 @@ copy-granskning mot klarspråkslistan respektive skillen `security-review`.
       ALDRIG landade på kontaktsektionen. Träffade produktsidornas hero-CTA och
       demo-CTA (href kommer som prop, osynlig för eslint). Ny `<CtaLink>` + ny grind
       `scripts/cta-anchors.mjs` (32 kombinationer: 8 CTA × mobil/desktop × ljust/mörkt)
-- [ ] ⬜ **B.** `/fixing-accessibility` — tangentbord, aria, fokus
+- [x] ✅ **B.** `/fixing-accessibility` — grunden var redan god (aria-hidden på ikoner,
+      formulärfel via shadcn Form, Sheet-fokusfälla, aria-current i nav). Tillagt:
+      skip-länk "Hoppa till innehållet" (header → `<main id="innehall">` på alla 6
+      routes), global fokusring-golv i globals.css (3px `--ring` via `:where` så
+      shadcn-ringar vinner), SwipeDots aria-current-polish. Beteendeverifierat med
+      Playwright: skip-länk, fokusindikatorer, Escape/fokusretur i mobilmenyn
 - [ ] ⬜ **C.** `/fixing-motion-performance` — animationsprestanda
 - [ ] ⬜ **D.** `/fixing-metadata` — SEO, OG, favicon + IndexNow-URL:er, sitemap, FAQPage
 - [ ] ⬜ **E.** Copy-granskning av all fas 2-copy (klarspråk, em-dash, Johnny-regeln)
