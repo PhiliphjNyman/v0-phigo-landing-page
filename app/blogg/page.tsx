@@ -6,13 +6,13 @@ import { getPublishedBlogPosts, getBlogPosts } from '@/lib/blog'
 import { SectionEyebrow } from '@/components/section-eyebrow'
 
 export const metadata: Metadata = {
-    title: 'Blogg | PHIGO',
+    title: 'Blogg: tips och guider för lokala företag – PHIGO',
     description: 'Tips och guider för lokala företag som vill ha fler kunder via sin hemsida.',
     alternates: {
         canonical: 'https://phigo.se/blogg',
     },
     openGraph: {
-        title: 'Blogg | PHIGO',
+        title: 'Blogg: tips och guider för lokala företag – PHIGO',
         description: 'Tips och guider för lokala företag som vill ha fler kunder via sin hemsida.',
         url: 'https://phigo.se/blogg',
         locale: 'sv_SE',
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Blogg | PHIGO',
+        title: 'Blogg: tips och guider för lokala företag – PHIGO',
         description: 'Tips och guider för lokala företag som vill ha fler kunder via sin hemsida.',
     },
 }

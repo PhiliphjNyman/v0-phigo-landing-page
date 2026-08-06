@@ -13,6 +13,7 @@ import {
     BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
 import { getPublishedBlogPosts, getBlogPostBySlug } from '@/lib/blog'
+import { ArticleHtml } from '@/components/article-html'
 
 export async function generateStaticParams() {
     const posts = getPublishedBlogPosts()
@@ -186,15 +187,15 @@ export default async function BloggPostPage({ params }: { params: Promise<{ slug
                     {/* Post content. Each <table> is wrapped in a horizontally
                         scrollable box so wide price tables scroll inside their own
                         container on narrow screens; the page body never scrolls
-                        sideways (R3). */}
+                        sideways (R3). ArticleHtml routes internal links through
+                        the Next router so /#kontakt lands on the contact form
+                        (the step A cross-page fragment fix). */}
                     <div className="prose prose-invert prose-lg max-w-none leading-loose text-foreground/75 prose-p:mb-8 prose-headings:mt-12 prose-headings:mb-4 prose-li:mb-2 prose-table:my-8">
                         {post.content ? (
-                            <div
-                                dangerouslySetInnerHTML={{
-                                    __html: post.content
-                                        .replace(/<table>/g, '<div class="table-scroll"><table>')
-                                        .replace(/<\/table>/g, '</table></div>'),
-                                }}
+                            <ArticleHtml
+                                html={post.content
+                                    .replace(/<table>/g, '<div class="table-scroll"><table>')
+                                    .replace(/<\/table>/g, '</table></div>')}
                             />
                         ) : null}
                     </div>

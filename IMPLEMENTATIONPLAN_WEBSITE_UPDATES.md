@@ -397,6 +397,14 @@ på kontaktformuläret, inte bara att klicket inte kraschar.
       FAQPage-schema på /hemsida byggt från SAMMA data. Validerat lokalt: all
       JSON-LD parsad + fältkontrollerad på 9 routes, FAQ-schematext verifierad
       identisk med renderad HTML, canonical=og:url på produktsidorna
+- [x] ✅ **D-tillägg.** `/seo-audit` — åtgärdat: 4 interna länkar blogg→/hemsida
+      (wrappade befintliga fraser, ingen copyändring), `<ArticleHtml>` som routar
+      artikel-HTML:ens interna länkar genom Next-routern (blogginläggens
+      /#kontakt-CTA:er hade steg A-buggen), /blogg-titel 13→49 tecken,
+      /integritetspolicy-description 67→146 tecken. Rent vid kontroll: alt-texter,
+      H1 ×1/route, title/desc-längder övriga routes, lazy-loading. Väntar på Hugo:
+      inga fynd berörde frusen copy. Väntar på deploy (G): Search Console,
+      indexeringsstatus, riktig Rich Results-test, PSI
 - [ ] ⬜ **E.** Copy-granskning av all fas 2-copy (klarspråk, em-dash, Johnny-regeln)
 - [ ] ⬜ **G.** PageSpeed Insights mot preview-URL (kräver att Philip stänger av
       Deployment Protection)

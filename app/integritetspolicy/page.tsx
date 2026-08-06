@@ -6,7 +6,7 @@ import { Footer } from '@/components/footer'
 export const metadata: Metadata = {
   title: 'Integritetspolicy – PHIGO',
   description:
-    'Läs om hur PHIGO hanterar dina personuppgifter i enlighet med GDPR.',
+    'Så hanterar vi dina personuppgifter: vad vi samlar in via kontaktformuläret, varför, hur länge vi sparar och vilka rättigheter du har enligt GDPR.',
   // Indexable on purpose: the page is in the sitemap + IndexNow list
   // (lib/site-urls.ts), and a noindex there would contradict the sitemap and
   // trigger Search Console warnings. A privacy policy is public trust content.
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Integritetspolicy – PHIGO',
     description:
-      'Läs om hur PHIGO hanterar dina personuppgifter i enlighet med GDPR.',
+      'Så hanterar vi dina personuppgifter: vad vi samlar in via kontaktformuläret, varför, hur länge vi sparar och vilka rättigheter du har enligt GDPR.',
     url: 'https://phigo.se/integritetspolicy',
     type: 'website',
     locale: 'sv_SE',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary',
     title: 'Integritetspolicy – PHIGO',
-    description: 'Läs om hur PHIGO hanterar dina personuppgifter i enlighet med GDPR.',
+    description: 'Så hanterar vi dina personuppgifter: vad vi samlar in via kontaktformuläret, varför, hur länge vi sparar och vilka rättigheter du har enligt GDPR.',
   },
 }
 

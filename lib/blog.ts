@@ -86,7 +86,7 @@ export const blogPosts: BlogPost[] = [
   </tbody>
 </table>
 
-<p>Vi på PHIGO har medvetet valt ett fast pris, 8 000 kr engång och 399 kr/mån för hosting, säkerhet och löpande support. Inget mer, inga dolda avgifter. Det passar ett litet företag som vill ha en professionell sajt utan att det ska bli ett stort projekt.</p>
+<p>Vi på PHIGO har medvetet valt <a href="/hemsida">ett fast pris, 8 000 kr engång och 399 kr/mån</a> för hosting, säkerhet och löpande support. Inget mer, inga dolda avgifter. Det passar ett litet företag som vill ha en professionell sajt utan att det ska bli ett stort projekt.</p>
 
 <h2>Vad du bör fråga innan du bestämmer dig</h2>
 
@@ -210,7 +210,7 @@ export const blogPosts: BlogPost[] = [
 
 <p>Vi på PHIGO tittar gärna på din hemsida och berättar konkret vad som kan förbättras, utan kostnad och utan förpliktelse.</p>
 
-<p>Vi bygger hemsidor åt lokala företag för 8 000 kr (engångskostnad) med drift för 399 kr/mån. Klart inom 14 dagar.</p>
+<p>Vi bygger <a href="/hemsida">hemsidor åt lokala företag för 8 000 kr</a> (engångskostnad) med drift för 399 kr/mån. Klart inom 14 dagar.</p>
 
 <p><a href="/#kontakt">Skicka din sajt så berättar vi vad du missar.</a></p>
         `.trim(),
@@ -311,7 +311,7 @@ export const blogPosts: BlogPost[] = [
 
 <p>En hemsida som är byggd rätt från start, med tydliga texter, snabb laddning och korrekt uppbyggnad, gör att Google förstår ditt företag utan att du behöver göra ett stort arbete efteråt.</p>
 
-<p>Vi på PHIGO bygger hemsidor åt lokala företag som ska synas och ge fler förfrågningar. Fast pris, live inom 14 dagar. <a href="/#kontakt">Kontakta oss</a> om du vill att vi tittar på din sajt. Det kostar ingenting.</p>
+<p>Vi på PHIGO bygger <a href="/hemsida">hemsidor åt lokala företag</a> som ska synas och ge fler förfrågningar. Fast pris, live inom 14 dagar. <a href="/#kontakt">Kontakta oss</a> om du vill att vi tittar på din sajt. Det kostar ingenting.</p>
         `.trim(),
         ogImage: '/images/blog/syns-inte-pa-google.png',
     },
@@ -385,7 +385,7 @@ export const blogPosts: BlogPost[] = [
 
 <p><strong>Webbyrå</strong> är rätt val för medelstora och stora företag med komplexa krav. För ett litet lokalt företag betalar du i regel för tjänster du inte behöver, projektledare, accountmanagers, långa avtalstider.</p>
 
-<p><strong>Fast pris</strong>, det vi på PHIGO erbjuder, är ett mellanting. Du vet exakt vad du betalar, vad som ingår och vem du pratar med. Inget mer, inga dolda avgifter.</p>
+<p><strong>Fast pris</strong>, <a href="/hemsida">det vi på PHIGO erbjuder</a>, är ett mellanting. Du vet exakt vad du betalar, vad som ingår och vem du pratar med. Inget mer, inga dolda avgifter.</p>
 
 <h2>Vad ingår, och vad ingår inte?</h2>
 
