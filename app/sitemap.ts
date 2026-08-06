@@ -1,62 +1,6 @@
 import type { MetadataRoute } from 'next'
-import { getCases } from '@/lib/cases'
-import { getPublishedBlogPosts } from '@/lib/blog'
+import { getSitemapEntries } from '@/lib/site-urls'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://phigo.se'
-
-  const staticRoutes: MetadataRoute.Sitemap = [
-    {
-      url: baseUrl,
-      lastModified: new Date('2026-03-26'),
-      changeFrequency: 'monthly',
-      priority: 1.0,
-    },
-    {
-      url: `${baseUrl}/hemsida`,
-      lastModified: new Date('2026-08-05'),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/ai-receptionist`,
-      lastModified: new Date('2026-08-05'),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/chatbot`,
-      lastModified: new Date('2026-08-05'),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/cases`,
-      lastModified: new Date('2026-03-26'),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/blogg`,
-      lastModified: new Date('2026-03-26'),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-  ]
-
-  const caseRoutes: MetadataRoute.Sitemap = getCases().map((c) => ({
-    url: `${baseUrl}/cases/${c.slug}`,
-    lastModified: new Date('2026-03-26'),
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }))
-
-  const blogRoutes: MetadataRoute.Sitemap = getPublishedBlogPosts().map((p) => ({
-    url: `${baseUrl}/blogg/${p.slug}`,
-    lastModified: p.updatedAt ? new Date(p.updatedAt) : new Date(p.publishedAt),
-    changeFrequency: 'weekly' as const,
-    priority: 0.7,
-  }))
-
-  return [...staticRoutes, ...caseRoutes, ...blogRoutes]
+  return getSitemapEntries()
 }

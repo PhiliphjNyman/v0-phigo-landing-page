@@ -7,10 +7,9 @@ export const metadata: Metadata = {
   title: 'Integritetspolicy – PHIGO',
   description:
     'Läs om hur PHIGO hanterar dina personuppgifter i enlighet med GDPR.',
-  robots: {
-    index: false,
-    follow: true,
-  },
+  // Indexable on purpose: the page is in the sitemap + IndexNow list
+  // (lib/site-urls.ts), and a noindex there would contradict the sitemap and
+  // trigger Search Console warnings. A privacy policy is public trust content.
   alternates: {
     canonical: 'https://phigo.se/integritetspolicy',
   },

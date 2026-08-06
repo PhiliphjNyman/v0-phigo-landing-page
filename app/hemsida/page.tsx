@@ -4,6 +4,7 @@ import { OfferSection } from '@/components/offer-section'
 import { ProcessSection } from '@/components/process-section'
 import { FaqSection } from '@/components/faq-section'
 import { FinalCta } from '@/components/final-cta'
+import { buildFaqPageSchema } from '@/lib/faq'
 
 export const metadata: Metadata = {
   title: 'Hemsida till fast pris, 8 000 kr – PHIGO',
@@ -86,6 +87,10 @@ const breadcrumbSchema = {
   ],
 }
 
+/* Built from lib/faq.ts — the exact strings FaqSection renders below, so the
+   schema always matches the visible content (Google's rich-results rule). */
+const faqPageSchema = buildFaqPageSchema('https://phigo.se/hemsida')
+
 export default function HemsidaPage() {
   return (
     <>
@@ -96,6 +101,10 @@ export default function HemsidaPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema) }}
       />
       <ProductHero
         label="Hemsida"

@@ -10,52 +10,21 @@ import {
 } from '@/components/ui/accordion'
 import { reveal, revealStagger } from '@/lib/animations'
 import { SectionEyebrow } from '@/components/section-eyebrow'
-import { HelpCircle, CreditCard, Clock, ShieldCheck, Smartphone, MapPin, Pencil, PackageMinus } from 'lucide-react'
+import { HelpCircle, CreditCard, Clock, ShieldCheck, Smartphone, MapPin, Pencil, PackageMinus, type LucideIcon } from 'lucide-react'
+import { faqs } from '@/lib/faq'
 
-const faqs = [
-  {
-    question: 'Vad kostar en hemsida?',
-    answer:
-      'En hemsida kostar 8 000 kr exkl. moms (engång) och 399 kr/mån exkl. moms för drift, säkerhet och support. Inga dolda kostnader. Priset är fast oavsett hur lång tid det tar. Du betalar hälften nu och resten först när du är nöjd vid leverans.',
-    icon: CreditCard,
-  },
-  {
-    question: 'Hur lång tid tar det?',
-    answer:
-      'Din sajt är live inom 14 dagar från att vi fått dina uppgifter. Ofta går det snabbare.',
-    icon: Clock,
-  },
-  {
-    question: 'Vad händer efter att sajten är live?',
-    answer:
-      'Vi ser till att sajten alltid är uppe och funkar. Månadsavgiften på 399 kr/mån (exkl. moms) täcker hosting, säkerhet och mindre ändringar, som att uppdatera öppettider, priser eller kontaktuppgifter.',
-    icon: ShieldCheck,
-  },
-  {
-    question: 'Fungerar sajten på mobilen?',
-    answer:
-      'Ja. Alla sajter vi bygger fungerar perfekt på mobilen. Det är ofta där dina kunder hittar dig.',
-    icon: Smartphone,
-  },
-  {
-    question: 'Hittar folk mig på Google?',
-    answer:
-      'Ja. Vi bygger sajten så att den syns i Google när folk i ditt område söker efter det du erbjuder. Det tar lite tid att bygga upp, men grunden läggs direkt.',
-    icon: MapPin,
-  },
-  {
-    question: 'Behöver du ändra texter och bilder själv?',
-    answer:
-      'Ja. Vi kan lägga till ett enkelt admin-system där du ändrar texter, bilder och priser själv, utan att kunna något om teknik. Det är ett tillägg utöver baspaketet. Vill du hellre slippa helt gör vi det åt dig. Mindre ändringar ingår i månadsavtalet.',
-    icon: Pencil,
-  },
-  {
-    question: 'Kan jag köpa bara hemsidan utan månadsavtal?',
-    answer:
-      'Ja, det går bra. Vi bygger sajten och överlämnar den till dig. Då ansvarar du själv för hosting, säkerhet och uppdateringar. De flesta av våra kunder väljer månadsavtalet för att slippa tänka på teknik, men det är inget krav.',
-    icon: PackageMinus,
-  },
-]
+/* Q&A text lives in lib/faq.ts (shared with the FAQPage JSON-LD on /hemsida so
+   schema and visible content cannot drift). Icons are presentation-only and
+   stay here, keyed by each item's stable id. */
+const iconMap: Record<string, LucideIcon> = {
+  'pris': CreditCard,
+  'leveranstid': Clock,
+  'efter-lansering': ShieldCheck,
+  'mobil': Smartphone,
+  'google': MapPin,
+  'sjalv-uppdatera': Pencil,
+  'utan-manadsavtal': PackageMinus,
+}
 
 export function FaqSection() {
   return (
@@ -94,12 +63,12 @@ export function FaqSection() {
           className="relative"
         >
           <Accordion type="single" collapsible className="w-full space-y-4">
-            {faqs.map((faq, index) => {
-              const Icon = faq.icon
+            {faqs.map((faq) => {
+              const Icon = iconMap[faq.id] ?? HelpCircle
               return (
                 <AccordionItem
-                  key={index}
-                  value={`item-${index}`}
+                  key={faq.id}
+                  value={faq.id}
                   className="group border border-border bg-card/50 rounded-2xl px-6 transition-[border-color,background-color,box-shadow] duration-200 data-[state=open]:border-primary/30 data-[state=open]:bg-card data-[state=open]:shadow-xl data-[state=open]:shadow-primary/5"
                 >
                   <AccordionTrigger className="flex gap-4 py-6 text-left text-lg font-bold text-foreground hover:no-underline hover:text-primary transition-[color] duration-200 [&[data-state=open]>svg]:rotate-180 [&>svg]:transition-transform [&>svg]:duration-200 [&>svg]:ease-in-out">

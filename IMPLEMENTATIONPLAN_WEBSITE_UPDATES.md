@@ -388,7 +388,15 @@ på kontaktformuläret, inte bara att klicket inte kraschar.
       kör-i-vy/fryst-ur-vy/återupptas. Flaggat utan ändring: mesh-CSS-looparna
       kör off-screen (medvetet parkerat i §11), desktop-headerns backdrop-blur
       (signad M1)
-- [ ] ⬜ **D.** `/fixing-metadata` — SEO, OG, favicon + IndexNow-URL:er, sitemap, FAQPage
+- [x] ✅ **D.** `/fixing-metadata` — metadata-täckningen var redan komplett (title/
+      description/canonical/OG på alla routes, generateMetadata på slug-sidor).
+      Fynd 5+6: ny `lib/site-urls.ts` som ENDA URL-källa för sitemap + IndexNow
+      (IndexNow saknade produktsidorna; /integritetspolicy in i båda — dess noindex
+      togs bort så robots/sitemap inte motsäger varandra). Fynd 7: FAQ-datan
+      utbruten till `lib/faq.ts` (stabila id:n, ikoner kvar i komponenten) och
+      FAQPage-schema på /hemsida byggt från SAMMA data. Validerat lokalt: all
+      JSON-LD parsad + fältkontrollerad på 9 routes, FAQ-schematext verifierad
+      identisk med renderad HTML, canonical=og:url på produktsidorna
 - [ ] ⬜ **E.** Copy-granskning av all fas 2-copy (klarspråk, em-dash, Johnny-regeln)
 - [ ] ⬜ **G.** PageSpeed Insights mot preview-URL (kräver att Philip stänger av
       Deployment Protection)

@@ -1,16 +1,7 @@
 import { NextResponse } from 'next/server'
-import { getCases } from '@/lib/cases'
-import { getPublishedBlogPosts } from '@/lib/blog'
+import { BASE_URL, getAllIndexableUrls } from '@/lib/site-urls'
 
-const BASE_URL = 'https://phigo.se'
 const INDEXNOW_KEY = 'cae0b11cf67e49c78a192df668fb82d4'
-
-function getAllUrls(): string[] {
-  const staticUrls = [BASE_URL, `${BASE_URL}/cases`, `${BASE_URL}/blogg`]
-  const caseUrls = getCases().map((c) => `${BASE_URL}/cases/${c.slug}`)
-  const blogUrls = getPublishedBlogPosts().map((p) => `${BASE_URL}/blogg/${p.slug}`)
-  return [...staticUrls, ...caseUrls, ...blogUrls]
-}
 
 export async function POST(request: Request) {
   const authHeader = request.headers.get('authorization')
@@ -20,7 +11,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const urls = getAllUrls()
+  const urls = getAllIndexableUrls()
 
   const response = await fetch('https://api.indexnow.org/indexnow', {
     method: 'POST',
