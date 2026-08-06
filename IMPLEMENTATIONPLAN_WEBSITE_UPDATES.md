@@ -39,8 +39,8 @@ briefingen** för produktombyggnaden; fas 2 är alltså sanktionerad, inget utö
 | 2 | Produktombyggnad | Produktsidor, navigering, guide-yta | ✅ KLAR (delstatus i §6) |
 | 3 | Moment 5 + 6 | Swipe-kort + typografisk skärpa (sajtbrett inkl. nya sidor) | ✅ KLAR |
 | 4 | Moment 7 + 8 | Viewport/a11y + slutmätning | ✅ KLAR (M7 godkänd; M8 mätt: CLS 0 + LCP<2s + R3, formell Lighthouse vid deploy) |
-| 5 | Integrationer | Chatbot-widget, guide-embed, receptionist-nummer | ⬜ |
-| 6 | Audits + deploy | Skills-audits, push-OK, prod-verifiering | ⬜ |
+| 5 | Integrationer | Chatbot-widget, guide-embed, receptionist-nummer | 🔄 KÖRS PÅ BRANCHEN före merge (omsekvenserat 2026-08-06, se §9) |
+| 6 | Audits + deploy | Skills-audits, push-OK, prod-verifiering | 🔄 F–H ✅ (H godkänd 2026-08-06); merge väntar på fas 5:s hårda krav |
 
 Branch: `feature/scroll-liv-och-diagnos`. Inget pushas utan uttryckligt OK.
 Commit per godkänt delmoment. Bocka av tabellen ovan när en fas godkänts.
@@ -325,7 +325,24 @@ på riktig mobil.
 
 ---
 
-## 9. FAS 5 — Integrationer ⬜ EJ PÅBÖRJAD (körs när respektive del finns)
+## 9. FAS 5 — Integrationer 🔄 (OMSEKVENSERAD 2026-08-06: körs PÅ BRANCHEN före merge)
+
+> **Nytt beslut (Hugo, efter godkänd H):** main får inte ett mellanläge. Fas 5
+> körs på `feature/scroll-liv-och-diagnos` och merge sker först när de HÅRDA
+> kraven är uppfyllda:
+> 1. **Chatbot-embedden live** på sajten (laddas efter interaktiv; LCP om-mäts)
+> 2. **Receptionist-numret live** på /ai-receptionist
+> 3. **CSP flippas** Report-Only → skarp när Voiceflow-konsolen är tyst
+>
+> **MJUKT krav (öppen beslutspunkt):** guide-embedden (femfrågorsflödet →
+> HubSpot-lead). Interim-fallbacken får lanseras; Hugo avgör när han ser hur
+> långt Voiceflow-bygget kommit.
+>
+> **Merge-grind (ersätter ny full H):** kort om-verifiering på preview efter
+> embedden — ny PSI (mobil / + /hemsida), tyst konsol (noll CSP-violations →
+> flip:en), cta-anchors ALL PASS, formuläret skickar. Hugos förkrav för
+> receptionisten (n8n/ElevenLabs, transfer-test, engelska, kunskapsbas-priser)
+> byggs parallellt utanför repot.
 
 - [ ] **Chatbot-widget:** Voiceflow-snippet på sajten. Laddas efter interaktiv —
       får inte påverka LCP. Verifiera moment 8-siffrorna igen efter inkoppling.
@@ -425,7 +442,13 @@ på kontaktformuläret, inte bara att klicket inte kraschar.
       /ai-receptionist 69→82–86, / 53→65 (kvarvarande gap = JS-vikt, fynd 2 i
       §11-backloggen). Desktop 83–99. Hero-ytorna kräver Hugos omsignering i H.
       Console-fyndet (upgrade-insecure-requests i Report-Only) fixat
-- [ ] ⬜ **H.** Slutgrind: visual-rules ALL PASS + build + tsc + Hugos mobilkoll på preview
+- [x] ✅ **H.** Slutgrind godkänd av Hugo 2026-08-06 mot preview: formulär (mejl
+      framme, XSS-escaping verifierad), mobilkoll 7 sidor, hero-OMSIGNERING
+      (CSS-entrance godkänd), footer/om-oss, CTA-stickprov, skip-länk. Formell
+      PSI: / mobil 82 / desktop 99, /hemsida mobil 81 / desktop 91, CLS 0,
+      SEO 100. 82 accepterat (gap = JS-vikt §11 + preview-miljö). Konsol:
+      vercel.live-brus är preview-only; analytics på prod täcks av CSP
+      ('self' för /_vercel/* + va.vercel-scripts.com/vitals i policyn)
 
 **CSP-beslut (fas 5-förberedelse):** policyn skeppar som
 `Content-Security-Policy-Report-Only` med `cdn.voiceflow.com`,
@@ -435,12 +458,18 @@ rapporterar noll överträdelser. `'unsafe-inline'` i script-src är ett medvete
 Next App Routers hydrerings-payload kräver det, och nonce-alternativet tvingar varje
 sida dynamisk och kostar oss den statiska prerendern av samtliga 23 routes.
 
-Deploy-sekvens:
-1. Alla grindar gröna + audits åtgärdade
-2. Hugo ger uttryckligt push-OK → push → deploy (Vercel)
-3. Skarp prod-verifiering: riktig mobil, ring receptionisten, klicka guiden,
-   QR-koden från visitkorten
-4. Session-handoff skrivs → frys (ingen ny funktionalitet efter detta)
+Deploy-sekvens (OMSEKVENSERAD 2026-08-06 — fas 5 FÖRE merge, se §9):
+1. ✅ Audits F–E åtgärdade, G mätt, H godkänd av Hugo (2026-08-06)
+2. Fas 5 hårda krav på branchen: chatbot-embed live + receptionist-nummer live
+   + CSP flippad skarp (Voiceflow-konsolen tyst). Guide-embed = mjukt krav,
+   Hugos beslut när Voiceflow-lägets status syns.
+3. **Merge-grind** (kort om-verifiering på preview, INTE ny full H): ny PSI
+   (mobil / + /hemsida), tyst konsol, cta-anchors ALL PASS, formuläret skickar
+4. Hugo ger uttryckligt merge-klartecken → merge till main → skarp deploy
+5. Skarp prod-verifiering: riktig mobil, ring receptionisten, klicka
+   chatbotten/guiden, QR-koden från visitkorten, IndexNow-ping
+   (INDEXNOW_SECRET finns i Production)
+6. Session-handoff skrivs → frys (ingen ny funktionalitet efter detta)
 
 ---
 
