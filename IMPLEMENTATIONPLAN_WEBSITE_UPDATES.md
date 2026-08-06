@@ -436,6 +436,18 @@ Deploy-sekvens:
 
 ---
 
+## 10b. Vercel-läge (Fas 6, uppdateras vid behov)
+
+- Branchen deployar till TVÅ Vercel-projekt: `v0-phigo-landing-page`
+  (huvudprojekt, kopplat till phigo.se, RESEND_API_KEY på All Environments)
+  och `v0-phigo-landing-page-cklb` (dubblett, tomma env-vars). All mätning
+  och test sker ENBART mot huvudprojektets preview.
+- **Efter lansering (fråga till Philip):** ska cklb-dubbletten arkiveras/
+  raderas så vi slipper dubbla builds per push?
+- `INDEXNOW_SECRET` saknas i Vercel — endpointen är fail-closed (401 utan
+  variabeln), så inget kraschar, men IndexNow-ping kan inte köras förrän den
+  är satt i Production. Behövs inte för preview-testerna.
+
 ## 11. Medvetet UTANFÖR planen (backlog, rörs ej)
 
 - Demo-bild-generatorn (parkerad, väntar på 48h-testet)
