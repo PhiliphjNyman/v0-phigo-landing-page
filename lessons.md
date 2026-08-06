@@ -646,3 +646,27 @@ Varje gång Claude Code gör ett misstag, eller ni upptäcker något som borde g
   scrollposition/destination (`scripts/cta-anchors.mjs` mot färsk server på
   :3001), inte bara att klicket inte kraschar. Grinden ingår i varje
   fas 6-audit-steg och körs efter varje ändring av en CTA eller länkkomponent.
+  Uppdatering 2026-08-06: buggen har nu dykt upp via TRE vägar — propade
+  href:ar (ProductHero/ProductDemoCta), eslint-synliga `<a>`-literaler, och råa
+  `<a>` i artikel-HTML via dangerouslySetInnerHTML (fixad med
+  `components/article-html.tsx` som routar interna länkar genom Next-routern).
+  cta-anchors.mjs grindar numera alla tre vägarna, inkl. en blogg-artikels
+  /#kontakt-länk.
+
+### [2026-08] Redigera aldrig UTF-8-filer via PowerShell-strängrundor
+- **Vad hände:** Under D-tillägget gjordes en textersättning i två filer via
+  PowerShell (`Get-Content -Raw` → `.Replace()` → `Set-Content -Encoding
+  utf8`). Windows PowerShell 5.1 läste UTF-8-filerna (utan BOM) som ANSI och
+  skrev tillbaka dem dubbelkodade. Symptom: å/ä/ö blev `Ã¥/Ã¤/Ã¶`, – blev
+  `â€"`, ← blev `â†` — klassisk mojibake, i både källfil och renderad sida.
+  Dessutom missade själva ersättningen tyst (gamla texten låg kvar, fast
+  korrupt).
+- **Varför:** PS 5.1:s standardkodning för `Get-Content` är ANSI när BOM
+  saknas; en läs-/skrivrunda är därför aldrig kodningsneutral. Edit-verktyget
+  bevarar filens kodning, det gör inte PowerShell.
+- **Regel:** Textändringar i repofiler görs ALLTID med Edit/Write-verktygen,
+  aldrig via PowerShell `Get-Content`/`Set-Content`-rundor. Ser du `Ã`- eller
+  `â€`-sekvenser i en diff eller på en sida: misstänk dubbelkodning, återställ
+  filen från git (`git checkout -- <fil>`) och gör om ändringen med Edit.
+  Mojibake-kontrollen i verifieringsskript (`innerText.includes('Ã')`) fångar
+  symptomet i renderad output.

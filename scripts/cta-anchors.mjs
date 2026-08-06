@@ -28,6 +28,11 @@ const CTAS = [
   { from: '/ai-receptionist', name: 'DemoCta', sel: 'a[href="/#kontakt"]:has-text("Kontakta oss")' },
   { from: '/chatbot', name: 'DemoCta', sel: 'a[href="/#kontakt"]:has-text("Kontakta oss")' },
   { from: '/cases', name: 'Botten-CTA', sel: 'a[href="/#kontakt"]:has-text("Boka kostnadsfri granskning")' },
+  /* Article-HTML path: raw <a> inside dangerouslySetInnerHTML, routed by
+     components/article-html.tsx. The step A bug has now appeared through three
+     different paths (propped hrefs, eslint-visible literals, article HTML) —
+     this entry gates the third. */
+  { from: '/blogg/hemsida-frisor', name: 'Artikel-länk (ArticleHtml)', sel: '.prose a[href="/#kontakt"]' },
 ]
 
 const VIEWPORTS = [
