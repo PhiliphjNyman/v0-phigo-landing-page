@@ -415,8 +415,16 @@ på kontaktformuläret, inte bara att klicket inte kraschar.
       fallback-rad + "Hjälp mig välja", success-statens brödtext ("omedelbart" vs
       24h-löftet), toast-utropstecknet, bloggens pedagogiska "SEO/Hosting"-
       definitioner. Väntar på Hugo: inga hero-/metatitel-avvikelser hittade
-- [ ] ⬜ **G.** PageSpeed Insights mot preview-URL (kräver att Philip stänger av
-      Deployment Protection)
+- [x] ✅ **G.** Perf mot preview (Lighthouse lokalt mot preview-URL:en; PSI-API:t
+      är stängt utan nyckel — formell PSI körs i webbläsare i H). CLS 0 överallt.
+      Huvudfynd: alla mobil-LCP-element var hydration-gatade framer-mount-
+      animationer; Chrome exkluderar dessutom CSS-animerade-från-0-element ur
+      LCP-kandidatur, så fixen krävde att HELA heron (H1, beskrivning, CTA-rad,
+      chips, mobilpill, mikrocopy) gick över till CSS-entrance (M1-mönstret,
+      identisk timing). Mobil före→efter: /hemsida 65→87, /chatbot 63→90,
+      /ai-receptionist 69→82–86, / 53→65 (kvarvarande gap = JS-vikt, fynd 2 i
+      §11-backloggen). Desktop 83–99. Hero-ytorna kräver Hugos omsignering i H.
+      Console-fyndet (upgrade-insecure-requests i Report-Only) fixat
 - [ ] ⬜ **H.** Slutgrind: visual-rules ALL PASS + build + tsc + Hugos mobilkoll på preview
 
 **CSP-beslut (fas 5-förberedelse):** policyn skeppar som
