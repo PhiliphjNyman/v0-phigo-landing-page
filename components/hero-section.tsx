@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useAnimation, useInView, useReducedMotion } from 'framer-motion'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { fadeIn } from '@/lib/animations'
 import { PhigoMetricsBlock } from '@/components/ui/phigo-metrics-block'
 import { SplitPaymentPromise } from '@/components/split-payment-promise'
 import { HeroMesh } from '@/components/hero-mesh'
@@ -164,27 +163,18 @@ export function HeroSection() {
             {/* Mobile trust promise — the split-payment line gets a place below
                 the CTAs on <lg (the desktop stat block that carries it is hidden
                 here). Compact one-liner, same glass style, placed after the CTAs
-                so it never pushes them down. */}
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={fadeIn}
-              className="mt-6 w-full max-w-sm lg:hidden"
-            >
+                so it never pushes them down. CSS entrance (G-fix): this pill was
+                the homepage's mobile LCP candidate once the CTA went CSS. */}
+            <div className="hero-entrance__pill mt-6 w-full max-w-sm lg:hidden">
               <SplitPaymentPromise className="py-2.5" />
-            </motion.div>
+            </div>
 
-            {/* Microcopy */}
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={fadeIn}
-              className="mt-6 flex items-center gap-4 text-xs text-muted-foreground font-medium"
-            >
+            {/* Microcopy — CSS entrance for the same reason as the pill. */}
+            <div className="hero-entrance__micro mt-6 flex items-center gap-4 text-xs text-muted-foreground font-medium">
               <span><span aria-hidden="true">✓</span> Tar 30 sekunder</span>
               <span className="size-1 rounded-full bg-border" aria-hidden="true" />
               <span><span aria-hidden="true">✓</span> Ingen förpliktelse</span>
-            </motion.div>
+            </div>
           </div>
 
           {/* Hero Visual Column */}

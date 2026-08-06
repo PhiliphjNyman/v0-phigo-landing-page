@@ -659,6 +659,35 @@
   animation: hero-fade-up 0.35s cubic-bezier(0.22, 0.61, 0.36, 1) 0.19s both;
 }
 
+/* G-fix, second pass. Measuring LCP candidates on the preview showed WHY the
+   H1 conversion only half-landed: Chrome excludes elements whose first paint
+   happens at opacity 0 (CSS-animated-in) from LCP candidacy entirely, so LCP
+   falls to whichever large element first paints VISIBLY — which was the next
+   framer mount animation in the hero (the mobile trust pill on /, the CTA row
+   on the product pages), still gated on JS hydration. Every above-fold hero
+   mount animation is therefore CSS now; delays continue each hero's cascade.
+   Scroll-reveals further down the pages keep framer as decided. */
+.product-hero-entrance-cta {
+  animation: hero-fade-up 0.35s cubic-bezier(0.22, 0.61, 0.36, 1) 0.26s both;
+}
+
+.product-hero-entrance-chips {
+  animation: hero-fade-up 0.35s cubic-bezier(0.22, 0.61, 0.36, 1) 0.33s both;
+}
+
+@keyframes hero-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.hero-entrance .hero-entrance__pill {
+  animation: hero-fade-in 0.6s ease-out 0.45s both;
+}
+
+.hero-entrance .hero-entrance__micro {
+  animation: hero-fade-in 0.6s ease-out 0.55s both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

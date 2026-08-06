@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, type Variants } from 'framer-motion'
+import type { Variants } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -8,12 +8,13 @@ import { CtaLink } from '@/components/cta-link'
 import { SectionEyebrow } from '@/components/section-eyebrow'
 import { cn } from '@/lib/utils'
 
-/* G-fix (LCP): the H1 and description are this hero's LCP elements and now
-   animate via CSS (globals.css .product-hero-entrance-*) so they paint before
-   JS hydrates. The framer revealStagger parent is gone as a consequence, so
-   the remaining framer children (eyebrow, CTAs, chips) carry their ORIGINAL
-   absolute stagger delays explicitly: 0.05 + 0.07×index with the shared
-   reveal timing (0.35s, same ease). Visual cascade is unchanged. */
+/* G-fix (LCP): every above-fold element in this hero animates via CSS
+   (globals.css .product-hero-entrance-*) so the hero paints before JS
+   hydrates — framer mount animations held the paint of whichever element
+   Chrome picked as LCP candidate until the bundle executed. The CSS classes
+   carry EXACTLY the timing the framer stagger had (reveal 0.35s, delays
+   0.05 + 0.07×index). Only the eyebrow stays framer (small, never an LCP
+   candidate) with its original absolute delay. Visual cascade unchanged. */
 const heroEase = [0.22, 0.61, 0.36, 1] as const
 const revealAt = (delay: number): Variants => ({
   hidden: { opacity: 0, y: 16 },
@@ -74,12 +75,7 @@ export function ProductHero({
           {description}
         </p>
 
-        <motion.div
-          variants={revealAt(0.26)}
-          initial="hidden"
-          animate="visible"
-          className="mt-10 flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row"
-        >
+        <div className="product-hero-entrance-cta mt-10 flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row">
           <Button
             asChild
             size="lg"
@@ -101,15 +97,10 @@ export function ProductHero({
               <CtaLink href={secondaryCta.href}>{secondaryCta.label}</CtaLink>
             </Button>
           )}
-        </motion.div>
+        </div>
 
         {chips && chips.length > 0 && (
-          <motion.div
-            variants={revealAt(0.33)}
-            initial="hidden"
-            animate="visible"
-            className="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs font-medium text-muted-foreground"
-          >
+          <div className="product-hero-entrance-chips mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs font-medium text-muted-foreground">
             {chips.map((chip, i) => (
               <span key={chip} className="flex items-center gap-4">
                 {i > 0 && (
@@ -123,7 +114,7 @@ export function ProductHero({
                 </span>
               </span>
             ))}
-          </motion.div>
+          </div>
         )}
       </div>
     </section>
