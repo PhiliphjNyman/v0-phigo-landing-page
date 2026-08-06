@@ -653,6 +653,18 @@ Varje gång Claude Code gör ett misstag, eller ni upptäcker något som borde g
   cta-anchors.mjs grindar numera alla tre vägarna, inkl. en blogg-artikels
   /#kontakt-länk.
 
+### [2026-08] pnpm 10 blockerar beroendens build-scripts som standard
+- **Vad hände:** Vercel-bygget (och lokala installer) visar "Ignored build
+  scripts: puppeteer, sharp, unrs-resolver". Ofarligt i bygget (dev-verktyg;
+  Vercels egen bildoptimering täcker sharp), men lokalt betyder det att
+  Playwright/puppeteer kan sakna nedladdad browser efter en färsk install.
+- **Varför:** pnpm 10 kör inte beroendens postinstall-scripts utan
+  uttryckligt godkännande (supply-chain-skydd).
+- **Regel:** Failar Playwright-/puppeteer-script med "browser not found"
+  efter färsk install: kör `pnpm approve-builds` och godkänn de berörda
+  paketen (eller `pnpm exec playwright install chromium`). Rör inte
+  Vercel-varningen, den är förväntad.
+
 ### [2026-08] Redigera aldrig UTF-8-filer via PowerShell-strängrundor
 - **Vad hände:** Under D-tillägget gjordes en textersättning i två filer via
   PowerShell (`Get-Content -Raw` → `.Replace()` → `Set-Content -Encoding

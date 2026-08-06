@@ -30,7 +30,9 @@ const contentSecurityPolicy = [
   "base-uri 'self'",
   "form-action 'self'",
   "object-src 'none'",
-  'upgrade-insecure-requests',
+  // NOTE: add 'upgrade-insecure-requests' back when this policy flips to
+  // enforcing Content-Security-Policy. In Report-Only mode the directive is
+  // ignored by design and Chrome logs a console error on every page view.
 ].join('; ')
 
 /** @type {import('next').NextConfig} */
