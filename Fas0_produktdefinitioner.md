@@ -225,6 +225,11 @@ Voiceflow-underlag OCH copy-referens.*
 "Svara på fem snabba frågor så visar vi vad som skulle ge ditt företag mest.
 Tar under en minut."
 
+**Interim-rad på guide-ytan (godkänd 2026-08-06, gäller TILLS Voiceflow-embedden
+ersätter den i fas 5):**
+CTA-knapp: "Hjälp mig välja" (leder till kontaktformuläret).
+Undertext: "Den smarta guiden öppnar snart. Så länge hjälper vi dig personligen."
+
 ### Frågor (knappar, ingen fritext förrän kontaktuppgifterna)
 
 1. **"Vad gör ditt företag?"**

@@ -89,7 +89,7 @@ export function ContactForm() {
         colors: ['#10b981', '#34d399', '#059669'],
       })
       setIsSubmitted(true)
-      toast.success('Analysförfrågan skickad!')
+      toast.success('Analysförfrågan skickad')
     } catch {
       toast.error('Kunde inte nå servern. Försök igen.')
     }
@@ -356,8 +356,8 @@ export function ContactForm() {
               </div>
               <h2 className="text-balance text-4xl font-black text-foreground mb-4">Tack för visat intresse</h2>
               <p className="text-pretty text-lg text-muted-foreground max-w-sm mb-10">
-                Vi har tagit emot din förfrågan och kommer att påbörja
-                analysen av din webbplats omedelbart.
+                Vi har tagit emot din förfrågan och återkommer inom 24 timmar
+                med en granskning och konkreta förslag.
               </p>
               <Button
                 onClick={() => setIsSubmitted(false)}
