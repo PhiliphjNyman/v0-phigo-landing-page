@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import { Header } from '@/components/header'
+import { Footer } from '@/components/footer'
 
 export const metadata: Metadata = {
   title: 'Integritetspolicy – PHIGO',
@@ -30,7 +32,10 @@ export const metadata: Metadata = {
 
 export default function IntegritetspolicyPage() {
   return (
-    <main className="mx-auto max-w-3xl px-4 py-24 lg:px-6 lg:py-32">
+    <>
+      <Header />
+      {/* id + tabIndex: target of the header skip link (see header.tsx) */}
+      <main id="innehall" tabIndex={-1} className="mx-auto max-w-3xl px-4 py-24 lg:px-6 lg:py-32">
       <div className="mb-12">
         <Link
           href="/"
@@ -171,7 +176,9 @@ export default function IntegritetspolicyPage() {
           </p>
         </Section>
       </article>
-    </main>
+      </main>
+      <Footer />
+    </>
   )
 }
 
