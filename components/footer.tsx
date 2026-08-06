@@ -1,9 +1,14 @@
 import { PhigoLogo } from '@/components/phigo-logo'
 import Link from 'next/link'
 
+/* Product links mirror the desktop nav order (Exempel, Hemsida,
+   AI-Receptionist, Chatbot) — the footer lagged behind fas 2 and only knew
+   about the hemsida product. */
 const footerLinks = [
   { label: 'Exempel', href: '/cases' },
   { label: 'Hemsida', href: '/hemsida' },
+  { label: 'AI-Receptionist', href: '/ai-receptionist' },
+  { label: 'Chatbot', href: '/chatbot' },
   { label: 'Så funkar det', href: '/hemsida#process' },
   { label: 'Om oss', href: '/#om-oss' },
   { label: 'Vanliga frågor', href: '/hemsida#faq' },
