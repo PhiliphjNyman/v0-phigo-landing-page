@@ -1,13 +1,28 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, type Variants } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { CtaLink } from '@/components/cta-link'
-import { reveal, revealStagger } from '@/lib/animations'
 import { SectionEyebrow } from '@/components/section-eyebrow'
 import { cn } from '@/lib/utils'
+
+/* G-fix (LCP): the H1 and description are this hero's LCP elements and now
+   animate via CSS (globals.css .product-hero-entrance-*) so they paint before
+   JS hydrates. The framer revealStagger parent is gone as a consequence, so
+   the remaining framer children (eyebrow, CTAs, chips) carry their ORIGINAL
+   absolute stagger delays explicitly: 0.05 + 0.07×index with the shared
+   reveal timing (0.35s, same ease). Visual cascade is unchanged. */
+const heroEase = [0.22, 0.61, 0.36, 1] as const
+const revealAt = (delay: number): Variants => ({
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.35, ease: heroEase, delay },
+  },
+})
 
 type ProductCta = {
   label: string
@@ -46,30 +61,23 @@ export function ProductHero({
         aria-hidden="true"
       />
 
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={revealStagger}
-        className="mx-auto flex max-w-3xl flex-col items-center px-4 text-center lg:px-8"
-      >
-        <SectionEyebrow>{label}</SectionEyebrow>
+      <div className="mx-auto flex max-w-3xl flex-col items-center px-4 text-center lg:px-8">
+        <SectionEyebrow variants={revealAt(0.05)} initial="hidden" animate="visible">
+          {label}
+        </SectionEyebrow>
 
-        <motion.h1
-          variants={reveal}
-          className="mt-5 text-balance text-fluid-h1 font-extrabold tracking-tight text-foreground"
-        >
+        <h1 className="product-hero-entrance-h1 mt-5 text-balance text-fluid-h1 font-extrabold tracking-tight text-foreground">
           {title}
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          variants={reveal}
-          className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground"
-        >
+        <p className="product-hero-entrance-p mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
           {description}
-        </motion.p>
+        </p>
 
         <motion.div
-          variants={reveal}
+          variants={revealAt(0.26)}
+          initial="hidden"
+          animate="visible"
           className="mt-10 flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row"
         >
           <Button
@@ -97,7 +105,9 @@ export function ProductHero({
 
         {chips && chips.length > 0 && (
           <motion.div
-            variants={reveal}
+            variants={revealAt(0.33)}
+            initial="hidden"
+            animate="visible"
             className="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs font-medium text-muted-foreground"
           >
             {chips.map((chip, i) => (
@@ -115,7 +125,7 @@ export function ProductHero({
             ))}
           </motion.div>
         )}
-      </motion.div>
+      </div>
     </section>
   )
 }

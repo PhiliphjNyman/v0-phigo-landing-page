@@ -36,16 +36,9 @@ export const revealStagger: Variants = {
   },
 }
 
-/* Hero-only (moment 1–2, shipped — do not fold into the reveal system). */
-export const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { ...springTransition, duration: 0.8 },
-  },
-}
-
+/* Hero-only (moment 1–2, shipped — do not fold into the reveal system).
+   fadeInUp was retired in fas 6 G: the hero CTA group now uses the CSS
+   entrance (.hero-entrance__cta) so it paints before hydration (LCP). */
 export const fadeIn: Variants = {
   hidden: { opacity: 0 },
   visible: {

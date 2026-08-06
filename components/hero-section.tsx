@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useAnimation, useInView, useReducedMotion } from 'framer-motion'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { fadeInUp, fadeIn } from '@/lib/animations'
+import { fadeIn } from '@/lib/animations'
 import { PhigoMetricsBlock } from '@/components/ui/phigo-metrics-block'
 import { SplitPaymentPromise } from '@/components/split-payment-promise'
 import { HeroMesh } from '@/components/hero-mesh'
@@ -133,13 +133,11 @@ export function HeroSection() {
               kontakt. Fast pris, live inom 14 dagar.
             </p>
 
-            {/* CTA group */}
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={fadeInUp}
-              className="mt-12 flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row lg:justify-start"
-            >
+            {/* CTA group — G-fix (LCP): the primary CTA is the homepage's
+                mobile LCP element, so the group animates via CSS
+                (.hero-entrance__cta) and paints before JS hydrates, like the
+                H1/p above it. Replaces the framer fadeInUp mount animation. */}
+            <div className="hero-entrance__cta mt-12 flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row lg:justify-start">
               <Button
                 asChild
                 size="lg"
@@ -161,7 +159,7 @@ export function HeroSection() {
                   <ChevronDown className="ml-2 size-5" aria-hidden="true" />
                 </a>
               </Button>
-            </motion.div>
+            </div>
 
             {/* Mobile trust promise — the split-payment line gets a place below
                 the CTAs on <lg (the desktop stat block that carries it is hidden

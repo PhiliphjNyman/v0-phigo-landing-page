@@ -450,6 +450,9 @@ Deploy-sekvens:
 
 ## 11. Medvetet UTANFÖR planen (backlog, rörs ej)
 
+- **JS-vikt startsidan (G-fynd 2):** en chunk bär framer + alla klientkomponenter
+  (~3s script-eval under mobil-throttle; / är tyngst även på desktop). Möjlig
+  åtgärd: dynamisk import av under-fold-sektioner. Efter lansering.
 - Demo-bild-generatorn (parkerad, väntar på 48h-testet)
 - Written Pathway-automatisering + IRL Pathway
 - Röstkloning som kundfeature (upsell)
