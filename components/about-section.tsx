@@ -46,7 +46,7 @@ export function AboutSection() {
             på Linköpings universitet. Det innebär människa-dator-interaktion:
             hur ögat rör sig över en sida, var uppmärksamheten fastnar,
             vad får någon att klicka istället för att lämna sidan.
-            Detta är varför PHIGO finns. Vi bygger inte hemsidor
+            Detta är varför PHIGO finns. Vi bygger ingenting
             på känsla, utan på hur perception och beslutsfattande
             faktiskt fungerar.
           </motion.p>

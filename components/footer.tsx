@@ -9,6 +9,7 @@ const footerLinks = [
   { label: 'Hemsida', href: '/hemsida' },
   { label: 'AI-Receptionist', href: '/ai-receptionist' },
   { label: 'Chatbot', href: '/chatbot' },
+  { label: 'Blogg', href: '/blogg' },
   { label: 'Så funkar det', href: '/hemsida#process' },
   { label: 'Om oss', href: '/#om-oss' },
   { label: 'Vanliga frågor', href: '/hemsida#faq' },
