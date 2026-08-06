@@ -35,7 +35,7 @@ const contactSchema = z.object({
   namn: z.string().min(2, 'Namn måste vara minst 2 tecken'),
   foretag: z.string().min(2, 'Företagsnamn måste vara minst 2 tecken'),
   epost: z.string().email('Ange en giltig e-postadress'),
-  hemsida: z.string().url('Ange en giltig URL').optional().or(z.literal('')),
+  hemsida: z.string().url('Ange en giltig webbadress').optional().or(z.literal('')),
   forbattra: z.string().min(1, 'Välj ett alternativ'),
   meddelande: z.string().min(10, 'Meddelandet måste vara minst 10 tecken'),
   gdpr: z.boolean().refine((v) => v === true, {
@@ -354,7 +354,7 @@ export function ContactForm() {
               <div className="size-20 rounded-full bg-primary/10 flex items-center justify-center mb-8">
                 <CheckCircle2 className="size-10 text-primary" aria-hidden="true" />
               </div>
-              <h2 className="text-balance text-4xl font-black text-foreground mb-4">Tack för visat intresse!</h2>
+              <h2 className="text-balance text-4xl font-black text-foreground mb-4">Tack för visat intresse</h2>
               <p className="text-pretty text-lg text-muted-foreground max-w-sm mb-10">
                 Vi har tagit emot din förfrågan och kommer att påbörja
                 analysen av din webbplats omedelbart.

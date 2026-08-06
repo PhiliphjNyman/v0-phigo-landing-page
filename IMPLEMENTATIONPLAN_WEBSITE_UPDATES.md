@@ -405,7 +405,16 @@ på kontaktformuläret, inte bara att klicket inte kraschar.
       H1 ×1/route, title/desc-längder övriga routes, lazy-loading. Väntar på Hugo:
       inga fynd berörde frusen copy. Väntar på deploy (G): Search Console,
       indexeringsstatus, riktig Rich Results-test, PSI
-- [ ] ⬜ **E.** Copy-granskning av all fas 2-copy (klarspråk, em-dash, Johnny-regeln)
+- [x] ✅ **E.** Copy-granskning (klarspråk, em-dash, Johnny-regeln, fas 0-spårbarhet).
+      Produktsidornas copy verbatim-verifierad mot fas 0 §1–5 (priser, minutpool,
+      halveringsvillkorets placering, FAQ 5/5, steg, boundaries). Inga em-dash i
+      synlig text (alla träffar = kodkommentarer; en-dash endast i metadata-titlar
+      och sifferintervall). 4 regelbrott fixade: "hosting"→"drift" ×2 i lib/faq.ts
+      (ordlistan), "URL"→"webbadress" i formulärvalidering, utropstecken bort ur
+      success-rubriken (hård regel). Flaggat utan källa (ej ändrat): guide-yttans
+      fallback-rad + "Hjälp mig välja", success-statens brödtext ("omedelbart" vs
+      24h-löftet), toast-utropstecknet, bloggens pedagogiska "SEO/Hosting"-
+      definitioner. Väntar på Hugo: inga hero-/metatitel-avvikelser hittade
 - [ ] ⬜ **G.** PageSpeed Insights mot preview-URL (kräver att Philip stänger av
       Deployment Protection)
 - [ ] ⬜ **H.** Slutgrind: visual-rules ALL PASS + build + tsc + Hugos mobilkoll på preview

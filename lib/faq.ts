@@ -29,7 +29,7 @@ export const faqs: FaqItem[] = [
     id: 'efter-lansering',
     question: 'Vad händer efter att sajten är live?',
     answer:
-      'Vi ser till att sajten alltid är uppe och funkar. Månadsavgiften på 399 kr/mån (exkl. moms) täcker hosting, säkerhet och mindre ändringar, som att uppdatera öppettider, priser eller kontaktuppgifter.',
+      'Vi ser till att sajten alltid är uppe och funkar. Månadsavgiften på 399 kr/mån (exkl. moms) täcker drift, säkerhet och mindre ändringar, som att uppdatera öppettider, priser eller kontaktuppgifter.',
   },
   {
     id: 'mobil',
@@ -53,7 +53,7 @@ export const faqs: FaqItem[] = [
     id: 'utan-manadsavtal',
     question: 'Kan jag köpa bara hemsidan utan månadsavtal?',
     answer:
-      'Ja, det går bra. Vi bygger sajten och överlämnar den till dig. Då ansvarar du själv för hosting, säkerhet och uppdateringar. De flesta av våra kunder väljer månadsavtalet för att slippa tänka på teknik, men det är inget krav.',
+      'Ja, det går bra. Vi bygger sajten och överlämnar den till dig. Då ansvarar du själv för drift, säkerhet och uppdateringar. De flesta av våra kunder väljer månadsavtalet för att slippa tänka på teknik, men det är inget krav.',
   },
 ]
 
