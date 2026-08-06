@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import { ArrowRight, Check, X, ShieldCheck } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { reveal, revealStagger } from '@/lib/animations'
@@ -183,10 +184,10 @@ export function OfferSection() {
               size="lg"
               className="h-auto min-h-12 w-full cursor-pointer whitespace-normal rounded-2xl bg-primary py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-[transform,background-color,box-shadow] duration-200 hover:scale-[1.02] hover:bg-primary/90 hover:shadow-2xl active:scale-[0.98] sm:min-h-14 sm:py-0 sm:text-base"
             >
-              <a href="/#kontakt">
+              <Link href="/#kontakt">
                 Se vad din hemsida missar, kostnadsfritt
                 <ArrowRight className="ml-2 size-5" aria-hidden="true" />
-              </a>
+              </Link>
             </Button>
 
             <p className="text-center text-xs text-muted-foreground">

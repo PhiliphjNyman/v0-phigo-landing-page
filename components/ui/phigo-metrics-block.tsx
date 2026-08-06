@@ -48,21 +48,21 @@ export function PhigoMetricsBlock() {
       >
         {metrics.map((metric) => (
           <motion.div key={metric.label} variants={fadeUp}>
-            <Card className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card/60 p-5 backdrop-blur-md transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-primary/60 dark:bg-card/66">
+            <Card className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card/60 p-5 backdrop-blur-md transition-[transform,border-color] duration-200 hover:-translate-y-1 hover:border-primary/60 dark:bg-card/66">
               <div className="absolute inset-0 bg-gradient-to-br from-foreground/[0.04] via-transparent to-transparent" />
               <div data-orb-protect className="relative z-10 space-y-2">
                 <span className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
                   {metric.label}
                 </span>
                 <div className="flex items-end gap-2">
-                  <span className="text-fluid-stat font-semibold tracking-tight text-foreground">
+                  <span className="text-fluid-stat font-semibold tabular-nums tracking-tight text-foreground">
                     {metric.value}
                   </span>
                   <span className="mb-0.5 text-xs font-medium text-muted-foreground">
                     {metric.delta}
                   </span>
                 </div>
-                <p className="text-xs leading-relaxed text-muted-foreground transition-colors duration-300 group-hover:text-primary">
+                <p className="text-xs leading-relaxed text-muted-foreground transition-colors duration-200 group-hover:text-primary">
                   {metric.description}
                 </p>
               </div>

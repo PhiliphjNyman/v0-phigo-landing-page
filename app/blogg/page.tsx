@@ -73,7 +73,7 @@ export default function BloggPage() {
                                                 <span>{post.readingTime} min</span>
                                             </div>
                                         </div>
-                                        <h2 className="flex-1 text-xl font-bold leading-snug text-foreground decoration-primary/30 decoration-2 transition-colors group-hover:underline">
+                                        <h2 className="flex-1 text-balance text-xl font-bold leading-snug text-foreground decoration-primary/30 decoration-2 transition-colors group-hover:underline">
                                             {post.title}
                                         </h2>
                                         <p className="mt-3 text-sm leading-relaxed text-muted-foreground/80 line-clamp-2">
@@ -116,7 +116,7 @@ export default function BloggPage() {
                                             Kommer snart
                                         </span>
                                     </div>
-                                    <h2 className="text-lg font-bold leading-snug text-muted-foreground">
+                                    <h2 className="text-balance text-lg font-bold leading-snug text-muted-foreground">
                                         {post.title}
                                     </h2>
                                     <p className="mt-3 text-sm leading-relaxed text-muted-foreground/60 line-clamp-2">

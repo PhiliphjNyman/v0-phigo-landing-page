@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { HeroOrb } from '@/components/hero-orb'
@@ -74,10 +75,10 @@ export function FinalCta() {
                 size="lg"
                 className="cursor-pointer rounded-xl bg-white px-8 text-anchor-ink shadow-lg shadow-black/25 hover:bg-white/90 hover:shadow-xl hover:shadow-black/30 focus-visible:border-white focus-visible:ring-white/70 active:scale-[0.98] transition-[transform,background-color,box-shadow] duration-200"
               >
-                <a href="/#kontakt">
+                <Link href="/#kontakt">
                   Skicka din sajt, vi visar vad du missar
                   <ArrowRight className="ml-1 size-4" aria-hidden="true" />
-                </a>
+                </Link>
               </Button>
               <p className="text-xs text-anchor-fg-muted">
                 Kostnadsfritt &middot; Svar inom 24h

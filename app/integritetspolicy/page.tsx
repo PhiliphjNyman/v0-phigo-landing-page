@@ -41,7 +41,7 @@ export default function IntegritetspolicyPage() {
       </div>
 
       <article className="prose prose-invert prose-emerald max-w-none">
-        <h1 className="text-4xl font-extrabold tracking-tight text-foreground mb-2">
+        <h1 className="text-balance text-4xl font-extrabold tracking-tight text-foreground mb-2">
           Integritetspolicy
         </h1>
         <p className="text-sm text-muted-foreground mb-12">
@@ -184,7 +184,7 @@ function Section({
 }) {
   return (
     <section className="mt-10">
-      <h2 className="text-xl font-bold tracking-tight text-foreground mb-4">
+      <h2 className="text-balance text-xl font-bold tracking-tight text-foreground mb-4">
         {title}
       </h2>
       <div className="space-y-3 text-muted-foreground leading-relaxed text-[0.95rem]">

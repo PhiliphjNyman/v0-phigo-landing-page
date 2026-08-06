@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Phone, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { CtaLink } from '@/components/cta-link'
 import { reveal, revealStagger } from '@/lib/animations'
 import { SectionEyebrow } from '@/components/section-eyebrow'
 
@@ -91,10 +92,10 @@ export function ProductDemoCta({
                       size="lg"
                       className="cursor-pointer rounded-xl bg-white px-8 text-anchor-ink shadow-lg shadow-black/25 hover:bg-white/90 hover:shadow-xl hover:shadow-black/30 focus-visible:border-white focus-visible:ring-white/70 active:scale-[0.98] transition-[transform,background-color,box-shadow] duration-200"
                     >
-                      <a href={button.href}>
+                      <CtaLink href={button.href}>
                         {button.label}
                         <ArrowRight className="ml-1 size-4" aria-hidden="true" />
-                      </a>
+                      </CtaLink>
                     </Button>
                   )}
                 </>

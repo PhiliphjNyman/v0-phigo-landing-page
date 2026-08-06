@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { reveal, revealStagger } from '@/lib/animations'
 import { SectionEyebrow } from '@/components/section-eyebrow'
 import { getCases } from '@/lib/cases'

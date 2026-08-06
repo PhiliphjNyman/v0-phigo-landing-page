@@ -363,7 +363,11 @@ copy-granskning mot klarspråkslistan respektive skillen `security-review`.
 - [x] ✅ **Verktyg** — `pnpm lint` lever igen (eslint 9 + eslint-config-next 16 i flat
       config), `ignoreBuildErrors` satt till false (bygget typkollar nu på riktigt),
       kommentar på next/font-raden. Lintens 5 kvarvarande errors är agendan för steg A
-- [ ] ⬜ **A.** `/baseline-ui` — AI-slop, spacing, typografi
+- [x] ✅ **A.** `/baseline-ui` — lintens 5 errors åtgärdade + AI-slop-svep. **Viktigast:**
+      verifieringen av `<a>`→`<Link>`-bytet avslöjade att plain `<a href="/#kontakt">`
+      ALDRIG landade på kontaktsektionen. Träffade produktsidornas hero-CTA och
+      demo-CTA (href kommer som prop, osynlig för eslint). Ny `<CtaLink>` + ny grind
+      `scripts/cta-anchors.mjs` (32 kombinationer: 8 CTA × mobil/desktop × ljust/mörkt)
 - [ ] ⬜ **B.** `/fixing-accessibility` — tangentbord, aria, fokus
 - [ ] ⬜ **C.** `/fixing-motion-performance` — animationsprestanda
 - [ ] ⬜ **D.** `/fixing-metadata` — SEO, OG, favicon + IndexNow-URL:er, sitemap, FAQPage

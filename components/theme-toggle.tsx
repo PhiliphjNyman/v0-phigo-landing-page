@@ -45,13 +45,13 @@ export function ThemeToggle({ className }: { className?: string }) {
         <span className="relative size-5" aria-hidden="true">
           <Sun
             className={cn(
-              'absolute inset-0 size-5 transition-[opacity,transform] duration-300 motion-reduce:transition-none',
+              'absolute inset-0 size-5 transition-[opacity,transform] duration-200 motion-reduce:transition-none',
               isDark ? 'rotate-0 opacity-100' : '-rotate-90 opacity-0',
             )}
           />
           <Moon
             className={cn(
-              'absolute inset-0 size-5 transition-[opacity,transform] duration-300 motion-reduce:transition-none',
+              'absolute inset-0 size-5 transition-[opacity,transform] duration-200 motion-reduce:transition-none',
               isDark ? 'rotate-90 opacity-0' : 'rotate-0 opacity-100',
             )}
           />

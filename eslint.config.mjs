@@ -11,6 +11,10 @@ const eslintConfig = [
       'next-env.d.ts',
       // Vendored shadcn/ui primitives — CLAUDE.md says do not touch these.
       'components/ui/**',
+      // ...except our own components that happen to live in that folder.
+      '!components/ui/phigo-metrics-block.tsx',
+      '!components/ui/counter.tsx',
+      '!components/ui/swipe-dots.tsx',
     ],
   },
   ...coreWebVitals,

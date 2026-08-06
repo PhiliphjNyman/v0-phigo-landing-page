@@ -3,7 +3,7 @@
 import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { ArrowUpRight, TrendingUp, Zap, Heart, Flame } from 'lucide-react'
+import { ArrowUpRight, TrendingUp, Zap, Heart, Flame, type LucideIcon } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { reveal, revealStagger } from '@/lib/animations'
 import { SectionEyebrow } from '@/components/section-eyebrow'
@@ -21,7 +21,7 @@ const accentMap = {
   cyan: 'group-hover:border-accent-process/30 text-accent-process bg-accent-process/10',
 }
 
-const iconMap: Record<string, any> = {
+const iconMap: Record<string, LucideIcon> = {
   'malte-orn': Flame,
   'leendekliniken': Heart,
   'andersson-el': Zap,
@@ -110,7 +110,7 @@ export function CaseStudies() {
                           {c.category}
                         </Badge>
                         {stat && (
-                          <div className={`flex items-center gap-1.5 text-sm font-bold transition-colors duration-500 ${accentStyles.split(' ')[1]}`}>
+                          <div className={`flex items-center gap-1.5 text-sm font-bold transition-colors duration-200 ${accentStyles.split(' ')[1]}`}>
                             <MetricIcon className="size-4" aria-hidden="true" />
                             <Counter
                               value={parseInt(stat.value.replace(/[^0-9]/g, ''))}

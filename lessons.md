@@ -623,3 +623,21 @@ Lägg till nya lessons efter varje korrigering.
 ## Att lägga till löpande
 
 Varje gång Claude Code gör ett misstag, eller ni upptäcker något som borde gjorts annorlunda — lägg till en ny lesson här. Över tid blir detta dokument er viktigaste kvalitetssäkring.
+
+### [2026-08] Cross-page ankarlänkar måste vara next/link, inte plain anchor
+- **Vad hände:** Vid steg A i fas 6 bytte vi tre `<a href="/#kontakt">` mot
+  `<Link>` för att tysta eslints `no-html-link-for-pages`. Verifieringen efteråt
+  visade att problemet var mycket större: plain `<a href="/#kontakt">` landade
+  ALDRIG på kontaktsektionen. Besökaren fick startsidan från toppen. Det drabbade
+  produktsidornas hero-CTA (`ProductHero`) och demo-CTA (`ProductDemoCta`) på
+  /hemsida, /ai-receptionist och /chatbot, alltså de primära köpknapparna.
+- **Varför:** Plain anchor ger full sidladdning. Webbläsarens fragment-scroll
+  sker tidigt i laddningen och överlever inte att startsidan sätter sig (hero
+  100vh, bilder, reveals). `next/link` navigerar klientsidigt och scrollar när
+  målet finns. Eslint-regeln såg inte de trasiga fallen eftersom href kommer in
+  som prop, inte som literal, så en grön lint gav falsk trygghet.
+- **Regel:** Interna mål (href som börjar med `/`) renderas alltid via
+  `<CtaLink>` (`components/cta-link.tsx`), som väljer `next/link` för interna
+  routes och plain anchor för tel:/mailto:/samma-sidas `#ankare`. Efter varje
+  ändring av en CTA: kör `pnpm exec node scripts/cta-anchors.mjs` mot en färsk
+  prod-server. Lita aldrig på en grön lint för länkar vars href är en prop.

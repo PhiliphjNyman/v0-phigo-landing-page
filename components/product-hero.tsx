@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { CtaLink } from '@/components/cta-link'
 import { reveal, revealStagger } from '@/lib/animations'
 import { SectionEyebrow } from '@/components/section-eyebrow'
 import { cn } from '@/lib/utils'
@@ -11,9 +12,10 @@ import { cn } from '@/lib/utils'
 type ProductCta = {
   label: string
   href: string
-  /* External / non-router targets (tel:, #anchor on another page) use a plain
-     anchor; internal routes still work with a plain anchor too, so we keep it
-     simple and let the href decide. */
+  /* Rendered through <CtaLink>, which picks next/link for internal routes and a
+     plain anchor for tel:/mailto:/same-page #anchors. Internal routes do NOT
+     work with a plain anchor: /#kontakt then full-loads and the browser's
+     fragment scroll is lost, landing the visitor at the top of the homepage. */
   icon?: LucideIcon
 }
 
@@ -75,10 +77,10 @@ export function ProductHero({
             size="lg"
             className="h-auto w-full cursor-pointer rounded-2xl bg-primary px-6 py-4 text-base font-semibold whitespace-normal text-center text-primary-foreground shadow-xl shadow-primary/20 transition-[transform,background-color,box-shadow] duration-200 hover:scale-[1.02] hover:bg-primary/90 hover:shadow-2xl hover:shadow-primary/30 active:scale-[0.98] sm:h-14 sm:w-auto sm:whitespace-nowrap sm:px-8 sm:py-0"
           >
-            <a href={primaryCta.href}>
+            <CtaLink href={primaryCta.href}>
               {primaryCta.label}
               <PrimaryIcon className="ml-2 size-5 shrink-0" aria-hidden="true" />
-            </a>
+            </CtaLink>
           </Button>
 
           {secondaryCta && (
@@ -88,7 +90,7 @@ export function ProductHero({
               size="lg"
               className="h-14 cursor-pointer text-base font-medium text-muted-foreground hover:bg-foreground/5 hover:text-foreground"
             >
-              <a href={secondaryCta.href}>{secondaryCta.label}</a>
+              <CtaLink href={secondaryCta.href}>{secondaryCta.label}</CtaLink>
             </Button>
           )}
         </motion.div>

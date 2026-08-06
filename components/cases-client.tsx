@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowUpRight, TrendingUp, Zap, Heart } from 'lucide-react'
+import { ArrowUpRight, TrendingUp, Zap, Heart, type LucideIcon } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Counter } from '@/components/ui/counter'
 import { Case } from '@/lib/cases'
@@ -15,7 +15,7 @@ const accentMap = {
     cyan: 'group-hover:border-accent-process/30 text-accent-process bg-accent-process/10',
 }
 
-const iconMap: Record<string, any> = {
+const iconMap: Record<string, LucideIcon> = {
     'leendekliniken': Heart,
     'andersson-el': Zap,
 }
@@ -65,7 +65,7 @@ export function CasesClient({ allCases }: { allCases: Case[] }) {
                                                 {c.category}
                                             </Badge>
                                             {stat && (
-                                                <div className={`flex items-center gap-1.5 text-sm font-bold transition-colors duration-500 ${accentStyles.split(' ')[1]}`}>
+                                                <div className={`flex items-center gap-1.5 text-sm font-bold transition-colors duration-200 ${accentStyles.split(' ')[1]}`}>
                                                     <MetricIcon className="size-4" aria-hidden="true" />
                                                     <Counter
                                                         value={parseInt(stat.value.replace(/[^0-9]/g, ''))}

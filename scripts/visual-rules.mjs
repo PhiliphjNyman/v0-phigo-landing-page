@@ -103,7 +103,7 @@ const browser = await chromium.launch()
 let anyFail = false
 const mark = (ok) => (ok ? 'PASS' : 'FAIL')
 
-async function runPass(page, w, h, tag) {
+async function runPass(page, _w, _h, _tag) {
   let localOrbs = 0
   for (const sel of CONTAINERS) {
     await page.evaluate((s) => document.querySelector(s)?.scrollIntoView({ block: 'center', behavior: 'instant' }), sel)
@@ -111,7 +111,7 @@ async function runPass(page, w, h, tag) {
     const data = await page.evaluate(collectFor, sel)
     if (!data || data.orbs.length === 0) continue
     const rows = analyze(data)
-    console.log(`  ${sel} — ${rows.length} orb(s)`) // eslint-disable-line
+    console.log(`  ${sel} — ${rows.length} orb(s)`)
     for (const row of rows) {
       localOrbs++
       if (!row.pass) anyFail = true

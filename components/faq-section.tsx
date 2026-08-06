@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import {
   Accordion,
   AccordionContent,
@@ -127,7 +128,7 @@ export function FaqSection() {
           <div className="inline-flex items-center gap-3 rounded-full border border-border bg-background px-6 py-3 text-sm font-medium text-muted-foreground">
             <HelpCircle className="size-4 text-primary" aria-hidden="true" />
             Fortfarande osäker?
-            <a href="/#kontakt" className="font-bold text-primary hover:underline">Chatta med oss</a>
+            <Link href="/#kontakt" className="font-bold text-primary hover:underline">Chatta med oss</Link>
           </div>
         </motion.div>
       </div>

@@ -97,7 +97,7 @@ export function Header() {
                 {link.label}
                 <span
                   className={cn(
-                    'absolute -bottom-1 left-0 h-px w-full bg-primary transition-transform duration-300 origin-left',
+                    'absolute -bottom-1 left-0 h-px w-full bg-primary transition-transform duration-200 origin-left',
                     active ? 'scale-x-100' : 'scale-x-0',
                   )}
                 />
