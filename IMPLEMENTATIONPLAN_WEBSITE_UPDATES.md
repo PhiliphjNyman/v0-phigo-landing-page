@@ -39,7 +39,7 @@ briefingen** för produktombyggnaden; fas 2 är alltså sanktionerad, inget utö
 | 2 | Produktombyggnad | Produktsidor, navigering, guide-yta | ✅ KLAR (delstatus i §6) |
 | 3 | Moment 5 + 6 | Swipe-kort + typografisk skärpa (sajtbrett inkl. nya sidor) | ✅ KLAR |
 | 4 | Moment 7 + 8 | Viewport/a11y + slutmätning | ✅ KLAR (M7 godkänd; M8 mätt: CLS 0 + LCP<2s + R3, formell Lighthouse vid deploy) |
-| 5 | Integrationer | Chatbot-widget, guide-embed, receptionist-nummer | 🔄 KÖRS PÅ BRANCHEN före merge (omsekvenserat 2026-08-06, se §9) |
+| 5 | Integrationer | Chatbot-widget, guiden (nativ), receptionist-nummer | 🔄 KÖRS PÅ BRANCHEN före merge (omsekvenserat 2026-08-06; guiden nativ sedan 2026-08-10, se §9 + §9.1) |
 | 6 | Audits + deploy | Skills-audits, push-OK, prod-verifiering | 🔄 F–H ✅ (H godkänd 2026-08-06); merge väntar på fas 5:s hårda krav |
 
 Branch: `feature/scroll-liv-och-diagnos`. Inget pushas utan uttryckligt OK.
@@ -334,9 +334,12 @@ på riktig mobil.
 > 2. **Receptionist-numret live** på /ai-receptionist
 > 3. **CSP flippas** Report-Only → skarp när Voiceflow-konsolen är tyst
 >
-> **MJUKT krav (öppen beslutspunkt):** guide-embedden (femfrågorsflödet →
-> HubSpot-lead). Interim-fallbacken får lanseras; Hugo avgör när han ser hur
-> långt Voiceflow-bygget kommit.
+> **NYTT BESLUT 2026-08-10 — guiden byggs NATIVT, inte i Voiceflow.** Alla
+> frågor, svarsalternativ och utfall är fasta, alltså finns ingen AI-uppgift.
+> Nativt bygge ger egen design, mörkt läge, inga externa script, ingen CSP-flipp,
+> ingen tredje prenumeration, och täcks av befintliga grindar. Guide-embedden
+> utgår därmed som Voiceflow-steg och blir ett eget nativt byggsteg (§9.1).
+> Sanningen för frågor, logik och copy är `Fas0_produktdefinitioner.md` §5.
 >
 > **Merge-grind (ersätter ny full H):** kort om-verifiering på preview efter
 > embedden — ny PSI (mobil / + /hemsida), tyst konsol (noll CSP-violations →
@@ -346,8 +349,7 @@ på riktig mobil.
 
 - [ ] **Chatbot-widget:** Voiceflow-snippet på sajten. Laddas efter interaktiv —
       får inte påverka LCP. Verifiera moment 8-siffrorna igen efter inkoppling.
-- [ ] **Guide-embed:** Voiceflow-flödet in i guide-ytan (fas 2). Utfall enligt
-      Johnny-regeln; svar + kontaktuppgifter → HubSpot som lead med valen ifyllda.
+- [ ] **Guiden (nativt bygge, se §9.1)** — ersätter det gamla guide-embed-steget.
 - [ ] **Receptionist-numret** live på AI-receptionistytan (samma som visitkorten).
 
       **Förkrav från `RECEPTIONIST_SYSTEMRAPPORT.md` innan numret publiceras:**
@@ -360,8 +362,39 @@ på riktig mobil.
       - [ ] Demo-inramning på `/ai-receptionist`: numret är den skarpa
             receptionisten, bokning innebär att Hugo ringer upp den tiden
 
-Om Voiceflow-delarna inte är klara blockerar de INTE fas 6 — guide-ytan skeppar
-med telefon/mejl-CTA och embedden görs i efterhand (femminutersjobb).
+Om Voiceflow-delarna inte är klara blockerar de INTE fas 6. Guiden är sedan
+2026-08-10 nativ och därmed oberoende av Voiceflow.
+
+### 9.1 Guiden "Hitta rätt lösning" — nativt bygge 🔄 PÅGÅR
+
+Deterministiskt frågeträd i Next.js. Ersätter interim-CTA:n i
+`components/guide-section.tsx`. Ingen ny extern host, alltså ingen påverkan på
+CSP-flippen. Inga nya beroenden.
+
+**Arkitektur (godkänd av Hugo 2026-08-10):**
+- `lib/guide.ts` — frågor, alternativ, ekofraser, utfallsordning, resolver.
+  Ren logik utan JSX, svaren lagras som id:n (aldrig etiketter) så servern kan
+  validera med `z.enum()` och HubSpot-kopplingen läser samma id:n i fas 5.
+- `components/guide/` — flow, frågesteg, utfallskort, kontaktsteg.
+- **Leverans via BEFINTLIG `/api/contact`** — ingen ny endpoint. Routen grenar
+  på `source`; kontaktformuläret skickar inget `source` och rörs därför inte.
+  Två godkända ändringar: rate limit-nyckeln blir `${ip}:${source}` (en
+  guide-testare får inte bränna formulärets fem försök) och `replyTo` utelämnas
+  när e-post saknas (telefonnumret hamnar i ämnesraden i stället).
+
+**Delstatus:**
+- [x] ✅ **G1. Undersök-först** — arkitekturrapport + 8 öppna frågor, alla
+      besvarade av Hugo 2026-08-10 (fas 0 §5 uppdaterad i samma svep)
+- [ ] **G2. Logiklager + matrisgrind** — `lib/guide.ts` + `scripts/guide-matrix.mjs`
+- [ ] **G3. Utfallscopy** — utkast ur fas 0 §2–4, Hugo signerar före commit
+- [ ] **G4. Komponenter** — flow, steg, utfall, kontaktsteg
+- [ ] **G5. Endpoint-gren** — guide-schema + mejlrendering i `/api/contact`
+- [ ] **G6. Beteendegrind** — `scripts/guide-flow.mjs` (CLS 0, konstant
+      stegshöjd, fokusflytt, tillbaka behåller svar)
+
+**Grind för varje G-commit** = fas 6:s stående grind (`pnpm lint` + `tsc --noEmit`
++ `pnpm build` + `visual-rules.mjs` + `cta-anchors.mjs`) plus de två nya
+guide-scripten.
 
 ---
 
@@ -495,6 +528,11 @@ Deploy-sekvens (OMSEKVENSERAD 2026-08-06 — fas 5 FÖRE merge, se §9):
   title/description ska bära SAMMA formulering av vad PHIGO är (webbyrå vs
   allt-i-ett). Även då: footer-länkarna "Så funkar det"/"Vanliga frågor"
   (→ /hemsida#...) och /blogg-descriptionen omprövas.
+- **Svarslöftet: "en arbetsdag" vs "24 timmar"** (beslutspunkt, bokförd
+  2026-08-10). Guiden lovar "inom en arbetsdag" (fas 0 §5), kontaktformuläret
+  "inom 24 timmar" (CLAUDE.md). Båda är låsta i sina egna källor och en besökare
+  kan se båda på startsidan. Ingetdera ändras nu. Hugo tar formuleringen med
+  positioneringspaketet ovan.
 - **Branded 404-sida** (custom not-found.tsx med copy + CTA). Efter lansering.
 - Demo-bild-generatorn (parkerad, väntar på 48h-testet)
 - Written Pathway-automatisering + IRL Pathway
@@ -511,6 +549,6 @@ Deploy-sekvens (OMSEKVENSERAD 2026-08-06 — fas 5 FÖRE merge, se §9):
 |---|---|
 | Fas 2 sväller | Fas 0 låser scopet; en skärmhöjd/produkt som riktmärke; inga bonus-sektioner (hård regel 1) |
 | Moment 4-refaktorn drar ut | Om tidsnöd: fas 2 krymper till produktöversikt på startsidan + EN produktyta (AI-receptionisten, den har demo-numret); övriga produkter blir kort med CTA |
-| Voiceflow ej klar | Guide-ytan skeppar med telefon/mejl-CTA; embed i efterhand (fas 5 blockerar aldrig fas 6) |
+| Voiceflow ej klar | Gäller nu bara chatbot-widgeten (fas 5 blockerar aldrig fas 6). Guiden är nativ sedan 2026-08-10 och berörs inte |
 | Copy skrivs på känsla | Förbjudet (6.3) — all copy från fas 0, annars STANNA och fråga |
 | Sista-kvällen-deploy | Frysen är hård: hellre en sektion mindre än trasig prod |

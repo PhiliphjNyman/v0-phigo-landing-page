@@ -88,6 +88,10 @@ export default function IntegritetspolicyPage() {
             <li>Meddelande</li>
           </ul>
           <p>
+            Vi samlar även in namn, kontaktuppgifter och dina svar när du
+            använder guiden &quot;Hitta rätt lösning&quot; på sajten.
+          </p>
+          <p>
             Vi samlar inte in fler uppgifter än vad som krävs för att kunna
             besvara din förfrågan.
           </p>

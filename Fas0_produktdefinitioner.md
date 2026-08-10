@@ -217,18 +217,15 @@ omfattningsklausulen i avtalet räcker. *Internt:* grundarpris 3 000 + 495.
 
 ## 5. Guiden "Hitta rätt lösning" (LÅST)
 
-*Byggs i Voiceflow (fas 5-embed). Fas 2 bygger endast den designade ytan med
-intro-copy + CTA enligt implementationsplanen §6.2. Frågor och utfall nedan är
-Voiceflow-underlag OCH copy-referens.*
+*Byggs NATIVT i Next.js som ett deterministiskt frågeträd — inte i Voiceflow.
+Beslut 2026-08-10: alla frågor, svarsalternativ och utfall är fasta, alltså finns
+ingen AI-uppgift. Nativt bygge ger egen design, mörkt läge, inga externa script,
+ingen CSP-flipp, ingen tredje prenumeration, och täcks av befintliga grindar
+(visual-rules, cta-anchors). Ersätter interim-raden i guide-ytan.*
 
-**Intro på guide-ytan (fas 2-copy):**
+**Intro på guide-ytan (fas 2-copy, oförändrad):**
 "Svara på fem snabba frågor så visar vi vad som skulle ge ditt företag mest.
 Tar under en minut."
-
-**Interim-rad på guide-ytan (godkänd 2026-08-06, gäller TILLS Voiceflow-embedden
-ersätter den i fas 5):**
-CTA-knapp: "Hjälp mig välja" (leder till kontaktformuläret).
-Undertext: "Den smarta guiden öppnar snart. Så länge hjälper vi dig personligen."
 
 ### Frågor (knappar, ingen fritext förrän kontaktuppgifterna)
 
@@ -262,6 +259,10 @@ Undertext: "Den smarta guiden öppnar snart. Så länge hjälper vi dig personli
    → Volym mot 300-minuterspoolen. "Fler än 15" flaggas internt för
    anpassat pris-samtal.
 
+**Progressräknare (beslut 2026-08-10):** introt lovar fem frågor, alltså räknas
+fråga 1 till 5 som "Fråga X av 5" och fråga 6 renderas som "Sista frågan" utan
+nummer. Nämnaren ändras aldrig mitt i flödet.
+
 ### Utfallslogik
 
 | Signal | Rekommendation |
@@ -272,6 +273,14 @@ Undertext: "Den smarta guiden öppnar snart. Så länge hjälper vi dig personli
 | Nöjd med sajten + "slippa samma frågor" | Chatbot (receptionist som rad två) |
 | Vård/behandling + receptionist-signal | Receptionist-utfall med mjukare löfte: "vi ringer upp och ser om det passar din verksamhet" |
 
+**"Missar samtal"** = fråga 3 är Röstbrevlåda, Det ringer bara ut, eller Kollega
+eller familj svarar ibland. **Deterministisk ordning:** raderna prövas uppifrån
+och ned, första träff vinner. Vård/behandling-raden är ett *överlägg* — den byter
+löftesformulering på receptionist-utfall, den ändrar inte vilken produkt som
+rekommenderas. Ingen kombination får sakna utfall: faller inget in
+(t.ex. nöjd med sajten + svarar nästan alltid) gäller **fallback = Chatbot**,
+med hemsidan aldrig påtvingad den som sagt sig nöjd.
+
 ### Utfallsmall (Johnny-regeln: UTFALL + pris + CTA, aldrig spec/funktionslista)
 
 Exempel, Allt-i-ett:
@@ -281,20 +290,55 @@ Exempel, Allt-i-ett:
 > sidan. En receptionist som tar samtalen du missar och bokar in kunderna i
 > din kalender."
 > **"Från 14 995 kr att komma igång, sedan 2 295 kr i månaden."**
-> "Lämna namn och nummer så ringer vi upp inom en arbetsdag och berättar exakt
+> "Lämna dina uppgifter så hör vi av oss inom en arbetsdag och berättar exakt
 > hur det skulle fungera för [bransch från fråga 1]."
-> [Namn] [Telefon] [E-post (valfritt)] → knapp: **"Ja, ring mig"**
+> [Namn] [Telefon] [E-post] → **"Ja, ring mig"** · sekundärt: **"Maila mig i stället"**
 
 Singelprodukt-utfall: samma skelett med respektive produkts pitch + pris ur
 avsnitt 2–4. Alltid "från"-pris. Branschekot från fråga 1 alltid med i sista raden.
 
-### Lead till HubSpot (fas 5)
-Kontakt + affär skapas med: Lead-kategori (fråga 1), samtliga svar som
-anteckning, källa "Guiden", pipeline-stage "Guide-lead".
+### Kontaktsteget (LÅST 2026-08-10)
 
-### Avslut utan kontaktuppgifter
-"Inga problem. Ring oss på [PHIGO-nummer] eller testa vår receptionist direkt:
-[receptionist-numret]."
+Två likvärdiga vägar, inget mörkt mönster som döljer den ena:
+
+- **"Ja, ring mig"** (primär) → telefon obligatoriskt, e-post frivilligt
+- **"Maila mig i stället"** (sekundär, tydligt synlig) → e-post obligatoriskt,
+  telefon frivilligt
+
+Namn alltid obligatoriskt. Valet sparas som **Kontaktsätt: ring / mejl** i
+HubSpot och **är ett löfte** — den som valt mejl rings inte upp först.
+
+E-postfältet **visas i båda vägarna men krävs bara i mejl-vägen** (förtydligat
+2026-08-10). Skälet att alltid visa det: HubSpot deduplicerar kontakter på
+e-postadress, och utan adress blir samma person dubbletter över chatt, formulär
+och guide. Skälet att ändå inte kräva det i ring-vägen: ett obligatoriskt fält i
+sista steget kostar leads, och uteblivna leads är ett större problem än
+dubbletter i HubSpot.
+
+**Samtycke (beslut 2026-08-10):** samma obligatoriska kryssruta som
+kontaktformuläret, mot /integritetspolicy. Integritetspolicyn nämner guiden
+uttryckligen.
+
+**Bekräftelse efter inskick** speglar valet ordagrant:
+ring → "Vi ringer upp dig inom en arbetsdag."
+mejl → "Vi mejlar dig inom en arbetsdag."
+
+### Lead till HubSpot (fas 5)
+Kontakt + affär skapas med: Lead-kategori (fråga 1), Kontaktsätt (ring/mejl),
+samtliga svar som anteckning, källa "Guiden", pipeline-stage "Guide-lead".
+Fram tills HubSpot-kopplingen finns levereras guide-leads via samma väg som
+kontaktformuläret (mejl till info@phigo.se) med alla svar i klartext.
+
+### Avslut utan kontaktuppgifter (omskriven 2026-08-10)
+
+Det finns inget publikt PHIGO-nummer, så utgången går via mejl. Ingen
+platshållare får stå i copyn.
+
+Tills receptionistnumret är live:
+"Inga problem. Mejla oss på info@phigo.se så hör vi av oss."
+
+När receptionistnumret är live (fas 5) läggs en andra mening till:
+"Vill du hellre höra hur receptionisten låter? Ring [receptionist-numret]."
 
 ---
 
