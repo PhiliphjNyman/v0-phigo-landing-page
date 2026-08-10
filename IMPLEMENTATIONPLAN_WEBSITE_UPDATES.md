@@ -365,7 +365,7 @@ på riktig mobil.
 Om Voiceflow-delarna inte är klara blockerar de INTE fas 6. Guiden är sedan
 2026-08-10 nativ och därmed oberoende av Voiceflow.
 
-### 9.1 Guiden "Hitta rätt lösning" — nativt bygge 🔄 PÅGÅR
+### 9.1 Guiden "Hitta rätt lösning" — nativt bygge ✅ BYGGD (väntar på Hugos ögon + skarp mejlverifiering)
 
 Deterministiskt frågeträd i Next.js. Ersätter interim-CTA:n i
 `components/guide-section.tsx`. Ingen ny extern host, alltså ingen påverkan på
@@ -386,15 +386,38 @@ CSP-flippen. Inga nya beroenden.
 - [x] ✅ **G1. Undersök-först** — arkitekturrapport + 8 öppna frågor, alla
       besvarade av Hugo 2026-08-10 (fas 0 §5 uppdaterad i samma svep)
 - [ ] **G2. Logiklager + matrisgrind** — `lib/guide.ts` + `scripts/guide-matrix.mjs`
-- [ ] **G3. Utfallscopy** — utkast ur fas 0 §2–4, Hugo signerar före commit
-- [ ] **G4. Komponenter** — flow, steg, utfall, kontaktsteg
-- [ ] **G5. Endpoint-gren** — guide-schema + mejlrendering i `/api/contact`
-- [ ] **G6. Beteendegrind** — `scripts/guide-flow.mjs` (CLS 0, konstant
-      stegshöjd, fokusflytt, tillbaka behåller svar)
+- [x] ✅ **G3. Utfallscopy** — signerad av Hugo 2026-08-10. Allt-i-ett verbatim ur
+      §5, övriga tre omskrivna ur §2–4:s Outcome-stycken. Halveringsraden är en
+      femte del ENDAST i hemsideutfallet (Hugos beslut: guiden är säljögonblicket
+      där priset syns först). Rad två hänger på regel-id, inte på utfall, eftersom
+      rad 4 och fallbacken delar utfall men inte människa
+- [x] ✅ **G4. Komponenter** — `guide-flow` (tillstånd, progress, tillbaka, fokus),
+      `guide-question-step`, `guide-outcome-step`. Utfall och kontaktsteg delar
+      kort enligt §5:s mall. Höjdgolvet `.guide-step-shell` är MÄTT till 26rem
+- [x] ✅ **G5. Endpoint-gren** — `/api/contact` grenar på `?source=guide` (i
+      query-strängen så rate limiten kan hinkas per källa FÖRE kroppen parsas).
+      Formulärets gren orörd. Svaren valideras med `z.enum()` mot `lib/guide.ts`
+- [x] ✅ **G6. Beteendegrind** — `scripts/guide-flow.mjs`, 294 kontroller gröna:
+      CLS 0 på alla vägar, konstant stegshöjd 416px, fokusflytt vid stegbyte,
+      tillbaka behåller svar, fråga 6 faller bort vid omval, fokusring 3px,
+      Enter väljer. Fann höjdgolvsbuggen (402 mot 384 på desktop)
 
 **Grind för varje G-commit** = fas 6:s stående grind (`pnpm lint` + `tsc --noEmit`
 + `pnpm build` + `visual-rules.mjs` + `cta-anchors.mjs`) plus de två nya
 guide-scripten.
+
+**Kvar innan guiden kan kallas klar:**
+- [ ] **Skarp mejlverifiering på preview.** Lokalt går guide-leadet hela vägen
+      genom validering och mejlrendering men fastnar på Resend med
+      "API key is invalid". Kontaktformuläret failar IDENTISKT på samma server,
+      alltså är den lokala nyckeln död och det är ingen regression. Att leadet
+      faktiskt landar i info@phigo.se måste verifieras på preview, precis som
+      formuläret verifierades i steg H.
+- [ ] **Hugos ögon** på riktig mobil (guiden är ny yta, mobilkänslan är hans
+      grind enligt §3).
+- [ ] **Nya strängar utan fas 0-källa** som behöver Hugos ord eller ett OK:
+      hjälptexten under telefon/e-post, "Jag vill inte lämna mina uppgifter nu",
+      "Tack"-rubriken i bekräftelsen, "Tillbaka", samt valideringsmeddelandena.
 
 ---
 

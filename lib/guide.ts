@@ -247,6 +247,114 @@ export function resolveOutcome(answers: GuideAnswers): ResolvedOutcome {
   }
 }
 
+/* --------------------------------------------------------- utfallscopy ----- */
+
+/**
+ * Utfallstexterna. Skelettet är fas 0 §5:s Johnny-regel: UTFALL + pris + CTA,
+ * aldrig en spec- eller funktionslista. Allt-i-ett står ordagrant i §5; de tre
+ * andra är omskrivningar ur §2 till §4:s låsta Outcome-stycken, signerade av
+ * Hugo 2026-08-10.
+ */
+export interface OutcomeCopy {
+  /** Rubrikraden: "Det här skulle ge dig mest: ..." */
+  heading: string
+  /** Utfallet i klarspråk. Aldrig funktioner, alltid vad kunden får ut. */
+  body: string
+  /** Alltid "från"-pris (fas 0 §5). */
+  price: string
+  /**
+   * Halveringsvillkoret. Finns ENDAST på hemsidan: chatbot, receptionist och
+   * paket faktureras fullt vid start, så raden får aldrig visas vid dem
+   * (fas 0 §1, *Internt*). Grinden bevisar att den inte läcker.
+   */
+  trust?: string
+}
+
+export const OUTCOME_COPY: Record<OutcomeId, OutcomeCopy> = {
+  'allt-i-ett': {
+    heading: 'Det här skulle ge dig mest: en digital reception som jobbar dygnet runt.',
+    body:
+      'En hemsida som får besökare att höra av sig. En chatt som svarar direkt på ' +
+      'sidan. En receptionist som tar samtalen du missar och bokar in kunderna i ' +
+      'din kalender.',
+    price: 'Från 14 995 kr att komma igång, sedan 2 295 kr i månaden.',
+  },
+  hemsida: {
+    heading: 'Det här skulle ge dig mest: en hemsida som får folk att höra av sig.',
+    body:
+      'Du svarar redan i telefon när det ringer. Det som saknas är att fler hittar ' +
+      'dig och att de som hittar dig faktiskt tar kontakt. Vi bygger en sajt som ' +
+      'visar vad du gör och gör det enkelt att höra av sig, live inom 14 dagar.',
+    price: 'Från 8 000 kr att komma igång, sedan 399 kr i månaden.',
+    trust: 'Betala hälften nu, resten först när du är nöjd.',
+  },
+  'ai-receptionist': {
+    heading: 'Det här skulle ge dig mest: en receptionist som svarar när du inte hinner.',
+    body:
+      'Sluta tappa kunder för att du inte kan svara. Varje samtal besvaras direkt, ' +
+      'även när du står mitt i ett jobb, har stängt eller är ledig. Bokningar hamnar ' +
+      'i din kalender och du får besked om varje samtal.',
+    price: 'Från 7 000 kr att komma igång, sedan 1 495 kr i månaden.',
+  },
+  chatbot: {
+    heading: 'Det här skulle ge dig mest: en chatt som svarar direkt på din sida.',
+    body:
+      'Besökare som får svar direkt stannar kvar. Chatten svarar på vanliga frågor ' +
+      'om priser, öppettider och tjänster, hjälper besökaren rätt och ser till att ' +
+      'du får namn och nummer på den som vill bli kontaktad.',
+    price: 'Från 4 000 kr att komma igång, sedan 695 kr i månaden.',
+  },
+}
+
+/**
+ * "Rad två" hänger på REGELN, inte på utfallet. Rad 4 och fallbacken ger båda
+ * chatbot men är olika människor: rad 4 vill slippa samma frågor, fallbacken är
+ * nöjd med sajten och svarar själv i telefon. Att erbjuda den senare en
+ * receptionist som nästa steg vore fel. Fas 0 §5 anger rad två endast för rad 2
+ * och rad 4; övriga rader har ingen.
+ */
+export const SECONDARY_LINE: Record<string, string | null> = {
+  'r1-ingen-gammal-missar': null,
+  'r2-ingen-gammal-svarar':
+    'Vill du dessutom slippa svara på samma frågor om och om igen finns chatten som nästa steg.',
+  'r3-nojd-missar': null,
+  'r4-nojd-samma-fragor':
+    'Är det telefonen som ringer obesvarad är receptionisten nästa steg.',
+  'fallback-chatbot': null,
+}
+
+/** Standard-CTA. Branschekot ligger alltid sist (fas 0 §5). */
+export function ctaLine(echo: string): string {
+  return `Lämna dina uppgifter så hör vi av oss inom en arbetsdag och berättar exakt hur det skulle fungera ${echo}.`
+}
+
+/**
+ * Vård-överläggets CTA. Byter löftesformulering, aldrig produkt eller pris.
+ * Ur fas 0 §3: "vi ringer upp och ser om det passar din verksamhet."
+ */
+export const CARE_CTA_LINE =
+  'Lämna dina uppgifter så ringer vi upp och ser om det passar din verksamhet.'
+
+export interface PresentedOutcome extends ResolvedOutcome, OutcomeCopy {
+  /** Null när regeln inte har någon rad två. */
+  secondary: string | null
+  /** Färdig sista rad, med överlägget redan applicerat. */
+  cta: string
+}
+
+/** Utfallet färdigt att rendera. Komponenten behöver inget mer än det här. */
+export function presentOutcome(answers: GuideAnswers): PresentedOutcome {
+  const resolved = resolveOutcome(answers)
+  const copy = OUTCOME_COPY[resolved.outcomeId]
+
+  return {
+    ...resolved,
+    ...copy,
+    secondary: SECONDARY_LINE[resolved.ruleId] ?? null,
+    cta: resolved.careOverlay ? CARE_CTA_LINE : ctaLine(resolved.echo),
+  }
+}
+
 /* ---------------------------------------------------------- navigering ----- */
 
 /** Frågorna som ingår i vägen givet svaren hittills, i ordning. */

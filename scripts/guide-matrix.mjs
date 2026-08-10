@@ -23,6 +23,11 @@ import {
   KONTAKTSATT_LABEL,
   KONTAKTSATT_BEKRAFTELSE,
   NUMBERED_QUESTIONS,
+  OUTCOME_COPY,
+  SECONDARY_LINE,
+  CARE_CTA_LINE,
+  ctaLine,
+  presentOutcome,
   resolveOutcome,
   visibleQuestions,
   clearOrphanedAnswers,
@@ -259,16 +264,112 @@ const echoProblems = OPTION_IDS.q1.filter((id) => !BRANSCH_EKO[id])
 check('Varje bransch har ett ekofras', echoProblems.length === 0, echoProblems.join(', '))
 
 /* ---------------------------------------------------------------------------
+   7b. Utfallscopyn
+   ------------------------------------------------------------------------ */
+
+/* Priserna ur fas 0 §1, restaterade här. Stat-siffrorna är låsta (planen §3),
+   så ett tyst byte i copyn ska fälla grinden. */
+const SPEC_PRICES = {
+  'allt-i-ett': 'Från 14 995 kr att komma igång, sedan 2 295 kr i månaden.',
+  hemsida: 'Från 8 000 kr att komma igång, sedan 399 kr i månaden.',
+  'ai-receptionist': 'Från 7 000 kr att komma igång, sedan 1 495 kr i månaden.',
+  chatbot: 'Från 4 000 kr att komma igång, sedan 695 kr i månaden.',
+}
+
+/* Halveringsvillkoret gäller ENDAST hemsidan (fas 0 §1, *Internt*). */
+const SPEC_TRUST_OUTCOME = 'hemsida'
+
+/* Rad två per REGEL, inte per utfall. Rad 4 och fallbacken delar utfall men
+   inte människa, så de får inte dela rad två. */
+const SPEC_SECONDARY = {
+  'r1-ingen-gammal-missar': null,
+  'r2-ingen-gammal-svarar': 'chatten',
+  'r3-nojd-missar': null,
+  'r4-nojd-samma-fragor': 'receptionisten',
+  'fallback-chatbot': null,
+}
+
+const copyProblems = []
+for (const id of OUTCOME_IDS) {
+  const copy = OUTCOME_COPY[id]
+  if (!copy) {
+    copyProblems.push(`${id}: saknar copy`)
+    continue
+  }
+  for (const field of ['heading', 'body', 'price']) {
+    if (!copy[field] || copy[field].trim().length === 0) copyProblems.push(`${id}: tom ${field}`)
+  }
+  if (copy.price !== SPEC_PRICES[id]) {
+    copyProblems.push(`${id}: pris "${copy.price}" != fas 0 §1`)
+  }
+  const hasTrust = copy.trust !== undefined
+  if (hasTrust !== (id === SPEC_TRUST_OUTCOME)) {
+    copyProblems.push(`${id}: halveringsraden ${hasTrust ? 'finns men ska inte' : 'saknas'}`)
+  }
+}
+check('Varje utfall har rubrik, utfallstext och rätt pris', copyProblems.length === 0, copyProblems.join('; '))
+
+const secondaryProblems = []
+const ruleIds = OUTCOME_RULES.map((r) => r.id)
+for (const ruleId of ruleIds) {
+  if (!(ruleId in SECONDARY_LINE)) {
+    secondaryProblems.push(`${ruleId}: saknar post i SECONDARY_LINE`)
+    continue
+  }
+  const line = SECONDARY_LINE[ruleId]
+  const expected = SPEC_SECONDARY[ruleId]
+  if (expected === null && line !== null) secondaryProblems.push(`${ruleId}: har rad två men ska sakna`)
+  if (expected !== null && (line === null || !line.includes(expected))) {
+    secondaryProblems.push(`${ruleId}: rad två nämner inte "${expected}"`)
+  }
+}
+for (const key of Object.keys(SECONDARY_LINE)) {
+  if (!ruleIds.includes(key)) secondaryProblems.push(`${key}: rad två utan matchande regel`)
+}
+check('Rad två hänger på rätt regel', secondaryProblems.length === 0, secondaryProblems.join('; '))
+
+/* Genom hela matrisen: halveringsraden får aldrig läcka till en annan produkt,
+   och överlägget ska byta exakt sista raden. */
+let trustLeak = null
+let ctaProblem = null
+for (const combo of combos) {
+  const shown = presentOutcome(combo)
+
+  if ((shown.trust !== undefined) !== (shown.outcomeId === SPEC_TRUST_OUTCOME)) {
+    trustLeak ??= `${JSON.stringify(combo)} -> ${shown.outcomeId}, trust=${shown.trust}`
+  }
+
+  const expectedCta = shown.careOverlay ? CARE_CTA_LINE : ctaLine(shown.echo)
+  if (shown.cta !== expectedCta) {
+    ctaProblem ??= `${JSON.stringify(combo)}: "${shown.cta}"`
+  }
+  if (!shown.careOverlay && !shown.cta.includes(shown.echo)) {
+    ctaProblem ??= `${JSON.stringify(combo)}: branschekot saknas i sista raden`
+  }
+  if (shown.secondary !== (SECONDARY_LINE[shown.ruleId] ?? null)) {
+    ctaProblem ??= `${JSON.stringify(combo)}: fel rad två`
+  }
+}
+check('Halveringsraden läcker aldrig till chatbot, receptionist eller paket', trustLeak === null, trustLeak ?? '')
+check('Sista raden bär branschekot, eller vård-löftet vid överlägg', ctaProblem === null, ctaProblem ?? '')
+
+/* ---------------------------------------------------------------------------
    8. Copy-regler som går att maskinkontrollera
    ------------------------------------------------------------------------ */
 
-/** Every string the visitor can actually read. Outcome copy joins in G3. */
+/** Every string the visitor can actually read, outcome copy included. */
 const VISIBLE_STRINGS = [
   ...QUESTIONS.flatMap((q) => [q.prompt, ...q.options.map((o) => o.label)]),
   ...Object.values(BRANSCH_EKO),
   ...Object.values(KONTAKTSATT_LABEL),
   ...Object.values(KONTAKTSATT_BEKRAFTELSE),
   ...QUESTIONS.map((q) => stepLabel(q.id)),
+  ...Object.values(OUTCOME_COPY).flatMap((c) =>
+    [c.heading, c.body, c.price, c.trust].filter(Boolean)
+  ),
+  ...Object.values(SECONDARY_LINE).filter(Boolean),
+  ...Object.values(BRANSCH_EKO).map((echo) => ctaLine(echo)),
+  CARE_CTA_LINE,
 ]
 
 /* Hård regel 15: inga em-dash eller en-dash i synlig text. Guidens strängar

@@ -682,3 +682,34 @@ Varje gång Claude Code gör ett misstag, eller ni upptäcker något som borde g
   filen från git (`git checkout -- <fil>`) och gör om ändringen med Edit.
   Mojibake-kontrollen i verifieringsskript (`innerText.includes('Ã')`) fångar
   symptomet i renderad output.
+
+### [2026-08] En grind som mäter appens konstant mot samma konstant godkänner sina egna fel
+- **Vad hände:** `scripts/guide-matrix.mjs` kontrollerade att vård-överlägget
+  bara sattes på receptionist-utfall genom att jämföra mot appens egen
+  `OUTCOMES_WITH_RECEPTIONIST`. Ett sabotagetest som felaktigt la in `chatbot` i
+  den listan passerade grinden utan en enda FAIL. Samma självreferens fanns i
+  nåbarhetskontrollen, som räknade utfall ur utfallstabellen i stället för ur en
+  fristående lista.
+- **Varför:** Kontrollen och det kontrollerade hämtade sanningen ur samma
+  variabel. Då mäter man bara att koden är konsekvent med sig själv, inte att
+  den är konsekvent med kravet.
+- **Regel:** En grind ska restatera specen självständigt. Skriv ut fas 0:s
+  påstående som en egen konstant i grindfilen (`SPEC_...`) med en kommentar om
+  varifrån den kommer, och jämför appens konstant MOT den. Verifiera alltid en
+  ny grind genom att sabotera koden med flit och se att den faller med exit 1.
+  En grind som aldrig setts fallera är inte en grind.
+
+### [2026-08] Höjdgolv mot layout-shift ska mätas, inte gissas
+- **Vad hände:** Guidens frågesteg fick ett `min-height`-golv för att stegbyten
+  inte skulle flytta något. Gissade värden (26rem mobil, 24rem desktop) såg
+  rimliga ut men desktopgolvet var för lågt: femalternativsfrågan var 402px mot
+  golvets 384px, så första steget var 18px högre än de andra.
+- **Varför:** Antalet alternativ och radbrytningen varierar per fråga och
+  bredd. Ett golv som inte täcker det högsta steget är inget golv.
+- **Regel:** Sätt golvet, mät sedan varje steg i varje bredd med Playwright
+  (`offsetHeight`) och hävda att alla är IDENTISKA. Ta med en mellanbredd
+  (768px) där etiketter kan radbryta oväntat. Notera det uppmätta värdet i
+  CSS-kommentaren så nästa läsare vet att siffran är mätt.
+- **Bonus:** Standard-CLS döljer det här. Skift inom 500 ms efter ett klick
+  räknas inte, så CLS var 0 medan stegen hoppade. Mät därför både CLS och
+  `hadRecentInput`-skiften, och mät stegens höjd separat.

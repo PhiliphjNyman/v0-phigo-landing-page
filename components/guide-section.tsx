@@ -1,15 +1,15 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Compass, ArrowRight } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Compass } from 'lucide-react'
 import { reveal, revealStagger } from '@/lib/animations'
 import { SectionEyebrow } from '@/components/section-eyebrow'
+import { GuideFlow } from '@/components/guide/guide-flow'
 
-/* Guide "Hitta rätt lösning". Fas 2 ships the designed CONTAINER only: heading,
-   intro (verbatim from Fas0_produktdefinitioner.md §5) and an interim CTA. The
-   Voiceflow flow is embedded here in fas 5 (see implementationsplanen §9); until
-   then the CTA falls back to the contact section. */
+/* Guide "Hitta rätt lösning". Fas 2 shipped the designed container; fas 5 §9.1
+   replaced the interim CTA with the native question tree. Heading and intro are
+   verbatim from Fas0_produktdefinitioner.md §5, and every question, option and
+   outcome below them comes from lib/guide.ts. No Voiceflow, no external host. */
 export function GuideSection() {
   return (
     <section
@@ -56,20 +56,8 @@ export function GuideSection() {
             mest. Tar under en minut.
           </motion.p>
 
-          <motion.div variants={reveal} className="mt-8 flex flex-col items-center gap-3">
-            <Button
-              asChild
-              size="lg"
-              className="h-auto min-h-12 cursor-pointer rounded-2xl bg-primary px-8 py-3 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-[transform,background-color,box-shadow] duration-200 hover:scale-[1.02] hover:bg-primary/90 hover:shadow-2xl active:scale-[0.98]"
-            >
-              <a href="#kontakt">
-                Hjälp mig välja
-                <ArrowRight className="ml-2 size-5" aria-hidden="true" />
-              </a>
-            </Button>
-            <p className="text-sm text-muted-foreground/70">
-              Den smarta guiden öppnar snart. Så länge hjälper vi dig personligen.
-            </p>
+          <motion.div variants={reveal}>
+            <GuideFlow />
           </motion.div>
         </motion.div>
       </div>

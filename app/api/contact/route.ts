@@ -1,6 +1,18 @@
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { z } from 'zod'
+import {
+  HUBSPOT_FIELD,
+  HUBSPOT_PIPELINE_STAGE,
+  HUBSPOT_SOURCE,
+  KONTAKTSATT_LABEL,
+  OPTION_IDS,
+  OUTCOME_COPY,
+  OUTCOME_IDS,
+  QUESTIONS,
+  answerLabel,
+  type QuestionId,
+} from '@/lib/guide'
 
 /**
  * Escapes the five HTML-significant characters so form input can never inject
@@ -55,6 +67,106 @@ const forbattraLabels: Record<string, string> = {
   'ovrigt': 'Övrigt',
 }
 
+/* --------------------------------------------------------------- guiden --- */
+
+/**
+ * The guide (fas 5 §9.1) delivers its leads through THIS endpoint rather than a
+ * new one: everything hardened in step F (JSON guard, rate limit, escaping,
+ * http(s)-only hrefs) applies unchanged. The contact form sends no `source`, so
+ * it keeps falling through to the schema below it, untouched.
+ *
+ * Answers arrive as ids and are validated against the same lists the UI renders
+ * from, so the only free text a visitor can send is name, phone and email. The
+ * Swedish labels are looked up server-side.
+ */
+const guideSchema = z
+  .object({
+    source: z.literal('guide'),
+    kontakt: z.object({
+      namn: z.string().min(2).max(100),
+      /* Loose on purpose: Swedish numbers get written with spaces, dashes,
+         parentheses and +46 in every combination. */
+      telefon: z.string().regex(/^[\d\s+()-]{6,20}$/).optional(),
+      epost: z.string().email().max(200).optional(),
+      kontaktsatt: z.enum(['ring', 'mejl']),
+    }),
+    svar: z.object({
+      q1: z.enum(OPTION_IDS.q1),
+      q2: z.enum(OPTION_IDS.q2),
+      q3: z.enum(OPTION_IDS.q3),
+      q4: z.enum(OPTION_IDS.q4),
+      q5: z.enum(OPTION_IDS.q5),
+      /* Endast om fråga 3 inte är "svarar nästan alltid" (fas 0 §5). */
+      q6: z.enum(OPTION_IDS.q6).optional(),
+    }),
+    utfall: z.enum(OUTCOME_IDS),
+  })
+  .superRefine((value, ctx) => {
+    const { kontaktsatt, telefon, epost } = value.kontakt
+    if (kontaktsatt === 'ring' && !telefon) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['kontakt', 'telefon'], message: 'Telefon krävs' })
+    }
+    if (kontaktsatt === 'mejl' && !epost) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['kontakt', 'epost'], message: 'E-post krävs' })
+    }
+    /* Fråga 6 ställs bara i receptionist-grenen, så ett svar därifrån när
+       fråga 3 är "svarar nästan alltid" betyder att nyttolasten är riggad. */
+    if (value.svar.q3 === 'svarar-sjalv' && value.svar.q6 !== undefined) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['svar', 'q6'], message: 'Ogiltig kombination' })
+    }
+  })
+
+type GuideLead = z.infer<typeof guideSchema>
+
+/** One row per answered question, in the order the visitor saw them. */
+function renderAnswerRows(svar: GuideLead['svar']): string {
+  return QUESTIONS.filter((question) => svar[question.id] !== undefined)
+    .map((question) => {
+      const optionId = svar[question.id] as string
+      const label = answerLabel(question.id as QuestionId, optionId) ?? optionId
+      return `<tr>
+          <td style="padding: 8px 0; font-weight: bold; width: 200px;">${escapeHtml(HUBSPOT_FIELD[question.id])}</td>
+          <td>${escapeHtml(label)}</td>
+        </tr>`
+    })
+    .join('')
+}
+
+function renderGuideEmail(lead: GuideLead): string {
+  const { namn, telefon, epost, kontaktsatt } = lead.kontakt
+  const safe = {
+    namn: escapeHtml(namn),
+    telefon: telefon ? escapeHtml(telefon) : '–',
+    epost: epost ? escapeHtml(epost) : '–',
+    kontaktsatt: escapeHtml(KONTAKTSATT_LABEL[kontaktsatt]),
+    rekommendation: escapeHtml(OUTCOME_COPY[lead.utfall].heading),
+  }
+
+  return `
+      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #111;">
+        <h2 style="color: #059669;">Nytt guide-lead via phigo.se</h2>
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr><td style="padding: 8px 0; font-weight: bold; width: 200px;">Namn</td><td>${safe.namn}</td></tr>
+          <tr><td style="padding: 8px 0; font-weight: bold;">Telefon</td><td>${safe.telefon}</td></tr>
+          <tr><td style="padding: 8px 0; font-weight: bold;">E-post</td><td>${epost ? `<a href="mailto:${safe.epost}">${safe.epost}</a>` : '–'}</td></tr>
+          <tr><td style="padding: 8px 0; font-weight: bold;">Kontaktsätt</td><td><strong>${safe.kontaktsatt}</strong></td></tr>
+        </table>
+        <hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;" />
+        <h3 style="margin-top: 0;">Rekommendation</h3>
+        <p style="color: #374151;">${safe.rekommendation}</p>
+        <hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;" />
+        <h3 style="margin-top: 0;">Svar i guiden</h3>
+        <table style="width: 100%; border-collapse: collapse;">
+          ${renderAnswerRows(lead.svar)}
+        </table>
+        <hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;" />
+        <p style="color: #6b7280; font-size: 13px;">
+          Källa: ${escapeHtml(HUBSPOT_SOURCE)} &middot; Pipeline: ${escapeHtml(HUBSPOT_PIPELINE_STAGE)}
+        </p>
+      </div>
+    `
+}
+
 /**
  * Best-effort in-memory rate limit. On Vercel each serverless instance keeps its
  * own map, so this is a spam speed bump rather than a hard guarantee — it caps
@@ -90,7 +202,16 @@ function isRateLimited(ip: string): boolean {
 }
 
 export async function POST(request: Request) {
-  if (isRateLimited(getClientIp(request))) {
+  /* The source rides in the query string so the rate limiter can bucket on it
+     BEFORE the body is parsed — a guide visitor must not be able to burn the
+     contact form's five attempts, and moving the parse ahead of the limiter
+     would hand an attacker unlimited JSON parses. Worth knowing: a spammer who
+     alternates the parameter gets two buckets instead of one. That is a 2x, not
+     an opening, and it buys the form its own untouched quota. */
+  const source =
+    new URL(request.url).searchParams.get('source') === 'guide' ? 'guide' : 'formular'
+
+  if (isRateLimited(`${getClientIp(request)}:${source}`)) {
     return NextResponse.json(
       { error: 'För många förfrågningar. Försök igen om en stund.' },
       { status: 429 }
@@ -102,6 +223,10 @@ export async function POST(request: Request) {
     body = await request.json()
   } catch {
     return NextResponse.json({ error: 'Ogiltig formulärdata' }, { status: 400 })
+  }
+
+  if (source === 'guide') {
+    return handleGuideLead(body)
   }
 
   const result = contactSchema.safeParse(body)
@@ -148,6 +273,37 @@ export async function POST(request: Request) {
 
   if (error) {
     console.error('Resend error:', error)
+    return NextResponse.json({ error: 'Kunde inte skicka e-post' }, { status: 500 })
+  }
+
+  return NextResponse.json({ success: true })
+}
+
+async function handleGuideLead(body: unknown) {
+  const result = guideSchema.safeParse(body)
+  if (!result.success) {
+    return NextResponse.json({ error: 'Ogiltig formulärdata' }, { status: 400 })
+  }
+
+  const lead = result.data
+  const { namn, epost, telefon, kontaktsatt } = lead.kontakt
+  const resend = new Resend(process.env.RESEND_API_KEY)
+
+  const { error } = await resend.emails.send({
+    from: 'PHIGO <noreply@phigo.se>',
+    to: 'info@phigo.se',
+    /* E-post är frivillig i ring-vägen (fas 0 §5), så replyTo sätts bara när
+       den finns. Utan adress är telefonnumret det enda sättet att nå leadet,
+       därför står det i ämnesraden i stället. */
+    ...(epost ? { replyTo: epost } : {}),
+    subject: `Nytt guide-lead från ${toSingleLine(namn)} (${KONTAKTSATT_LABEL[kontaktsatt]}${
+      epost ? '' : `, ${toSingleLine(telefon ?? '')}`
+    })`,
+    html: renderGuideEmail(lead),
+  })
+
+  if (error) {
+    console.error('Resend error (guide):', error)
     return NextResponse.json({ error: 'Kunde inte skicka e-post' }, { status: 500 })
   }
 

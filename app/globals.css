@@ -688,6 +688,19 @@
   animation: hero-fade-in 0.6s ease-out 0.55s both;
 }
 
+/* Guiden (fas 5, §9.1): höjdgolv genom frågefasen. CLS 0 är signat på hela
+   sajten och guiden får inte bryta det, så steget mellan en fråga med tre och en
+   med fem alternativ ska inte flytta en pixel. Golvet är satt till det högsta
+   frågesteget och verifieras av scripts/guide-flow.mjs, som mäter att samtliga
+   frågesteg har identisk höjd. Utfallet är en egen fas utanför golvet.
+
+   Värdet är MÄTT, inte gissat: femalternativsfrågan är den högsta och landar på
+   402px på desktop och 416px på mobil, så golvet ligger på 26rem (416px) i alla
+   bredder. En första ansats med 24rem på desktop föll i grinden, 402 mot 384. */
+.guide-step-shell {
+  min-height: 26rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
