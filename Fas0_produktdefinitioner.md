@@ -319,9 +319,35 @@ dubbletter i HubSpot.
 kontaktformuläret, mot /integritetspolicy. Integritetspolicyn nämner guiden
 uttryckligen.
 
-**Bekräftelse efter inskick** speglar valet ordagrant:
+**Bekräftelse efter inskick** speglar valet ordagrant, under rubriken
+"Tack, vi hör av oss":
 ring → "Vi ringer upp dig inom en arbetsdag."
 mejl → "Vi mejlar dig inom en arbetsdag."
+
+### Gränssnittstexter i guiden (SIGNERADE 2026-08-10)
+
+Strängar som saknade källa i §5 och därför signerades separat. De bor i
+`lib/guide.ts` (`GUIDE_UI_COPY`, `GUIDE_VALIDATION`) så att matrisgrindens
+copy-svep täcker dem; en sträng skriven direkt i en komponent vore osynlig för
+kontrollen.
+
+| Plats | Text |
+|---|---|
+| Hjälptext under fälten | "Fyll i telefonnumret om du vill bli uppringd, e-posten om du hellre vill bli mejlad." |
+| Avbryt-länk | "Jag vill inte lämna mina uppgifter nu" |
+| Bekräftelserubrik | "Tack, vi hör av oss" |
+| Bakåtknapp | "Tillbaka" |
+
+**Valideringsmeddelanden.** Namn, e-post och samtycke följer kontaktformulärets
+befintliga formuleringar ordagrant så sajten talar med en röst.
+
+| Fält | Meddelande |
+|---|---|
+| Namn | "Namn måste vara minst 2 tecken" |
+| E-post (format) | "Ange en giltig e-postadress" |
+| Telefon | "Fyll i ett telefonnummer så vi kan ringa upp." |
+| E-post (när mejl valts) | "Fyll i e-post om du hellre vill bli mejlad." |
+| Samtycke | "Du måste godkänna integritetspolicyn för att skicka formuläret" |
 
 ### Lead till HubSpot (fas 5)
 Kontakt + affär skapas med: Lead-kategori (fråga 1), Kontaktsätt (ring/mejl),

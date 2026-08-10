@@ -196,6 +196,72 @@ async function runBackAndOrphan(page, label) {
   check(`${label} omvalet ger hemsideutfallet`, shown.trim() === expected.heading, shown.trim())
 }
 
+/**
+ * The submit itself, with the endpoint mocked. Two things get proven that no
+ * amount of reading can settle: the payload actually carries the ids the logic
+ * decided, and the confirmation mirrors the chosen path VERBATIM. Fas 0 §5 makes
+ * that mirroring a promise ("den som valt mejl rings inte upp först"), so a
+ * generic "tack för ditt meddelande" would be a broken promise, not a nuance.
+ */
+async function runSubmit(page, kontaktsatt, label) {
+  const answers = { q1: 'hantverk', q2: 'ingen', q3: 'rostbrevlada', q4: 'google', q5: 'fler-forfragningar', q6: '5-15' }
+
+  let captured = null
+  let capturedUrl = null
+  await page.route('**/api/contact*', async (route) => {
+    capturedUrl = route.request().url()
+    captured = route.request().postDataJSON()
+    await route.fulfill({ status: 200, contentType: 'application/json', body: '{"success":true}' })
+  })
+
+  await openGuide(page)
+  for (const questionId of questionOrder(answers)) {
+    await page.getByRole('button', { name: answerLabel(questionId, answers[questionId]), exact: true }).click()
+    await page.waitForTimeout(350)
+  }
+
+  /* Startsidan bär BÅDE guiden och kontaktformuläret, och de har fält med samma
+     etiketter. Allt nedan scopas därför till guidesektionen. */
+  const guide = page.locator('#guide')
+  await guide.getByLabel('Namn').fill('Testperson Grind')
+  await guide.getByLabel('Telefon').fill('070 123 45 67')
+  if (kontaktsatt === 'mejl') await guide.getByLabel('E-post').fill('test@example.com')
+  await page.locator('#guide-gdpr').click()
+
+  const button = kontaktsatt === 'ring' ? 'Ja, ring mig' : 'Maila mig i stället'
+  await guide.getByRole('button', { name: button }).click()
+  await page.waitForTimeout(700)
+
+  check(`${label} inskick/${kontaktsatt}: källan ligger i query-strängen`, capturedUrl?.includes('source=guide') === true, capturedUrl ?? 'ingen förfrågan')
+
+  const payloadOk =
+    captured?.source === 'guide' &&
+    captured?.kontakt?.kontaktsatt === kontaktsatt &&
+    captured?.utfall === presentOutcome(answers).outcomeId &&
+    JSON.stringify(captured?.svar) === JSON.stringify(answers)
+  check(`${label} inskick/${kontaktsatt}: nyttolasten bär rätt svar och utfall`, payloadOk, JSON.stringify(captured?.svar ?? null))
+
+  /* Ring-vägen får skicka utan e-post; mejl-vägen måste ha den. */
+  const emailRule =
+    kontaktsatt === 'ring'
+      ? captured?.kontakt?.epost === undefined
+      : typeof captured?.kontakt?.epost === 'string'
+  check(`${label} inskick/${kontaktsatt}: e-postfältet följer vägens krav`, emailRule)
+
+  const shown = await page.locator('#guide').innerText()
+  const expectedSentence =
+    kontaktsatt === 'ring' ? 'Vi ringer upp dig inom en arbetsdag.' : 'Vi mejlar dig inom en arbetsdag.'
+  check(`${label} inskick/${kontaktsatt}: bekräftelsen speglar valet ordagrant`, shown.includes(expectedSentence), expectedSentence)
+  check(`${label} inskick/${kontaktsatt}: bekräftelserubriken visas`, shown.includes('Tack, vi hör av oss'))
+
+  /* Motsatt löfte får ALDRIG stå kvar på skärmen. */
+  const wrongSentence =
+    kontaktsatt === 'ring' ? 'Vi mejlar dig inom en arbetsdag.' : 'Vi ringer upp dig inom en arbetsdag.'
+  check(`${label} inskick/${kontaktsatt}: motsatt löfte syns inte`, !shown.includes(wrongSentence))
+
+  await page.unroute('**/api/contact*')
+}
+
 /** Every option must be reachable and operable from the keyboard alone. */
 async function runKeyboard(page, label) {
   await openGuide(page)
@@ -238,6 +304,15 @@ for (const vp of VIEWPORTS) {
       await runPath(page, path, label)
     }
     await runBackAndOrphan(page, label)
+    /* Ett trasigt uttag i ETT delsteg får inte döda körningen och dölja de
+       tvåhundra kontroller som ligger efter. Rapportera och gå vidare. */
+    for (const kontaktsatt of ['ring', 'mejl']) {
+      try {
+        await runSubmit(page, kontaktsatt, label)
+      } catch (err) {
+        check(`${label} inskick/${kontaktsatt}`, false, err.message.split('\n')[0])
+      }
+    }
     if (theme === 'light') await runKeyboard(page, label)
 
     await context.close()

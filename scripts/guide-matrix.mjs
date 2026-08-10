@@ -23,6 +23,8 @@ import {
   KONTAKTSATT_LABEL,
   KONTAKTSATT_BEKRAFTELSE,
   NUMBERED_QUESTIONS,
+  GUIDE_UI_COPY,
+  GUIDE_VALIDATION,
   OUTCOME_COPY,
   SECONDARY_LINE,
   CARE_CTA_LINE,
@@ -370,6 +372,8 @@ const VISIBLE_STRINGS = [
   ...Object.values(SECONDARY_LINE).filter(Boolean),
   ...Object.values(BRANSCH_EKO).map((echo) => ctaLine(echo)),
   CARE_CTA_LINE,
+  ...Object.values(GUIDE_UI_COPY),
+  ...Object.values(GUIDE_VALIDATION),
 ]
 
 /* Hård regel 15: inga em-dash eller en-dash i synlig text. Guidens strängar
@@ -392,9 +396,10 @@ for (const term of FORBIDDEN) {
 }
 check('Inga tekniska begrepp ur ordlistan i synlig text', wordHits.length === 0, wordHits.join('; '))
 
-/* Inga utropstecken i rubriker/frågor (CLAUDE.md språkregel). */
-const bangHits = QUESTIONS.map((q) => q.prompt).filter((p) => p.includes('!'))
-check('Inga utropstecken i frågorna', bangHits.length === 0, bangHits.join(' | '))
+/* Inga utropstecken i synlig text (CLAUDE.md språkregel). Gällde tidigare bara
+   frågorna; sveper nu allt, inklusive bekräftelser och valideringsmeddelanden. */
+const bangHits = VISIBLE_STRINGS.filter((s) => s.includes('!'))
+check('Inga utropstecken i synlig text', bangHits.length === 0, bangHits.join(' | '))
 
 /* ---------------------------------------------------------------------------
    Sammanfattning

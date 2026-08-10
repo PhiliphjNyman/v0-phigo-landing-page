@@ -6,6 +6,7 @@ import { ArrowLeft } from 'lucide-react'
 import { GuideQuestionStep } from '@/components/guide/guide-question-step'
 import { GuideOutcomeStep } from '@/components/guide/guide-outcome-step'
 import {
+  GUIDE_UI_COPY,
   NUMBERED_QUESTIONS,
   clearOrphanedAnswers,
   presentOutcome,
@@ -80,7 +81,7 @@ export function GuideFlow() {
             className="flex cursor-pointer items-center gap-1.5 rounded-lg px-2 py-1 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground"
           >
             <ArrowLeft className="size-4" aria-hidden="true" />
-            Tillbaka
+            {GUIDE_UI_COPY.back}
           </button>
         )}
       </div>

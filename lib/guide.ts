@@ -419,6 +419,36 @@ export const KONTAKTSATT_BEKRAFTELSE: Record<KontaktsattId, string> = {
   mejl: 'Vi mejlar dig inom en arbetsdag.',
 }
 
+/**
+ * Guidens gränssnittstexter och valideringsmeddelanden. De bor HÄR och inte i
+ * komponenterna av ett skäl: matrisgrindens copy-svep (tankstreck, ordlistan,
+ * utropstecken) läser den här filen, så en sträng i en komponent skulle vara
+ * osynlig för kontrollen. Signerade av Hugo 2026-08-10, se fas 0 §5.
+ */
+export const GUIDE_UI_COPY = {
+  back: 'Tillbaka',
+  fieldHelp:
+    'Fyll i telefonnumret om du vill bli uppringd, e-posten om du hellre vill bli mejlad.',
+  declineLink: 'Jag vill inte lämna mina uppgifter nu',
+  /* Avslut utan kontaktuppgifter. Mejlvägen tills receptionistnumret är live;
+     ingen platshållare i copyn (fas 0 §5, omskriven 2026-08-10). */
+  declineLead: 'Inga problem. Mejla oss på',
+  declineTail: 'så hör vi av oss.',
+  confirmationHeading: 'Tack, vi hör av oss',
+} as const
+
+/**
+ * Valideringsmeddelanden. Namn, e-post och samtycke följer kontaktformulärets
+ * befintliga formuleringar ordagrant så sajten talar med en röst.
+ */
+export const GUIDE_VALIDATION = {
+  namn: 'Namn måste vara minst 2 tecken',
+  epostFormat: 'Ange en giltig e-postadress',
+  telefon: 'Fyll i ett telefonnummer så vi kan ringa upp.',
+  epostValbero: 'Fyll i e-post om du hellre vill bli mejlad.',
+  gdpr: 'Du måste godkänna integritetspolicyn för att skicka formuläret',
+} as const
+
 /** HubSpot-mappning (fas 5). Fältnamnen bor här så kopplingen slipper gissa. */
 export const HUBSPOT_FIELD: Record<QuestionId, string> = {
   q1: 'Lead-kategori',

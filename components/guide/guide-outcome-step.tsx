@@ -19,6 +19,8 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import {
+  GUIDE_UI_COPY,
+  GUIDE_VALIDATION,
   KONTAKTSATT_BEKRAFTELSE,
   type GuideAnswers,
   type KontaktsattId,
@@ -33,31 +35,29 @@ import {
  */
 const kontaktSchema = z
   .object({
-    namn: z.string().min(2, 'Skriv ditt namn'),
+    namn: z.string().min(2, GUIDE_VALIDATION.namn),
     telefon: z
       .string()
-      .regex(/^[\d\s+()-]{6,20}$/, 'Ange ett telefonnummer vi kan nå dig på')
+      .regex(/^[\d\s+()-]{6,20}$/, GUIDE_VALIDATION.telefon)
       .optional()
       .or(z.literal('')),
-    epost: z.string().email('Ange en giltig e-postadress').optional().or(z.literal('')),
+    epost: z.string().email(GUIDE_VALIDATION.epostFormat).optional().or(z.literal('')),
     kontaktsatt: z.enum(['ring', 'mejl']),
-    gdpr: z.boolean().refine((v) => v === true, {
-      message: 'Du måste godkänna integritetspolicyn för att skicka',
-    }),
+    gdpr: z.boolean().refine((v) => v === true, { message: GUIDE_VALIDATION.gdpr }),
   })
   .superRefine((values, ctx) => {
     if (values.kontaktsatt === 'ring' && !values.telefon) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ['telefon'],
-        message: 'Fyll i telefonnumret så ringer vi upp dig',
+        message: GUIDE_VALIDATION.telefon,
       })
     }
     if (values.kontaktsatt === 'mejl' && !values.epost) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ['epost'],
-        message: 'Fyll i e-postadressen så mejlar vi dig',
+        message: GUIDE_VALIDATION.epostValbero,
       })
     }
   })
@@ -131,7 +131,9 @@ export function GuideOutcomeStep({ outcome, answers }: GuideOutcomeStepProps) {
         <div className="flex size-16 items-center justify-center rounded-full bg-primary/10">
           <CheckCircle2 className="size-8 text-primary" aria-hidden="true" />
         </div>
-        <p className="mt-6 text-xl font-bold text-foreground">Tack</p>
+        <p className="mt-6 text-balance text-xl font-bold text-foreground">
+          {GUIDE_UI_COPY.confirmationHeading}
+        </p>
         <p className="mt-2 text-pretty text-lg text-muted-foreground">
           {KONTAKTSATT_BEKRAFTELSE[sentAs]}
         </p>
@@ -222,9 +224,8 @@ export function GuideOutcomeStep({ outcome, answers }: GuideOutcomeStepProps) {
             />
           </div>
 
-          <p className="text-sm text-muted-foreground">
-            Fyll i telefonnumret om du vill bli uppringd, e-posten om du hellre vill
-            bli mejlad.
+          <p className="text-pretty text-sm text-muted-foreground">
+            {GUIDE_UI_COPY.fieldHelp}
           </p>
 
           <FormField
@@ -294,14 +295,14 @@ export function GuideOutcomeStep({ outcome, answers }: GuideOutcomeStepProps) {
               receptionistnumret är live; ingen platshållare i copyn. */}
           {showExit ? (
             <p className="text-pretty text-sm text-muted-foreground" role="status">
-              Inga problem. Mejla oss på{' '}
+              {GUIDE_UI_COPY.declineLead}{' '}
               <a
                 href="mailto:info@phigo.se"
                 className="text-primary underline underline-offset-2 transition-colors hover:text-primary/80"
               >
                 info@phigo.se
               </a>{' '}
-              så hör vi av oss.
+              {GUIDE_UI_COPY.declineTail}
             </p>
           ) : (
             <button
@@ -309,7 +310,7 @@ export function GuideOutcomeStep({ outcome, answers }: GuideOutcomeStepProps) {
               onClick={() => setShowExit(true)}
               className="cursor-pointer self-start text-sm text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground"
             >
-              Jag vill inte lämna mina uppgifter nu
+              {GUIDE_UI_COPY.declineLink}
             </button>
           )}
         </form>
