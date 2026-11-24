@@ -39,7 +39,7 @@ briefingen** för produktombyggnaden; fas 2 är alltså sanktionerad, inget utö
 | 2 | Produktombyggnad | Produktsidor, navigering, guide-yta | ✅ KLAR (delstatus i §6) |
 | 3 | Moment 5 + 6 | Swipe-kort + typografisk skärpa (sajtbrett inkl. nya sidor) | ✅ KLAR |
 | 4 | Moment 7 + 8 | Viewport/a11y + slutmätning | ✅ KLAR (M7 godkänd; M8 mätt: CLS 0 + LCP<2s + R3, formell Lighthouse vid deploy) |
-| 5 | Integrationer | Chatbot-widget, guiden (nativ), receptionist-nummer | 🔄 KÖRS PÅ BRANCHEN före merge (omsekvenserat 2026-08-06; guiden nativ sedan 2026-08-10, se §9 + §9.1) |
+| 5 | Integrationer | Chatbot-widget, guiden (nativ), receptionist-nummer | 🔄 KÖRS PÅ BRANCHEN före merge. Widget + nummer inlagda 2026-11-24, väntar på previewverifiering (§9) |
 | 6 | Audits + deploy | Skills-audits, push-OK, prod-verifiering | 🔄 F–H ✅ (H godkänd 2026-08-06); merge väntar på fas 5:s hårda krav |
 
 Branch: `feature/scroll-liv-och-diagnos`. Inget pushas utan uttryckligt OK.
@@ -330,16 +330,22 @@ på riktig mobil.
 > **Nytt beslut (Hugo, efter godkänd H):** main får inte ett mellanläge. Fas 5
 > körs på `feature/scroll-liv-och-diagnos` och merge sker först när de HÅRDA
 > kraven är uppfyllda:
-> 1. **Chatbot-embedden live** på sajten (laddas efter interaktiv; LCP om-mäts)
+> 1. **Chatbot-widgeten live** på sajten (laddas efter interaktiv; LCP om-mäts)
 > 2. **Receptionist-numret live** på /ai-receptionist
-> 3. **CSP flippas** Report-Only → skarp när Voiceflow-konsolen är tyst
+> 3. **CSP flippas** Report-Only → skarp när konsolen är tyst med widgeten inlagd
 >
 > **NYTT BESLUT 2026-08-10 — guiden byggs NATIVT, inte i Voiceflow.** Alla
 > frågor, svarsalternativ och utfall är fasta, alltså finns ingen AI-uppgift.
 > Nativt bygge ger egen design, mörkt läge, inga externa script, ingen CSP-flipp,
-> ingen tredje prenumeration, och täcks av befintliga grindar. Guide-embedden
-> utgår därmed som Voiceflow-steg och blir ett eget nativt byggsteg (§9.1).
+> ingen tredje prenumeration, och täcks av befintliga grindar. Guiden är byggd
+> och klar (§9.1).
 > Sanningen för frågor, logik och copy är `Fas0_produktdefinitioner.md` §5.
+>
+> **NYTT BESLUT — chatboten byggs i ElevenLabs, inte Voiceflow.** Voiceflows
+> approved domains var plangrindade till Business-nivån, och receptionisten
+> körs redan på ElevenLabs Creator, så widgeten flyttade dit. Se
+> `CHATBOT_V1_SPEC.md` (v3) — det ändrar också CSP-rutan i §10 (skriptkälla
+> unpkg, ElevenLabs i connect-src, inte Voiceflows domäner).
 >
 > **Merge-grind (ersätter ny full H):** kort om-verifiering på preview efter
 > embedden — ny PSI (mobil / + /hemsida), tyst konsol (noll CSP-violations →
@@ -347,10 +353,28 @@ på riktig mobil.
 > receptionisten (n8n/ElevenLabs, transfer-test, engelska, kunskapsbas-priser)
 > byggs parallellt utanför repot.
 
-- [ ] **Chatbot-widget:** Voiceflow-snippet på sajten. Laddas efter interaktiv —
-      får inte påverka LCP. Verifiera moment 8-siffrorna igen efter inkoppling.
-- [ ] **Guiden (nativt bygge, se §9.1)** — ersätter det gamla guide-embed-steget.
-- [ ] **Receptionist-numret** live på AI-receptionistytan (samma som visitkorten).
+- [x] **Chatbot-widget (ElevenLabs):** INLAGD PÅ BRANCHEN 2026-11-24
+      (`components/chat-widget.tsx`, monteras sajtbrett i `app/layout.tsx`
+      efter `load` + idle, skriptet pinnat till
+      `@elevenlabs/convai-widget-embed@0.28.0`, agent `PHIGO Chatbot`
+      `agent_2101kzr8vr0hex38m80b6dwmpexc`, allowlist verifierad i kontot:
+      phigo.se, www.phigo.se och branch-previewen). /chatbot-demon öppnar
+      widgeten (`CHATBOT_WIDGET_ENABLED = true`). CSP-allowlisten bytt från
+      Voiceflow till unpkg + ElevenLabs, fortfarande Report-Only.
+      **Kvar:** §13-sviten i widgeten på previewen inkl. riktig mobil (bubblan
+      får inte täcka CTA:er), LCP/moment 8 om-mätt, konsolen tyst → CSP-flip.
+      Ursprunglig beskrivning: embedden är elementet med agent-ID plus
+      skriptet från unpkg. Laddas efter interaktiv — får inte påverka LCP.
+      Verifiera moment 8-siffrorna igen efter inkoppling.
+      Status: agenten är byggd och verifierad i kontot, widgeten konfigurerad
+      och publicerad, allowlist satt på båda nivåerna. Kvar: embedden på
+      previewen, §13-sviten i widgeten inklusive mobil, CSP-flippen och
+      demo-CTA:n.
+- [x] **Receptionist-numret** live på AI-receptionistytan (samma som visitkorten).
+      INLAGT 2026-11-24: `013-329 60 01` i `components/ai-receptionist-content.tsx`.
+      **Hugos beslut 2026-11-24:** receptionisten bedöms funktionell nog att
+      visas som demo; förkraven nedan som inte är avbockade körs som
+      härdning EFTER lansering, de blockerar inte längre merge.
 
       **Förkrav från `RECEPTIONIST_SYSTEMRAPPORT.md` innan numret publiceras:**
       - [ ] HMAC-härdning av post-call-webhooken (fail-closed)
@@ -361,9 +385,6 @@ på riktig mobil.
             (chatbot, receptionist), testsvit grön efteråt
       - [ ] Demo-inramning på `/ai-receptionist`: numret är den skarpa
             receptionisten, bokning innebär att Hugo ringer upp den tiden
-
-Om Voiceflow-delarna inte är klara blockerar de INTE fas 6. Guiden är sedan
-2026-08-10 nativ och därmed oberoende av Voiceflow.
 
 ### 9.1 Guiden "Hitta rätt lösning" — nativt bygge ✅ BYGGD (väntar på Hugos ögon + skarp mejlverifiering)
 
@@ -385,7 +406,8 @@ CSP-flippen. Inga nya beroenden.
 **Delstatus:**
 - [x] ✅ **G1. Undersök-först** — arkitekturrapport + 8 öppna frågor, alla
       besvarade av Hugo 2026-08-10 (fas 0 §5 uppdaterad i samma svep)
-- [ ] **G2. Logiklager + matrisgrind** — `lib/guide.ts` + `scripts/guide-matrix.mjs`
+- [x] ✅ **G2. Logiklager + matrisgrind** (a00f3a1) — `lib/guide.ts` +
+      `scripts/guide-matrix.mjs`, 2400 kombinationer gröna
 - [x] ✅ **G3. Utfallscopy** — signerad av Hugo 2026-08-10. Allt-i-ett verbatim ur
       §5, övriga tre omskrivna ur §2–4:s Outcome-stycken. Halveringsraden är en
       femte del ENDAST i hemsideutfallet (Hugos beslut: guiden är säljögonblicket
@@ -401,6 +423,12 @@ CSP-flippen. Inga nya beroenden.
       CLS 0 på alla vägar, konstant stegshöjd 416px, fokusflytt vid stegbyte,
       tillbaka behåller svar, fråga 6 faller bort vid omval, fokusring 3px,
       Enter väljer. Fann höjdgolvsbuggen (402 mot 384 på desktop)
+- [x] ✅ **G7. Sex osourcade strängar** (3fe8b3e) — hjälptexten under telefon/
+      e-post, "Jag vill inte lämna mina uppgifter nu", bekräftelserubriken
+      ("Tack, vi hör av oss"), "Tillbaka" och valideringsmeddelandena är nu
+      signerade av Hugo och flyttade till `lib/guide.ts` (`GUIDE_UI_COPY`,
+      `GUIDE_VALIDATION`) så matrisgrindens copysvep ser dem. Fas 0 §5 har
+      strängarna daterade och godkända
 
 **Grind för varje G-commit** = fas 6:s stående grind (`pnpm lint` + `tsc --noEmit`
 + `pnpm build` + `visual-rules.mjs` + `cta-anchors.mjs`) plus de två nya
@@ -415,9 +443,6 @@ guide-scripten.
       formuläret verifierades i steg H.
 - [ ] **Hugos ögon** på riktig mobil (guiden är ny yta, mobilkänslan är hans
       grind enligt §3).
-- [ ] **Nya strängar utan fas 0-källa** som behöver Hugos ord eller ett OK:
-      hjälptexten under telefon/e-post, "Jag vill inte lämna mina uppgifter nu",
-      "Tack"-rubriken i bekräftelsen, "Tillbaka", samt valideringsmeddelandena.
 
 ---
 
@@ -507,18 +532,22 @@ på kontaktformuläret, inte bara att klicket inte kraschar.
       ('self' för /_vercel/* + va.vercel-scripts.com/vitals i policyn)
 
 **CSP-beslut (fas 5-förberedelse):** policyn skeppar som
-`Content-Security-Policy-Report-Only` med `cdn.voiceflow.com`,
-`general-runtime.voiceflow.com` och `*.voiceflow.com` redan tillåtna. Den flippas
-till skarp `Content-Security-Policy` FÖRST när fas 5-embedden är live och konsolen
-rapporterar noll överträdelser. `'unsafe-inline'` i script-src är ett medvetet val:
-Next App Routers hydrerings-payload kräver det, och nonce-alternativet tvingar varje
-sida dynamisk och kostar oss den statiska prerendern av samtliga 23 routes.
+`Content-Security-Policy-Report-Only`. Voiceflow-domänerna är utgångna sedan
+chatboten flyttade till ElevenLabs (se §9): skriptkällan är unpkg (script-src)
+och widgeten pratar med ElevenLabs (connect-src, plus `wss:` om den använder
+websocket) — de exakta domänerna är [TBD — läses av ur widget-snippeten och ur
+Report-Only-rapporterna med widgeten inlagd på previewen]. Policyn flippas till
+skarp `Content-Security-Policy` FÖRST när fas 5-embedden är live och konsolen
+rapporterar noll överträdelser MED widgeten inlagd, och de faktiska domänerna
+är verifierade, inte antagna. `'unsafe-inline'` i script-src är ett medvetet
+val: Next App Routers hydrerings-payload kräver det, och nonce-alternativet
+tvingar varje sida dynamisk och kostar oss den statiska prerendern av samtliga
+23 routes.
 
 Deploy-sekvens (OMSEKVENSERAD 2026-08-06 — fas 5 FÖRE merge, se §9):
 1. ✅ Audits F–E åtgärdade, G mätt, H godkänd av Hugo (2026-08-06)
-2. Fas 5 hårda krav på branchen: chatbot-embed live + receptionist-nummer live
-   + CSP flippad skarp (Voiceflow-konsolen tyst). Guide-embed = mjukt krav,
-   Hugos beslut när Voiceflow-lägets status syns.
+2. Fas 5 hårda krav på branchen: chatbot-widget live + receptionist-nummer live
+   + CSP flippad skarp (konsolen tyst med widgeten inlagd).
 3. **Merge-grind** (kort om-verifiering på preview, INTE ny full H): ny PSI
    (mobil / + /hemsida), tyst konsol, cta-anchors ALL PASS, formuläret skickar
 4. Hugo ger uttryckligt merge-klartecken → merge till main → skarp deploy
