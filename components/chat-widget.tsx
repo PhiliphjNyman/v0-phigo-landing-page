@@ -36,6 +36,7 @@ export function ChatWidget() {
       script.async = true
       script.type = 'text/javascript'
       document.body.appendChild(script)
+      fixIosInputZoom(el)
     }
 
     const idle = (cb: () => void) => {
@@ -56,6 +57,34 @@ export function ChatWidget() {
   }, [])
 
   return null
+}
+
+/* iOS Safari zooms the whole page when a focused text field has a font size
+   under 16px, and the widget's message box is smaller than that: visitors on
+   iPhone had to pinch back out to use the chat (Hugo, preview test
+   2026-11-24). The widget renders in an open shadow root, so page CSS cannot
+   reach it; we adopt one stylesheet into that root instead. Adopted sheets
+   survive the widget re-rendering its own DOM. Polls briefly because the
+   shadow root only exists once the script has defined the element. */
+function fixIosInputZoom(host: HTMLElement) {
+  let tries = 0
+  const timer = window.setInterval(() => {
+    tries += 1
+    const root = host.shadowRoot
+    if (root && 'adoptedStyleSheets' in root) {
+      try {
+        const sheet = new CSSStyleSheet()
+        sheet.replaceSync('textarea, input { font-size: 16px !important; }')
+        root.adoptedStyleSheets = [...root.adoptedStyleSheets, sheet]
+      } catch {
+        /* Older browsers without constructable stylesheets keep the zoom;
+           the widget still works. */
+      }
+      window.clearInterval(timer)
+    } else if (tries > 80) {
+      window.clearInterval(timer)
+    }
+  }, 250)
 }
 
 /* Opens the widget from an on-page CTA ("Testa chatten"). The widget renders
