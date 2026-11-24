@@ -19,9 +19,10 @@ import { ProductPrice } from '@/components/product/product-price'
 import { ProductFaq } from '@/components/product/product-faq'
 import { ProductDemoCta } from '@/components/product/product-demo-cta'
 
-/* Demo number for "Ring och prova själv". null until it is set in fas 5 — the
-   demo block then shows the placeholder note + fallback, never a dead tel:. */
-const RECEPTIONIST_PHONE: string | null = null
+/* Demo number for "Ring och prova själv": PHIGO's own live receptionist
+   (Twilio Local, Linköping), the same number as on the business cards. Set to
+   null to fall back to the placeholder note + /#kontakt, never a dead tel:. */
+const RECEPTIONIST_PHONE: string | null = '013-329 60 01'
 
 const benefits = [
   {

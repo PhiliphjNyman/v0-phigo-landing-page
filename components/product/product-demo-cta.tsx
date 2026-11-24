@@ -19,8 +19,8 @@ type DemoPhone = {
 
    - phone: the receptionist "Ring och prova själv" demo. Renders a tel: link
      when a number exists, otherwise the placeholder note + fallback button.
-   - button: a plain action (fallback, or the chatbot "Testa den här på sidan"
-     which stays swappable until the widget embed lands in fas 5). */
+   - button: a plain action. With onClick it renders a real <button> (the
+     chatbot demo opens the on-site widget); otherwise a CtaLink to href. */
 export function ProductDemoCta({
   id,
   eyebrow,
@@ -34,7 +34,7 @@ export function ProductDemoCta({
   title: string
   description?: string
   phone?: DemoPhone
-  button?: { label: string; href: string }
+  button?: { label: string; href: string; onClick?: () => void }
 }) {
   return (
     <section id={id} className="border-t border-border">
@@ -92,10 +92,17 @@ export function ProductDemoCta({
                       size="lg"
                       className="cursor-pointer rounded-xl bg-white px-8 text-anchor-ink shadow-lg shadow-black/25 hover:bg-white/90 hover:shadow-xl hover:shadow-black/30 focus-visible:border-white focus-visible:ring-white/70 active:scale-[0.98] transition-[transform,background-color,box-shadow] duration-200"
                     >
-                      <CtaLink href={button.href}>
-                        {button.label}
-                        <ArrowRight className="ml-1 size-4" aria-hidden="true" />
-                      </CtaLink>
+                      {button.onClick ? (
+                        <button type="button" onClick={button.onClick}>
+                          {button.label}
+                          <ArrowRight className="ml-1 size-4" aria-hidden="true" />
+                        </button>
+                      ) : (
+                        <CtaLink href={button.href}>
+                          {button.label}
+                          <ArrowRight className="ml-1 size-4" aria-hidden="true" />
+                        </CtaLink>
+                      )}
                     </Button>
                   )}
                 </>

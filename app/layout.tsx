@@ -6,6 +6,7 @@ import { Toaster } from '@/components/ui/sonner'
 import { PageBackground } from '@/components/page-background'
 import { MotionProvider } from '@/components/framer-exports'
 import { ThemeProvider } from '@/components/theme-provider'
+import { ChatWidget } from '@/components/chat-widget'
 import './globals.css'
 
 const organizationSchema = {
@@ -144,6 +145,7 @@ export default function RootLayout({
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />
+        <ChatWidget />
       </body>
     </html>
   )

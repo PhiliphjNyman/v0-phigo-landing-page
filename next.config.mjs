@@ -8,11 +8,12 @@ const isDev = process.env.NODE_ENV !== 'production'
 /**
  * Content Security Policy, shipped in Report-Only mode (see headers() below).
  *
- * Voiceflow hosts are pre-allowed so the fas 5 chat widget and guide embed do
- * not require a policy rewrite:
- *   - cdn.voiceflow.com              widget bundle (script) + widget assets
- *   - general-runtime.voiceflow.com  runtime API the widget talks to
- *   - *.voiceflow.com                covers the remaining first-party hosts
+ * Hosts for the ElevenLabs chat widget (fas 5, components/chat-widget.tsx):
+ *   - unpkg.com                 widget bundle (script, pinned version)
+ *   - api.elevenlabs.io + *.elevenlabs.io (https + wss)
+ *                               conversation API and realtime socket
+ *   - storage.googleapis.com    agent avatar image
+ * Voiceflow hosts were removed when the chatbot moved to ElevenLabs.
  * Vercel Analytics / Speed Insights are served same-origin under /_vercel/ in
  * production but fall back to va.vercel-scripts.com, so both are listed.
  *
@@ -20,12 +21,14 @@ const isDev = process.env.NODE_ENV !== 'production'
  */
 const contentSecurityPolicy = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://cdn.voiceflow.com https://va.vercel-scripts.com`,
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://unpkg.com https://va.vercel-scripts.com`,
   "style-src 'self' 'unsafe-inline'",
-  'img-src \'self\' data: blob: https://cdn.voiceflow.com https://s3.amazonaws.com',
+  "img-src 'self' data: blob: https://storage.googleapis.com",
   "font-src 'self' data:",
-  "connect-src 'self' https://general-runtime.voiceflow.com https://api.voiceflow.com https://va.vercel-scripts.com https://vitals.vercel-insights.com",
-  "frame-src 'self' https://*.voiceflow.com",
+  "connect-src 'self' https://api.elevenlabs.io wss://api.elevenlabs.io https://*.elevenlabs.io wss://*.elevenlabs.io https://va.vercel-scripts.com https://vitals.vercel-insights.com",
+  "media-src 'self' blob:",
+  "worker-src 'self' blob:",
+  "frame-src 'self'",
   "frame-ancestors 'none'",
   "base-uri 'self'",
   "form-action 'self'",
@@ -65,14 +68,11 @@ const nextConfig = {
             key: 'Strict-Transport-Security',
             value: 'max-age=63072000; includeSubDomains; preload',
           },
-          // Report-Only on purpose. The Voiceflow chat widget and guide embed land
-          // in fas 5; the allowlist below is seeded from their documented hosts
-          // (cdn.voiceflow.com for the bundle, general-runtime.voiceflow.com for
-          // the runtime API) but their asset hosts are not fully documented, so
-          // enforcing now would risk breaking the widget on launch day.
-          //
-          // Flip to Content-Security-Policy (enforcing) AFTER the fas 5 embed is
-          // live and the browser console reports zero violations across the site.
+          // Report-Only on purpose. Flip to Content-Security-Policy (enforcing)
+          // only AFTER the ElevenLabs chat widget is live on the preview and the
+          // browser console reports zero violations across the site (fas 5,
+          // CHATBOT_V1_SPEC.md §17.5). Enforcing an untested allowlist risks a
+          // dead widget on launch day.
           //
           // 'unsafe-inline' in script-src is required by Next's App Router
           // hydration payload. Removing it needs a nonce via middleware, which

@@ -8,11 +8,13 @@ import { ProductSteps } from '@/components/product/product-steps'
 import { ProductBoundaries } from '@/components/product/product-boundaries'
 import { ProductPrice } from '@/components/product/product-price'
 import { ProductDemoCta } from '@/components/product/product-demo-cta'
+import { openChatWidget } from '@/components/chat-widget'
 
 /* The on-site chat widget is the chatbot's own demo ("samma produkt"). It is
-   embedded in fas 5 (Voiceflow). Until then the flag stays false and the demo
-   block falls back to /#kontakt (regel 5: conditional flag + fallback). */
-const CHATBOT_WIDGET_ENABLED = false
+   embedded site-wide in fas 5 (ElevenLabs, components/chat-widget.tsx). Set the
+   flag to false to fall back to /#kontakt (regel 5: conditional flag +
+   fallback), e.g. if the widget has to be pulled. */
+const CHATBOT_WIDGET_ENABLED = true
 
 /* All copy below is sourced from Fas0_produktdefinitioner.md §4 — verbatim or a
    light, approved rewrite into card form. Never authored here. */
@@ -102,7 +104,7 @@ export function ChatbotContent() {
         description="Den du pratar med är samma produkt som du får på din egen hemsida."
         button={
           CHATBOT_WIDGET_ENABLED
-            ? { label: 'Öppna chatten', href: '#chat' }
+            ? { label: 'Öppna chatten', href: '#demo', onClick: openChatWidget }
             : { label: 'Kontakta oss', href: '/#kontakt' }
         }
       />
