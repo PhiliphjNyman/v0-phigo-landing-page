@@ -39,10 +39,10 @@ briefingen** för produktombyggnaden; fas 2 är alltså sanktionerad, inget utö
 | 2 | Produktombyggnad | Produktsidor, navigering, guide-yta | ✅ KLAR (delstatus i §6) |
 | 3 | Moment 5 + 6 | Swipe-kort + typografisk skärpa (sajtbrett inkl. nya sidor) | ✅ KLAR |
 | 4 | Moment 7 + 8 | Viewport/a11y + slutmätning | ✅ KLAR (M7 godkänd; M8 mätt: CLS 0 + LCP<2s + R3, formell Lighthouse vid deploy) |
-| 5 | Integrationer | Chatbot-widget, guiden (nativ), receptionist-nummer | 🔄 KÖRS PÅ BRANCHEN före merge. Widget + nummer inlagda 2026-11-24, väntar på previewverifiering (§9) |
-| 6 | Audits + deploy | Skills-audits, push-OK, prod-verifiering | 🔄 F–H ✅ (H godkänd 2026-08-06); merge väntar på fas 5:s hårda krav |
+| 5 | Integrationer | Chatbot-widget, guiden (nativ), receptionist-nummer | ✅ KLAR — widget + nummer inlagda 2026-11-24, CSP flippad skarp (d0125d8), mergat till main 2026-11-25 |
+| 6 | Audits + deploy | Skills-audits, push-OK, prod-verifiering | 🔄 F–H ✅, merge + deploy ✅ 2026-11-25 (main = d0125d8). **Kvar:** skarp prod-verifiering (steg 5 i §10) inkl. formell Lighthouse/LCP |
 
-Branch: `feature/scroll-liv-och-diagnos`. Inget pushas utan uttryckligt OK.
+Branch: `feature/scroll-liv-och-diagnos` — **mergad till main 2026-11-25** (Hugo pushade, main = d0125d8). Inget pushas utan uttryckligt OK.
 Commit per godkänt delmoment. Bocka av tabellen ovan när en fas godkänts.
 
 ---
@@ -325,7 +325,7 @@ på riktig mobil.
 
 ---
 
-## 9. FAS 5 — Integrationer 🔄 (OMSEKVENSERAD 2026-08-06: körs PÅ BRANCHEN före merge)
+## 9. FAS 5 — Integrationer ✅ KLAR 2026-11-25 (OMSEKVENSERAD 2026-08-06: kördes PÅ BRANCHEN före merge)
 
 > **Nytt beslut (Hugo, efter godkänd H):** main får inte ett mellanläge. Fas 5
 > körs på `feature/scroll-liv-och-diagnos` och merge sker först när de HÅRDA
@@ -549,12 +549,12 @@ tvingar varje sida dynamisk och kostar oss den statiska prerendern av samtliga
 
 Deploy-sekvens (OMSEKVENSERAD 2026-08-06 — fas 5 FÖRE merge, se §9):
 1. ✅ Audits F–E åtgärdade, G mätt, H godkänd av Hugo (2026-08-06)
-2. Fas 5 hårda krav på branchen: chatbot-widget live + receptionist-nummer live
-   + CSP flippad skarp (konsolen tyst med widgeten inlagd).
-3. **Merge-grind** (kort om-verifiering på preview, INTE ny full H): ny PSI
+2. ✅ Fas 5 hårda krav på branchen: chatbot-widget live + receptionist-nummer live
+   + CSP flippad skarp (konsolen tyst med widgeten inlagd). (2026-11-24/25)
+3. **Merge-grind** (mergen gjordes 2026-11-25; PSI-siffrorna för grinden är inte dokumenterade här, ta dem i steg 5) (kort om-verifiering på preview, INTE ny full H): ny PSI
    (mobil / + /hemsida), tyst konsol, cta-anchors ALL PASS, formuläret skickar
-4. Hugo ger uttryckligt merge-klartecken → merge till main → skarp deploy
-5. Skarp prod-verifiering: riktig mobil, ring receptionisten, klicka
+4. ✅ Hugo ger uttryckligt merge-klartecken → merge till main → skarp deploy (2026-11-25, d0125d8)
+5. ⬜ Skarp prod-verifiering: riktig mobil, ring receptionisten, klicka
    chatbotten/guiden, QR-koden från visitkorten, IndexNow-ping
    (INDEXNOW_SECRET finns i Production)
 6. Session-handoff skrivs → frys (ingen ny funktionalitet efter detta)

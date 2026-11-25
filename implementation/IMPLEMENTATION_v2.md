@@ -20,7 +20,7 @@ pågående och framtida arbete. Hierarki: CLAUDE.md > denna plan._
 - [x] Fas 1 — Städa cruft. Borttaget: styles/globals.css, services.tsx,
       og-image.png, trust-bar.tsx, hero-visual.tsx (den hårdkodade "värsta boven").
       Gamla DEPRECATED-ikoner behålls tills vidare.
-- [ ] Fas 2 — Uppdatera CLAUDE.md: ersätt "forcerad dark mode" med dual-mode-policy
+- [x] Fas 2 — Uppdatera CLAUDE.md: ersätt "forcerad dark mode" med dual-mode-policy
       ovan; lägg till regeln "grönt = accent i ljust läge, ytton endast i mörkt".
 - [x] Fas 3 — Tokenisera kvarvarande hårdkodade färger (utom shadcn ui/). Bl.a.
       bg-zinc-900 → bg-muted, hover:bg-white/5 → bg-foreground/5, emerald/amber/
@@ -39,7 +39,7 @@ pågående och framtida arbete. Hierarki: CLAUDE.md > denna plan._
       Verifierat: light-via-OS → html.light, dark-via-OS → html.dark (Playwright
       color_scheme-emulering), anti-FOUC-skript i <head>, inga hydration-warnings.
       Ingen toggle ännu (Fas 6).
-- [ ] Fas 6 — Toggle-knapp i header + finputs: WCAG AA-kontrast i båda lägena,
+- [ ] Fas 6 — Toggle-knapp i header + finputs (togglen finns: components/theme-toggle.tsx i headern): WCAG AA-kontrast i båda lägena,
       accent-blobbar kontrollerade mot vit fond, logotypvarianter (grå GO för
       ljust läge, ljus GO för mörkt läge).
       - [x] Steg 3 — Emerald anchor (STATIC) på FINAL CTA. (Hero-anchorn provades
@@ -56,16 +56,19 @@ pågående och framtida arbete. Hierarki: CLAUDE.md > denna plan._
             "kunder"; ingen död CSS). Build OK, verifierat färskt i ljust + mörkt
             läge (Playwright color_scheme) — final CTA identisk i båda.
       Återstående Fas 6 (separata steg):
-      - [ ] Logotypens grå "GO" i ljust läge (phigo-logo.tsx) — se nedan.
+      - [x] Logotypens "GO" i ljust läge — STÄNGD 2026-11-25: GO renderas via
+            text-foreground (svart i ljust läge, ljus i mörkt). Hugo nöjd, ingen
+            grå variant behövs.
       - [ ] Mörk-tunade skuggor på vita kort kontrollerade mot vit fond — se nedan.
       Konkreta flaggor från Fas 4-preview av ljust läge:
       - Dekorativa gröna blobbar tintar de neutrala vita ytorna grönt i ljust
         läge (bryter mot regel 14 "grönt = accent, aldrig yta i ljust läge"):
         components/page-background.tsx (bg-primary/10 + bg-accent-hero/5) och
         contact-form.tsx rad 100 (bg-primary/5 blur-[120px]). Dämpa/byt till
-        neutral eller dölj i ljust läge.
-      - Logotypens "GO" renderar nära-svart i ljust läge; Fas 6 vill ha en grå
-        GO-variant (phigo-logo.tsx).
+        neutral eller dölj i ljust läge. **Fortfarande öppen per 2026-11-25**
+        (page-background.tsx har kvar bg-primary/10 utan dark-only).
+      - ~~Logotypens "GO" renderar nära-svart i ljust läge~~ — beslutat att det
+        är rätt (2026-11-25).
       - Mörk-tunade skuggor på kort (t.ex. about-section hover:shadow-black/20)
         bör kontrolleras mot vit fond — kan se fel ut i ljust läge.
       - Verifiera slutläget (efter entrance-animation) för om-oss-kortet och
@@ -80,9 +83,9 @@ pågående och framtida arbete. Hierarki: CLAUDE.md > denna plan._
       från grunden med riktiga kundlogotyper och nuvarande design-tokens. Gamla
       trust-bar.tsx togs bort i städningen (juni 2026).
 - [ ] Bloggbilder saknas: lib/blog.ts refererar /images/blog/*.png (6 filer) som
-      inte finns i public/images/. Antingen lägg till bilderna eller justera
+      inte finns i public/images/ (kontrollerat igen 2026-11-25, fortfarande saknas). Antingen lägg till bilderna eller justera
       blog.ts. (Upptäckt under städning, ej brådskande.)
-- [ ] Logotyp på sajten: CLAUDE.md säger gemener "phigo"; phigo-logo.tsx renderar
-      versaler "PHI"/"GO". Bestäm vilket som gäller och synka.
+- [x] Logotyp på sajten: versaler "PHI"/"GO" gäller — CLAUDE.md säger nu
+      också versaler (synkat).
 
 ---

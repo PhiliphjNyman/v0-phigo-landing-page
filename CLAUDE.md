@@ -2,7 +2,9 @@
 
 ## Vem vi är
 
-PHIGO bygger moderna, konverteringsoptimerade hemsidor åt lokala småföretag. Detta projekt är **PHIGOs egen hemsida** — den ska demonstrera vår kompetens och fungera som primärt säljverktyg. Kvalitetskravet är maximalt: varje detalj ska utstråla premium.
+PHIGO bygger moderna, konverteringsoptimerade hemsidor åt lokala småföretag, plus AI-receptionist och chatbot. Detta projekt är **PHIGOs egen hemsida** — den ska demonstrera vår kompetens och fungera som primärt säljverktyg. Kvalitetskravet är maximalt: varje detalj ska utstråla premium.
+
+> **Bygger du en kundsida?** Läs `PLAYBOOK_kundsidor.md` — samlade lärdomar från den här sajten, översatta till kundbyggen (vanilla HTML/CSS/JS).
 
 ---
 
@@ -25,12 +27,18 @@ PHIGO bygger moderna, konverteringsoptimerade hemsidor åt lokala småföretag. 
 
 ### Nuvarande offer (detta ska sajten sälja)
 
+Tre produkter, var och en med egen sida (uppdaterat 2026-11-25). Priser exkl. moms;
+källan för all kundvänd copy är `Fas0_produktdefinitioner.md`.
+
 | Del | Detalj |
 |---|---|
-| **Hemsida** | 8 000 kr (engång) — single-page, mobilanpassad, konverteringsstruktur |
-| **Drift** | 399 kr/mån — hosting, säkerhet, backup, mindre ändringar |
-| **Admin-system** | Tillägg (pris ges i samtal) — enkel redigering av texter/bilder |
-| **Leveranstid** | 14 dagar |
+| **Hemsida** (`/hemsida`) | 8 000 kr (engång) — mobilanpassad, konverteringsstruktur. Betala hälften vid start, resten när du är nöjd |
+| **Drift** | 399 kr/mån — hosting, säkerhet, backup, support, mindre ändringar, månadsrapport |
+| **AI-receptionist** (`/ai-receptionist`) | 7 000 kr uppsättning + 1 495 kr/mån (300 minuter ingår) |
+| **Chatbot** (`/chatbot`) | 4 000 kr uppsättning + 695 kr/mån |
+| **Paket** | Hemsida + chatbot *från* 10 995 kr + 995 kr/mån; allt-i-ett *från* 14 995 kr + 2 295 kr/mån. Ordet "från" är obligatoriskt |
+| **Admin-system / tillägg** | Inget fast pris — prissätts i förväg efter avstämning |
+| **Leveranstid** | Hemsida live inom 14 dagar |
 
 ### Offer-strukturen (varje erbjudande följer detta ramverk)
 
@@ -59,6 +67,8 @@ Lokala, etablerade småföretag med bevisad verksamhet men låg digital mognad. 
 | Tema | next-themes (ljust + mörkt läge, ljust som standard) |
 | Toast | Sonner |
 | Pakethanterare | pnpm |
+| Chatt | ElevenLabs ConvAI-widget (`@elevenlabs/convai-widget-embed`, version pinnad i `components/chat-widget.tsx`) |
+| Säkerhetsheaders | CSP i `next.config` — tillåter ElevenLabs (https + wss) och Vercel-skript |
 
 > **OBS:** Denna stack gäller PHIGOs EGEN sajt. Kundhemsidor byggs ALLTID i vanilla HTML/CSS/JS — aldrig React, Next.js eller Tailwind.
 
@@ -68,33 +78,58 @@ Lokala, etablerade småföretag med bevisad verksamhet men låg digital mognad. 
 
 ```
 app/
-  layout.tsx              # Root layout (next-themes, Inter, SEO metadata)
-  page.tsx                # Huvudsida — importerar alla sektioner
+  layout.tsx              # Root layout (next-themes, Inter, SEO metadata, chattwidget)
+  page.tsx                # Startsidan — översikt över alla tre produkter
   globals.css             # Tema-tokens: ljus palett i :root, mörk emerald i .dark
+  hemsida/                # Produktsida hemsida (erbjudande, process, FAQ + FAQPage JSON-LD)
+  ai-receptionist/        # Produktsida AI-receptionist (ring och prova, pris)
+  chatbot/                # Produktsida chatbot (testa chatten, pris)
   cases/
     page.tsx              # Case index med filter
     [slug]/page.tsx       # Case-detaljsida
   blogg/
-    [slug]/page.tsx       # Blogginlägg-detaljsida
+    page.tsx              # Bloggindex
+    [slug]/page.tsx       # Blogginlägg-detaljsida (BlogPosting JSON-LD)
+  integritetspolicy/      # Integritetspolicy
+  api/contact/route.ts    # Kontaktformulärets backend
+  api/indexnow/route.ts   # IndexNow-ping vid publicering
+  robots.ts, sitemap.ts
 
 components/
   ui/                     # shadcn/ui (rör ej)
-  phigo-logo.tsx          # Textlogotyp: PHI (emerald) + GO (ljus)
+  phigo-logo.tsx          # Textlogotyp: PHI (emerald) + GO (text-foreground)
   header.tsx              # Sticky header + mobilmeny
-  hero-section.tsx        # Hero med CTA
+  theme-toggle.tsx        # Ljust/mörkt läge
+  hero-section.tsx        # Hero med CTA (+ hero-mesh/hero-orb)
+  product-overview.tsx    # Startsidans "Tjänster" — kort till de tre produktsidorna
+  guide-section.tsx       # "Hitta rätt lösning" (guide/*, logik i lib/guide.ts)
+  guide/                  # guide-flow, guide-question-step, guide-outcome-step
+  product-hero.tsx        # Hero på produktsidorna
+  product/                # Byggblock för produktsidor (benefits, steps, price, faq, demo-cta …)
+  ai-receptionist-content.tsx, chatbot-content.tsx  # Innehåll per produktsida
   case-studies.tsx        # Case-kort (data från lib/cases.ts)
-  offer-section.tsx       # Erbjudande (ersätter gamla services.tsx)
-  process-section.tsx     # 3-stegs process
+  offer-section.tsx       # Erbjudande (på /hemsida)
+  process-section.tsx     # 3-stegs process (på /hemsida)
   why-phigo.tsx           # Varför PHIGO
-  faq-section.tsx         # FAQ accordion
+  about-section.tsx       # Om oss (#om-oss)
+  faq-section.tsx         # FAQ accordion (data från lib/faq.ts)
   final-cta.tsx           # Avslutande CTA
-  contact-form.tsx        # Kontaktformulär
+  contact-form.tsx        # Kontaktformulär (#kontakt)
+  chat-widget.tsx         # ElevenLabs-chatten (laddas efter interaktivitet, påverkar inte LCP)
+  section-eyebrow.tsx, cta-link.tsx, split-payment-promise.tsx, page-background.tsx
   footer.tsx              # Footer
 
 lib/
   utils.ts                # cn() utility
   animations.ts           # Återanvändbara Framer Motion variants
   cases.ts                # Case-data (single source of truth)
+  faq.ts                  # FAQ-data + FAQPage-schema (single source of truth)
+  guide.ts                # Guidens logiklager
+  blog.ts                 # Blogginlägg
+  site-urls.ts            # Kanoniska URL:er
+
+scripts/                  # Kontrollskript: cta-anchors, guide-flow, guide-matrix,
+                          # visual-rules, perf-scroll, generate-favicons
 
 brand_assets/             # brand kit (BRAND.md, palette.png, logo/, archive/, scripts/)
   BRAND.md                # källa till sanning för färg, typografi, logga
@@ -113,13 +148,20 @@ public/
 
 ## Sajtstruktur (sektionsordning)
 
+Sajten har en startsida plus en sida per produkt (uppdaterat 2026-11-25).
+
+**Startsidan (`/`):**
 1. **Hero** — Problem + löfte + CTA
-2. **Cases** — Exempel med story-format (behåll, social proof)
-3. **Erbjudande** — Outcome → mechanism → differentiator → boundaries → pris (ersätter gamla "Värdeerbjudande")
-4. **Process** — Tre steg: lär känna → bygger → går live
+2. **Tjänster** (`ProductOverview`) — kort till Hemsida, AI-receptionist och Chatbot
+3. **Hitta rätt lösning** (`GuideSection`) — kort guide som pekar på rätt produkt
+4. **Exempel** (`CaseStudies`) — case i story-format (social proof)
 5. **Varför PHIGO** — Förtroendepunkter i klarspråk
-6. **FAQ** — Vanliga frågor med tydliga svar och priser
-7. **CTA + Kontaktformulär** — Formulär via React Hook Form
+6. **Om oss** (`#om-oss`)
+7. **Avslutande CTA + Kontaktformulär** (`#kontakt`)
+
+**`/hemsida`:** ProductHero → Erbjudande (outcome → mechanism → differentiator → boundaries → pris) → Process (`#process`) → FAQ (`#faq`, med FAQPage JSON-LD) → Avslutande CTA.
+
+**`/ai-receptionist` och `/chatbot`:** ProductHero (primär CTA "Ring och prova själv" resp. "Testa chatten", sekundär "Se pris") → fördelar, steg, gränser, pris (`#pris`), demo (`#demo`), FAQ.
 
 > **TA BORT:** Logotyp-karusellen med fiktiva företagsnamn (NordicTech, Storberg etc.). Skapar misstroende. Antingen riktiga kunder eller inget.
 
@@ -146,14 +188,14 @@ Sajten har två lägen. Ljust läge är standard: vita/ljusgrå ytor, mörk text
 | `--border` | Ramar | Subtil ljusgrå | Subtil mörkgrå |
 | `--accent` | Hover, highlights | Emerald-tint | Emerald-tint |
 
-> **Tema-tokens:** `:root` innehåller den ljusa paletten (standardläget) — neutrala vita/grå ytor, inte den gröna tonen översatt till ljust. `.dark` innehåller den mörka emerald-paletten. `--primary` är identisk i båda. (Idag är `:root` en dubblett av `.dark`; en riktig ljus palett definieras i Fas 4.)
+> **Tema-tokens:** `:root` innehåller den ljusa paletten (standardläget) — neutrala vita/grå ytor, inte den gröna tonen översatt till ljust. `.dark` innehåller den mörka emerald-paletten. `--primary` är identisk i båda.
 
 **Accentfärger per sektion:**
 - Case Studies: Warm Gold / Amber
 - Process: Cool Teal / Cyan
 - Hero/CTA: Vivid Emerald
 
-Dessa ska bli namngivna tokens definierade per läge i `:root`/`.dark`: `--accent-cases` (amber), `--accent-process` (cyan), `--accent-hero` (emerald). De måste klara WCAG AA mot vit bakgrund i ljust läge. Själva tokeniseringen sker i Fas 3 — detta är endast dokumentregeln.
+Dessa finns som namngivna tokens per läge i `:root`/`.dark`: `--accent-cases` (amber), `--accent-process` (cyan), `--accent-hero` (emerald). De måste klara WCAG AA mot vit bakgrund i ljust läge.
 
 ### Typografi
 
@@ -164,7 +206,7 @@ Dessa ska bli namngivna tokens definierade per läge i `:root`/`.dark`: `--accen
 
 ### Logotyp
 
-Textbaserad: **PHI** (emerald) + **GO** (ljus/vit). Versaler, modern känsla. Ingen ikon.
+Textbaserad: **PHI** (emerald) + **GO** (`text-foreground`: mörk i ljust läge, ljus i mörkt läge). Versaler, modern känsla. Ingen ikon.
 
 ---
 
@@ -202,10 +244,10 @@ Inga undantag.
 - Logo vänster, nav-länkar center, CTA höger.
 - Mobil: hamburger → Sheet-komponent med scroll-lock.
 - Scroll-spy: aktiv indikator på nav-länk baserat på viewport-position.
-- **Nav-text:** Exempel | Erbjudande | Så funkar det | Vanliga frågor (INTE "Case | Tjänster | Process | FAQ")
+- **Nav-text:** Hemsida | AI-Receptionist | Chatbot | Exempel | Blogg (sidlänkar, aktiv markering per route). CTA "Se vad din hemsida missar".
 
 ### Hero
-- **Rubrik:** "Din hemsida borde ge dig kunder — inte bara finnas."
+- **Rubrik:** "Din hemsida borde ge dig kunder. Inte bara finnas."
 - **Undertext:** "Vi bygger hemsidor åt lokala företag som faktiskt gör att folk tar kontakt. Fast pris, live inom 14 dagar."
 - Primär + sekundär CTA.
 - Abstrakt tech-visual (CSS/SVG-baserad).
@@ -219,13 +261,13 @@ Inga undantag.
 - **Case-beskrivningar i story-format:** "[Typ av företag] som hade [problem]. Vi byggde [lösning] som resulterade i [resultat]."
 - **Märk tydligt som "Konceptcase" eller "Demo"** tills riktiga kundprojekt finns.
 
-### Erbjudande (ersätter gamla Services)
+### Erbjudande (på `/hemsida`)
 - Sektionsrubrik: "En hemsida som ger dig fler kunder"
 - Visar offer-strukturen: outcome → mechanism (3 steg) → differentiator → boundaries → pris
 - Priskortet med 8 000 kr + 399 kr/mån tydligt synligt
-- CTA: "Se vad din hemsida missar — kostnadsfritt"
+- CTA: "Se vad din hemsida missar, kostnadsfritt"
 
-### Process
+### Process (på `/hemsida#process`)
 - **Rubrik:** "Din nya hemsida på 14 dagar"
 - 3 steg med visuell tidslinje/pipeline.
 - Steg 1: "Vi lär känna ditt företag"
@@ -241,15 +283,16 @@ Inga undantag.
   3. "Snabb och säker" — laddar på under en sekund, funkar på mobilen
   4. "Du pratar med den som bygger" — ingen mellanhand
 
-### FAQ
+### FAQ (på `/hemsida#faq`)
 - shadcn Accordion med mjuka layout-transitions.
+- Data i `lib/faq.ts` — samma källa för accordionen och FAQPage JSON-LD. Ändra aldrig en befintlig frågas nyckel.
 - Frågor och svar på svenska, i klarspråk:
   1. Vad kostar en hemsida? (visa priser tydligt)
   2. Hur lång tid tar det? (14 dagar)
-  3. Vad händer efter lansering? (drift ingår)
+  3. Vad händer efter att sajten är live? (drift ingår)
   4. Fungerar sajten på mobilen? (ja)
   5. Hittar folk mig på Google? (ja, utan att säga "SEO")
-  6. Kan jag uppdatera sajten själv? (tillägg, inte inkluderat)
+  6. Behöver du ändra texter och bilder själv? (tillägg, inte inkluderat)
   7. Kan jag köpa bara hemsidan utan månadsavtal? (ja, men nudga mot drift)
 
 ### Kontaktformulär
@@ -264,12 +307,13 @@ Inga undantag.
 ### Avslutande CTA
 - **Rubrik:** "Vill du veta var din hemsida tappar kunder?"
 - **Undertext:** "Vi granskar din sajt och visar konkret vad som kan förbättras — kostnadsfritt och utan förpliktelse."
-- **Knapp:** "Skicka din sajt — vi visar vad du missar"
+- **Knapp:** "Skicka din sajt, vi visar vad du missar"
 
 ### Footer
 - Mörk bakgrund.
 - Logotyp, beskrivning, navigation, kontaktinfo, copyright.
-- **Beskrivning:** "Vi bygger hemsidor som ger lokala företag fler kunder. Fast pris, klart inom 14 dagar."
+- **Beskrivning:** "Vi bygger hemsidor som ger lokala företag fler kunder. Baserade i Linköping, klart inom 14 dagar."
+- **Navigation:** Exempel, Hemsida, AI-Receptionist, Chatbot, Blogg, Så funkar det, Om oss, Vanliga frågor, Kontakt.
 - Dynamiskt copyrightår.
 
 ---
@@ -364,13 +408,15 @@ All kundvänd text på sajten ska följa denna ordlista. Om ett begrepp finns i 
 | Plats | Text | Typ |
 |---|---|---|
 | Header | "Se vad din hemsida missar" | Knapp (emerald) |
-| Hero (primär) | "Se vad din hemsida missar — kostnadsfritt" | Stor knapp (emerald) |
+| Hero (primär) | "Se vad din hemsida missar, kostnadsfritt" | Stor knapp (emerald) |
 | Hero (sekundär) | "Se exempel" | Ghost/outline |
 | Case-kort | "Se case" | Textlänk |
-| Erbjudande | "Se vad din hemsida missar — kostnadsfritt" | Stor knapp (emerald) |
-| Avslutande CTA | "Skicka din sajt — vi visar vad du missar" | Stor knapp (emerald) |
+| Erbjudande / `/hemsida`-hero | "Se vad din hemsida missar, kostnadsfritt" | Stor knapp (emerald) |
+| Avslutande CTA | "Skicka din sajt, vi visar vad du missar" | Stor knapp (emerald) |
+| `/ai-receptionist` | "Ring och prova själv" (+ "Se pris") | Stor knapp → `#demo` |
+| `/chatbot` | "Testa chatten" (+ "Se pris") | Stor knapp → `#demo`, öppnar widgeten |
 
-Alla primära CTA:er scrollar till `#kontakt`.
+Hemsidans primära CTA:er går till `/#kontakt`. Produktsidornas primära CTA leder till demon.
 
 ---
 

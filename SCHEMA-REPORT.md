@@ -1,6 +1,15 @@
 # Schema Markup Report — PHIGO
 Generated: 2026-03-27
 
+> **Uppdatering 2026-11-25 — rapporten nedan är historik.** Läget idag:
+> - **Service**-schema finns på `/hemsida`, `/ai-receptionist` och `/chatbot`
+>   (inte längre på startsidan).
+> - **FAQPage** är återinfört på `/hemsida`, genererat från `lib/faq.ts`
+>   (samma data som FAQ-accordionen). Google visar inte FAQ-rich results för
+>   vanliga företag, men schemat skadar inte och hjälper AI-sökmotorer.
+> - Blogginlägg använder **BlogPosting** (+ BreadcrumbList).
+> Kör en ny schema-audit innan något här används som underlag.
+
 ## Detection Results
 
 | Sida | Schema-typ | Status | Problem |
