@@ -361,8 +361,11 @@ på riktig mobil.
       phigo.se, www.phigo.se och branch-previewen). /chatbot-demon öppnar
       widgeten (`CHATBOT_WIDGET_ENABLED = true`). CSP-allowlisten bytt från
       Voiceflow till unpkg + ElevenLabs, fortfarande Report-Only.
-      **Kvar:** §13-sviten i widgeten på previewen inkl. riktig mobil (bubblan
-      får inte täcka CTA:er), LCP/moment 8 om-mätt, konsolen tyst → CSP-flip.
+      **2026-11-24/25:** §13 körd i ElevenLabs (44/44 efter ton- och
+      guardrail-fix), testad i widgeten på riktig mobil (iOS-zoomen fixad),
+      lead hela vägen till mejl. Konsolen tyst under ett riktigt samtal på
+      previewen → **CSP flippad till skarp 2026-11-25** (vercel.live tillåts
+      bara när VERCEL_ENV=preview). Kvar: LCP/moment 8 om-mätt efter merge.
       Ursprunglig beskrivning: embedden är elementet med agent-ID plus
       skriptet från unpkg. Laddas efter interaktiv — får inte påverka LCP.
       Verifiera moment 8-siffrorna igen efter inkoppling.
